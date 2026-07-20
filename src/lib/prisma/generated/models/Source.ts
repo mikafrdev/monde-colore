@@ -182,9 +182,9 @@ export type SourceWhereInput = {
   logo?: Prisma.StringNullableFilter<"Source"> | string | null
   type?: Prisma.EnumSourceTypeFilter<"Source"> | $Enums.SourceType
   bio?: Prisma.StringNullableFilter<"Source"> | string | null
-  Article?: Prisma.ArticleListRelationFilter
-  CollectionSource?: Prisma.CollectionSourceListRelationFilter
-  Media?: Prisma.MediaListRelationFilter
+  medias?: Prisma.MediaListRelationFilter
+  articles?: Prisma.ArticleListRelationFilter
+  collections?: Prisma.CollectionSourceListRelationFilter
 }
 
 export type SourceOrderByWithRelationInput = {
@@ -193,9 +193,9 @@ export type SourceOrderByWithRelationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByRelationAggregateInput
-  CollectionSource?: Prisma.CollectionSourceOrderByRelationAggregateInput
-  Media?: Prisma.MediaOrderByRelationAggregateInput
+  medias?: Prisma.MediaOrderByRelationAggregateInput
+  articles?: Prisma.ArticleOrderByRelationAggregateInput
+  collections?: Prisma.CollectionSourceOrderByRelationAggregateInput
 }
 
 export type SourceWhereUniqueInput = Prisma.AtLeast<{
@@ -207,9 +207,9 @@ export type SourceWhereUniqueInput = Prisma.AtLeast<{
   logo?: Prisma.StringNullableFilter<"Source"> | string | null
   type?: Prisma.EnumSourceTypeFilter<"Source"> | $Enums.SourceType
   bio?: Prisma.StringNullableFilter<"Source"> | string | null
-  Article?: Prisma.ArticleListRelationFilter
-  CollectionSource?: Prisma.CollectionSourceListRelationFilter
-  Media?: Prisma.MediaListRelationFilter
+  medias?: Prisma.MediaListRelationFilter
+  articles?: Prisma.ArticleListRelationFilter
+  collections?: Prisma.CollectionSourceListRelationFilter
 }, "id">
 
 export type SourceOrderByWithAggregationInput = {
@@ -235,25 +235,25 @@ export type SourceScalarWhereWithAggregatesInput = {
 }
 
 export type SourceCreateInput = {
-  id: string
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutSourceInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaCreateNestedManyWithoutSourceInput
+  medias?: Prisma.MediaCreateNestedManyWithoutSourcesInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutSourceInput
+  collections?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
 }
 
 export type SourceUncheckedCreateInput = {
-  id: string
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSourceInput
+  medias?: Prisma.MediaUncheckedCreateNestedManyWithoutSourcesInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
+  collections?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
 }
 
 export type SourceUpdateInput = {
@@ -262,9 +262,9 @@ export type SourceUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUpdateManyWithoutSourcesNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
+  collections?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
 }
 
 export type SourceUncheckedUpdateInput = {
@@ -273,13 +273,13 @@ export type SourceUncheckedUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUncheckedUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUncheckedUpdateManyWithoutSourcesNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
+  collections?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
 }
 
 export type SourceCreateManyInput = {
-  id: string
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
@@ -307,21 +307,6 @@ export type SourceNullableScalarRelationFilter = {
   isNot?: Prisma.SourceWhereInput | null
 }
 
-export type SourceScalarRelationFilter = {
-  is?: Prisma.SourceWhereInput
-  isNot?: Prisma.SourceWhereInput
-}
-
-export type SourceListRelationFilter = {
-  every?: Prisma.SourceWhereInput
-  some?: Prisma.SourceWhereInput
-  none?: Prisma.SourceWhereInput
-}
-
-export type SourceOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type SourceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -346,229 +331,188 @@ export type SourceMinOrderByAggregateInput = {
   bio?: Prisma.SortOrder
 }
 
-export type SourceCreateNestedOneWithoutArticleInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutArticleInput, Prisma.SourceUncheckedCreateWithoutArticleInput>
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutArticleInput
+export type SourceListRelationFilter = {
+  every?: Prisma.SourceWhereInput
+  some?: Prisma.SourceWhereInput
+  none?: Prisma.SourceWhereInput
+}
+
+export type SourceOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type SourceScalarRelationFilter = {
+  is?: Prisma.SourceWhereInput
+  isNot?: Prisma.SourceWhereInput
+}
+
+export type SourceCreateNestedOneWithoutArticlesInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutArticlesInput, Prisma.SourceUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutArticlesInput
   connect?: Prisma.SourceWhereUniqueInput
 }
 
-export type SourceUpdateOneWithoutArticleNestedInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutArticleInput, Prisma.SourceUncheckedCreateWithoutArticleInput>
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutArticleInput
-  upsert?: Prisma.SourceUpsertWithoutArticleInput
+export type SourceUpdateOneWithoutArticlesNestedInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutArticlesInput, Prisma.SourceUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutArticlesInput
+  upsert?: Prisma.SourceUpsertWithoutArticlesInput
   disconnect?: Prisma.SourceWhereInput | boolean
   delete?: Prisma.SourceWhereInput | boolean
   connect?: Prisma.SourceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SourceUpdateToOneWithWhereWithoutArticleInput, Prisma.SourceUpdateWithoutArticleInput>, Prisma.SourceUncheckedUpdateWithoutArticleInput>
-}
-
-export type SourceCreateNestedOneWithoutCollectionSourceInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutCollectionSourceInput, Prisma.SourceUncheckedCreateWithoutCollectionSourceInput>
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutCollectionSourceInput
-  connect?: Prisma.SourceWhereUniqueInput
-}
-
-export type SourceUpdateOneRequiredWithoutCollectionSourceNestedInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutCollectionSourceInput, Prisma.SourceUncheckedCreateWithoutCollectionSourceInput>
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutCollectionSourceInput
-  upsert?: Prisma.SourceUpsertWithoutCollectionSourceInput
-  connect?: Prisma.SourceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SourceUpdateToOneWithWhereWithoutCollectionSourceInput, Prisma.SourceUpdateWithoutCollectionSourceInput>, Prisma.SourceUncheckedUpdateWithoutCollectionSourceInput>
-}
-
-export type SourceCreateNestedManyWithoutMediaInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput> | Prisma.SourceCreateWithoutMediaInput[] | Prisma.SourceUncheckedCreateWithoutMediaInput[]
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediaInput | Prisma.SourceCreateOrConnectWithoutMediaInput[]
-  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-}
-
-export type SourceUncheckedCreateNestedManyWithoutMediaInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput> | Prisma.SourceCreateWithoutMediaInput[] | Prisma.SourceUncheckedCreateWithoutMediaInput[]
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediaInput | Prisma.SourceCreateOrConnectWithoutMediaInput[]
-  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-}
-
-export type SourceUpdateManyWithoutMediaNestedInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput> | Prisma.SourceCreateWithoutMediaInput[] | Prisma.SourceUncheckedCreateWithoutMediaInput[]
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediaInput | Prisma.SourceCreateOrConnectWithoutMediaInput[]
-  upsert?: Prisma.SourceUpsertWithWhereUniqueWithoutMediaInput | Prisma.SourceUpsertWithWhereUniqueWithoutMediaInput[]
-  set?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  disconnect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  delete?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  update?: Prisma.SourceUpdateWithWhereUniqueWithoutMediaInput | Prisma.SourceUpdateWithWhereUniqueWithoutMediaInput[]
-  updateMany?: Prisma.SourceUpdateManyWithWhereWithoutMediaInput | Prisma.SourceUpdateManyWithWhereWithoutMediaInput[]
-  deleteMany?: Prisma.SourceScalarWhereInput | Prisma.SourceScalarWhereInput[]
-}
-
-export type SourceUncheckedUpdateManyWithoutMediaNestedInput = {
-  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput> | Prisma.SourceCreateWithoutMediaInput[] | Prisma.SourceUncheckedCreateWithoutMediaInput[]
-  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediaInput | Prisma.SourceCreateOrConnectWithoutMediaInput[]
-  upsert?: Prisma.SourceUpsertWithWhereUniqueWithoutMediaInput | Prisma.SourceUpsertWithWhereUniqueWithoutMediaInput[]
-  set?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  disconnect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  delete?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
-  update?: Prisma.SourceUpdateWithWhereUniqueWithoutMediaInput | Prisma.SourceUpdateWithWhereUniqueWithoutMediaInput[]
-  updateMany?: Prisma.SourceUpdateManyWithWhereWithoutMediaInput | Prisma.SourceUpdateManyWithWhereWithoutMediaInput[]
-  deleteMany?: Prisma.SourceScalarWhereInput | Prisma.SourceScalarWhereInput[]
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SourceUpdateToOneWithWhereWithoutArticlesInput, Prisma.SourceUpdateWithoutArticlesInput>, Prisma.SourceUncheckedUpdateWithoutArticlesInput>
 }
 
 export type EnumSourceTypeFieldUpdateOperationsInput = {
   set?: $Enums.SourceType
 }
 
-export type SourceCreateWithoutArticleInput = {
-  id: string
+export type SourceCreateNestedManyWithoutMediasInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput> | Prisma.SourceCreateWithoutMediasInput[] | Prisma.SourceUncheckedCreateWithoutMediasInput[]
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediasInput | Prisma.SourceCreateOrConnectWithoutMediasInput[]
+  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+}
+
+export type SourceUncheckedCreateNestedManyWithoutMediasInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput> | Prisma.SourceCreateWithoutMediasInput[] | Prisma.SourceUncheckedCreateWithoutMediasInput[]
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediasInput | Prisma.SourceCreateOrConnectWithoutMediasInput[]
+  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+}
+
+export type SourceUpdateManyWithoutMediasNestedInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput> | Prisma.SourceCreateWithoutMediasInput[] | Prisma.SourceUncheckedCreateWithoutMediasInput[]
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediasInput | Prisma.SourceCreateOrConnectWithoutMediasInput[]
+  upsert?: Prisma.SourceUpsertWithWhereUniqueWithoutMediasInput | Prisma.SourceUpsertWithWhereUniqueWithoutMediasInput[]
+  set?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  disconnect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  delete?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  update?: Prisma.SourceUpdateWithWhereUniqueWithoutMediasInput | Prisma.SourceUpdateWithWhereUniqueWithoutMediasInput[]
+  updateMany?: Prisma.SourceUpdateManyWithWhereWithoutMediasInput | Prisma.SourceUpdateManyWithWhereWithoutMediasInput[]
+  deleteMany?: Prisma.SourceScalarWhereInput | Prisma.SourceScalarWhereInput[]
+}
+
+export type SourceUncheckedUpdateManyWithoutMediasNestedInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput> | Prisma.SourceCreateWithoutMediasInput[] | Prisma.SourceUncheckedCreateWithoutMediasInput[]
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutMediasInput | Prisma.SourceCreateOrConnectWithoutMediasInput[]
+  upsert?: Prisma.SourceUpsertWithWhereUniqueWithoutMediasInput | Prisma.SourceUpsertWithWhereUniqueWithoutMediasInput[]
+  set?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  disconnect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  delete?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  connect?: Prisma.SourceWhereUniqueInput | Prisma.SourceWhereUniqueInput[]
+  update?: Prisma.SourceUpdateWithWhereUniqueWithoutMediasInput | Prisma.SourceUpdateWithWhereUniqueWithoutMediasInput[]
+  updateMany?: Prisma.SourceUpdateManyWithWhereWithoutMediasInput | Prisma.SourceUpdateManyWithWhereWithoutMediasInput[]
+  deleteMany?: Prisma.SourceScalarWhereInput | Prisma.SourceScalarWhereInput[]
+}
+
+export type SourceCreateNestedOneWithoutCollectionsInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutCollectionsInput, Prisma.SourceUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutCollectionsInput
+  connect?: Prisma.SourceWhereUniqueInput
+}
+
+export type SourceUpdateOneRequiredWithoutCollectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.SourceCreateWithoutCollectionsInput, Prisma.SourceUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.SourceCreateOrConnectWithoutCollectionsInput
+  upsert?: Prisma.SourceUpsertWithoutCollectionsInput
+  connect?: Prisma.SourceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SourceUpdateToOneWithWhereWithoutCollectionsInput, Prisma.SourceUpdateWithoutCollectionsInput>, Prisma.SourceUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type SourceCreateWithoutArticlesInput = {
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaCreateNestedManyWithoutSourceInput
+  medias?: Prisma.MediaCreateNestedManyWithoutSourcesInput
+  collections?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
 }
 
-export type SourceUncheckedCreateWithoutArticleInput = {
-  id: string
+export type SourceUncheckedCreateWithoutArticlesInput = {
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSourceInput
+  medias?: Prisma.MediaUncheckedCreateNestedManyWithoutSourcesInput
+  collections?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
 }
 
-export type SourceCreateOrConnectWithoutArticleInput = {
+export type SourceCreateOrConnectWithoutArticlesInput = {
   where: Prisma.SourceWhereUniqueInput
-  create: Prisma.XOR<Prisma.SourceCreateWithoutArticleInput, Prisma.SourceUncheckedCreateWithoutArticleInput>
+  create: Prisma.XOR<Prisma.SourceCreateWithoutArticlesInput, Prisma.SourceUncheckedCreateWithoutArticlesInput>
 }
 
-export type SourceUpsertWithoutArticleInput = {
-  update: Prisma.XOR<Prisma.SourceUpdateWithoutArticleInput, Prisma.SourceUncheckedUpdateWithoutArticleInput>
-  create: Prisma.XOR<Prisma.SourceCreateWithoutArticleInput, Prisma.SourceUncheckedCreateWithoutArticleInput>
+export type SourceUpsertWithoutArticlesInput = {
+  update: Prisma.XOR<Prisma.SourceUpdateWithoutArticlesInput, Prisma.SourceUncheckedUpdateWithoutArticlesInput>
+  create: Prisma.XOR<Prisma.SourceCreateWithoutArticlesInput, Prisma.SourceUncheckedCreateWithoutArticlesInput>
   where?: Prisma.SourceWhereInput
 }
 
-export type SourceUpdateToOneWithWhereWithoutArticleInput = {
+export type SourceUpdateToOneWithWhereWithoutArticlesInput = {
   where?: Prisma.SourceWhereInput
-  data: Prisma.XOR<Prisma.SourceUpdateWithoutArticleInput, Prisma.SourceUncheckedUpdateWithoutArticleInput>
+  data: Prisma.XOR<Prisma.SourceUpdateWithoutArticlesInput, Prisma.SourceUncheckedUpdateWithoutArticlesInput>
 }
 
-export type SourceUpdateWithoutArticleInput = {
+export type SourceUpdateWithoutArticlesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUpdateManyWithoutSourcesNestedInput
+  collections?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
 }
 
-export type SourceUncheckedUpdateWithoutArticleInput = {
+export type SourceUncheckedUpdateWithoutArticlesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUncheckedUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUncheckedUpdateManyWithoutSourcesNestedInput
+  collections?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
 }
 
-export type SourceCreateWithoutCollectionSourceInput = {
-  id: string
+export type SourceCreateWithoutMediasInput = {
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaCreateNestedManyWithoutSourceInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutSourceInput
+  collections?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
 }
 
-export type SourceUncheckedCreateWithoutCollectionSourceInput = {
-  id: string
+export type SourceUncheckedCreateWithoutMediasInput = {
+  id?: string
   name: string
   logo?: string | null
   type: $Enums.SourceType
   bio?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
-  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSourceInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
+  collections?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
 }
 
-export type SourceCreateOrConnectWithoutCollectionSourceInput = {
+export type SourceCreateOrConnectWithoutMediasInput = {
   where: Prisma.SourceWhereUniqueInput
-  create: Prisma.XOR<Prisma.SourceCreateWithoutCollectionSourceInput, Prisma.SourceUncheckedCreateWithoutCollectionSourceInput>
+  create: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput>
 }
 
-export type SourceUpsertWithoutCollectionSourceInput = {
-  update: Prisma.XOR<Prisma.SourceUpdateWithoutCollectionSourceInput, Prisma.SourceUncheckedUpdateWithoutCollectionSourceInput>
-  create: Prisma.XOR<Prisma.SourceCreateWithoutCollectionSourceInput, Prisma.SourceUncheckedCreateWithoutCollectionSourceInput>
-  where?: Prisma.SourceWhereInput
-}
-
-export type SourceUpdateToOneWithWhereWithoutCollectionSourceInput = {
-  where?: Prisma.SourceWhereInput
-  data: Prisma.XOR<Prisma.SourceUpdateWithoutCollectionSourceInput, Prisma.SourceUncheckedUpdateWithoutCollectionSourceInput>
-}
-
-export type SourceUpdateWithoutCollectionSourceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUpdateManyWithoutSourceNestedInput
-}
-
-export type SourceUncheckedUpdateWithoutCollectionSourceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
-  Media?: Prisma.MediaUncheckedUpdateManyWithoutSourceNestedInput
-}
-
-export type SourceCreateWithoutMediaInput = {
-  id: string
-  name: string
-  logo?: string | null
-  type: $Enums.SourceType
-  bio?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutSourceInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutSourceInput
-}
-
-export type SourceUncheckedCreateWithoutMediaInput = {
-  id: string
-  name: string
-  logo?: string | null
-  type: $Enums.SourceType
-  bio?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutSourceInput
-}
-
-export type SourceCreateOrConnectWithoutMediaInput = {
+export type SourceUpsertWithWhereUniqueWithoutMediasInput = {
   where: Prisma.SourceWhereUniqueInput
-  create: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput>
+  update: Prisma.XOR<Prisma.SourceUpdateWithoutMediasInput, Prisma.SourceUncheckedUpdateWithoutMediasInput>
+  create: Prisma.XOR<Prisma.SourceCreateWithoutMediasInput, Prisma.SourceUncheckedCreateWithoutMediasInput>
 }
 
-export type SourceUpsertWithWhereUniqueWithoutMediaInput = {
+export type SourceUpdateWithWhereUniqueWithoutMediasInput = {
   where: Prisma.SourceWhereUniqueInput
-  update: Prisma.XOR<Prisma.SourceUpdateWithoutMediaInput, Prisma.SourceUncheckedUpdateWithoutMediaInput>
-  create: Prisma.XOR<Prisma.SourceCreateWithoutMediaInput, Prisma.SourceUncheckedCreateWithoutMediaInput>
+  data: Prisma.XOR<Prisma.SourceUpdateWithoutMediasInput, Prisma.SourceUncheckedUpdateWithoutMediasInput>
 }
 
-export type SourceUpdateWithWhereUniqueWithoutMediaInput = {
-  where: Prisma.SourceWhereUniqueInput
-  data: Prisma.XOR<Prisma.SourceUpdateWithoutMediaInput, Prisma.SourceUncheckedUpdateWithoutMediaInput>
-}
-
-export type SourceUpdateManyWithWhereWithoutMediaInput = {
+export type SourceUpdateManyWithWhereWithoutMediasInput = {
   where: Prisma.SourceScalarWhereInput
-  data: Prisma.XOR<Prisma.SourceUpdateManyMutationInput, Prisma.SourceUncheckedUpdateManyWithoutMediaInput>
+  data: Prisma.XOR<Prisma.SourceUpdateManyMutationInput, Prisma.SourceUncheckedUpdateManyWithoutMediasInput>
 }
 
 export type SourceScalarWhereInput = {
@@ -582,27 +526,83 @@ export type SourceScalarWhereInput = {
   bio?: Prisma.StringNullableFilter<"Source"> | string | null
 }
 
-export type SourceUpdateWithoutMediaInput = {
+export type SourceCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  type: $Enums.SourceType
+  bio?: string | null
+  medias?: Prisma.MediaCreateNestedManyWithoutSourcesInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutSourceInput
+}
+
+export type SourceUncheckedCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  type: $Enums.SourceType
+  bio?: string | null
+  medias?: Prisma.MediaUncheckedCreateNestedManyWithoutSourcesInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutSourceInput
+}
+
+export type SourceCreateOrConnectWithoutCollectionsInput = {
+  where: Prisma.SourceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SourceCreateWithoutCollectionsInput, Prisma.SourceUncheckedCreateWithoutCollectionsInput>
+}
+
+export type SourceUpsertWithoutCollectionsInput = {
+  update: Prisma.XOR<Prisma.SourceUpdateWithoutCollectionsInput, Prisma.SourceUncheckedUpdateWithoutCollectionsInput>
+  create: Prisma.XOR<Prisma.SourceCreateWithoutCollectionsInput, Prisma.SourceUncheckedCreateWithoutCollectionsInput>
+  where?: Prisma.SourceWhereInput
+}
+
+export type SourceUpdateToOneWithWhereWithoutCollectionsInput = {
+  where?: Prisma.SourceWhereInput
+  data: Prisma.XOR<Prisma.SourceUpdateWithoutCollectionsInput, Prisma.SourceUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type SourceUpdateWithoutCollectionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUpdateManyWithoutSourcesNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
 }
 
-export type SourceUncheckedUpdateWithoutMediaInput = {
+export type SourceUncheckedUpdateWithoutCollectionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
+  medias?: Prisma.MediaUncheckedUpdateManyWithoutSourcesNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
 }
 
-export type SourceUncheckedUpdateManyWithoutMediaInput = {
+export type SourceUpdateWithoutMediasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  articles?: Prisma.ArticleUpdateManyWithoutSourceNestedInput
+  collections?: Prisma.CollectionSourceUpdateManyWithoutSourceNestedInput
+}
+
+export type SourceUncheckedUpdateWithoutMediasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumSourceTypeFieldUpdateOperationsInput | $Enums.SourceType
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutSourceNestedInput
+  collections?: Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput
+}
+
+export type SourceUncheckedUpdateManyWithoutMediasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -616,15 +616,15 @@ export type SourceUncheckedUpdateManyWithoutMediaInput = {
  */
 
 export type SourceCountOutputType = {
-  Article: number
-  CollectionSource: number
-  Media: number
+  medias: number
+  articles: number
+  collections: number
 }
 
 export type SourceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | SourceCountOutputTypeCountArticleArgs
-  CollectionSource?: boolean | SourceCountOutputTypeCountCollectionSourceArgs
-  Media?: boolean | SourceCountOutputTypeCountMediaArgs
+  medias?: boolean | SourceCountOutputTypeCountMediasArgs
+  articles?: boolean | SourceCountOutputTypeCountArticlesArgs
+  collections?: boolean | SourceCountOutputTypeCountCollectionsArgs
 }
 
 /**
@@ -640,22 +640,22 @@ export type SourceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * SourceCountOutputType without action
  */
-export type SourceCountOutputTypeCountArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SourceCountOutputTypeCountMediasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaWhereInput
+}
+
+/**
+ * SourceCountOutputType without action
+ */
+export type SourceCountOutputTypeCountArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ArticleWhereInput
 }
 
 /**
  * SourceCountOutputType without action
  */
-export type SourceCountOutputTypeCountCollectionSourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SourceCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionSourceWhereInput
-}
-
-/**
- * SourceCountOutputType without action
- */
-export type SourceCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MediaWhereInput
 }
 
 
@@ -665,9 +665,9 @@ export type SourceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   logo?: boolean
   type?: boolean
   bio?: boolean
-  Article?: boolean | Prisma.Source$ArticleArgs<ExtArgs>
-  CollectionSource?: boolean | Prisma.Source$CollectionSourceArgs<ExtArgs>
-  Media?: boolean | Prisma.Source$MediaArgs<ExtArgs>
+  medias?: boolean | Prisma.Source$mediasArgs<ExtArgs>
+  articles?: boolean | Prisma.Source$articlesArgs<ExtArgs>
+  collections?: boolean | Prisma.Source$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.SourceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["source"]>
 
@@ -697,9 +697,9 @@ export type SourceSelectScalar = {
 
 export type SourceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "logo" | "type" | "bio", ExtArgs["result"]["source"]>
 export type SourceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.Source$ArticleArgs<ExtArgs>
-  CollectionSource?: boolean | Prisma.Source$CollectionSourceArgs<ExtArgs>
-  Media?: boolean | Prisma.Source$MediaArgs<ExtArgs>
+  medias?: boolean | Prisma.Source$mediasArgs<ExtArgs>
+  articles?: boolean | Prisma.Source$articlesArgs<ExtArgs>
+  collections?: boolean | Prisma.Source$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.SourceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SourceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -708,9 +708,9 @@ export type SourceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $SourcePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Source"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>[]
-    CollectionSource: Prisma.$CollectionSourcePayload<ExtArgs>[]
-    Media: Prisma.$MediaPayload<ExtArgs>[]
+    medias: Prisma.$MediaPayload<ExtArgs>[]
+    articles: Prisma.$ArticlePayload<ExtArgs>[]
+    collections: Prisma.$CollectionSourcePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1112,9 +1112,9 @@ readonly fields: SourceFieldRefs;
  */
 export interface Prisma__SourceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.Source$ArticleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$ArticleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  CollectionSource<T extends Prisma.Source$CollectionSourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$CollectionSourceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Media<T extends Prisma.Source$MediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$MediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  medias<T extends Prisma.Source$mediasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$mediasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  articles<T extends Prisma.Source$articlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collections<T extends Prisma.Source$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Source$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1542,9 +1542,33 @@ export type SourceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Source.Article
+ * Source.medias
  */
-export type Source$ArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Source$mediasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Media
+   */
+  select?: Prisma.MediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Media
+   */
+  omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  where?: Prisma.MediaWhereInput
+  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
+  cursor?: Prisma.MediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
+}
+
+/**
+ * Source.articles
+ */
+export type Source$articlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Article
    */
@@ -1566,9 +1590,9 @@ export type Source$ArticleArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Source.CollectionSource
+ * Source.collections
  */
-export type Source$CollectionSourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Source$collectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CollectionSource
    */
@@ -1587,30 +1611,6 @@ export type Source$CollectionSourceArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.CollectionSourceScalarFieldEnum | Prisma.CollectionSourceScalarFieldEnum[]
-}
-
-/**
- * Source.Media
- */
-export type Source$MediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Media
-   */
-  select?: Prisma.MediaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Media
-   */
-  omit?: Prisma.MediaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MediaInclude<ExtArgs> | null
-  where?: Prisma.MediaWhereInput
-  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
-  cursor?: Prisma.MediaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
 }
 
 /**

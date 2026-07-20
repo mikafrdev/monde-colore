@@ -35,9 +35,9 @@ export type ArticleMinAggregateOutputType = {
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  visibility: $Enums.Visibility | null
   authorId: string | null
   sourceId: string | null
-  visibility: $Enums.Visibility | null
 }
 
 export type ArticleMaxAggregateOutputType = {
@@ -51,9 +51,9 @@ export type ArticleMaxAggregateOutputType = {
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  visibility: $Enums.Visibility | null
   authorId: string | null
   sourceId: string | null
-  visibility: $Enums.Visibility | null
 }
 
 export type ArticleCountAggregateOutputType = {
@@ -67,9 +67,9 @@ export type ArticleCountAggregateOutputType = {
   publishedAt: number
   createdAt: number
   updatedAt: number
+  visibility: number
   authorId: number
   sourceId: number
-  visibility: number
   _all: number
 }
 
@@ -85,9 +85,9 @@ export type ArticleMinAggregateInputType = {
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
+  visibility?: true
   authorId?: true
   sourceId?: true
-  visibility?: true
 }
 
 export type ArticleMaxAggregateInputType = {
@@ -101,9 +101,9 @@ export type ArticleMaxAggregateInputType = {
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
+  visibility?: true
   authorId?: true
   sourceId?: true
-  visibility?: true
 }
 
 export type ArticleCountAggregateInputType = {
@@ -117,9 +117,9 @@ export type ArticleCountAggregateInputType = {
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
+  visibility?: true
   authorId?: true
   sourceId?: true
-  visibility?: true
   _all?: true
 }
 
@@ -206,9 +206,9 @@ export type ArticleGroupByOutputType = {
   publishedAt: Date | null
   createdAt: Date
   updatedAt: Date
+  visibility: $Enums.Visibility
   authorId: string
   sourceId: string | null
-  visibility: $Enums.Visibility
   _count: ArticleCountAggregateOutputType | null
   _min: ArticleMinAggregateOutputType | null
   _max: ArticleMaxAggregateOutputType | null
@@ -243,19 +243,19 @@ export type ArticleWhereInput = {
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
+  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
-  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
-  Author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  Source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
-  ArticleContent?: Prisma.ArticleContentListRelationFilter
-  ArticleImage?: Prisma.ArticleImageListRelationFilter
-  ArticleTag?: Prisma.ArticleTagListRelationFilter
-  ArticleVideo?: Prisma.ArticleVideoListRelationFilter
-  ArticleView?: Prisma.ArticleViewListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
-  TimelineEvent?: Prisma.TimelineEventListRelationFilter
-  Category?: Prisma.CategoryListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
+  source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
+  categories?: Prisma.CategoryListRelationFilter
+  tags?: Prisma.ArticleTagListRelationFilter
+  contents?: Prisma.ArticleContentListRelationFilter
+  views?: Prisma.ArticleViewListRelationFilter
+  images?: Prisma.ArticleImageListRelationFilter
+  videos?: Prisma.ArticleVideoListRelationFilter
+  timelineEvents?: Prisma.TimelineEventListRelationFilter
 }
 
 export type ArticleOrderByWithRelationInput = {
@@ -269,19 +269,19 @@ export type ArticleOrderByWithRelationInput = {
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  visibility?: Prisma.SortOrder
-  Author?: Prisma.AuthorOrderByWithRelationInput
-  Source?: Prisma.SourceOrderByWithRelationInput
-  ArticleContent?: Prisma.ArticleContentOrderByRelationAggregateInput
-  ArticleImage?: Prisma.ArticleImageOrderByRelationAggregateInput
-  ArticleTag?: Prisma.ArticleTagOrderByRelationAggregateInput
-  ArticleVideo?: Prisma.ArticleVideoOrderByRelationAggregateInput
-  ArticleView?: Prisma.ArticleViewOrderByRelationAggregateInput
-  Content?: Prisma.ContentOrderByWithRelationInput
-  TimelineEvent?: Prisma.TimelineEventOrderByRelationAggregateInput
-  Category?: Prisma.CategoryOrderByRelationAggregateInput
+  content?: Prisma.ContentOrderByWithRelationInput
+  author?: Prisma.AuthorOrderByWithRelationInput
+  source?: Prisma.SourceOrderByWithRelationInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
+  tags?: Prisma.ArticleTagOrderByRelationAggregateInput
+  contents?: Prisma.ArticleContentOrderByRelationAggregateInput
+  views?: Prisma.ArticleViewOrderByRelationAggregateInput
+  images?: Prisma.ArticleImageOrderByRelationAggregateInput
+  videos?: Prisma.ArticleVideoOrderByRelationAggregateInput
+  timelineEvents?: Prisma.TimelineEventOrderByRelationAggregateInput
 }
 
 export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -298,19 +298,19 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
+  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
-  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
-  Author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  Source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
-  ArticleContent?: Prisma.ArticleContentListRelationFilter
-  ArticleImage?: Prisma.ArticleImageListRelationFilter
-  ArticleTag?: Prisma.ArticleTagListRelationFilter
-  ArticleVideo?: Prisma.ArticleVideoListRelationFilter
-  ArticleView?: Prisma.ArticleViewListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
-  TimelineEvent?: Prisma.TimelineEventListRelationFilter
-  Category?: Prisma.CategoryListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
+  source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
+  categories?: Prisma.CategoryListRelationFilter
+  tags?: Prisma.ArticleTagListRelationFilter
+  contents?: Prisma.ArticleContentListRelationFilter
+  views?: Prisma.ArticleViewListRelationFilter
+  images?: Prisma.ArticleImageListRelationFilter
+  videos?: Prisma.ArticleVideoListRelationFilter
+  timelineEvents?: Prisma.TimelineEventListRelationFilter
 }, "id" | "slug" | "title">
 
 export type ArticleOrderByWithAggregationInput = {
@@ -324,9 +324,9 @@ export type ArticleOrderByWithAggregationInput = {
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  visibility?: Prisma.SortOrder
   _count?: Prisma.ArticleCountOrderByAggregateInput
   _max?: Prisma.ArticleMaxOrderByAggregateInput
   _min?: Prisma.ArticleMinOrderByAggregateInput
@@ -346,13 +346,13 @@ export type ArticleScalarWhereWithAggregatesInput = {
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
+  visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringWithAggregatesFilter<"Article"> | string
   sourceId?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
-  visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Article"> | $Enums.Visibility
 }
 
 export type ArticleCreateInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -361,22 +361,22 @@ export type ArticleCreateInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -385,18 +385,18 @@ export type ArticleUncheckedCreateInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUpdateInput = {
@@ -411,16 +411,16 @@ export type ArticleUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateInput = {
@@ -434,21 +434,21 @@ export type ArticleUncheckedUpdateInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateManyInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -457,10 +457,10 @@ export type ArticleCreateManyInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
-  visibility?: $Enums.Visibility
 }
 
 export type ArticleUpdateManyMutationInput = {
@@ -488,9 +488,19 @@ export type ArticleUncheckedUpdateManyInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+}
+
+export type ArticleListRelationFilter = {
+  every?: Prisma.ArticleWhereInput
+  some?: Prisma.ArticleWhereInput
+  none?: Prisma.ArticleWhereInput
+}
+
+export type ArticleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ArticleCountOrderByAggregateInput = {
@@ -504,9 +514,9 @@ export type ArticleCountOrderByAggregateInput = {
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
-  visibility?: Prisma.SortOrder
 }
 
 export type ArticleMaxOrderByAggregateInput = {
@@ -520,9 +530,9 @@ export type ArticleMaxOrderByAggregateInput = {
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
-  visibility?: Prisma.SortOrder
 }
 
 export type ArticleMinOrderByAggregateInput = {
@@ -536,9 +546,9 @@ export type ArticleMinOrderByAggregateInput = {
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
-  visibility?: Prisma.SortOrder
 }
 
 export type ArticleScalarRelationFilter = {
@@ -546,117 +556,9 @@ export type ArticleScalarRelationFilter = {
   isNot?: Prisma.ArticleWhereInput
 }
 
-export type ArticleListRelationFilter = {
-  every?: Prisma.ArticleWhereInput
-  some?: Prisma.ArticleWhereInput
-  none?: Prisma.ArticleWhereInput
-}
-
-export type ArticleOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type ArticleNullableScalarRelationFilter = {
   is?: Prisma.ArticleWhereInput | null
   isNot?: Prisma.ArticleWhereInput | null
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type EnumArticleStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ArticleStatus
-}
-
-export type EnumArticleTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ArticleType
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type EnumVisibilityFieldUpdateOperationsInput = {
-  set?: $Enums.Visibility
-}
-
-export type ArticleCreateNestedOneWithoutArticleContentInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleContentInput, Prisma.ArticleUncheckedCreateWithoutArticleContentInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleContentInput
-  connect?: Prisma.ArticleWhereUniqueInput
-}
-
-export type ArticleUpdateOneRequiredWithoutArticleContentNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleContentInput, Prisma.ArticleUncheckedCreateWithoutArticleContentInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleContentInput
-  upsert?: Prisma.ArticleUpsertWithoutArticleContentInput
-  connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutArticleContentInput, Prisma.ArticleUpdateWithoutArticleContentInput>, Prisma.ArticleUncheckedUpdateWithoutArticleContentInput>
-}
-
-export type ArticleCreateNestedOneWithoutArticleImageInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleImageInput, Prisma.ArticleUncheckedCreateWithoutArticleImageInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleImageInput
-  connect?: Prisma.ArticleWhereUniqueInput
-}
-
-export type ArticleUpdateOneRequiredWithoutArticleImageNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleImageInput, Prisma.ArticleUncheckedCreateWithoutArticleImageInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleImageInput
-  upsert?: Prisma.ArticleUpsertWithoutArticleImageInput
-  connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutArticleImageInput, Prisma.ArticleUpdateWithoutArticleImageInput>, Prisma.ArticleUncheckedUpdateWithoutArticleImageInput>
-}
-
-export type ArticleCreateNestedOneWithoutArticleTagInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleTagInput, Prisma.ArticleUncheckedCreateWithoutArticleTagInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleTagInput
-  connect?: Prisma.ArticleWhereUniqueInput
-}
-
-export type ArticleUpdateOneRequiredWithoutArticleTagNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleTagInput, Prisma.ArticleUncheckedCreateWithoutArticleTagInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleTagInput
-  upsert?: Prisma.ArticleUpsertWithoutArticleTagInput
-  connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutArticleTagInput, Prisma.ArticleUpdateWithoutArticleTagInput>, Prisma.ArticleUncheckedUpdateWithoutArticleTagInput>
-}
-
-export type ArticleCreateNestedOneWithoutArticleVideoInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleVideoInput, Prisma.ArticleUncheckedCreateWithoutArticleVideoInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleVideoInput
-  connect?: Prisma.ArticleWhereUniqueInput
-}
-
-export type ArticleUpdateOneRequiredWithoutArticleVideoNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleVideoInput, Prisma.ArticleUncheckedCreateWithoutArticleVideoInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleVideoInput
-  upsert?: Prisma.ArticleUpsertWithoutArticleVideoInput
-  connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutArticleVideoInput, Prisma.ArticleUpdateWithoutArticleVideoInput>, Prisma.ArticleUncheckedUpdateWithoutArticleVideoInput>
-}
-
-export type ArticleCreateNestedOneWithoutArticleViewInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleViewInput, Prisma.ArticleUncheckedCreateWithoutArticleViewInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleViewInput
-  connect?: Prisma.ArticleWhereUniqueInput
-}
-
-export type ArticleUpdateOneRequiredWithoutArticleViewNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutArticleViewInput, Prisma.ArticleUncheckedCreateWithoutArticleViewInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutArticleViewInput
-  upsert?: Prisma.ArticleUpsertWithoutArticleViewInput
-  connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutArticleViewInput, Prisma.ArticleUpdateWithoutArticleViewInput>, Prisma.ArticleUncheckedUpdateWithoutArticleViewInput>
 }
 
 export type ArticleCreateNestedManyWithoutAuthorInput = {
@@ -701,58 +603,84 @@ export type ArticleUncheckedUpdateManyWithoutAuthorNestedInput = {
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
-export type ArticleCreateNestedManyWithoutCategoryInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput> | Prisma.ArticleCreateWithoutCategoryInput[] | Prisma.ArticleUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoryInput | Prisma.ArticleCreateOrConnectWithoutCategoryInput[]
+export type ArticleCreateNestedManyWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput> | Prisma.ArticleCreateWithoutCategoriesInput[] | Prisma.ArticleUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoriesInput | Prisma.ArticleCreateOrConnectWithoutCategoriesInput[]
   connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
 }
 
-export type ArticleUncheckedCreateNestedManyWithoutCategoryInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput> | Prisma.ArticleCreateWithoutCategoryInput[] | Prisma.ArticleUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoryInput | Prisma.ArticleCreateOrConnectWithoutCategoryInput[]
+export type ArticleUncheckedCreateNestedManyWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput> | Prisma.ArticleCreateWithoutCategoriesInput[] | Prisma.ArticleUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoriesInput | Prisma.ArticleCreateOrConnectWithoutCategoriesInput[]
   connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
 }
 
-export type ArticleUpdateManyWithoutCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput> | Prisma.ArticleCreateWithoutCategoryInput[] | Prisma.ArticleUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoryInput | Prisma.ArticleCreateOrConnectWithoutCategoryInput[]
-  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutCategoryInput | Prisma.ArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+export type ArticleUpdateManyWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput> | Prisma.ArticleCreateWithoutCategoriesInput[] | Prisma.ArticleUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoriesInput | Prisma.ArticleCreateOrConnectWithoutCategoriesInput[]
+  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutCategoriesInput | Prisma.ArticleUpsertWithWhereUniqueWithoutCategoriesInput[]
   set?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   disconnect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   delete?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
-  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutCategoryInput | Prisma.ArticleUpdateWithWhereUniqueWithoutCategoryInput[]
-  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutCategoryInput | Prisma.ArticleUpdateManyWithWhereWithoutCategoryInput[]
+  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutCategoriesInput | Prisma.ArticleUpdateWithWhereUniqueWithoutCategoriesInput[]
+  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutCategoriesInput | Prisma.ArticleUpdateManyWithWhereWithoutCategoriesInput[]
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
-export type ArticleUncheckedUpdateManyWithoutCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput> | Prisma.ArticleCreateWithoutCategoryInput[] | Prisma.ArticleUncheckedCreateWithoutCategoryInput[]
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoryInput | Prisma.ArticleCreateOrConnectWithoutCategoryInput[]
-  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutCategoryInput | Prisma.ArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+export type ArticleUncheckedUpdateManyWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput> | Prisma.ArticleCreateWithoutCategoriesInput[] | Prisma.ArticleUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutCategoriesInput | Prisma.ArticleCreateOrConnectWithoutCategoriesInput[]
+  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutCategoriesInput | Prisma.ArticleUpsertWithWhereUniqueWithoutCategoriesInput[]
   set?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   disconnect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   delete?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
-  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutCategoryInput | Prisma.ArticleUpdateWithWhereUniqueWithoutCategoryInput[]
-  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutCategoryInput | Prisma.ArticleUpdateManyWithWhereWithoutCategoryInput[]
+  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutCategoriesInput | Prisma.ArticleUpdateWithWhereUniqueWithoutCategoriesInput[]
+  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutCategoriesInput | Prisma.ArticleUpdateManyWithWhereWithoutCategoriesInput[]
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
-export type ArticleCreateNestedOneWithoutContentInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentInput, Prisma.ArticleUncheckedCreateWithoutContentInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentInput
+export type EnumArticleStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ArticleStatus
+}
+
+export type EnumArticleTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ArticleType
+}
+
+export type EnumVisibilityFieldUpdateOperationsInput = {
+  set?: $Enums.Visibility
+}
+
+export type ArticleCreateNestedOneWithoutContentsInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentsInput, Prisma.ArticleUncheckedCreateWithoutContentsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentsInput
   connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleUpdateOneWithoutContentNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentInput, Prisma.ArticleUncheckedCreateWithoutContentInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentInput
-  upsert?: Prisma.ArticleUpsertWithoutContentInput
+export type ArticleUpdateOneRequiredWithoutContentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentsInput, Prisma.ArticleUncheckedCreateWithoutContentsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentsInput
+  upsert?: Prisma.ArticleUpsertWithoutContentsInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutContentsInput, Prisma.ArticleUpdateWithoutContentsInput>, Prisma.ArticleUncheckedUpdateWithoutContentsInput>
+}
+
+export type ArticleCreateNestedOneWithoutTimelineEventsInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventsInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTimelineEventsInput
+  connect?: Prisma.ArticleWhereUniqueInput
+}
+
+export type ArticleUpdateOneWithoutTimelineEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventsInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTimelineEventsInput
+  upsert?: Prisma.ArticleUpsertWithoutTimelineEventsInput
   disconnect?: Prisma.ArticleWhereInput | boolean
   delete?: Prisma.ArticleWhereInput | boolean
   connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutContentInput, Prisma.ArticleUpdateWithoutContentInput>, Prisma.ArticleUncheckedUpdateWithoutContentInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutTimelineEventsInput, Prisma.ArticleUpdateWithoutTimelineEventsInput>, Prisma.ArticleUncheckedUpdateWithoutTimelineEventsInput>
 }
 
 export type ArticleCreateNestedManyWithoutSourceInput = {
@@ -797,564 +725,80 @@ export type ArticleUncheckedUpdateManyWithoutSourceNestedInput = {
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
-export type ArticleCreateNestedOneWithoutTimelineEventInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTimelineEventInput
+export type ArticleCreateNestedOneWithoutContentInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentInput, Prisma.ArticleUncheckedCreateWithoutContentInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentInput
   connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleUpdateOneWithoutTimelineEventNestedInput = {
-  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventInput>
-  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTimelineEventInput
-  upsert?: Prisma.ArticleUpsertWithoutTimelineEventInput
+export type ArticleUpdateOneWithoutContentNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutContentInput, Prisma.ArticleUncheckedCreateWithoutContentInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutContentInput
+  upsert?: Prisma.ArticleUpsertWithoutContentInput
   disconnect?: Prisma.ArticleWhereInput | boolean
   delete?: Prisma.ArticleWhereInput | boolean
   connect?: Prisma.ArticleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutTimelineEventInput, Prisma.ArticleUpdateWithoutTimelineEventInput>, Prisma.ArticleUncheckedUpdateWithoutTimelineEventInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutContentInput, Prisma.ArticleUpdateWithoutContentInput>, Prisma.ArticleUncheckedUpdateWithoutContentInput>
 }
 
-export type ArticleCreateWithoutArticleContentInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
+export type ArticleCreateNestedOneWithoutTagsInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTagsInput, Prisma.ArticleUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTagsInput
+  connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleUncheckedCreateWithoutArticleContentInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
-  sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
+export type ArticleUpdateOneRequiredWithoutTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutTagsInput, Prisma.ArticleUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutTagsInput
+  upsert?: Prisma.ArticleUpsertWithoutTagsInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutTagsInput, Prisma.ArticleUpdateWithoutTagsInput>, Prisma.ArticleUncheckedUpdateWithoutTagsInput>
 }
 
-export type ArticleCreateOrConnectWithoutArticleContentInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleContentInput, Prisma.ArticleUncheckedCreateWithoutArticleContentInput>
+export type ArticleCreateNestedOneWithoutImagesInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutImagesInput, Prisma.ArticleUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutImagesInput
+  connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleUpsertWithoutArticleContentInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleContentInput, Prisma.ArticleUncheckedUpdateWithoutArticleContentInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleContentInput, Prisma.ArticleUncheckedCreateWithoutArticleContentInput>
-  where?: Prisma.ArticleWhereInput
+export type ArticleUpdateOneRequiredWithoutImagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutImagesInput, Prisma.ArticleUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutImagesInput
+  upsert?: Prisma.ArticleUpsertWithoutImagesInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutImagesInput, Prisma.ArticleUpdateWithoutImagesInput>, Prisma.ArticleUncheckedUpdateWithoutImagesInput>
 }
 
-export type ArticleUpdateToOneWithWhereWithoutArticleContentInput = {
-  where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleContentInput, Prisma.ArticleUncheckedUpdateWithoutArticleContentInput>
+export type ArticleCreateNestedOneWithoutViewsInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutViewsInput, Prisma.ArticleUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutViewsInput
+  connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleUpdateWithoutArticleContentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+export type ArticleUpdateOneRequiredWithoutViewsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutViewsInput, Prisma.ArticleUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutViewsInput
+  upsert?: Prisma.ArticleUpsertWithoutViewsInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutViewsInput, Prisma.ArticleUpdateWithoutViewsInput>, Prisma.ArticleUncheckedUpdateWithoutViewsInput>
 }
 
-export type ArticleUncheckedUpdateWithoutArticleContentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+export type ArticleCreateNestedOneWithoutVideosInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutVideosInput, Prisma.ArticleUncheckedCreateWithoutVideosInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutVideosInput
+  connect?: Prisma.ArticleWhereUniqueInput
 }
 
-export type ArticleCreateWithoutArticleImageInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleUncheckedCreateWithoutArticleImageInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
-  sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleCreateOrConnectWithoutArticleImageInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleImageInput, Prisma.ArticleUncheckedCreateWithoutArticleImageInput>
-}
-
-export type ArticleUpsertWithoutArticleImageInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleImageInput, Prisma.ArticleUncheckedUpdateWithoutArticleImageInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleImageInput, Prisma.ArticleUncheckedCreateWithoutArticleImageInput>
-  where?: Prisma.ArticleWhereInput
-}
-
-export type ArticleUpdateToOneWithWhereWithoutArticleImageInput = {
-  where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleImageInput, Prisma.ArticleUncheckedUpdateWithoutArticleImageInput>
-}
-
-export type ArticleUpdateWithoutArticleImageInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleUncheckedUpdateWithoutArticleImageInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleCreateWithoutArticleTagInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleUncheckedCreateWithoutArticleTagInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
-  sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleCreateOrConnectWithoutArticleTagInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleTagInput, Prisma.ArticleUncheckedCreateWithoutArticleTagInput>
-}
-
-export type ArticleUpsertWithoutArticleTagInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleTagInput, Prisma.ArticleUncheckedUpdateWithoutArticleTagInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleTagInput, Prisma.ArticleUncheckedCreateWithoutArticleTagInput>
-  where?: Prisma.ArticleWhereInput
-}
-
-export type ArticleUpdateToOneWithWhereWithoutArticleTagInput = {
-  where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleTagInput, Prisma.ArticleUncheckedUpdateWithoutArticleTagInput>
-}
-
-export type ArticleUpdateWithoutArticleTagInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleUncheckedUpdateWithoutArticleTagInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleCreateWithoutArticleVideoInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleUncheckedCreateWithoutArticleVideoInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
-  sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleCreateOrConnectWithoutArticleVideoInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleVideoInput, Prisma.ArticleUncheckedCreateWithoutArticleVideoInput>
-}
-
-export type ArticleUpsertWithoutArticleVideoInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleVideoInput, Prisma.ArticleUncheckedUpdateWithoutArticleVideoInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleVideoInput, Prisma.ArticleUncheckedCreateWithoutArticleVideoInput>
-  where?: Prisma.ArticleWhereInput
-}
-
-export type ArticleUpdateToOneWithWhereWithoutArticleVideoInput = {
-  where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleVideoInput, Prisma.ArticleUncheckedUpdateWithoutArticleVideoInput>
-}
-
-export type ArticleUpdateWithoutArticleVideoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleUncheckedUpdateWithoutArticleVideoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleCreateWithoutArticleViewInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleUncheckedCreateWithoutArticleViewInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
-  sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleCreateOrConnectWithoutArticleViewInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleViewInput, Prisma.ArticleUncheckedCreateWithoutArticleViewInput>
-}
-
-export type ArticleUpsertWithoutArticleViewInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleViewInput, Prisma.ArticleUncheckedUpdateWithoutArticleViewInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutArticleViewInput, Prisma.ArticleUncheckedCreateWithoutArticleViewInput>
-  where?: Prisma.ArticleWhereInput
-}
-
-export type ArticleUpdateToOneWithWhereWithoutArticleViewInput = {
-  where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutArticleViewInput, Prisma.ArticleUncheckedUpdateWithoutArticleViewInput>
-}
-
-export type ArticleUpdateWithoutArticleViewInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
-}
-
-export type ArticleUncheckedUpdateWithoutArticleViewInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+export type ArticleUpdateOneRequiredWithoutVideosNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutVideosInput, Prisma.ArticleUncheckedCreateWithoutVideosInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutVideosInput
+  upsert?: Prisma.ArticleUpsertWithoutVideosInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutVideosInput, Prisma.ArticleUpdateWithoutVideosInput>, Prisma.ArticleUncheckedUpdateWithoutVideosInput>
 }
 
 export type ArticleCreateWithoutAuthorInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1363,21 +807,21 @@ export type ArticleCreateWithoutAuthorInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutAuthorInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1386,17 +830,17 @@ export type ArticleUncheckedCreateWithoutAuthorInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
-  sourceId?: string | null
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutAuthorInput = {
@@ -1439,13 +883,13 @@ export type ArticleScalarWhereInput = {
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
+  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
-  visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
 }
 
-export type ArticleCreateWithoutCategoryInput = {
-  id: string
+export type ArticleCreateWithoutCategoriesInput = {
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1454,21 +898,21 @@ export type ArticleCreateWithoutCategoryInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
 }
 
-export type ArticleUncheckedCreateWithoutCategoryInput = {
-  id: string
+export type ArticleUncheckedCreateWithoutCategoriesInput = {
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1477,42 +921,330 @@ export type ArticleUncheckedCreateWithoutCategoryInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
 }
 
-export type ArticleCreateOrConnectWithoutCategoryInput = {
+export type ArticleCreateOrConnectWithoutCategoriesInput = {
   where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput>
 }
 
-export type ArticleUpsertWithWhereUniqueWithoutCategoryInput = {
+export type ArticleUpsertWithWhereUniqueWithoutCategoriesInput = {
   where: Prisma.ArticleWhereUniqueInput
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutCategoryInput, Prisma.ArticleUncheckedUpdateWithoutCategoryInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutCategoryInput, Prisma.ArticleUncheckedCreateWithoutCategoryInput>
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutCategoriesInput, Prisma.ArticleUncheckedUpdateWithoutCategoriesInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutCategoriesInput, Prisma.ArticleUncheckedCreateWithoutCategoriesInput>
 }
 
-export type ArticleUpdateWithWhereUniqueWithoutCategoryInput = {
+export type ArticleUpdateWithWhereUniqueWithoutCategoriesInput = {
   where: Prisma.ArticleWhereUniqueInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutCategoryInput, Prisma.ArticleUncheckedUpdateWithoutCategoryInput>
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutCategoriesInput, Prisma.ArticleUncheckedUpdateWithoutCategoriesInput>
 }
 
-export type ArticleUpdateManyWithWhereWithoutCategoryInput = {
+export type ArticleUpdateManyWithWhereWithoutCategoriesInput = {
   where: Prisma.ArticleScalarWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutCategoryInput>
+  data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutCategoriesInput>
+}
+
+export type ArticleCreateWithoutContentsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutContentsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutContentsInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutContentsInput, Prisma.ArticleUncheckedCreateWithoutContentsInput>
+}
+
+export type ArticleUpsertWithoutContentsInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutContentsInput, Prisma.ArticleUncheckedUpdateWithoutContentsInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutContentsInput, Prisma.ArticleUncheckedCreateWithoutContentsInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutContentsInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutContentsInput, Prisma.ArticleUncheckedUpdateWithoutContentsInput>
+}
+
+export type ArticleUpdateWithoutContentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutContentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutTimelineEventsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutTimelineEventsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutTimelineEventsInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventsInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventsInput>
+}
+
+export type ArticleUpsertWithoutTimelineEventsInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutTimelineEventsInput, Prisma.ArticleUncheckedUpdateWithoutTimelineEventsInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventsInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventsInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutTimelineEventsInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutTimelineEventsInput, Prisma.ArticleUncheckedUpdateWithoutTimelineEventsInput>
+}
+
+export type ArticleUpdateWithoutTimelineEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutTimelineEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutSourceInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutSourceInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutSourceInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutSourceInput, Prisma.ArticleUncheckedCreateWithoutSourceInput>
+}
+
+export type ArticleCreateManySourceInputEnvelope = {
+  data: Prisma.ArticleCreateManySourceInput | Prisma.ArticleCreateManySourceInput[]
+  skipDuplicates?: boolean
+}
+
+export type ArticleUpsertWithWhereUniqueWithoutSourceInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutSourceInput, Prisma.ArticleUncheckedUpdateWithoutSourceInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutSourceInput, Prisma.ArticleUncheckedCreateWithoutSourceInput>
+}
+
+export type ArticleUpdateWithWhereUniqueWithoutSourceInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutSourceInput, Prisma.ArticleUncheckedUpdateWithoutSourceInput>
+}
+
+export type ArticleUpdateManyWithWhereWithoutSourceInput = {
+  where: Prisma.ArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutSourceInput>
 }
 
 export type ArticleCreateWithoutContentInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1521,21 +1253,21 @@ export type ArticleCreateWithoutContentInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1544,17 +1276,17 @@ export type ArticleUncheckedCreateWithoutContentInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutContentInput = {
@@ -1585,15 +1317,15 @@ export type ArticleUpdateWithoutContentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutContentInput = {
@@ -1607,20 +1339,20 @@ export type ArticleUncheckedUpdateWithoutContentInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
-export type ArticleCreateWithoutSourceInput = {
-  id: string
+export type ArticleCreateWithoutTagsInput = {
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1629,21 +1361,21 @@ export type ArticleCreateWithoutSourceInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
 }
 
-export type ArticleUncheckedCreateWithoutSourceInput = {
-  id: string
+export type ArticleUncheckedCreateWithoutTagsInput = {
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1652,108 +1384,36 @@ export type ArticleUncheckedCreateWithoutSourceInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleCreateOrConnectWithoutSourceInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutSourceInput, Prisma.ArticleUncheckedCreateWithoutSourceInput>
-}
-
-export type ArticleCreateManySourceInputEnvelope = {
-  data: Prisma.ArticleCreateManySourceInput | Prisma.ArticleCreateManySourceInput[]
-  skipDuplicates?: boolean
-}
-
-export type ArticleUpsertWithWhereUniqueWithoutSourceInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutSourceInput, Prisma.ArticleUncheckedUpdateWithoutSourceInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutSourceInput, Prisma.ArticleUncheckedCreateWithoutSourceInput>
-}
-
-export type ArticleUpdateWithWhereUniqueWithoutSourceInput = {
-  where: Prisma.ArticleWhereUniqueInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutSourceInput, Prisma.ArticleUncheckedUpdateWithoutSourceInput>
-}
-
-export type ArticleUpdateManyWithWhereWithoutSourceInput = {
-  where: Prisma.ArticleScalarWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutSourceInput>
-}
-
-export type ArticleCreateWithoutTimelineEventInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Author: Prisma.AuthorCreateNestedOneWithoutArticleInput
-  Source?: Prisma.SourceCreateNestedOneWithoutArticleInput
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentCreateNestedOneWithoutArticleInput
-  Category?: Prisma.CategoryCreateNestedManyWithoutArticleInput
-}
-
-export type ArticleUncheckedCreateWithoutTimelineEventInput = {
-  id: string
-  slug: string
-  title: string
-  excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
   authorId: string
   sourceId?: string | null
-  visibility?: $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
-  ArticleImage?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
-  ArticleTag?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
-  ArticleView?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
-  Category?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticleInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
 }
 
-export type ArticleCreateOrConnectWithoutTimelineEventInput = {
+export type ArticleCreateOrConnectWithoutTagsInput = {
   where: Prisma.ArticleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutTagsInput, Prisma.ArticleUncheckedCreateWithoutTagsInput>
 }
 
-export type ArticleUpsertWithoutTimelineEventInput = {
-  update: Prisma.XOR<Prisma.ArticleUpdateWithoutTimelineEventInput, Prisma.ArticleUncheckedUpdateWithoutTimelineEventInput>
-  create: Prisma.XOR<Prisma.ArticleCreateWithoutTimelineEventInput, Prisma.ArticleUncheckedCreateWithoutTimelineEventInput>
+export type ArticleUpsertWithoutTagsInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutTagsInput, Prisma.ArticleUncheckedUpdateWithoutTagsInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutTagsInput, Prisma.ArticleUncheckedCreateWithoutTagsInput>
   where?: Prisma.ArticleWhereInput
 }
 
-export type ArticleUpdateToOneWithWhereWithoutTimelineEventInput = {
+export type ArticleUpdateToOneWithWhereWithoutTagsInput = {
   where?: Prisma.ArticleWhereInput
-  data: Prisma.XOR<Prisma.ArticleUpdateWithoutTimelineEventInput, Prisma.ArticleUncheckedUpdateWithoutTimelineEventInput>
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutTagsInput, Prisma.ArticleUncheckedUpdateWithoutTagsInput>
 }
 
-export type ArticleUpdateWithoutTimelineEventInput = {
+export type ArticleUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1765,18 +1425,18 @@ export type ArticleUpdateWithoutTimelineEventInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
-export type ArticleUncheckedUpdateWithoutTimelineEventInput = {
+export type ArticleUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1787,20 +1447,344 @@ export type ArticleUncheckedUpdateWithoutTimelineEventInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutImagesInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutImagesInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutImagesInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutImagesInput, Prisma.ArticleUncheckedCreateWithoutImagesInput>
+}
+
+export type ArticleUpsertWithoutImagesInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutImagesInput, Prisma.ArticleUncheckedUpdateWithoutImagesInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutImagesInput, Prisma.ArticleUncheckedCreateWithoutImagesInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutImagesInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutImagesInput, Prisma.ArticleUncheckedUpdateWithoutImagesInput>
+}
+
+export type ArticleUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutViewsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutViewsInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutViewsInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutViewsInput, Prisma.ArticleUncheckedCreateWithoutViewsInput>
+}
+
+export type ArticleUpsertWithoutViewsInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutViewsInput, Prisma.ArticleUncheckedUpdateWithoutViewsInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutViewsInput, Prisma.ArticleUncheckedCreateWithoutViewsInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutViewsInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutViewsInput, Prisma.ArticleUncheckedUpdateWithoutViewsInput>
+}
+
+export type ArticleUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutVideosInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutVideosInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutVideosInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutVideosInput, Prisma.ArticleUncheckedCreateWithoutVideosInput>
+}
+
+export type ArticleUpsertWithoutVideosInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutVideosInput, Prisma.ArticleUncheckedUpdateWithoutVideosInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutVideosInput, Prisma.ArticleUncheckedCreateWithoutVideosInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutVideosInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutVideosInput, Prisma.ArticleUncheckedUpdateWithoutVideosInput>
+}
+
+export type ArticleUpdateWithoutVideosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutVideosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateManyAuthorInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1809,9 +1793,9 @@ export type ArticleCreateManyAuthorInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
-  sourceId?: string | null
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
+  sourceId?: string | null
 }
 
 export type ArticleUpdateWithoutAuthorInput = {
@@ -1826,15 +1810,15 @@ export type ArticleUpdateWithoutAuthorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutAuthorInput = {
@@ -1848,16 +1832,16 @@ export type ArticleUncheckedUpdateWithoutAuthorInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateManyWithoutAuthorInput = {
@@ -1871,11 +1855,11 @@ export type ArticleUncheckedUpdateManyWithoutAuthorInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
 }
 
-export type ArticleUpdateWithoutCategoryInput = {
+export type ArticleUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1887,18 +1871,18 @@ export type ArticleUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  Source?: Prisma.SourceUpdateOneWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
-export type ArticleUncheckedUpdateWithoutCategoryInput = {
+export type ArticleUncheckedUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1909,19 +1893,19 @@ export type ArticleUncheckedUpdateWithoutCategoryInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
-export type ArticleUncheckedUpdateManyWithoutCategoryInput = {
+export type ArticleUncheckedUpdateManyWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1932,13 +1916,13 @@ export type ArticleUncheckedUpdateManyWithoutCategoryInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
 }
 
 export type ArticleCreateManySourceInput = {
-  id: string
+  id?: string
   slug: string
   title: string
   excerpt?: string | null
@@ -1947,9 +1931,9 @@ export type ArticleCreateManySourceInput = {
   type?: $Enums.ArticleType
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
-  authorId: string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
+  authorId: string
 }
 
 export type ArticleUpdateWithoutSourceInput = {
@@ -1964,15 +1948,15 @@ export type ArticleUpdateWithoutSourceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutArticleNestedInput
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUpdateManyWithoutArticleNestedInput
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutSourceInput = {
@@ -1986,16 +1970,16 @@ export type ArticleUncheckedUpdateWithoutSourceInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleImage?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleTag?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
-  ArticleView?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
-  Category?: Prisma.CategoryUncheckedUpdateManyWithoutArticleNestedInput
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateManyWithoutSourceInput = {
@@ -2009,8 +1993,8 @@ export type ArticleUncheckedUpdateManyWithoutSourceInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -2019,23 +2003,23 @@ export type ArticleUncheckedUpdateManyWithoutSourceInput = {
  */
 
 export type ArticleCountOutputType = {
-  ArticleContent: number
-  ArticleImage: number
-  ArticleTag: number
-  ArticleVideo: number
-  ArticleView: number
-  TimelineEvent: number
-  Category: number
+  categories: number
+  tags: number
+  contents: number
+  views: number
+  images: number
+  videos: number
+  timelineEvents: number
 }
 
 export type ArticleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ArticleContent?: boolean | ArticleCountOutputTypeCountArticleContentArgs
-  ArticleImage?: boolean | ArticleCountOutputTypeCountArticleImageArgs
-  ArticleTag?: boolean | ArticleCountOutputTypeCountArticleTagArgs
-  ArticleVideo?: boolean | ArticleCountOutputTypeCountArticleVideoArgs
-  ArticleView?: boolean | ArticleCountOutputTypeCountArticleViewArgs
-  TimelineEvent?: boolean | ArticleCountOutputTypeCountTimelineEventArgs
-  Category?: boolean | ArticleCountOutputTypeCountCategoryArgs
+  categories?: boolean | ArticleCountOutputTypeCountCategoriesArgs
+  tags?: boolean | ArticleCountOutputTypeCountTagsArgs
+  contents?: boolean | ArticleCountOutputTypeCountContentsArgs
+  views?: boolean | ArticleCountOutputTypeCountViewsArgs
+  images?: boolean | ArticleCountOutputTypeCountImagesArgs
+  videos?: boolean | ArticleCountOutputTypeCountVideosArgs
+  timelineEvents?: boolean | ArticleCountOutputTypeCountTimelineEventsArgs
 }
 
 /**
@@ -2051,50 +2035,50 @@ export type ArticleCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountArticleContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ArticleContentWhereInput
+export type ArticleCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountArticleImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ArticleImageWhereInput
-}
-
-/**
- * ArticleCountOutputType without action
- */
-export type ArticleCountOutputTypeCountArticleTagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ArticleCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ArticleTagWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountArticleVideoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ArticleVideoWhereInput
+export type ArticleCountOutputTypeCountContentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleContentWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountArticleViewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ArticleCountOutputTypeCountViewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ArticleViewWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountTimelineEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TimelineEventWhereInput
+export type ArticleCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleImageWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountCategoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CategoryWhereInput
+export type ArticleCountOutputTypeCountVideosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleVideoWhereInput
+}
+
+/**
+ * ArticleCountOutputType without action
+ */
+export type ArticleCountOutputTypeCountTimelineEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimelineEventWhereInput
 }
 
 
@@ -2109,19 +2093,19 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
-  visibility?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
-  ArticleContent?: boolean | Prisma.Article$ArticleContentArgs<ExtArgs>
-  ArticleImage?: boolean | Prisma.Article$ArticleImageArgs<ExtArgs>
-  ArticleTag?: boolean | Prisma.Article$ArticleTagArgs<ExtArgs>
-  ArticleVideo?: boolean | Prisma.Article$ArticleVideoArgs<ExtArgs>
-  ArticleView?: boolean | Prisma.Article$ArticleViewArgs<ExtArgs>
-  Content?: boolean | Prisma.Article$ContentArgs<ExtArgs>
-  TimelineEvent?: boolean | Prisma.Article$TimelineEventArgs<ExtArgs>
-  Category?: boolean | Prisma.Article$CategoryArgs<ExtArgs>
+  content?: boolean | Prisma.Article$contentArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  categories?: boolean | Prisma.Article$categoriesArgs<ExtArgs>
+  tags?: boolean | Prisma.Article$tagsArgs<ExtArgs>
+  contents?: boolean | Prisma.Article$contentsArgs<ExtArgs>
+  views?: boolean | Prisma.Article$viewsArgs<ExtArgs>
+  images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
+  videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
+  timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
@@ -2136,11 +2120,11 @@ export type ArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
-  visibility?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
 export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2154,11 +2138,11 @@ export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
-  visibility?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
 export type ArticleSelectScalar = {
@@ -2172,47 +2156,47 @@ export type ArticleSelectScalar = {
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
-  visibility?: boolean
 }
 
-export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "excerpt" | "body" | "status" | "type" | "publishedAt" | "createdAt" | "updatedAt" | "authorId" | "sourceId" | "visibility", ExtArgs["result"]["article"]>
+export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "excerpt" | "body" | "status" | "type" | "publishedAt" | "createdAt" | "updatedAt" | "visibility" | "authorId" | "sourceId", ExtArgs["result"]["article"]>
 export type ArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
-  ArticleContent?: boolean | Prisma.Article$ArticleContentArgs<ExtArgs>
-  ArticleImage?: boolean | Prisma.Article$ArticleImageArgs<ExtArgs>
-  ArticleTag?: boolean | Prisma.Article$ArticleTagArgs<ExtArgs>
-  ArticleVideo?: boolean | Prisma.Article$ArticleVideoArgs<ExtArgs>
-  ArticleView?: boolean | Prisma.Article$ArticleViewArgs<ExtArgs>
-  Content?: boolean | Prisma.Article$ContentArgs<ExtArgs>
-  TimelineEvent?: boolean | Prisma.Article$TimelineEventArgs<ExtArgs>
-  Category?: boolean | Prisma.Article$CategoryArgs<ExtArgs>
+  content?: boolean | Prisma.Article$contentArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  categories?: boolean | Prisma.Article$categoriesArgs<ExtArgs>
+  tags?: boolean | Prisma.Article$tagsArgs<ExtArgs>
+  contents?: boolean | Prisma.Article$contentsArgs<ExtArgs>
+  views?: boolean | Prisma.Article$viewsArgs<ExtArgs>
+  images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
+  videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
+  timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArticleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
 }
 export type ArticleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.Article$SourceArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
 }
 
 export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Article"
   objects: {
-    Author: Prisma.$AuthorPayload<ExtArgs>
-    Source: Prisma.$SourcePayload<ExtArgs> | null
-    ArticleContent: Prisma.$ArticleContentPayload<ExtArgs>[]
-    ArticleImage: Prisma.$ArticleImagePayload<ExtArgs>[]
-    ArticleTag: Prisma.$ArticleTagPayload<ExtArgs>[]
-    ArticleVideo: Prisma.$ArticleVideoPayload<ExtArgs>[]
-    ArticleView: Prisma.$ArticleViewPayload<ExtArgs>[]
-    Content: Prisma.$ContentPayload<ExtArgs> | null
-    TimelineEvent: Prisma.$TimelineEventPayload<ExtArgs>[]
-    Category: Prisma.$CategoryPayload<ExtArgs>[]
+    content: Prisma.$ContentPayload<ExtArgs> | null
+    author: Prisma.$AuthorPayload<ExtArgs>
+    source: Prisma.$SourcePayload<ExtArgs> | null
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
+    tags: Prisma.$ArticleTagPayload<ExtArgs>[]
+    contents: Prisma.$ArticleContentPayload<ExtArgs>[]
+    views: Prisma.$ArticleViewPayload<ExtArgs>[]
+    images: Prisma.$ArticleImagePayload<ExtArgs>[]
+    videos: Prisma.$ArticleVideoPayload<ExtArgs>[]
+    timelineEvents: Prisma.$TimelineEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2225,9 +2209,9 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     publishedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    visibility: $Enums.Visibility
     authorId: string
     sourceId: string | null
-    visibility: $Enums.Visibility
   }, ExtArgs["result"]["article"]>
   composites: {}
 }
@@ -2622,16 +2606,16 @@ readonly fields: ArticleFieldRefs;
  */
 export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Author<T extends Prisma.AuthorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthorDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Source<T extends Prisma.Article$SourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$SourceArgs<ExtArgs>>): Prisma.Prisma__SourceClient<runtime.Types.Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  ArticleContent<T extends Prisma.Article$ArticleContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ArticleContentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ArticleImage<T extends Prisma.Article$ArticleImageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ArticleImageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ArticleTag<T extends Prisma.Article$ArticleTagArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ArticleTagArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ArticleVideo<T extends Prisma.Article$ArticleVideoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ArticleVideoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ArticleView<T extends Prisma.Article$ArticleViewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ArticleViewArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Content<T extends Prisma.Article$ContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$ContentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  TimelineEvent<T extends Prisma.Article$TimelineEventArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$TimelineEventArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Category<T extends Prisma.Article$CategoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$CategoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  content<T extends Prisma.Article$contentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$contentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  author<T extends Prisma.AuthorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthorDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  source<T extends Prisma.Article$sourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$sourceArgs<ExtArgs>>): Prisma.Prisma__SourceClient<runtime.Types.Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  categories<T extends Prisma.Article$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tags<T extends Prisma.Article$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contents<T extends Prisma.Article$contentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$contentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  views<T extends Prisma.Article$viewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$viewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  images<T extends Prisma.Article$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  videos<T extends Prisma.Article$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  timelineEvents<T extends Prisma.Article$timelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$timelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2671,9 +2655,9 @@ export interface ArticleFieldRefs {
   readonly publishedAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Article", 'DateTime'>
+  readonly visibility: Prisma.FieldRef<"Article", 'Visibility'>
   readonly authorId: Prisma.FieldRef<"Article", 'String'>
   readonly sourceId: Prisma.FieldRef<"Article", 'String'>
-  readonly visibility: Prisma.FieldRef<"Article", 'Visibility'>
 }
     
 
@@ -3075,9 +3059,28 @@ export type ArticleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Article.Source
+ * Article.content
  */
-export type Article$SourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$contentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Content
+   */
+  select?: Prisma.ContentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Content
+   */
+  omit?: Prisma.ContentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContentInclude<ExtArgs> | null
+  where?: Prisma.ContentWhereInput
+}
+
+/**
+ * Article.source
+ */
+export type Article$sourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Source
    */
@@ -3094,57 +3097,33 @@ export type Article$SourceArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Article.ArticleContent
+ * Article.categories
  */
-export type Article$ArticleContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ArticleContent
+   * Select specific fields to fetch from the Category
    */
-  select?: Prisma.ArticleContentSelect<ExtArgs> | null
+  select?: Prisma.CategorySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ArticleContent
+   * Omit specific fields from the Category
    */
-  omit?: Prisma.ArticleContentOmit<ExtArgs> | null
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ArticleContentInclude<ExtArgs> | null
-  where?: Prisma.ArticleContentWhereInput
-  orderBy?: Prisma.ArticleContentOrderByWithRelationInput | Prisma.ArticleContentOrderByWithRelationInput[]
-  cursor?: Prisma.ArticleContentWhereUniqueInput
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ArticleContentScalarFieldEnum | Prisma.ArticleContentScalarFieldEnum[]
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
 }
 
 /**
- * Article.ArticleImage
+ * Article.tags
  */
-export type Article$ArticleImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ArticleImage
-   */
-  select?: Prisma.ArticleImageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ArticleImage
-   */
-  omit?: Prisma.ArticleImageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ArticleImageInclude<ExtArgs> | null
-  where?: Prisma.ArticleImageWhereInput
-  orderBy?: Prisma.ArticleImageOrderByWithRelationInput | Prisma.ArticleImageOrderByWithRelationInput[]
-  cursor?: Prisma.ArticleImageWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ArticleImageScalarFieldEnum | Prisma.ArticleImageScalarFieldEnum[]
-}
-
-/**
- * Article.ArticleTag
- */
-export type Article$ArticleTagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ArticleTag
    */
@@ -3166,33 +3145,33 @@ export type Article$ArticleTagArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Article.ArticleVideo
+ * Article.contents
  */
-export type Article$ArticleVideoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$contentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ArticleVideo
+   * Select specific fields to fetch from the ArticleContent
    */
-  select?: Prisma.ArticleVideoSelect<ExtArgs> | null
+  select?: Prisma.ArticleContentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ArticleVideo
+   * Omit specific fields from the ArticleContent
    */
-  omit?: Prisma.ArticleVideoOmit<ExtArgs> | null
+  omit?: Prisma.ArticleContentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ArticleVideoInclude<ExtArgs> | null
-  where?: Prisma.ArticleVideoWhereInput
-  orderBy?: Prisma.ArticleVideoOrderByWithRelationInput | Prisma.ArticleVideoOrderByWithRelationInput[]
-  cursor?: Prisma.ArticleVideoWhereUniqueInput
+  include?: Prisma.ArticleContentInclude<ExtArgs> | null
+  where?: Prisma.ArticleContentWhereInput
+  orderBy?: Prisma.ArticleContentOrderByWithRelationInput | Prisma.ArticleContentOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleContentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ArticleVideoScalarFieldEnum | Prisma.ArticleVideoScalarFieldEnum[]
+  distinct?: Prisma.ArticleContentScalarFieldEnum | Prisma.ArticleContentScalarFieldEnum[]
 }
 
 /**
- * Article.ArticleView
+ * Article.views
  */
-export type Article$ArticleViewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$viewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ArticleView
    */
@@ -3214,28 +3193,57 @@ export type Article$ArticleViewArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Article.Content
+ * Article.images
  */
-export type Article$ContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Content
+   * Select specific fields to fetch from the ArticleImage
    */
-  select?: Prisma.ContentSelect<ExtArgs> | null
+  select?: Prisma.ArticleImageSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Content
+   * Omit specific fields from the ArticleImage
    */
-  omit?: Prisma.ContentOmit<ExtArgs> | null
+  omit?: Prisma.ArticleImageOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  where?: Prisma.ContentWhereInput
+  include?: Prisma.ArticleImageInclude<ExtArgs> | null
+  where?: Prisma.ArticleImageWhereInput
+  orderBy?: Prisma.ArticleImageOrderByWithRelationInput | Prisma.ArticleImageOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleImageScalarFieldEnum | Prisma.ArticleImageScalarFieldEnum[]
 }
 
 /**
- * Article.TimelineEvent
+ * Article.videos
  */
-export type Article$TimelineEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Article$videosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArticleVideo
+   */
+  select?: Prisma.ArticleVideoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArticleVideo
+   */
+  omit?: Prisma.ArticleVideoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleVideoInclude<ExtArgs> | null
+  where?: Prisma.ArticleVideoWhereInput
+  orderBy?: Prisma.ArticleVideoOrderByWithRelationInput | Prisma.ArticleVideoOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleVideoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleVideoScalarFieldEnum | Prisma.ArticleVideoScalarFieldEnum[]
+}
+
+/**
+ * Article.timelineEvents
+ */
+export type Article$timelineEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TimelineEvent
    */
@@ -3254,30 +3262,6 @@ export type Article$TimelineEventArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.TimelineEventScalarFieldEnum | Prisma.TimelineEventScalarFieldEnum[]
-}
-
-/**
- * Article.Category
- */
-export type Article$CategoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Category
-   */
-  select?: Prisma.CategorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Category
-   */
-  omit?: Prisma.CategoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoryInclude<ExtArgs> | null
-  where?: Prisma.CategoryWhereInput
-  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
-  cursor?: Prisma.CategoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
 }
 
 /**

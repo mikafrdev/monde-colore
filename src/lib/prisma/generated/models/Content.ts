@@ -206,13 +206,13 @@ export type ContentWhereInput = {
   documentId?: Prisma.StringNullableFilter<"Content"> | string | null
   timelineId?: Prisma.StringNullableFilter<"Content"> | string | null
   collectionId?: Prisma.StringNullableFilter<"Content"> | string | null
-  ArticleContent?: Prisma.ArticleContentListRelationFilter
-  CollectionItem?: Prisma.CollectionItemListRelationFilter
-  Article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
-  Collection?: Prisma.XOR<Prisma.CollectionNullableScalarRelationFilter, Prisma.CollectionWhereInput> | null
-  Document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
-  Timeline?: Prisma.XOR<Prisma.TimelineNullableScalarRelationFilter, Prisma.TimelineWhereInput> | null
-  Video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  timeline?: Prisma.XOR<Prisma.TimelineNullableScalarRelationFilter, Prisma.TimelineWhereInput> | null
+  collection?: Prisma.XOR<Prisma.CollectionNullableScalarRelationFilter, Prisma.CollectionWhereInput> | null
+  collectionItems?: Prisma.CollectionItemListRelationFilter
+  articleContents?: Prisma.ArticleContentListRelationFilter
 }
 
 export type ContentOrderByWithRelationInput = {
@@ -224,13 +224,13 @@ export type ContentOrderByWithRelationInput = {
   documentId?: Prisma.SortOrderInput | Prisma.SortOrder
   timelineId?: Prisma.SortOrderInput | Prisma.SortOrder
   collectionId?: Prisma.SortOrderInput | Prisma.SortOrder
-  ArticleContent?: Prisma.ArticleContentOrderByRelationAggregateInput
-  CollectionItem?: Prisma.CollectionItemOrderByRelationAggregateInput
-  Article?: Prisma.ArticleOrderByWithRelationInput
-  Collection?: Prisma.CollectionOrderByWithRelationInput
-  Document?: Prisma.DocumentOrderByWithRelationInput
-  Timeline?: Prisma.TimelineOrderByWithRelationInput
-  Video?: Prisma.VideoOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
+  video?: Prisma.VideoOrderByWithRelationInput
+  document?: Prisma.DocumentOrderByWithRelationInput
+  timeline?: Prisma.TimelineOrderByWithRelationInput
+  collection?: Prisma.CollectionOrderByWithRelationInput
+  collectionItems?: Prisma.CollectionItemOrderByRelationAggregateInput
+  articleContents?: Prisma.ArticleContentOrderByRelationAggregateInput
 }
 
 export type ContentWhereUniqueInput = Prisma.AtLeast<{
@@ -245,13 +245,13 @@ export type ContentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContentWhereInput | Prisma.ContentWhereInput[]
   type?: Prisma.EnumContentTypeFilter<"Content"> | $Enums.ContentType
   createdAt?: Prisma.DateTimeFilter<"Content"> | Date | string
-  ArticleContent?: Prisma.ArticleContentListRelationFilter
-  CollectionItem?: Prisma.CollectionItemListRelationFilter
-  Article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
-  Collection?: Prisma.XOR<Prisma.CollectionNullableScalarRelationFilter, Prisma.CollectionWhereInput> | null
-  Document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
-  Timeline?: Prisma.XOR<Prisma.TimelineNullableScalarRelationFilter, Prisma.TimelineWhereInput> | null
-  Video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  timeline?: Prisma.XOR<Prisma.TimelineNullableScalarRelationFilter, Prisma.TimelineWhereInput> | null
+  collection?: Prisma.XOR<Prisma.CollectionNullableScalarRelationFilter, Prisma.CollectionWhereInput> | null
+  collectionItems?: Prisma.CollectionItemListRelationFilter
+  articleContents?: Prisma.ArticleContentListRelationFilter
 }, "id" | "articleId" | "videoId" | "documentId" | "timelineId" | "collectionId">
 
 export type ContentOrderByWithAggregationInput = {
@@ -283,20 +283,20 @@ export type ContentScalarWhereWithAggregatesInput = {
 }
 
 export type ContentCreateInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
 }
 
 export type ContentUncheckedCreateInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
   articleId?: string | null
@@ -304,21 +304,21 @@ export type ContentUncheckedCreateInput = {
   documentId?: string | null
   timelineId?: string | null
   collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
 }
 
 export type ContentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
 }
 
 export type ContentUncheckedUpdateInput = {
@@ -330,12 +330,12 @@ export type ContentUncheckedUpdateInput = {
   documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
 }
 
 export type ContentCreateManyInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
   articleId?: string | null
@@ -437,68 +437,50 @@ export type ContentUncheckedUpdateOneWithoutArticleNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutArticleInput, Prisma.ContentUpdateWithoutArticleInput>, Prisma.ContentUncheckedUpdateWithoutArticleInput>
 }
 
-export type ContentCreateNestedOneWithoutArticleContentInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentInput, Prisma.ContentUncheckedCreateWithoutArticleContentInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutArticleContentInput
+export type ContentCreateNestedOneWithoutArticleContentsInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentsInput, Prisma.ContentUncheckedCreateWithoutArticleContentsInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutArticleContentsInput
   connect?: Prisma.ContentWhereUniqueInput
 }
 
-export type ContentUpdateOneRequiredWithoutArticleContentNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentInput, Prisma.ContentUncheckedCreateWithoutArticleContentInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutArticleContentInput
-  upsert?: Prisma.ContentUpsertWithoutArticleContentInput
+export type ContentUpdateOneRequiredWithoutArticleContentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentsInput, Prisma.ContentUncheckedCreateWithoutArticleContentsInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutArticleContentsInput
+  upsert?: Prisma.ContentUpsertWithoutArticleContentsInput
   connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutArticleContentInput, Prisma.ContentUpdateWithoutArticleContentInput>, Prisma.ContentUncheckedUpdateWithoutArticleContentInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutArticleContentsInput, Prisma.ContentUpdateWithoutArticleContentsInput>, Prisma.ContentUncheckedUpdateWithoutArticleContentsInput>
 }
 
-export type ContentCreateNestedOneWithoutCollectionInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
-  connect?: Prisma.ContentWhereUniqueInput
-}
-
-export type ContentUncheckedCreateNestedOneWithoutCollectionInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
+export type ContentCreateNestedOneWithoutVideoInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
   connect?: Prisma.ContentWhereUniqueInput
 }
 
-export type ContentUpdateOneWithoutCollectionNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
-  upsert?: Prisma.ContentUpsertWithoutCollectionInput
+export type ContentUncheckedCreateNestedOneWithoutVideoInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
+  connect?: Prisma.ContentWhereUniqueInput
+}
+
+export type ContentUpdateOneWithoutVideoNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
+  upsert?: Prisma.ContentUpsertWithoutVideoInput
   disconnect?: Prisma.ContentWhereInput | boolean
   delete?: Prisma.ContentWhereInput | boolean
   connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionInput, Prisma.ContentUpdateWithoutCollectionInput>, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutVideoInput, Prisma.ContentUpdateWithoutVideoInput>, Prisma.ContentUncheckedUpdateWithoutVideoInput>
 }
 
-export type ContentUncheckedUpdateOneWithoutCollectionNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
-  upsert?: Prisma.ContentUpsertWithoutCollectionInput
+export type ContentUncheckedUpdateOneWithoutVideoNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
+  upsert?: Prisma.ContentUpsertWithoutVideoInput
   disconnect?: Prisma.ContentWhereInput | boolean
   delete?: Prisma.ContentWhereInput | boolean
   connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionInput, Prisma.ContentUpdateWithoutCollectionInput>, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
-}
-
-export type ContentCreateNestedOneWithoutCollectionItemInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemInput, Prisma.ContentUncheckedCreateWithoutCollectionItemInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionItemInput
-  connect?: Prisma.ContentWhereUniqueInput
-}
-
-export type ContentUpdateOneRequiredWithoutCollectionItemNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemInput, Prisma.ContentUncheckedCreateWithoutCollectionItemInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionItemInput
-  upsert?: Prisma.ContentUpsertWithoutCollectionItemInput
-  connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionItemInput, Prisma.ContentUpdateWithoutCollectionItemInput>, Prisma.ContentUncheckedUpdateWithoutCollectionItemInput>
-}
-
-export type EnumContentTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ContentType
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutVideoInput, Prisma.ContentUpdateWithoutVideoInput>, Prisma.ContentUncheckedUpdateWithoutVideoInput>
 }
 
 export type ContentCreateNestedOneWithoutDocumentInput = {
@@ -565,60 +547,78 @@ export type ContentUncheckedUpdateOneWithoutTimelineNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutTimelineInput, Prisma.ContentUpdateWithoutTimelineInput>, Prisma.ContentUncheckedUpdateWithoutTimelineInput>
 }
 
-export type ContentCreateNestedOneWithoutVideoInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
+export type ContentCreateNestedOneWithoutCollectionInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
   connect?: Prisma.ContentWhereUniqueInput
 }
 
-export type ContentUncheckedCreateNestedOneWithoutVideoInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
+export type ContentUncheckedCreateNestedOneWithoutCollectionInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
   connect?: Prisma.ContentWhereUniqueInput
 }
 
-export type ContentUpdateOneWithoutVideoNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
-  upsert?: Prisma.ContentUpsertWithoutVideoInput
+export type ContentUpdateOneWithoutCollectionNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
+  upsert?: Prisma.ContentUpsertWithoutCollectionInput
   disconnect?: Prisma.ContentWhereInput | boolean
   delete?: Prisma.ContentWhereInput | boolean
   connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutVideoInput, Prisma.ContentUpdateWithoutVideoInput>, Prisma.ContentUncheckedUpdateWithoutVideoInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionInput, Prisma.ContentUpdateWithoutCollectionInput>, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
 }
 
-export type ContentUncheckedUpdateOneWithoutVideoNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutVideoInput, Prisma.ContentUncheckedCreateWithoutVideoInput>
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutVideoInput
-  upsert?: Prisma.ContentUpsertWithoutVideoInput
+export type ContentUncheckedUpdateOneWithoutCollectionNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionInput
+  upsert?: Prisma.ContentUpsertWithoutCollectionInput
   disconnect?: Prisma.ContentWhereInput | boolean
   delete?: Prisma.ContentWhereInput | boolean
   connect?: Prisma.ContentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutVideoInput, Prisma.ContentUpdateWithoutVideoInput>, Prisma.ContentUncheckedUpdateWithoutVideoInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionInput, Prisma.ContentUpdateWithoutCollectionInput>, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
+}
+
+export type ContentCreateNestedOneWithoutCollectionItemsInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemsInput, Prisma.ContentUncheckedCreateWithoutCollectionItemsInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionItemsInput
+  connect?: Prisma.ContentWhereUniqueInput
+}
+
+export type ContentUpdateOneRequiredWithoutCollectionItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemsInput, Prisma.ContentUncheckedCreateWithoutCollectionItemsInput>
+  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutCollectionItemsInput
+  upsert?: Prisma.ContentUpsertWithoutCollectionItemsInput
+  connect?: Prisma.ContentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContentUpdateToOneWithWhereWithoutCollectionItemsInput, Prisma.ContentUpdateWithoutCollectionItemsInput>, Prisma.ContentUncheckedUpdateWithoutCollectionItemsInput>
+}
+
+export type EnumContentTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ContentType
 }
 
 export type ContentCreateWithoutArticleInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
 }
 
 export type ContentUncheckedCreateWithoutArticleInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
   videoId?: string | null
   documentId?: string | null
   timelineId?: string | null
   collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
 }
 
 export type ContentCreateOrConnectWithoutArticleInput = {
@@ -641,12 +641,12 @@ export type ContentUpdateWithoutArticleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
 }
 
 export type ContentUncheckedUpdateWithoutArticleInput = {
@@ -657,24 +657,24 @@ export type ContentUncheckedUpdateWithoutArticleInput = {
   documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
 }
 
-export type ContentCreateWithoutArticleContentInput = {
-  id: string
+export type ContentCreateWithoutArticleContentsInput = {
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
 }
 
-export type ContentUncheckedCreateWithoutArticleContentInput = {
-  id: string
+export type ContentUncheckedCreateWithoutArticleContentsInput = {
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
   articleId?: string | null
@@ -682,38 +682,38 @@ export type ContentUncheckedCreateWithoutArticleContentInput = {
   documentId?: string | null
   timelineId?: string | null
   collectionId?: string | null
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
 }
 
-export type ContentCreateOrConnectWithoutArticleContentInput = {
+export type ContentCreateOrConnectWithoutArticleContentsInput = {
   where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentInput, Prisma.ContentUncheckedCreateWithoutArticleContentInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentsInput, Prisma.ContentUncheckedCreateWithoutArticleContentsInput>
 }
 
-export type ContentUpsertWithoutArticleContentInput = {
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutArticleContentInput, Prisma.ContentUncheckedUpdateWithoutArticleContentInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentInput, Prisma.ContentUncheckedCreateWithoutArticleContentInput>
+export type ContentUpsertWithoutArticleContentsInput = {
+  update: Prisma.XOR<Prisma.ContentUpdateWithoutArticleContentsInput, Prisma.ContentUncheckedUpdateWithoutArticleContentsInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutArticleContentsInput, Prisma.ContentUncheckedCreateWithoutArticleContentsInput>
   where?: Prisma.ContentWhereInput
 }
 
-export type ContentUpdateToOneWithWhereWithoutArticleContentInput = {
+export type ContentUpdateToOneWithWhereWithoutArticleContentsInput = {
   where?: Prisma.ContentWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutArticleContentInput, Prisma.ContentUncheckedUpdateWithoutArticleContentInput>
+  data: Prisma.XOR<Prisma.ContentUpdateWithoutArticleContentsInput, Prisma.ContentUncheckedUpdateWithoutArticleContentsInput>
 }
 
-export type ContentUpdateWithoutArticleContentInput = {
+export type ContentUpdateWithoutArticleContentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
 }
 
-export type ContentUncheckedUpdateWithoutArticleContentInput = {
+export type ContentUncheckedUpdateWithoutArticleContentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -722,287 +722,31 @@ export type ContentUncheckedUpdateWithoutArticleContentInput = {
   documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
-}
-
-export type ContentCreateWithoutCollectionInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
-}
-
-export type ContentUncheckedCreateWithoutCollectionInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  articleId?: string | null
-  videoId?: string | null
-  documentId?: string | null
-  timelineId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
-}
-
-export type ContentCreateOrConnectWithoutCollectionInput = {
-  where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-}
-
-export type ContentUpsertWithoutCollectionInput = {
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionInput, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
-  where?: Prisma.ContentWhereInput
-}
-
-export type ContentUpdateToOneWithWhereWithoutCollectionInput = {
-  where?: Prisma.ContentWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionInput, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
-}
-
-export type ContentUpdateWithoutCollectionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
-}
-
-export type ContentUncheckedUpdateWithoutCollectionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
-}
-
-export type ContentCreateWithoutCollectionItemInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
-}
-
-export type ContentUncheckedCreateWithoutCollectionItemInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  articleId?: string | null
-  videoId?: string | null
-  documentId?: string | null
-  timelineId?: string | null
-  collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-}
-
-export type ContentCreateOrConnectWithoutCollectionItemInput = {
-  where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemInput, Prisma.ContentUncheckedCreateWithoutCollectionItemInput>
-}
-
-export type ContentUpsertWithoutCollectionItemInput = {
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionItemInput, Prisma.ContentUncheckedUpdateWithoutCollectionItemInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemInput, Prisma.ContentUncheckedCreateWithoutCollectionItemInput>
-  where?: Prisma.ContentWhereInput
-}
-
-export type ContentUpdateToOneWithWhereWithoutCollectionItemInput = {
-  where?: Prisma.ContentWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionItemInput, Prisma.ContentUncheckedUpdateWithoutCollectionItemInput>
-}
-
-export type ContentUpdateWithoutCollectionItemInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
-}
-
-export type ContentUncheckedUpdateWithoutCollectionItemInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-}
-
-export type ContentCreateWithoutDocumentInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
-}
-
-export type ContentUncheckedCreateWithoutDocumentInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  articleId?: string | null
-  videoId?: string | null
-  timelineId?: string | null
-  collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
-}
-
-export type ContentCreateOrConnectWithoutDocumentInput = {
-  where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutDocumentInput, Prisma.ContentUncheckedCreateWithoutDocumentInput>
-}
-
-export type ContentUpsertWithoutDocumentInput = {
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutDocumentInput, Prisma.ContentUncheckedUpdateWithoutDocumentInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutDocumentInput, Prisma.ContentUncheckedCreateWithoutDocumentInput>
-  where?: Prisma.ContentWhereInput
-}
-
-export type ContentUpdateToOneWithWhereWithoutDocumentInput = {
-  where?: Prisma.ContentWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutDocumentInput, Prisma.ContentUncheckedUpdateWithoutDocumentInput>
-}
-
-export type ContentUpdateWithoutDocumentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
-}
-
-export type ContentUncheckedUpdateWithoutDocumentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
-}
-
-export type ContentCreateWithoutTimelineInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Video?: Prisma.VideoCreateNestedOneWithoutContentInput
-}
-
-export type ContentUncheckedCreateWithoutTimelineInput = {
-  id: string
-  type: $Enums.ContentType
-  createdAt?: Date | string
-  articleId?: string | null
-  videoId?: string | null
-  documentId?: string | null
-  collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
-}
-
-export type ContentCreateOrConnectWithoutTimelineInput = {
-  where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutTimelineInput, Prisma.ContentUncheckedCreateWithoutTimelineInput>
-}
-
-export type ContentUpsertWithoutTimelineInput = {
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutTimelineInput, Prisma.ContentUncheckedUpdateWithoutTimelineInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutTimelineInput, Prisma.ContentUncheckedCreateWithoutTimelineInput>
-  where?: Prisma.ContentWhereInput
-}
-
-export type ContentUpdateToOneWithWhereWithoutTimelineInput = {
-  where?: Prisma.ContentWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutTimelineInput, Prisma.ContentUncheckedUpdateWithoutTimelineInput>
-}
-
-export type ContentUpdateWithoutTimelineInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Video?: Prisma.VideoUpdateOneWithoutContentNestedInput
-}
-
-export type ContentUncheckedUpdateWithoutTimelineInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
 }
 
 export type ContentCreateWithoutVideoInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
-  ArticleContent?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
-  Article?: Prisma.ArticleCreateNestedOneWithoutContentInput
-  Collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
-  Document?: Prisma.DocumentCreateNestedOneWithoutContentInput
-  Timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
 }
 
 export type ContentUncheckedCreateWithoutVideoInput = {
-  id: string
+  id?: string
   type: $Enums.ContentType
   createdAt?: Date | string
   articleId?: string | null
   documentId?: string | null
   timelineId?: string | null
   collectionId?: string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
 }
 
 export type ContentCreateOrConnectWithoutVideoInput = {
@@ -1025,12 +769,12 @@ export type ContentUpdateWithoutVideoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ArticleContent?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
-  Article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
-  Collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
-  Document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
-  Timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
 }
 
 export type ContentUncheckedUpdateWithoutVideoInput = {
@@ -1041,8 +785,264 @@ export type ContentUncheckedUpdateWithoutVideoInput = {
   documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ArticleContent?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
+}
+
+export type ContentCreateWithoutDocumentInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
+}
+
+export type ContentUncheckedCreateWithoutDocumentInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  articleId?: string | null
+  videoId?: string | null
+  timelineId?: string | null
+  collectionId?: string | null
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
+}
+
+export type ContentCreateOrConnectWithoutDocumentInput = {
+  where: Prisma.ContentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContentCreateWithoutDocumentInput, Prisma.ContentUncheckedCreateWithoutDocumentInput>
+}
+
+export type ContentUpsertWithoutDocumentInput = {
+  update: Prisma.XOR<Prisma.ContentUpdateWithoutDocumentInput, Prisma.ContentUncheckedUpdateWithoutDocumentInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutDocumentInput, Prisma.ContentUncheckedCreateWithoutDocumentInput>
+  where?: Prisma.ContentWhereInput
+}
+
+export type ContentUpdateToOneWithWhereWithoutDocumentInput = {
+  where?: Prisma.ContentWhereInput
+  data: Prisma.XOR<Prisma.ContentUpdateWithoutDocumentInput, Prisma.ContentUncheckedUpdateWithoutDocumentInput>
+}
+
+export type ContentUpdateWithoutDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
+}
+
+export type ContentUncheckedUpdateWithoutDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
+}
+
+export type ContentCreateWithoutTimelineInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
+}
+
+export type ContentUncheckedCreateWithoutTimelineInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  articleId?: string | null
+  videoId?: string | null
+  documentId?: string | null
+  collectionId?: string | null
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
+}
+
+export type ContentCreateOrConnectWithoutTimelineInput = {
+  where: Prisma.ContentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContentCreateWithoutTimelineInput, Prisma.ContentUncheckedCreateWithoutTimelineInput>
+}
+
+export type ContentUpsertWithoutTimelineInput = {
+  update: Prisma.XOR<Prisma.ContentUpdateWithoutTimelineInput, Prisma.ContentUncheckedUpdateWithoutTimelineInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutTimelineInput, Prisma.ContentUncheckedCreateWithoutTimelineInput>
+  where?: Prisma.ContentWhereInput
+}
+
+export type ContentUpdateToOneWithWhereWithoutTimelineInput = {
+  where?: Prisma.ContentWhereInput
+  data: Prisma.XOR<Prisma.ContentUpdateWithoutTimelineInput, Prisma.ContentUncheckedUpdateWithoutTimelineInput>
+}
+
+export type ContentUpdateWithoutTimelineInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
+}
+
+export type ContentUncheckedUpdateWithoutTimelineInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
+}
+
+export type ContentCreateWithoutCollectionInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collectionItems?: Prisma.CollectionItemCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
+}
+
+export type ContentUncheckedCreateWithoutCollectionInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  articleId?: string | null
+  videoId?: string | null
+  documentId?: string | null
+  timelineId?: string | null
+  collectionItems?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutContentInput
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
+}
+
+export type ContentCreateOrConnectWithoutCollectionInput = {
+  where: Prisma.ContentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+}
+
+export type ContentUpsertWithoutCollectionInput = {
+  update: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionInput, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionInput, Prisma.ContentUncheckedCreateWithoutCollectionInput>
+  where?: Prisma.ContentWhereInput
+}
+
+export type ContentUpdateToOneWithWhereWithoutCollectionInput = {
+  where?: Prisma.ContentWhereInput
+  data: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionInput, Prisma.ContentUncheckedUpdateWithoutCollectionInput>
+}
+
+export type ContentUpdateWithoutCollectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collectionItems?: Prisma.CollectionItemUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
+}
+
+export type ContentUncheckedUpdateWithoutCollectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionItems?: Prisma.CollectionItemUncheckedUpdateManyWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
+}
+
+export type ContentCreateWithoutCollectionItemsInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  article?: Prisma.ArticleCreateNestedOneWithoutContentInput
+  video?: Prisma.VideoCreateNestedOneWithoutContentInput
+  document?: Prisma.DocumentCreateNestedOneWithoutContentInput
+  timeline?: Prisma.TimelineCreateNestedOneWithoutContentInput
+  collection?: Prisma.CollectionCreateNestedOneWithoutContentInput
+  articleContents?: Prisma.ArticleContentCreateNestedManyWithoutContentInput
+}
+
+export type ContentUncheckedCreateWithoutCollectionItemsInput = {
+  id?: string
+  type: $Enums.ContentType
+  createdAt?: Date | string
+  articleId?: string | null
+  videoId?: string | null
+  documentId?: string | null
+  timelineId?: string | null
+  collectionId?: string | null
+  articleContents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutContentInput
+}
+
+export type ContentCreateOrConnectWithoutCollectionItemsInput = {
+  where: Prisma.ContentWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemsInput, Prisma.ContentUncheckedCreateWithoutCollectionItemsInput>
+}
+
+export type ContentUpsertWithoutCollectionItemsInput = {
+  update: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionItemsInput, Prisma.ContentUncheckedUpdateWithoutCollectionItemsInput>
+  create: Prisma.XOR<Prisma.ContentCreateWithoutCollectionItemsInput, Prisma.ContentUncheckedCreateWithoutCollectionItemsInput>
+  where?: Prisma.ContentWhereInput
+}
+
+export type ContentUpdateToOneWithWhereWithoutCollectionItemsInput = {
+  where?: Prisma.ContentWhereInput
+  data: Prisma.XOR<Prisma.ContentUpdateWithoutCollectionItemsInput, Prisma.ContentUncheckedUpdateWithoutCollectionItemsInput>
+}
+
+export type ContentUpdateWithoutCollectionItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  article?: Prisma.ArticleUpdateOneWithoutContentNestedInput
+  video?: Prisma.VideoUpdateOneWithoutContentNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutContentNestedInput
+  timeline?: Prisma.TimelineUpdateOneWithoutContentNestedInput
+  collection?: Prisma.CollectionUpdateOneWithoutContentNestedInput
+  articleContents?: Prisma.ArticleContentUpdateManyWithoutContentNestedInput
+}
+
+export type ContentUncheckedUpdateWithoutCollectionItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  articleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timelineId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  articleContents?: Prisma.ArticleContentUncheckedUpdateManyWithoutContentNestedInput
 }
 
 
@@ -1051,13 +1051,13 @@ export type ContentUncheckedUpdateWithoutVideoInput = {
  */
 
 export type ContentCountOutputType = {
-  ArticleContent: number
-  CollectionItem: number
+  collectionItems: number
+  articleContents: number
 }
 
 export type ContentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ArticleContent?: boolean | ContentCountOutputTypeCountArticleContentArgs
-  CollectionItem?: boolean | ContentCountOutputTypeCountCollectionItemArgs
+  collectionItems?: boolean | ContentCountOutputTypeCountCollectionItemsArgs
+  articleContents?: boolean | ContentCountOutputTypeCountArticleContentsArgs
 }
 
 /**
@@ -1073,15 +1073,15 @@ export type ContentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * ContentCountOutputType without action
  */
-export type ContentCountOutputTypeCountArticleContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ArticleContentWhereInput
+export type ContentCountOutputTypeCountCollectionItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CollectionItemWhereInput
 }
 
 /**
  * ContentCountOutputType without action
  */
-export type ContentCountOutputTypeCountCollectionItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CollectionItemWhereInput
+export type ContentCountOutputTypeCountArticleContentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleContentWhereInput
 }
 
 
@@ -1094,13 +1094,13 @@ export type ContentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   documentId?: boolean
   timelineId?: boolean
   collectionId?: boolean
-  ArticleContent?: boolean | Prisma.Content$ArticleContentArgs<ExtArgs>
-  CollectionItem?: boolean | Prisma.Content$CollectionItemArgs<ExtArgs>
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
+  collectionItems?: boolean | Prisma.Content$collectionItemsArgs<ExtArgs>
+  articleContents?: boolean | Prisma.Content$articleContentsArgs<ExtArgs>
   _count?: boolean | Prisma.ContentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
@@ -1113,11 +1113,11 @@ export type ContentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   documentId?: boolean
   timelineId?: boolean
   collectionId?: boolean
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
 export type ContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1129,11 +1129,11 @@ export type ContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   documentId?: boolean
   timelineId?: boolean
   collectionId?: boolean
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
 export type ContentSelectScalar = {
@@ -1149,40 +1149,40 @@ export type ContentSelectScalar = {
 
 export type ContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "createdAt" | "articleId" | "videoId" | "documentId" | "timelineId" | "collectionId", ExtArgs["result"]["content"]>
 export type ContentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ArticleContent?: boolean | Prisma.Content$ArticleContentArgs<ExtArgs>
-  CollectionItem?: boolean | Prisma.Content$CollectionItemArgs<ExtArgs>
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
+  collectionItems?: boolean | Prisma.Content$collectionItemsArgs<ExtArgs>
+  articleContents?: boolean | Prisma.Content$articleContentsArgs<ExtArgs>
   _count?: boolean | Prisma.ContentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
 }
 export type ContentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.Content$ArticleArgs<ExtArgs>
-  Collection?: boolean | Prisma.Content$CollectionArgs<ExtArgs>
-  Document?: boolean | Prisma.Content$DocumentArgs<ExtArgs>
-  Timeline?: boolean | Prisma.Content$TimelineArgs<ExtArgs>
-  Video?: boolean | Prisma.Content$VideoArgs<ExtArgs>
+  article?: boolean | Prisma.Content$articleArgs<ExtArgs>
+  video?: boolean | Prisma.Content$videoArgs<ExtArgs>
+  document?: boolean | Prisma.Content$documentArgs<ExtArgs>
+  timeline?: boolean | Prisma.Content$timelineArgs<ExtArgs>
+  collection?: boolean | Prisma.Content$collectionArgs<ExtArgs>
 }
 
 export type $ContentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Content"
   objects: {
-    ArticleContent: Prisma.$ArticleContentPayload<ExtArgs>[]
-    CollectionItem: Prisma.$CollectionItemPayload<ExtArgs>[]
-    Article: Prisma.$ArticlePayload<ExtArgs> | null
-    Collection: Prisma.$CollectionPayload<ExtArgs> | null
-    Document: Prisma.$DocumentPayload<ExtArgs> | null
-    Timeline: Prisma.$TimelinePayload<ExtArgs> | null
-    Video: Prisma.$VideoPayload<ExtArgs> | null
+    article: Prisma.$ArticlePayload<ExtArgs> | null
+    video: Prisma.$VideoPayload<ExtArgs> | null
+    document: Prisma.$DocumentPayload<ExtArgs> | null
+    timeline: Prisma.$TimelinePayload<ExtArgs> | null
+    collection: Prisma.$CollectionPayload<ExtArgs> | null
+    collectionItems: Prisma.$CollectionItemPayload<ExtArgs>[]
+    articleContents: Prisma.$ArticleContentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1587,13 +1587,13 @@ readonly fields: ContentFieldRefs;
  */
 export interface Prisma__ContentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  ArticleContent<T extends Prisma.Content$ArticleContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$ArticleContentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  CollectionItem<T extends Prisma.Content$CollectionItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$CollectionItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Article<T extends Prisma.Content$ArticleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$ArticleArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Collection<T extends Prisma.Content$CollectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$CollectionArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Document<T extends Prisma.Content$DocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$DocumentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Timeline<T extends Prisma.Content$TimelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$TimelineArgs<ExtArgs>>): Prisma.Prisma__TimelineClient<runtime.Types.Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Video<T extends Prisma.Content$VideoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$VideoArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.Content$articleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$articleArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  video<T extends Prisma.Content$videoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$videoArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  document<T extends Prisma.Content$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$documentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  timeline<T extends Prisma.Content$timelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$timelineArgs<ExtArgs>>): Prisma.Prisma__TimelineClient<runtime.Types.Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  collection<T extends Prisma.Content$collectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$collectionArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  collectionItems<T extends Prisma.Content$collectionItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$collectionItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  articleContents<T extends Prisma.Content$articleContentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Content$articleContentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2032,33 +2032,104 @@ export type ContentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Content.ArticleContent
+ * Content.article
  */
-export type Content$ArticleContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Content$articleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ArticleContent
+   * Select specific fields to fetch from the Article
    */
-  select?: Prisma.ArticleContentSelect<ExtArgs> | null
+  select?: Prisma.ArticleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ArticleContent
+   * Omit specific fields from the Article
    */
-  omit?: Prisma.ArticleContentOmit<ExtArgs> | null
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ArticleContentInclude<ExtArgs> | null
-  where?: Prisma.ArticleContentWhereInput
-  orderBy?: Prisma.ArticleContentOrderByWithRelationInput | Prisma.ArticleContentOrderByWithRelationInput[]
-  cursor?: Prisma.ArticleContentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ArticleContentScalarFieldEnum | Prisma.ArticleContentScalarFieldEnum[]
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
 }
 
 /**
- * Content.CollectionItem
+ * Content.video
  */
-export type Content$CollectionItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Content$videoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Video
+   */
+  select?: Prisma.VideoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Video
+   */
+  omit?: Prisma.VideoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VideoInclude<ExtArgs> | null
+  where?: Prisma.VideoWhereInput
+}
+
+/**
+ * Content.document
+ */
+export type Content$documentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+}
+
+/**
+ * Content.timeline
+ */
+export type Content$timelineArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Timeline
+   */
+  select?: Prisma.TimelineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Timeline
+   */
+  omit?: Prisma.TimelineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimelineInclude<ExtArgs> | null
+  where?: Prisma.TimelineWhereInput
+}
+
+/**
+ * Content.collection
+ */
+export type Content$collectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Collection
+   */
+  select?: Prisma.CollectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Collection
+   */
+  omit?: Prisma.CollectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollectionInclude<ExtArgs> | null
+  where?: Prisma.CollectionWhereInput
+}
+
+/**
+ * Content.collectionItems
+ */
+export type Content$collectionItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CollectionItem
    */
@@ -2080,98 +2151,27 @@ export type Content$CollectionItemArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * Content.Article
+ * Content.articleContents
  */
-export type Content$ArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Content$articleContentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Article
+   * Select specific fields to fetch from the ArticleContent
    */
-  select?: Prisma.ArticleSelect<ExtArgs> | null
+  select?: Prisma.ArticleContentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Article
+   * Omit specific fields from the ArticleContent
    */
-  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  omit?: Prisma.ArticleContentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ArticleInclude<ExtArgs> | null
-  where?: Prisma.ArticleWhereInput
-}
-
-/**
- * Content.Collection
- */
-export type Content$CollectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Collection
-   */
-  select?: Prisma.CollectionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Collection
-   */
-  omit?: Prisma.CollectionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CollectionInclude<ExtArgs> | null
-  where?: Prisma.CollectionWhereInput
-}
-
-/**
- * Content.Document
- */
-export type Content$DocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Document
-   */
-  select?: Prisma.DocumentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Document
-   */
-  omit?: Prisma.DocumentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DocumentInclude<ExtArgs> | null
-  where?: Prisma.DocumentWhereInput
-}
-
-/**
- * Content.Timeline
- */
-export type Content$TimelineArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Timeline
-   */
-  select?: Prisma.TimelineSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Timeline
-   */
-  omit?: Prisma.TimelineOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TimelineInclude<ExtArgs> | null
-  where?: Prisma.TimelineWhereInput
-}
-
-/**
- * Content.Video
- */
-export type Content$VideoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Video
-   */
-  select?: Prisma.VideoSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Video
-   */
-  omit?: Prisma.VideoOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VideoInclude<ExtArgs> | null
-  where?: Prisma.VideoWhereInput
+  include?: Prisma.ArticleContentInclude<ExtArgs> | null
+  where?: Prisma.ArticleContentWhereInput
+  orderBy?: Prisma.ArticleContentOrderByWithRelationInput | Prisma.ArticleContentOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleContentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleContentScalarFieldEnum | Prisma.ArticleContentScalarFieldEnum[]
 }
 
 /**

@@ -9,6 +9,34 @@
 * 🟢 You can import this file directly.
 */
 
+export const Role = {
+  ADMIN: 'ADMIN',
+  STAFF: 'STAFF',
+  MEMBER: 'MEMBER',
+  GUEST: 'GUEST',
+  PUBLIC: 'PUBLIC'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const PermissionType = {
+  ROLE: 'ROLE',
+  USER: 'USER'
+} as const
+
+export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType]
+
+
+export const Visibility = {
+  PUBLIC: 'PUBLIC',
+  FAMILY: 'FAMILY',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type Visibility = (typeof Visibility)[keyof typeof Visibility]
+
+
 export const ArticleStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
@@ -33,57 +61,6 @@ export const ArticleType = {
 export type ArticleType = (typeof ArticleType)[keyof typeof ArticleType]
 
 
-export const CollectionContributorRole = {
-  EDITOR: 'EDITOR',
-  WRITER: 'WRITER',
-  RESEARCHER: 'RESEARCHER',
-  PHOTOGRAPHER: 'PHOTOGRAPHER'
-} as const
-
-export type CollectionContributorRole = (typeof CollectionContributorRole)[keyof typeof CollectionContributorRole]
-
-
-export const CollectionSourceRole = {
-  PRIMARY: 'PRIMARY',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-  CITED: 'CITED'
-} as const
-
-export type CollectionSourceRole = (typeof CollectionSourceRole)[keyof typeof CollectionSourceRole]
-
-
-export const CollectionStatus = {
-  DRAFT: 'DRAFT',
-  PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED',
-  LIVE: 'LIVE'
-} as const
-
-export type CollectionStatus = (typeof CollectionStatus)[keyof typeof CollectionStatus]
-
-
-export const CollectionType = {
-  DOSSIER: 'DOSSIER',
-  SERIE: 'SERIE',
-  ENQUETE: 'ENQUETE',
-  LIVE: 'LIVE',
-  SPECIAL: 'SPECIAL'
-} as const
-
-export type CollectionType = (typeof CollectionType)[keyof typeof CollectionType]
-
-
-export const ContentType = {
-  ARTICLE: 'ARTICLE',
-  VIDEO: 'VIDEO',
-  DOCUMENT: 'DOCUMENT',
-  TIMELINE: 'TIMELINE',
-  COLLECTION: 'COLLECTION'
-} as const
-
-export type ContentType = (typeof ContentType)[keyof typeof ContentType]
-
-
 export const ImageType = {
   ARTICLE: 'ARTICLE',
   GALLERY: 'GALLERY',
@@ -94,13 +71,36 @@ export const ImageType = {
 export type ImageType = (typeof ImageType)[keyof typeof ImageType]
 
 
-export const MediaRole = {
-  COVER: 'COVER',
-  INLINE: 'INLINE',
-  GALLERY: 'GALLERY'
+export const VideoProvider = {
+  YOUTUBE: 'YOUTUBE',
+  VIMEO: 'VIMEO',
+  UPLOAD: 'UPLOAD',
+  OTHER: 'OTHER'
 } as const
 
-export type MediaRole = (typeof MediaRole)[keyof typeof MediaRole]
+export type VideoProvider = (typeof VideoProvider)[keyof typeof VideoProvider]
+
+
+export const VideoStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type VideoStatus = (typeof VideoStatus)[keyof typeof VideoStatus]
+
+
+export const SourceType = {
+  PERSON: 'PERSON',
+  COLLECTIVE: 'COLLECTIVE',
+  BRAND: 'BRAND',
+  MEDIA: 'MEDIA',
+  POLITICAL: 'POLITICAL',
+  INSTITUTION: 'INSTITUTION',
+  COMPANY: 'COMPANY'
+} as const
+
+export type SourceType = (typeof SourceType)[keyof typeof SourceType]
 
 
 export const MediaType = {
@@ -126,61 +126,61 @@ export const MediaType = {
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
 
-export const PermissionType = {
-  ROLE: 'ROLE',
-  USER: 'USER'
+export const CollectionType = {
+  DOSSIER: 'DOSSIER',
+  SERIE: 'SERIE',
+  ENQUETE: 'ENQUETE',
+  LIVE: 'LIVE',
+  SPECIAL: 'SPECIAL'
 } as const
 
-export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType]
+export type CollectionType = (typeof CollectionType)[keyof typeof CollectionType]
 
 
-export const Role = {
-  ADMIN: 'ADMIN',
-  STAFF: 'STAFF',
-  MEMBER: 'MEMBER',
-  GUEST: 'GUEST',
-  PUBLIC: 'PUBLIC'
-} as const
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-
-export const SourceType = {
-  PERSON: 'PERSON',
-  COLLECTIVE: 'COLLECTIVE',
-  BRAND: 'BRAND',
-  MEDIA: 'MEDIA',
-  POLITICAL: 'POLITICAL',
-  INSTITUTION: 'INSTITUTION',
-  COMPANY: 'COMPANY'
-} as const
-
-export type SourceType = (typeof SourceType)[keyof typeof SourceType]
-
-
-export const VideoProvider = {
-  YOUTUBE: 'YOUTUBE',
-  VIMEO: 'VIMEO',
-  UPLOAD: 'UPLOAD',
-  OTHER: 'OTHER'
-} as const
-
-export type VideoProvider = (typeof VideoProvider)[keyof typeof VideoProvider]
-
-
-export const VideoStatus = {
+export const CollectionStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED'
+  ARCHIVED: 'ARCHIVED',
+  LIVE: 'LIVE'
 } as const
 
-export type VideoStatus = (typeof VideoStatus)[keyof typeof VideoStatus]
+export type CollectionStatus = (typeof CollectionStatus)[keyof typeof CollectionStatus]
 
 
-export const Visibility = {
-  PUBLIC: 'PUBLIC',
-  FAMILY: 'FAMILY',
-  PRIVATE: 'PRIVATE'
+export const CollectionContributorRole = {
+  EDITOR: 'EDITOR',
+  WRITER: 'WRITER',
+  RESEARCHER: 'RESEARCHER',
+  PHOTOGRAPHER: 'PHOTOGRAPHER'
 } as const
 
-export type Visibility = (typeof Visibility)[keyof typeof Visibility]
+export type CollectionContributorRole = (typeof CollectionContributorRole)[keyof typeof CollectionContributorRole]
+
+
+export const CollectionSourceRole = {
+  PRIMARY: 'PRIMARY',
+  CONTRIBUTOR: 'CONTRIBUTOR',
+  CITED: 'CITED'
+} as const
+
+export type CollectionSourceRole = (typeof CollectionSourceRole)[keyof typeof CollectionSourceRole]
+
+
+export const ContentType = {
+  ARTICLE: 'ARTICLE',
+  VIDEO: 'VIDEO',
+  DOCUMENT: 'DOCUMENT',
+  TIMELINE: 'TIMELINE',
+  COLLECTION: 'COLLECTION'
+} as const
+
+export type ContentType = (typeof ContentType)[keyof typeof ContentType]
+
+
+export const MediaRole = {
+  COVER: 'COVER',
+  INLINE: 'INLINE',
+  GALLERY: 'GALLERY'
+} as const
+
+export type MediaRole = (typeof MediaRole)[keyof typeof MediaRole]

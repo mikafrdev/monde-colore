@@ -174,8 +174,8 @@ export type CollectionSourceWhereInput = {
   collectionId?: Prisma.StringFilter<"CollectionSource"> | string
   sourceId?: Prisma.StringFilter<"CollectionSource"> | string
   role?: Prisma.EnumCollectionSourceRoleFilter<"CollectionSource"> | $Enums.CollectionSourceRole
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
-  Source?: Prisma.XOR<Prisma.SourceScalarRelationFilter, Prisma.SourceWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  source?: Prisma.XOR<Prisma.SourceScalarRelationFilter, Prisma.SourceWhereInput>
 }
 
 export type CollectionSourceOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type CollectionSourceOrderByWithRelationInput = {
   collectionId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  Collection?: Prisma.CollectionOrderByWithRelationInput
-  Source?: Prisma.SourceOrderByWithRelationInput
+  collection?: Prisma.CollectionOrderByWithRelationInput
+  source?: Prisma.SourceOrderByWithRelationInput
 }
 
 export type CollectionSourceWhereUniqueInput = Prisma.AtLeast<{
@@ -196,8 +196,8 @@ export type CollectionSourceWhereUniqueInput = Prisma.AtLeast<{
   collectionId?: Prisma.StringFilter<"CollectionSource"> | string
   sourceId?: Prisma.StringFilter<"CollectionSource"> | string
   role?: Prisma.EnumCollectionSourceRoleFilter<"CollectionSource"> | $Enums.CollectionSourceRole
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
-  Source?: Prisma.XOR<Prisma.SourceScalarRelationFilter, Prisma.SourceWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  source?: Prisma.XOR<Prisma.SourceScalarRelationFilter, Prisma.SourceWhereInput>
 }, "id" | "collectionId_sourceId">
 
 export type CollectionSourceOrderByWithAggregationInput = {
@@ -221,14 +221,14 @@ export type CollectionSourceScalarWhereWithAggregatesInput = {
 }
 
 export type CollectionSourceCreateInput = {
-  id: string
+  id?: string
   role?: $Enums.CollectionSourceRole
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionSourceInput
-  Source: Prisma.SourceCreateNestedOneWithoutCollectionSourceInput
+  collection: Prisma.CollectionCreateNestedOneWithoutSourcesInput
+  source: Prisma.SourceCreateNestedOneWithoutCollectionsInput
 }
 
 export type CollectionSourceUncheckedCreateInput = {
-  id: string
+  id?: string
   collectionId: string
   sourceId: string
   role?: $Enums.CollectionSourceRole
@@ -237,8 +237,8 @@ export type CollectionSourceUncheckedCreateInput = {
 export type CollectionSourceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionSourceNestedInput
-  Source?: Prisma.SourceUpdateOneRequiredWithoutCollectionSourceNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutSourcesNestedInput
+  source?: Prisma.SourceUpdateOneRequiredWithoutCollectionsNestedInput
 }
 
 export type CollectionSourceUncheckedUpdateInput = {
@@ -249,7 +249,7 @@ export type CollectionSourceUncheckedUpdateInput = {
 }
 
 export type CollectionSourceCreateManyInput = {
-  id: string
+  id?: string
   collectionId: string
   sourceId: string
   role?: $Enums.CollectionSourceRole
@@ -303,6 +303,48 @@ export type CollectionSourceMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
 }
 
+export type CollectionSourceCreateNestedManyWithoutSourceInput = {
+  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
+  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
+  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+}
+
+export type CollectionSourceUncheckedCreateNestedManyWithoutSourceInput = {
+  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
+  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
+  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+}
+
+export type CollectionSourceUpdateManyWithoutSourceNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
+  upsert?: Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput[]
+  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
+  set?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  disconnect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  delete?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  update?: Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput[]
+  updateMany?: Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput | Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput[]
+  deleteMany?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
+}
+
+export type CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
+  upsert?: Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput[]
+  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
+  set?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  disconnect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  delete?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
+  update?: Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput[]
+  updateMany?: Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput | Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput[]
+  deleteMany?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
+}
+
 export type CollectionSourceCreateNestedManyWithoutCollectionInput = {
   create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutCollectionInput, Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput> | Prisma.CollectionSourceCreateWithoutCollectionInput[] | Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput[]
   connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutCollectionInput | Prisma.CollectionSourceCreateOrConnectWithoutCollectionInput[]
@@ -349,104 +391,14 @@ export type EnumCollectionSourceRoleFieldUpdateOperationsInput = {
   set?: $Enums.CollectionSourceRole
 }
 
-export type CollectionSourceCreateNestedManyWithoutSourceInput = {
-  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
-  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
-  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
-  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-}
-
-export type CollectionSourceUncheckedCreateNestedManyWithoutSourceInput = {
-  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
-  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
-  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
-  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-}
-
-export type CollectionSourceUpdateManyWithoutSourceNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
-  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
-  upsert?: Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput[]
-  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
-  set?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  disconnect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  delete?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  update?: Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput[]
-  updateMany?: Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput | Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput[]
-  deleteMany?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
-}
-
-export type CollectionSourceUncheckedUpdateManyWithoutSourceNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionSourceCreateWithoutSourceInput, Prisma.CollectionSourceUncheckedCreateWithoutSourceInput> | Prisma.CollectionSourceCreateWithoutSourceInput[] | Prisma.CollectionSourceUncheckedCreateWithoutSourceInput[]
-  connectOrCreate?: Prisma.CollectionSourceCreateOrConnectWithoutSourceInput | Prisma.CollectionSourceCreateOrConnectWithoutSourceInput[]
-  upsert?: Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpsertWithWhereUniqueWithoutSourceInput[]
-  createMany?: Prisma.CollectionSourceCreateManySourceInputEnvelope
-  set?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  disconnect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  delete?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  connect?: Prisma.CollectionSourceWhereUniqueInput | Prisma.CollectionSourceWhereUniqueInput[]
-  update?: Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput | Prisma.CollectionSourceUpdateWithWhereUniqueWithoutSourceInput[]
-  updateMany?: Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput | Prisma.CollectionSourceUpdateManyWithWhereWithoutSourceInput[]
-  deleteMany?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
-}
-
-export type CollectionSourceCreateWithoutCollectionInput = {
-  id: string
-  role?: $Enums.CollectionSourceRole
-  Source: Prisma.SourceCreateNestedOneWithoutCollectionSourceInput
-}
-
-export type CollectionSourceUncheckedCreateWithoutCollectionInput = {
-  id: string
-  sourceId: string
-  role?: $Enums.CollectionSourceRole
-}
-
-export type CollectionSourceCreateOrConnectWithoutCollectionInput = {
-  where: Prisma.CollectionSourceWhereUniqueInput
-  create: Prisma.XOR<Prisma.CollectionSourceCreateWithoutCollectionInput, Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput>
-}
-
-export type CollectionSourceCreateManyCollectionInputEnvelope = {
-  data: Prisma.CollectionSourceCreateManyCollectionInput | Prisma.CollectionSourceCreateManyCollectionInput[]
-  skipDuplicates?: boolean
-}
-
-export type CollectionSourceUpsertWithWhereUniqueWithoutCollectionInput = {
-  where: Prisma.CollectionSourceWhereUniqueInput
-  update: Prisma.XOR<Prisma.CollectionSourceUpdateWithoutCollectionInput, Prisma.CollectionSourceUncheckedUpdateWithoutCollectionInput>
-  create: Prisma.XOR<Prisma.CollectionSourceCreateWithoutCollectionInput, Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput>
-}
-
-export type CollectionSourceUpdateWithWhereUniqueWithoutCollectionInput = {
-  where: Prisma.CollectionSourceWhereUniqueInput
-  data: Prisma.XOR<Prisma.CollectionSourceUpdateWithoutCollectionInput, Prisma.CollectionSourceUncheckedUpdateWithoutCollectionInput>
-}
-
-export type CollectionSourceUpdateManyWithWhereWithoutCollectionInput = {
-  where: Prisma.CollectionSourceScalarWhereInput
-  data: Prisma.XOR<Prisma.CollectionSourceUpdateManyMutationInput, Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionInput>
-}
-
-export type CollectionSourceScalarWhereInput = {
-  AND?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
-  OR?: Prisma.CollectionSourceScalarWhereInput[]
-  NOT?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
-  id?: Prisma.StringFilter<"CollectionSource"> | string
-  collectionId?: Prisma.StringFilter<"CollectionSource"> | string
-  sourceId?: Prisma.StringFilter<"CollectionSource"> | string
-  role?: Prisma.EnumCollectionSourceRoleFilter<"CollectionSource"> | $Enums.CollectionSourceRole
-}
-
 export type CollectionSourceCreateWithoutSourceInput = {
-  id: string
+  id?: string
   role?: $Enums.CollectionSourceRole
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionSourceInput
+  collection: Prisma.CollectionCreateNestedOneWithoutSourcesInput
 }
 
 export type CollectionSourceUncheckedCreateWithoutSourceInput = {
-  id: string
+  id?: string
   collectionId: string
   role?: $Enums.CollectionSourceRole
 }
@@ -477,32 +429,56 @@ export type CollectionSourceUpdateManyWithWhereWithoutSourceInput = {
   data: Prisma.XOR<Prisma.CollectionSourceUpdateManyMutationInput, Prisma.CollectionSourceUncheckedUpdateManyWithoutSourceInput>
 }
 
-export type CollectionSourceCreateManyCollectionInput = {
-  id: string
+export type CollectionSourceScalarWhereInput = {
+  AND?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
+  OR?: Prisma.CollectionSourceScalarWhereInput[]
+  NOT?: Prisma.CollectionSourceScalarWhereInput | Prisma.CollectionSourceScalarWhereInput[]
+  id?: Prisma.StringFilter<"CollectionSource"> | string
+  collectionId?: Prisma.StringFilter<"CollectionSource"> | string
+  sourceId?: Prisma.StringFilter<"CollectionSource"> | string
+  role?: Prisma.EnumCollectionSourceRoleFilter<"CollectionSource"> | $Enums.CollectionSourceRole
+}
+
+export type CollectionSourceCreateWithoutCollectionInput = {
+  id?: string
+  role?: $Enums.CollectionSourceRole
+  source: Prisma.SourceCreateNestedOneWithoutCollectionsInput
+}
+
+export type CollectionSourceUncheckedCreateWithoutCollectionInput = {
+  id?: string
   sourceId: string
   role?: $Enums.CollectionSourceRole
 }
 
-export type CollectionSourceUpdateWithoutCollectionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
-  Source?: Prisma.SourceUpdateOneRequiredWithoutCollectionSourceNestedInput
+export type CollectionSourceCreateOrConnectWithoutCollectionInput = {
+  where: Prisma.CollectionSourceWhereUniqueInput
+  create: Prisma.XOR<Prisma.CollectionSourceCreateWithoutCollectionInput, Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput>
 }
 
-export type CollectionSourceUncheckedUpdateWithoutCollectionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
+export type CollectionSourceCreateManyCollectionInputEnvelope = {
+  data: Prisma.CollectionSourceCreateManyCollectionInput | Prisma.CollectionSourceCreateManyCollectionInput[]
+  skipDuplicates?: boolean
 }
 
-export type CollectionSourceUncheckedUpdateManyWithoutCollectionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sourceId?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
+export type CollectionSourceUpsertWithWhereUniqueWithoutCollectionInput = {
+  where: Prisma.CollectionSourceWhereUniqueInput
+  update: Prisma.XOR<Prisma.CollectionSourceUpdateWithoutCollectionInput, Prisma.CollectionSourceUncheckedUpdateWithoutCollectionInput>
+  create: Prisma.XOR<Prisma.CollectionSourceCreateWithoutCollectionInput, Prisma.CollectionSourceUncheckedCreateWithoutCollectionInput>
+}
+
+export type CollectionSourceUpdateWithWhereUniqueWithoutCollectionInput = {
+  where: Prisma.CollectionSourceWhereUniqueInput
+  data: Prisma.XOR<Prisma.CollectionSourceUpdateWithoutCollectionInput, Prisma.CollectionSourceUncheckedUpdateWithoutCollectionInput>
+}
+
+export type CollectionSourceUpdateManyWithWhereWithoutCollectionInput = {
+  where: Prisma.CollectionSourceScalarWhereInput
+  data: Prisma.XOR<Prisma.CollectionSourceUpdateManyMutationInput, Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionInput>
 }
 
 export type CollectionSourceCreateManySourceInput = {
-  id: string
+  id?: string
   collectionId: string
   role?: $Enums.CollectionSourceRole
 }
@@ -510,7 +486,7 @@ export type CollectionSourceCreateManySourceInput = {
 export type CollectionSourceUpdateWithoutSourceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionSourceNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutSourcesNestedInput
 }
 
 export type CollectionSourceUncheckedUpdateWithoutSourceInput = {
@@ -525,6 +501,30 @@ export type CollectionSourceUncheckedUpdateManyWithoutSourceInput = {
   role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
 }
 
+export type CollectionSourceCreateManyCollectionInput = {
+  id?: string
+  sourceId: string
+  role?: $Enums.CollectionSourceRole
+}
+
+export type CollectionSourceUpdateWithoutCollectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
+  source?: Prisma.SourceUpdateOneRequiredWithoutCollectionsNestedInput
+}
+
+export type CollectionSourceUncheckedUpdateWithoutCollectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
+}
+
+export type CollectionSourceUncheckedUpdateManyWithoutCollectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumCollectionSourceRoleFieldUpdateOperationsInput | $Enums.CollectionSourceRole
+}
+
 
 
 export type CollectionSourceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -532,8 +532,8 @@ export type CollectionSourceSelect<ExtArgs extends runtime.Types.Extensions.Inte
   collectionId?: boolean
   sourceId?: boolean
   role?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionSource"]>
 
 export type CollectionSourceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -541,8 +541,8 @@ export type CollectionSourceSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   collectionId?: boolean
   sourceId?: boolean
   role?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionSource"]>
 
 export type CollectionSourceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -550,8 +550,8 @@ export type CollectionSourceSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   collectionId?: boolean
   sourceId?: boolean
   role?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionSource"]>
 
 export type CollectionSourceSelectScalar = {
@@ -563,23 +563,23 @@ export type CollectionSourceSelectScalar = {
 
 export type CollectionSourceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collectionId" | "sourceId" | "role", ExtArgs["result"]["collectionSource"]>
 export type CollectionSourceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }
 export type CollectionSourceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }
 export type CollectionSourceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  source?: boolean | Prisma.SourceDefaultArgs<ExtArgs>
 }
 
 export type $CollectionSourcePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CollectionSource"
   objects: {
-    Collection: Prisma.$CollectionPayload<ExtArgs>
-    Source: Prisma.$SourcePayload<ExtArgs>
+    collection: Prisma.$CollectionPayload<ExtArgs>
+    source: Prisma.$SourcePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -980,8 +980,8 @@ readonly fields: CollectionSourceFieldRefs;
  */
 export interface Prisma__CollectionSourceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Source<T extends Prisma.SourceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SourceDefaultArgs<ExtArgs>>): Prisma.Prisma__SourceClient<runtime.Types.Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  source<T extends Prisma.SourceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SourceDefaultArgs<ExtArgs>>): Prisma.Prisma__SourceClient<runtime.Types.Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

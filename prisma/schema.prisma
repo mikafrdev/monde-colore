@@ -7,319 +7,59 @@ datasource db {
   provider = "postgresql"
 }
 
-model Article {
-  id             String           @id
-  slug           String           @unique
-  title          String           @unique
-  excerpt        String?
-  body           String           @default("[]")
-  status         ArticleStatus    @default(DRAFT)
-  type           ArticleType      @default(ARTICLE)
-  publishedAt    DateTime?
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime
-  authorId       String
-  sourceId       String?
-  visibility     Visibility       @default(PUBLIC)
-  Author         Author           @relation(fields: [authorId], references: [id])
-  Source         Source?          @relation(fields: [sourceId], references: [id])
-  ArticleContent ArticleContent[]
-  ArticleImage   ArticleImage[]
-  ArticleTag     ArticleTag[]
-  ArticleVideo   ArticleVideo[]
-  ArticleView    ArticleView[]
-  Content        Content?
-  TimelineEvent  TimelineEvent[]
-  Category       Category[]
+// ─────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────
+
+enum Role {
+  ADMIN // ancien "admin"
+  STAFF // ancien "staff" — à décider si tu gardes
+  MEMBER // nouveau — remplace "user" pour les membres famille
+  GUEST // nouveau — visiteur avec compte
+  PUBLIC // nouveau — anonyme
 }
 
-model ArticleContent {
-  id        String  @id
-  articleId String
-  contentId String
-  order     Int?
-  label     String?
-  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  Content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+model User {
+  id            String    @id
+  role          Role      @default(GUEST)
+  section       String? // "caro", "leo", "mika", "denise"...
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
 
-  @@unique([articleId, contentId])
-  @@index([articleId])
+  author Author?
+
+  @@unique([email])
+  @@map("user")
 }
 
-model ArticleImage {
-  articleId String
-  imageId   String
-  order     Int?
-  isPrimary Boolean @default(false)
-  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  Image     Image   @relation(fields: [imageId], references: [id], onDelete: Cascade)
-
-  @@id([articleId, imageId])
-}
-
-model ArticleTag {
-  articleId String
-  tagId     String
-  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  Tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
-
-  @@id([articleId, tagId])
-}
-
-model ArticleVideo {
+model Session {
   id        String   @id
-  order     Int      @default(0)
-  caption   String?
-  isPrimary Boolean  @default(false)
-  articleId String
-  videoId   String
+  expiresAt DateTime
+  token     String
   createdAt DateTime @default(now())
-  Article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  Video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([articleId, videoId])
-  @@index([articleId, order])
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
 }
 
-model ArticleView {
-  id        String   @id
-  articleId String
-  ipHash    String?
-  viewedAt  DateTime @default(now())
-  Article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
-}
-
-model Author {
-  id                    String                  @id
-  name                  String
-  bio                   String?
-  avatarUrl             String?
-  userId                String?                 @unique
-  Article               Article[]
-  user                  user?                   @relation(fields: [userId], references: [id])
-  CollectionContributor CollectionContributor[]
-}
-
-model Category {
-  id                                                   String               @id
-  name                                                 String               @unique
-  slug                                                 String               @unique
-  description                                          String?
-  createdAt                                            DateTime             @default(now())
-  updatedAt                                            DateTime             @default(now())
-  isPublic                                             Boolean              @default(true)
-  CategoryPermission                                   CategoryPermission[]
-  CategoryRelation_CategoryRelation_childIdToCategory  CategoryRelation[]   @relation("CategoryRelation_childIdToCategory")
-  CategoryRelation_CategoryRelation_parentIdToCategory CategoryRelation[]   @relation("CategoryRelation_parentIdToCategory")
-  Article                                              Article[]
-}
-
-model CategoryPermission {
-  id           String         @id
-  categoryId   String
-  roleOrUserId String
-  type         PermissionType @default(ROLE)
-  granted      Boolean        @default(true)
-  Category     Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@unique([categoryId, roleOrUserId])
-}
-
-model CategoryRelation {
-  parentId                                     String
-  childId                                      String
-  Category_CategoryRelation_childIdToCategory  Category @relation("CategoryRelation_childIdToCategory", fields: [childId], references: [id], onDelete: Cascade)
-  Category_CategoryRelation_parentIdToCategory Category @relation("CategoryRelation_parentIdToCategory", fields: [parentId], references: [id], onDelete: Cascade)
-
-  @@id([parentId, childId])
-  @@unique([parentId, childId])
-}
-
-model Collection {
-  id                    String                  @id
-  title                 String
-  slug                  String                  @unique
-  description           String?
-  type                  CollectionType
-  status                CollectionStatus        @default(DRAFT)
-  coverImageId          String?
-  startedAt             DateTime?
-  endedAt               DateTime?
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime
-  visibility            Visibility              @default(PUBLIC)
-  Image                 Image?                  @relation(fields: [coverImageId], references: [id])
-  CollectionContributor CollectionContributor[]
-  CollectionItem        CollectionItem[]
-  CollectionSource      CollectionSource[]
-  Content               Content?
-}
-
-model CollectionContributor {
-  id           String                    @id
-  collectionId String
-  authorId     String
-  role         CollectionContributorRole @default(WRITER)
-  Author       Author                    @relation(fields: [authorId], references: [id])
-  Collection   Collection                @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-
-  @@unique([collectionId, authorId])
-}
-
-model CollectionItem {
-  id           String     @id
-  collectionId String
-  contentId    String
-  order        Int
-  isPrimary    Boolean    @default(false)
-  label        String?
-  Collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  Content      Content    @relation(fields: [contentId], references: [id], onDelete: Cascade)
-
-  @@unique([collectionId, contentId])
-  @@index([collectionId, order])
-}
-
-model CollectionSource {
-  id           String               @id
-  collectionId String
-  sourceId     String
-  role         CollectionSourceRole @default(PRIMARY)
-  Collection   Collection           @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  Source       Source               @relation(fields: [sourceId], references: [id])
-
-  @@unique([collectionId, sourceId])
-}
-
-model Content {
-  id             String           @id
-  type           ContentType
-  createdAt      DateTime         @default(now())
-  articleId      String?          @unique
-  videoId        String?          @unique
-  documentId     String?          @unique
-  timelineId     String?          @unique
-  collectionId   String?          @unique
-  ArticleContent ArticleContent[]
-  CollectionItem CollectionItem[]
-  Article        Article?         @relation(fields: [articleId], references: [id])
-  Collection     Collection?      @relation(fields: [collectionId], references: [id])
-  Document       Document?        @relation(fields: [documentId], references: [id])
-  Timeline       Timeline?        @relation(fields: [timelineId], references: [id])
-  Video          Video?           @relation(fields: [videoId], references: [id])
-}
-
-model Document {
-  id        String   @id
-  title     String
-  fileUrl   String   @unique
-  mimeType  String
-  size      Int?
-  createdAt DateTime @default(now())
-  Content   Content?
-}
-
-model Image {
-  id            String          @id
-  url           String          @unique
-  alt           String?
-  type          ImageType       @default(ARTICLE)
-  filename      String?
-  width         Int?
-  height        Int?
-  size          Int?
-  mimeType      String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime
-  section       String?
-  visibility    Visibility      @default(PUBLIC)
-  ArticleImage  ArticleImage[]
-  Collection    Collection[]
-  TimelineEvent TimelineEvent[]
-}
-
-model Media {
-  id     String    @id
-  url    String    @unique
-  type   MediaType
-  Source Source[]
-}
-
-model Source {
-  id               String             @id
-  name             String
-  logo             String?
-  type             SourceType
-  bio              String?
-  Article          Article[]
-  CollectionSource CollectionSource[]
-  Media            Media[]
-}
-
-model Tag {
-  id         String       @id
-  name       String
-  slug       String       @unique
-  ArticleTag ArticleTag[]
-}
-
-model Timeline {
-  id            String          @id
-  title         String
-  description   String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime
-  visibility    Visibility      @default(PUBLIC)
-  Content       Content?
-  TimelineEvent TimelineEvent[]
-}
-
-model TimelineEvent {
-  id          String   @id
-  timelineId  String
-  date        DateTime
-  title       String
-  description String?
-  order       Int
-  imageId     String?
-  articleId   String?
-  Article     Article? @relation(fields: [articleId], references: [id])
-  Image       Image?   @relation(fields: [imageId], references: [id])
-  Timeline    Timeline @relation(fields: [timelineId], references: [id], onDelete: Cascade)
-
-  @@index([timelineId, order])
-}
-
-model Video {
-  id           String         @id
-  title        String
-  description  String?
-  embedUrl     String?
-  fileUrl      String?
-  provider     VideoProvider
-  status       VideoStatus    @default(DRAFT)
-  filename     String?
-  size         Int?
-  mimeType     String?
-  width        Int?
-  height       Int?
-  duration     Int?
-  thumbnailUrl String?
-  altText      String?
-  publishedAt  DateTime?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime
-  section      String?
-  visibility   Visibility     @default(PUBLIC)
-  ArticleVideo ArticleVideo[]
-  Content      Content?
-}
-
-model account {
+model Account {
   id                    String    @id
   accountId             String
   providerId            String
   userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -328,50 +68,87 @@ model account {
   scope                 String?
   password              String?
   createdAt             DateTime  @default(now())
-  updatedAt             DateTime
-  user                  user      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt             DateTime  @updatedAt
 
   @@index([userId])
+  @@map("account")
 }
 
-model session {
-  id        String   @id
-  expiresAt DateTime
-  token     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model user {
-  id            String    @id
-  role          Role      @default(GUEST)
-  name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime
-  section       String?
-  Author        Author?
-  account       account[]
-  session       session[]
-}
-
-model verification {
+model Verification {
   id         String   @id
   identifier String
   value      String
   expiresAt  DateTime
   createdAt  DateTime @default(now())
-  updatedAt  DateTime
+  updatedAt  DateTime @updatedAt
 
   @@index([identifier])
+  @@map("verification")
+}
+
+// ─────────────────────────────────────────
+// Privilèges
+// ─────────────────────────────────────────
+
+model CategoryPermission {
+  id           String         @id @default(cuid())
+  categoryId   String
+  category     Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  roleOrUserId String // peut être un Role enum OU un User.id
+  type         PermissionType @default(ROLE)
+  granted      Boolean        @default(true) // true = accès, false = refus explicite
+
+  @@unique([categoryId, roleOrUserId])
+}
+
+enum PermissionType {
+  ROLE // s'applique à tous les users avec ce rôle
+  USER // s'applique à un user spécifique
+}
+
+enum Visibility {
+  PUBLIC // tout le monde
+  FAMILY // tous les MEMBER + ADMIN connectés
+  PRIVATE // ADMIN uniquement
+}
+
+// ─────────────────────────────────────────
+// TABLES
+// ─────────────────────────────────────────
+
+model Author {
+  id          String                  @id @default(cuid())
+  name        String
+  bio         String?
+  avatarUrl   String?
+  userId      String?                 @unique
+  user        User?                   @relation(fields: [userId], references: [id])
+  articles    Article[]
+  collections CollectionContributor[]
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+
+  parentRelations CategoryRelation[] @relation("ParentCategory")
+  childRelations  CategoryRelation[] @relation("ChildCategory")
+
+  articles  Article[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+  isPublic    Boolean              @default(true)
+  permissions CategoryPermission[]
+}
+
+model Tag {
+  id       String       @id @default(cuid())
+  name     String
+  slug     String       @unique
+  articles ArticleTag[]
 }
 
 enum ArticleStatus {
@@ -392,40 +169,47 @@ enum ArticleType {
   SITES
 }
 
-enum CollectionContributorRole {
-  EDITOR
-  WRITER
-  RESEARCHER
-  PHOTOGRAPHER
+model Article {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String        @unique
+  excerpt     String?
+  body        String        @default("[]")
+  content     Content?
+  status      ArticleStatus @default(DRAFT)
+  type        ArticleType   @default(ARTICLE)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  visibility Visibility @default(PUBLIC)
+
+  authorId String
+  author   Author @relation(fields: [authorId], references: [id])
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id])
+
+  categories     Category[]
+  tags           ArticleTag[]
+  contents       ArticleContent[]
+  views          ArticleView[]
+  images         ArticleImage[]
+  videos         ArticleVideo[]
+  timelineEvents TimelineEvent[]
 }
 
-enum CollectionSourceRole {
-  PRIMARY
-  CONTRIBUTOR
-  CITED
-}
+model ArticleContent {
+  id        String  @id @default(cuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  contentId String
+  content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  order     Int?
+  label     String? // "Document associé", "Voir aussi"...
 
-enum CollectionStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
-  LIVE
-}
-
-enum CollectionType {
-  DOSSIER
-  SERIE
-  ENQUETE
-  LIVE
-  SPECIAL
-}
-
-enum ContentType {
-  ARTICLE
-  VIDEO
-  DOCUMENT
-  TIMELINE
-  COLLECTION
+  @@unique([articleId, contentId])
+  @@index([articleId])
 }
 
 enum ImageType {
@@ -435,10 +219,134 @@ enum ImageType {
   COVER
 }
 
-enum MediaRole {
-  COVER
-  INLINE
-  GALLERY
+model Image {
+  id        String    @id @default(cuid())
+  url       String    @unique
+  alt       String?
+  type      ImageType @default(ARTICLE)
+  filename  String?
+  width     Int?
+  height    Int?
+  size      Int?
+  mimeType  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  section    String? // "caro", "leo", "mika", "general"
+  visibility Visibility @default(PUBLIC)
+
+  articles       ArticleImage[]
+  timelineEvents TimelineEvent[]
+  collections    Collection[]    @relation("CollectionCover") // ← nom explicite
+}
+
+enum VideoProvider {
+  YOUTUBE
+  VIMEO
+  UPLOAD
+  OTHER
+}
+
+enum VideoStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Video {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  embedUrl    String? // YouTube, Vimeo
+  fileUrl     String? // fichier uploadé
+
+  provider VideoProvider
+  status   VideoStatus   @default(DRAFT)
+
+  // Métadonnées fichier (upload uniquement)
+  filename String?
+  size     Int? // en octets
+  mimeType String? // ex. video/mp4
+  width    Int?
+  height   Int?
+
+  // Lecture & affichage
+  duration     Int? // en secondes
+  thumbnailUrl String?
+  altText      String? // accessibilité
+
+  // Publication
+  publishedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  section    String? // "caro", "leo", "mika", "general"
+  visibility Visibility @default(PUBLIC)
+
+  content  Content?
+  articles ArticleVideo[]
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  title     String
+  fileUrl   String   @unique
+  mimeType  String // "application/pdf"
+  size      Int? // en octets
+  createdAt DateTime @default(now())
+
+  content Content?
+}
+
+model Timeline {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  visibility Visibility @default(PUBLIC)
+
+  events  TimelineEvent[]
+  content Content?
+}
+
+model TimelineEvent {
+  id          String   @id @default(cuid())
+  timelineId  String
+  timeline    Timeline @relation(fields: [timelineId], references: [id], onDelete: Cascade)
+  date        DateTime
+  title       String
+  description String?
+  order       Int
+  imageId     String?
+  image       Image?   @relation(fields: [imageId], references: [id])
+  articleId   String?
+  article     Article? @relation(fields: [articleId], references: [id])
+
+  @@index([timelineId, order])
+}
+
+enum SourceType {
+  PERSON
+  COLLECTIVE
+  BRAND
+  MEDIA
+  POLITICAL
+  INSTITUTION
+  COMPANY
+}
+
+model Source {
+  id          String             @id @default(cuid())
+  name        String
+  logo        String?
+  type        SourceType
+  bio         String?
+  medias      Media[]
+  articles    Article[]
+  collections CollectionSource[]
 }
 
 enum MediaType {
@@ -461,44 +369,201 @@ enum MediaType {
   OTHER
 }
 
-enum PermissionType {
-  ROLE
-  USER
+model Media {
+  id      String    @id @default(cuid())
+  url     String    @unique
+  type    MediaType
+  sources Source[]
 }
 
-enum Role {
-  ADMIN
-  STAFF
-  MEMBER
-  GUEST
-  PUBLIC
+// ─────────────────────────────────────────
+// COLLECTION
+// ─────────────────────────────────────────
+
+enum CollectionType {
+  DOSSIER
+  SERIE
+  ENQUETE
+  LIVE
+  SPECIAL
 }
 
-enum SourceType {
-  PERSON
-  COLLECTIVE
-  BRAND
-  MEDIA
-  POLITICAL
-  INSTITUTION
-  COMPANY
-}
-
-enum VideoProvider {
-  YOUTUBE
-  VIMEO
-  UPLOAD
-  OTHER
-}
-
-enum VideoStatus {
+enum CollectionStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
+  LIVE
 }
 
-enum Visibility {
-  PUBLIC
-  FAMILY
-  PRIVATE
+enum CollectionContributorRole {
+  EDITOR
+  WRITER
+  RESEARCHER
+  PHOTOGRAPHER
+}
+
+enum CollectionSourceRole {
+  PRIMARY
+  CONTRIBUTOR
+  CITED
+}
+
+model Collection {
+  id           String           @id @default(cuid())
+  title        String
+  slug         String           @unique
+  description  String?
+  type         CollectionType
+  status       CollectionStatus @default(DRAFT)
+  coverImageId String?
+  coverImage   Image?           @relation("CollectionCover", fields: [coverImageId], references: [id])
+
+  startedAt DateTime? // utile pour ENQUETE, LIVE
+  endedAt   DateTime? // null = en cours
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  visibility Visibility @default(PUBLIC)
+
+  items        CollectionItem[]
+  sources      CollectionSource[]
+  contributors CollectionContributor[]
+  content      Content?
+}
+
+model CollectionItem {
+  id           String     @id @default(cuid())
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  contentId    String
+  content      Content    @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  order        Int
+  isPrimary    Boolean    @default(false)
+  label        String? // "Épisode 1", "Document clé"...
+
+  @@unique([collectionId, contentId])
+  @@index([collectionId, order])
+}
+
+model CollectionSource {
+  id           String               @id @default(cuid())
+  collectionId String
+  collection   Collection           @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  sourceId     String
+  source       Source               @relation(fields: [sourceId], references: [id])
+  role         CollectionSourceRole @default(PRIMARY)
+
+  @@unique([collectionId, sourceId])
+}
+
+model CollectionContributor {
+  id           String                    @id @default(cuid())
+  collectionId String
+  collection   Collection                @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  authorId     String
+  author       Author                    @relation(fields: [authorId], references: [id])
+  role         CollectionContributorRole @default(WRITER)
+
+  @@unique([collectionId, authorId])
+}
+
+// ─────────────────────────────────────────
+// CONTENT
+// ─────────────────────────────────────────
+
+enum ContentType {
+  ARTICLE
+  VIDEO
+  DOCUMENT
+  TIMELINE
+  COLLECTION
+}
+
+model Content {
+  id        String      @id @default(cuid())
+  type      ContentType
+  createdAt DateTime    @default(now())
+
+  // Un seul renseigné à la fois — contrainte applicative
+  articleId    String?     @unique
+  article      Article?    @relation(fields: [articleId], references: [id])
+  videoId      String?     @unique
+  video        Video?      @relation(fields: [videoId], references: [id])
+  documentId   String?     @unique
+  document     Document?   @relation(fields: [documentId], references: [id])
+  timelineId   String?     @unique
+  timeline     Timeline?   @relation(fields: [timelineId], references: [id])
+  collectionId String?     @unique
+  collection   Collection? @relation(fields: [collectionId], references: [id])
+
+  collectionItems CollectionItem[]
+  articleContents ArticleContent[]
+}
+
+// ─────────────────────────────────────────
+// JOINTURES
+// ─────────────────────────────────────────
+
+model CategoryRelation {
+  parentId String
+  childId  String
+  parent   Category @relation("ParentCategory", fields: [parentId], references: [id], onDelete: Cascade)
+  child    Category @relation("ChildCategory", fields: [childId], references: [id], onDelete: Cascade)
+
+  @@id([parentId, childId])
+  @@unique([parentId, childId])
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+}
+
+model ArticleImage {
+  articleId String
+  imageId   String
+  order     Int?
+  isPrimary Boolean @default(false) // true = image de couverture
+
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  image   Image   @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, imageId])
+}
+
+model ArticleView {
+  id        String   @id @default(cuid())
+  articleId String
+  ipHash    String?
+  viewedAt  DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
+
+model ArticleVideo {
+  id        String  @id @default(cuid())
+  order     Int     @default(0)
+  caption   String? // légende spécifique à cet article
+  isPrimary Boolean @default(false)
+
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  videoId String
+  video   Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([articleId, videoId])
+  @@index([articleId, order])
+}
+
+// Si tu n'as pas encore ce enum (à vérifier avec ArticleImage)
+enum MediaRole {
+  COVER // hero / couverture
+  INLINE // dans le corps de l'article
+  GALLERY // galerie en bas
 }

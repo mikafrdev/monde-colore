@@ -8,22 +8,26 @@ export default async function HomeFeatureNavigation() {
          icon: <Play className="size-10" />,
          title: "Vidéos",
          description: "Regarde les dessins animés et films préférés",
+         href: "/videos",
       },
       {
          icon: <Gamepad2 className="size-10" />,
          title: "Jeux",
          description: "Retrouve tes jeux préférés et découvre de nouveaux jeux",
+         href: "/jeux-video",
       },
       {
          icon: <ImageIcon className="size-10" />,
          title: "Photos",
          description:
             "Explore ta collection d'images et découvre de nouvelles photos",
+         href: "/images",
       },
       {
          icon: <ChevronRight className="size-10" />,
          title: "",
          description: "Bientôt de nouvelles surprises ...",
+         href: "#",
       },
    ];
 
@@ -41,6 +45,7 @@ export default async function HomeFeatureNavigation() {
                      title={item.title}
                      description={item.description}
                      isLast={isLast}
+                     href={item.href}
                   />
                );
             })}

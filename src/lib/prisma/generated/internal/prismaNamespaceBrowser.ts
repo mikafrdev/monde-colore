@@ -51,33 +51,33 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Article: 'Article',
-  ArticleContent: 'ArticleContent',
-  ArticleImage: 'ArticleImage',
-  ArticleTag: 'ArticleTag',
-  ArticleVideo: 'ArticleVideo',
-  ArticleView: 'ArticleView',
+  User: 'User',
+  Session: 'Session',
+  Account: 'Account',
+  Verification: 'Verification',
+  CategoryPermission: 'CategoryPermission',
   Author: 'Author',
   Category: 'Category',
-  CategoryPermission: 'CategoryPermission',
-  CategoryRelation: 'CategoryRelation',
-  Collection: 'Collection',
-  CollectionContributor: 'CollectionContributor',
-  CollectionItem: 'CollectionItem',
-  CollectionSource: 'CollectionSource',
-  Content: 'Content',
-  Document: 'Document',
-  Image: 'Image',
-  Media: 'Media',
-  Source: 'Source',
   Tag: 'Tag',
+  Article: 'Article',
+  ArticleContent: 'ArticleContent',
+  Image: 'Image',
+  Video: 'Video',
+  Document: 'Document',
   Timeline: 'Timeline',
   TimelineEvent: 'TimelineEvent',
-  Video: 'Video',
-  account: 'account',
-  session: 'session',
-  user: 'user',
-  verification: 'verification'
+  Source: 'Source',
+  Media: 'Media',
+  Collection: 'Collection',
+  CollectionItem: 'CollectionItem',
+  CollectionSource: 'CollectionSource',
+  CollectionContributor: 'CollectionContributor',
+  Content: 'Content',
+  CategoryRelation: 'CategoryRelation',
+  ArticleTag: 'ArticleTag',
+  ArticleImage: 'ArticleImage',
+  ArticleView: 'ArticleView',
+  ArticleVideo: 'ArticleVideo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -96,75 +96,75 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ArticleScalarFieldEnum = {
+export const UserScalarFieldEnum = {
   id: 'id',
-  slug: 'slug',
-  title: 'title',
-  excerpt: 'excerpt',
-  body: 'body',
-  status: 'status',
-  type: 'type',
-  publishedAt: 'publishedAt',
+  role: 'role',
+  section: 'section',
+  name: 'name',
+  email: 'email',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  expiresAt: 'expiresAt',
+  token: 'token',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  authorId: 'authorId',
-  sourceId: 'sourceId',
-  visibility: 'visibility'
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  userId: 'userId'
 } as const
 
-export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
-export const ArticleContentScalarFieldEnum = {
+export const AccountScalarFieldEnum = {
   id: 'id',
-  articleId: 'articleId',
-  contentId: 'contentId',
-  order: 'order',
-  label: 'label'
+  accountId: 'accountId',
+  providerId: 'providerId',
+  userId: 'userId',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  idToken: 'idToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  scope: 'scope',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type ArticleContentScalarFieldEnum = (typeof ArticleContentScalarFieldEnum)[keyof typeof ArticleContentScalarFieldEnum]
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
 
 
-export const ArticleImageScalarFieldEnum = {
-  articleId: 'articleId',
-  imageId: 'imageId',
-  order: 'order',
-  isPrimary: 'isPrimary'
-} as const
-
-export type ArticleImageScalarFieldEnum = (typeof ArticleImageScalarFieldEnum)[keyof typeof ArticleImageScalarFieldEnum]
-
-
-export const ArticleTagScalarFieldEnum = {
-  articleId: 'articleId',
-  tagId: 'tagId'
-} as const
-
-export type ArticleTagScalarFieldEnum = (typeof ArticleTagScalarFieldEnum)[keyof typeof ArticleTagScalarFieldEnum]
-
-
-export const ArticleVideoScalarFieldEnum = {
+export const VerificationScalarFieldEnum = {
   id: 'id',
-  order: 'order',
-  caption: 'caption',
-  isPrimary: 'isPrimary',
-  articleId: 'articleId',
-  videoId: 'videoId',
-  createdAt: 'createdAt'
+  identifier: 'identifier',
+  value: 'value',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type ArticleVideoScalarFieldEnum = (typeof ArticleVideoScalarFieldEnum)[keyof typeof ArticleVideoScalarFieldEnum]
+export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
-export const ArticleViewScalarFieldEnum = {
+export const CategoryPermissionScalarFieldEnum = {
   id: 'id',
-  articleId: 'articleId',
-  ipHash: 'ipHash',
-  viewedAt: 'viewedAt'
+  categoryId: 'categoryId',
+  roleOrUserId: 'roleOrUserId',
+  type: 'type',
+  granted: 'granted'
 } as const
 
-export type ArticleViewScalarFieldEnum = (typeof ArticleViewScalarFieldEnum)[keyof typeof ArticleViewScalarFieldEnum]
+export type CategoryPermissionScalarFieldEnum = (typeof CategoryPermissionScalarFieldEnum)[keyof typeof CategoryPermissionScalarFieldEnum]
 
 
 export const AuthorScalarFieldEnum = {
@@ -191,99 +191,43 @@ export const CategoryScalarFieldEnum = {
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
-export const CategoryPermissionScalarFieldEnum = {
+export const TagScalarFieldEnum = {
   id: 'id',
-  categoryId: 'categoryId',
-  roleOrUserId: 'roleOrUserId',
-  type: 'type',
-  granted: 'granted'
+  name: 'name',
+  slug: 'slug'
 } as const
 
-export type CategoryPermissionScalarFieldEnum = (typeof CategoryPermissionScalarFieldEnum)[keyof typeof CategoryPermissionScalarFieldEnum]
+export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
-export const CategoryRelationScalarFieldEnum = {
-  parentId: 'parentId',
-  childId: 'childId'
-} as const
-
-export type CategoryRelationScalarFieldEnum = (typeof CategoryRelationScalarFieldEnum)[keyof typeof CategoryRelationScalarFieldEnum]
-
-
-export const CollectionScalarFieldEnum = {
+export const ArticleScalarFieldEnum = {
   id: 'id',
-  title: 'title',
   slug: 'slug',
-  description: 'description',
-  type: 'type',
+  title: 'title',
+  excerpt: 'excerpt',
+  body: 'body',
   status: 'status',
-  coverImageId: 'coverImageId',
-  startedAt: 'startedAt',
-  endedAt: 'endedAt',
+  type: 'type',
+  publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  visibility: 'visibility'
-} as const
-
-export type CollectionScalarFieldEnum = (typeof CollectionScalarFieldEnum)[keyof typeof CollectionScalarFieldEnum]
-
-
-export const CollectionContributorScalarFieldEnum = {
-  id: 'id',
-  collectionId: 'collectionId',
+  visibility: 'visibility',
   authorId: 'authorId',
-  role: 'role'
+  sourceId: 'sourceId'
 } as const
 
-export type CollectionContributorScalarFieldEnum = (typeof CollectionContributorScalarFieldEnum)[keyof typeof CollectionContributorScalarFieldEnum]
+export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
 
 
-export const CollectionItemScalarFieldEnum = {
+export const ArticleContentScalarFieldEnum = {
   id: 'id',
-  collectionId: 'collectionId',
+  articleId: 'articleId',
   contentId: 'contentId',
   order: 'order',
-  isPrimary: 'isPrimary',
   label: 'label'
 } as const
 
-export type CollectionItemScalarFieldEnum = (typeof CollectionItemScalarFieldEnum)[keyof typeof CollectionItemScalarFieldEnum]
-
-
-export const CollectionSourceScalarFieldEnum = {
-  id: 'id',
-  collectionId: 'collectionId',
-  sourceId: 'sourceId',
-  role: 'role'
-} as const
-
-export type CollectionSourceScalarFieldEnum = (typeof CollectionSourceScalarFieldEnum)[keyof typeof CollectionSourceScalarFieldEnum]
-
-
-export const ContentScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  createdAt: 'createdAt',
-  articleId: 'articleId',
-  videoId: 'videoId',
-  documentId: 'documentId',
-  timelineId: 'timelineId',
-  collectionId: 'collectionId'
-} as const
-
-export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
-
-
-export const DocumentScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  fileUrl: 'fileUrl',
-  mimeType: 'mimeType',
-  size: 'size',
-  createdAt: 'createdAt'
-} as const
-
-export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+export type ArticleContentScalarFieldEnum = (typeof ArticleContentScalarFieldEnum)[keyof typeof ArticleContentScalarFieldEnum]
 
 
 export const ImageScalarFieldEnum = {
@@ -303,61 +247,6 @@ export const ImageScalarFieldEnum = {
 } as const
 
 export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
-
-
-export const MediaScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  type: 'type'
-} as const
-
-export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
-
-
-export const SourceScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  logo: 'logo',
-  type: 'type',
-  bio: 'bio'
-} as const
-
-export type SourceScalarFieldEnum = (typeof SourceScalarFieldEnum)[keyof typeof SourceScalarFieldEnum]
-
-
-export const TagScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug'
-} as const
-
-export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
-
-
-export const TimelineScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  visibility: 'visibility'
-} as const
-
-export type TimelineScalarFieldEnum = (typeof TimelineScalarFieldEnum)[keyof typeof TimelineScalarFieldEnum]
-
-
-export const TimelineEventScalarFieldEnum = {
-  id: 'id',
-  timelineId: 'timelineId',
-  date: 'date',
-  title: 'title',
-  description: 'description',
-  order: 'order',
-  imageId: 'imageId',
-  articleId: 'articleId'
-} as const
-
-export type TimelineEventScalarFieldEnum = (typeof TimelineEventScalarFieldEnum)[keyof typeof TimelineEventScalarFieldEnum]
 
 
 export const VideoScalarFieldEnum = {
@@ -386,64 +275,175 @@ export const VideoScalarFieldEnum = {
 export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
-export const AccountScalarFieldEnum = {
+export const DocumentScalarFieldEnum = {
   id: 'id',
-  accountId: 'accountId',
-  providerId: 'providerId',
-  userId: 'userId',
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
-  idToken: 'idToken',
-  accessTokenExpiresAt: 'accessTokenExpiresAt',
-  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
-  scope: 'scope',
-  password: 'password',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  title: 'title',
+  fileUrl: 'fileUrl',
+  mimeType: 'mimeType',
+  size: 'size',
+  createdAt: 'createdAt'
 } as const
 
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
-export const SessionScalarFieldEnum = {
+export const TimelineScalarFieldEnum = {
   id: 'id',
-  expiresAt: 'expiresAt',
-  token: 'token',
+  title: 'title',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  ipAddress: 'ipAddress',
-  userAgent: 'userAgent',
-  userId: 'userId'
+  visibility: 'visibility'
 } as const
 
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+export type TimelineScalarFieldEnum = (typeof TimelineScalarFieldEnum)[keyof typeof TimelineScalarFieldEnum]
 
 
-export const UserScalarFieldEnum = {
+export const TimelineEventScalarFieldEnum = {
   id: 'id',
-  role: 'role',
+  timelineId: 'timelineId',
+  date: 'date',
+  title: 'title',
+  description: 'description',
+  order: 'order',
+  imageId: 'imageId',
+  articleId: 'articleId'
+} as const
+
+export type TimelineEventScalarFieldEnum = (typeof TimelineEventScalarFieldEnum)[keyof typeof TimelineEventScalarFieldEnum]
+
+
+export const SourceScalarFieldEnum = {
+  id: 'id',
   name: 'name',
-  email: 'email',
-  emailVerified: 'emailVerified',
-  image: 'image',
+  logo: 'logo',
+  type: 'type',
+  bio: 'bio'
+} as const
+
+export type SourceScalarFieldEnum = (typeof SourceScalarFieldEnum)[keyof typeof SourceScalarFieldEnum]
+
+
+export const MediaScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  type: 'type'
+} as const
+
+export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
+
+
+export const CollectionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  type: 'type',
+  status: 'status',
+  coverImageId: 'coverImageId',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  section: 'section'
+  visibility: 'visibility'
 } as const
 
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type CollectionScalarFieldEnum = (typeof CollectionScalarFieldEnum)[keyof typeof CollectionScalarFieldEnum]
 
 
-export const VerificationScalarFieldEnum = {
+export const CollectionItemScalarFieldEnum = {
   id: 'id',
-  identifier: 'identifier',
-  value: 'value',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  collectionId: 'collectionId',
+  contentId: 'contentId',
+  order: 'order',
+  isPrimary: 'isPrimary',
+  label: 'label'
 } as const
 
-export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+export type CollectionItemScalarFieldEnum = (typeof CollectionItemScalarFieldEnum)[keyof typeof CollectionItemScalarFieldEnum]
+
+
+export const CollectionSourceScalarFieldEnum = {
+  id: 'id',
+  collectionId: 'collectionId',
+  sourceId: 'sourceId',
+  role: 'role'
+} as const
+
+export type CollectionSourceScalarFieldEnum = (typeof CollectionSourceScalarFieldEnum)[keyof typeof CollectionSourceScalarFieldEnum]
+
+
+export const CollectionContributorScalarFieldEnum = {
+  id: 'id',
+  collectionId: 'collectionId',
+  authorId: 'authorId',
+  role: 'role'
+} as const
+
+export type CollectionContributorScalarFieldEnum = (typeof CollectionContributorScalarFieldEnum)[keyof typeof CollectionContributorScalarFieldEnum]
+
+
+export const ContentScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  createdAt: 'createdAt',
+  articleId: 'articleId',
+  videoId: 'videoId',
+  documentId: 'documentId',
+  timelineId: 'timelineId',
+  collectionId: 'collectionId'
+} as const
+
+export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
+
+
+export const CategoryRelationScalarFieldEnum = {
+  parentId: 'parentId',
+  childId: 'childId'
+} as const
+
+export type CategoryRelationScalarFieldEnum = (typeof CategoryRelationScalarFieldEnum)[keyof typeof CategoryRelationScalarFieldEnum]
+
+
+export const ArticleTagScalarFieldEnum = {
+  articleId: 'articleId',
+  tagId: 'tagId'
+} as const
+
+export type ArticleTagScalarFieldEnum = (typeof ArticleTagScalarFieldEnum)[keyof typeof ArticleTagScalarFieldEnum]
+
+
+export const ArticleImageScalarFieldEnum = {
+  articleId: 'articleId',
+  imageId: 'imageId',
+  order: 'order',
+  isPrimary: 'isPrimary'
+} as const
+
+export type ArticleImageScalarFieldEnum = (typeof ArticleImageScalarFieldEnum)[keyof typeof ArticleImageScalarFieldEnum]
+
+
+export const ArticleViewScalarFieldEnum = {
+  id: 'id',
+  articleId: 'articleId',
+  ipHash: 'ipHash',
+  viewedAt: 'viewedAt'
+} as const
+
+export type ArticleViewScalarFieldEnum = (typeof ArticleViewScalarFieldEnum)[keyof typeof ArticleViewScalarFieldEnum]
+
+
+export const ArticleVideoScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  caption: 'caption',
+  isPrimary: 'isPrimary',
+  articleId: 'articleId',
+  videoId: 'videoId',
+  createdAt: 'createdAt'
+} as const
+
+export type ArticleVideoScalarFieldEnum = (typeof ArticleVideoScalarFieldEnum)[keyof typeof ArticleVideoScalarFieldEnum]
 
 
 export const SortOrder = {

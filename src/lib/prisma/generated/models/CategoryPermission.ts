@@ -182,7 +182,7 @@ export type CategoryPermissionWhereInput = {
   roleOrUserId?: Prisma.StringFilter<"CategoryPermission"> | string
   type?: Prisma.EnumPermissionTypeFilter<"CategoryPermission"> | $Enums.PermissionType
   granted?: Prisma.BoolFilter<"CategoryPermission"> | boolean
-  Category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }
 
 export type CategoryPermissionOrderByWithRelationInput = {
@@ -191,7 +191,7 @@ export type CategoryPermissionOrderByWithRelationInput = {
   roleOrUserId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   granted?: Prisma.SortOrder
-  Category?: Prisma.CategoryOrderByWithRelationInput
+  category?: Prisma.CategoryOrderByWithRelationInput
 }
 
 export type CategoryPermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -204,7 +204,7 @@ export type CategoryPermissionWhereUniqueInput = Prisma.AtLeast<{
   roleOrUserId?: Prisma.StringFilter<"CategoryPermission"> | string
   type?: Prisma.EnumPermissionTypeFilter<"CategoryPermission"> | $Enums.PermissionType
   granted?: Prisma.BoolFilter<"CategoryPermission"> | boolean
-  Category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }, "id" | "categoryId_roleOrUserId">
 
 export type CategoryPermissionOrderByWithAggregationInput = {
@@ -230,15 +230,15 @@ export type CategoryPermissionScalarWhereWithAggregatesInput = {
 }
 
 export type CategoryPermissionCreateInput = {
-  id: string
+  id?: string
   roleOrUserId: string
   type?: $Enums.PermissionType
   granted?: boolean
-  Category: Prisma.CategoryCreateNestedOneWithoutCategoryPermissionInput
+  category: Prisma.CategoryCreateNestedOneWithoutPermissionsInput
 }
 
 export type CategoryPermissionUncheckedCreateInput = {
-  id: string
+  id?: string
   categoryId: string
   roleOrUserId: string
   type?: $Enums.PermissionType
@@ -250,7 +250,7 @@ export type CategoryPermissionUpdateInput = {
   roleOrUserId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   granted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Category?: Prisma.CategoryUpdateOneRequiredWithoutCategoryPermissionNestedInput
+  category?: Prisma.CategoryUpdateOneRequiredWithoutPermissionsNestedInput
 }
 
 export type CategoryPermissionUncheckedUpdateInput = {
@@ -262,7 +262,7 @@ export type CategoryPermissionUncheckedUpdateInput = {
 }
 
 export type CategoryPermissionCreateManyInput = {
-  id: string
+  id?: string
   categoryId: string
   roleOrUserId: string
   type?: $Enums.PermissionType
@@ -282,16 +282,6 @@ export type CategoryPermissionUncheckedUpdateManyInput = {
   roleOrUserId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPermissionTypeFieldUpdateOperationsInput | $Enums.PermissionType
   granted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-}
-
-export type CategoryPermissionListRelationFilter = {
-  every?: Prisma.CategoryPermissionWhereInput
-  some?: Prisma.CategoryPermissionWhereInput
-  none?: Prisma.CategoryPermissionWhereInput
-}
-
-export type CategoryPermissionOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type CategoryPermissionCategoryIdRoleOrUserIdCompoundUniqueInput = {
@@ -321,6 +311,20 @@ export type CategoryPermissionMinOrderByAggregateInput = {
   roleOrUserId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   granted?: Prisma.SortOrder
+}
+
+export type CategoryPermissionListRelationFilter = {
+  every?: Prisma.CategoryPermissionWhereInput
+  some?: Prisma.CategoryPermissionWhereInput
+  none?: Prisma.CategoryPermissionWhereInput
+}
+
+export type CategoryPermissionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type EnumPermissionTypeFieldUpdateOperationsInput = {
+  set?: $Enums.PermissionType
 }
 
 export type CategoryPermissionCreateNestedManyWithoutCategoryInput = {
@@ -365,19 +369,15 @@ export type CategoryPermissionUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.CategoryPermissionScalarWhereInput | Prisma.CategoryPermissionScalarWhereInput[]
 }
 
-export type EnumPermissionTypeFieldUpdateOperationsInput = {
-  set?: $Enums.PermissionType
-}
-
 export type CategoryPermissionCreateWithoutCategoryInput = {
-  id: string
+  id?: string
   roleOrUserId: string
   type?: $Enums.PermissionType
   granted?: boolean
 }
 
 export type CategoryPermissionUncheckedCreateWithoutCategoryInput = {
-  id: string
+  id?: string
   roleOrUserId: string
   type?: $Enums.PermissionType
   granted?: boolean
@@ -421,7 +421,7 @@ export type CategoryPermissionScalarWhereInput = {
 }
 
 export type CategoryPermissionCreateManyCategoryInput = {
-  id: string
+  id?: string
   roleOrUserId: string
   type?: $Enums.PermissionType
   granted?: boolean
@@ -456,7 +456,7 @@ export type CategoryPermissionSelect<ExtArgs extends runtime.Types.Extensions.In
   roleOrUserId?: boolean
   type?: boolean
   granted?: boolean
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryPermission"]>
 
 export type CategoryPermissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -465,7 +465,7 @@ export type CategoryPermissionSelectCreateManyAndReturn<ExtArgs extends runtime.
   roleOrUserId?: boolean
   type?: boolean
   granted?: boolean
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryPermission"]>
 
 export type CategoryPermissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -474,7 +474,7 @@ export type CategoryPermissionSelectUpdateManyAndReturn<ExtArgs extends runtime.
   roleOrUserId?: boolean
   type?: boolean
   granted?: boolean
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryPermission"]>
 
 export type CategoryPermissionSelectScalar = {
@@ -487,19 +487,19 @@ export type CategoryPermissionSelectScalar = {
 
 export type CategoryPermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "categoryId" | "roleOrUserId" | "type" | "granted", ExtArgs["result"]["categoryPermission"]>
 export type CategoryPermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type CategoryPermissionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type CategoryPermissionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 
 export type $CategoryPermissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CategoryPermission"
   objects: {
-    Category: Prisma.$CategoryPayload<ExtArgs>
+    category: Prisma.$CategoryPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -901,7 +901,7 @@ readonly fields: CategoryPermissionFieldRefs;
  */
 export interface Prisma__CategoryPermissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
