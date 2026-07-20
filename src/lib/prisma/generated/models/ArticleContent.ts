@@ -216,8 +216,8 @@ export type ArticleContentWhereInput = {
   contentId?: Prisma.StringFilter<"ArticleContent"> | string
   order?: Prisma.IntNullableFilter<"ArticleContent"> | number | null
   label?: Prisma.StringNullableFilter<"ArticleContent"> | string | null
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
 }
 
 export type ArticleContentOrderByWithRelationInput = {
@@ -226,8 +226,8 @@ export type ArticleContentOrderByWithRelationInput = {
   contentId?: Prisma.SortOrder
   order?: Prisma.SortOrderInput | Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByWithRelationInput
-  Content?: Prisma.ContentOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
+  content?: Prisma.ContentOrderByWithRelationInput
 }
 
 export type ArticleContentWhereUniqueInput = Prisma.AtLeast<{
@@ -240,8 +240,8 @@ export type ArticleContentWhereUniqueInput = Prisma.AtLeast<{
   contentId?: Prisma.StringFilter<"ArticleContent"> | string
   order?: Prisma.IntNullableFilter<"ArticleContent"> | number | null
   label?: Prisma.StringNullableFilter<"ArticleContent"> | string | null
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
 }, "id" | "articleId_contentId">
 
 export type ArticleContentOrderByWithAggregationInput = {
@@ -269,15 +269,15 @@ export type ArticleContentScalarWhereWithAggregatesInput = {
 }
 
 export type ArticleContentCreateInput = {
-  id: string
+  id?: string
   order?: number | null
   label?: string | null
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleContentInput
-  Content: Prisma.ContentCreateNestedOneWithoutArticleContentInput
+  article: Prisma.ArticleCreateNestedOneWithoutContentsInput
+  content: Prisma.ContentCreateNestedOneWithoutArticleContentsInput
 }
 
 export type ArticleContentUncheckedCreateInput = {
-  id: string
+  id?: string
   articleId: string
   contentId: string
   order?: number | null
@@ -288,8 +288,8 @@ export type ArticleContentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleContentNestedInput
-  Content?: Prisma.ContentUpdateOneRequiredWithoutArticleContentNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutContentsNestedInput
+  content?: Prisma.ContentUpdateOneRequiredWithoutArticleContentsNestedInput
 }
 
 export type ArticleContentUncheckedUpdateInput = {
@@ -301,7 +301,7 @@ export type ArticleContentUncheckedUpdateInput = {
 }
 
 export type ArticleContentCreateManyInput = {
-  id: string
+  id?: string
   articleId: string
   contentId: string
   order?: number | null
@@ -462,14 +462,14 @@ export type ArticleContentUncheckedUpdateManyWithoutContentNestedInput = {
 }
 
 export type ArticleContentCreateWithoutArticleInput = {
-  id: string
+  id?: string
   order?: number | null
   label?: string | null
-  Content: Prisma.ContentCreateNestedOneWithoutArticleContentInput
+  content: Prisma.ContentCreateNestedOneWithoutArticleContentsInput
 }
 
 export type ArticleContentUncheckedCreateWithoutArticleInput = {
-  id: string
+  id?: string
   contentId: string
   order?: number | null
   label?: string | null
@@ -513,14 +513,14 @@ export type ArticleContentScalarWhereInput = {
 }
 
 export type ArticleContentCreateWithoutContentInput = {
-  id: string
+  id?: string
   order?: number | null
   label?: string | null
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleContentInput
+  article: Prisma.ArticleCreateNestedOneWithoutContentsInput
 }
 
 export type ArticleContentUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   articleId: string
   order?: number | null
   label?: string | null
@@ -553,7 +553,7 @@ export type ArticleContentUpdateManyWithWhereWithoutContentInput = {
 }
 
 export type ArticleContentCreateManyArticleInput = {
-  id: string
+  id?: string
   contentId: string
   order?: number | null
   label?: string | null
@@ -563,7 +563,7 @@ export type ArticleContentUpdateWithoutArticleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.ContentUpdateOneRequiredWithoutArticleContentNestedInput
+  content?: Prisma.ContentUpdateOneRequiredWithoutArticleContentsNestedInput
 }
 
 export type ArticleContentUncheckedUpdateWithoutArticleInput = {
@@ -581,7 +581,7 @@ export type ArticleContentUncheckedUpdateManyWithoutArticleInput = {
 }
 
 export type ArticleContentCreateManyContentInput = {
-  id: string
+  id?: string
   articleId: string
   order?: number | null
   label?: string | null
@@ -591,7 +591,7 @@ export type ArticleContentUpdateWithoutContentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleContentNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutContentsNestedInput
 }
 
 export type ArticleContentUncheckedUpdateWithoutContentInput = {
@@ -616,8 +616,8 @@ export type ArticleContentSelect<ExtArgs extends runtime.Types.Extensions.Intern
   contentId?: boolean
   order?: boolean
   label?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleContent"]>
 
 export type ArticleContentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -626,8 +626,8 @@ export type ArticleContentSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   contentId?: boolean
   order?: boolean
   label?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleContent"]>
 
 export type ArticleContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -636,8 +636,8 @@ export type ArticleContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   contentId?: boolean
   order?: boolean
   label?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleContent"]>
 
 export type ArticleContentSelectScalar = {
@@ -650,23 +650,23 @@ export type ArticleContentSelectScalar = {
 
 export type ArticleContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "articleId" | "contentId" | "order" | "label", ExtArgs["result"]["articleContent"]>
 export type ArticleContentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 export type ArticleContentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 export type ArticleContentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 
 export type $ArticleContentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ArticleContent"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>
-    Content: Prisma.$ContentPayload<ExtArgs>
+    article: Prisma.$ArticlePayload<ExtArgs>
+    content: Prisma.$ContentPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1068,8 +1068,8 @@ readonly fields: ArticleContentFieldRefs;
  */
 export interface Prisma__ArticleContentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Content<T extends Prisma.ContentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContentDefaultArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  content<T extends Prisma.ContentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContentDefaultArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

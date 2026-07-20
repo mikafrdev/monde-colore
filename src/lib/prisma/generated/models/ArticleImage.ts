@@ -208,8 +208,8 @@ export type ArticleImageWhereInput = {
   imageId?: Prisma.StringFilter<"ArticleImage"> | string
   order?: Prisma.IntNullableFilter<"ArticleImage"> | number | null
   isPrimary?: Prisma.BoolFilter<"ArticleImage"> | boolean
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Image?: Prisma.XOR<Prisma.ImageScalarRelationFilter, Prisma.ImageWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  image?: Prisma.XOR<Prisma.ImageScalarRelationFilter, Prisma.ImageWhereInput>
 }
 
 export type ArticleImageOrderByWithRelationInput = {
@@ -217,8 +217,8 @@ export type ArticleImageOrderByWithRelationInput = {
   imageId?: Prisma.SortOrder
   order?: Prisma.SortOrderInput | Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByWithRelationInput
-  Image?: Prisma.ImageOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
+  image?: Prisma.ImageOrderByWithRelationInput
 }
 
 export type ArticleImageWhereUniqueInput = Prisma.AtLeast<{
@@ -230,8 +230,8 @@ export type ArticleImageWhereUniqueInput = Prisma.AtLeast<{
   imageId?: Prisma.StringFilter<"ArticleImage"> | string
   order?: Prisma.IntNullableFilter<"ArticleImage"> | number | null
   isPrimary?: Prisma.BoolFilter<"ArticleImage"> | boolean
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Image?: Prisma.XOR<Prisma.ImageScalarRelationFilter, Prisma.ImageWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  image?: Prisma.XOR<Prisma.ImageScalarRelationFilter, Prisma.ImageWhereInput>
 }, "articleId_imageId">
 
 export type ArticleImageOrderByWithAggregationInput = {
@@ -259,8 +259,8 @@ export type ArticleImageScalarWhereWithAggregatesInput = {
 export type ArticleImageCreateInput = {
   order?: number | null
   isPrimary?: boolean
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleImageInput
-  Image: Prisma.ImageCreateNestedOneWithoutArticleImageInput
+  article: Prisma.ArticleCreateNestedOneWithoutImagesInput
+  image: Prisma.ImageCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleImageUncheckedCreateInput = {
@@ -273,8 +273,8 @@ export type ArticleImageUncheckedCreateInput = {
 export type ArticleImageUpdateInput = {
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleImageNestedInput
-  Image?: Prisma.ImageUpdateOneRequiredWithoutArticleImageNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutImagesNestedInput
+  image?: Prisma.ImageUpdateOneRequiredWithoutArticlesNestedInput
 }
 
 export type ArticleImageUncheckedUpdateInput = {
@@ -389,10 +389,6 @@ export type ArticleImageUncheckedUpdateManyWithoutArticleNestedInput = {
   deleteMany?: Prisma.ArticleImageScalarWhereInput | Prisma.ArticleImageScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ArticleImageCreateNestedManyWithoutImageInput = {
   create?: Prisma.XOR<Prisma.ArticleImageCreateWithoutImageInput, Prisma.ArticleImageUncheckedCreateWithoutImageInput> | Prisma.ArticleImageCreateWithoutImageInput[] | Prisma.ArticleImageUncheckedCreateWithoutImageInput[]
   connectOrCreate?: Prisma.ArticleImageCreateOrConnectWithoutImageInput | Prisma.ArticleImageCreateOrConnectWithoutImageInput[]
@@ -438,7 +434,7 @@ export type ArticleImageUncheckedUpdateManyWithoutImageNestedInput = {
 export type ArticleImageCreateWithoutArticleInput = {
   order?: number | null
   isPrimary?: boolean
-  Image: Prisma.ImageCreateNestedOneWithoutArticleImageInput
+  image: Prisma.ImageCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleImageUncheckedCreateWithoutArticleInput = {
@@ -486,7 +482,7 @@ export type ArticleImageScalarWhereInput = {
 export type ArticleImageCreateWithoutImageInput = {
   order?: number | null
   isPrimary?: boolean
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleImageInput
+  article: Prisma.ArticleCreateNestedOneWithoutImagesInput
 }
 
 export type ArticleImageUncheckedCreateWithoutImageInput = {
@@ -530,7 +526,7 @@ export type ArticleImageCreateManyArticleInput = {
 export type ArticleImageUpdateWithoutArticleInput = {
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Image?: Prisma.ImageUpdateOneRequiredWithoutArticleImageNestedInput
+  image?: Prisma.ImageUpdateOneRequiredWithoutArticlesNestedInput
 }
 
 export type ArticleImageUncheckedUpdateWithoutArticleInput = {
@@ -554,7 +550,7 @@ export type ArticleImageCreateManyImageInput = {
 export type ArticleImageUpdateWithoutImageInput = {
   order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleImageNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutImagesNestedInput
 }
 
 export type ArticleImageUncheckedUpdateWithoutImageInput = {
@@ -576,8 +572,8 @@ export type ArticleImageSelect<ExtArgs extends runtime.Types.Extensions.Internal
   imageId?: boolean
   order?: boolean
   isPrimary?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
 
 export type ArticleImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -585,8 +581,8 @@ export type ArticleImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   imageId?: boolean
   order?: boolean
   isPrimary?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
 
 export type ArticleImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -594,8 +590,8 @@ export type ArticleImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   imageId?: boolean
   order?: boolean
   isPrimary?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
 
 export type ArticleImageSelectScalar = {
@@ -607,23 +603,23 @@ export type ArticleImageSelectScalar = {
 
 export type ArticleImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"articleId" | "imageId" | "order" | "isPrimary", ExtArgs["result"]["articleImage"]>
 export type ArticleImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }
 export type ArticleImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }
 export type ArticleImageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.ImageDefaultArgs<ExtArgs>
 }
 
 export type $ArticleImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ArticleImage"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>
-    Image: Prisma.$ImagePayload<ExtArgs>
+    article: Prisma.$ArticlePayload<ExtArgs>
+    image: Prisma.$ImagePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     articleId: string
@@ -1024,8 +1020,8 @@ readonly fields: ArticleImageFieldRefs;
  */
 export interface Prisma__ArticleImageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Image<T extends Prisma.ImageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ImageDefaultArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  image<T extends Prisma.ImageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ImageDefaultArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

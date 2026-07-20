@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Articles
- * const articles = await prisma.article.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,35 +42,30 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Article
+ * Model User
  * 
  */
-export type Article = Prisma.ArticleModel
+export type User = Prisma.UserModel
 /**
- * Model ArticleContent
+ * Model Session
  * 
  */
-export type ArticleContent = Prisma.ArticleContentModel
+export type Session = Prisma.SessionModel
 /**
- * Model ArticleImage
+ * Model Account
  * 
  */
-export type ArticleImage = Prisma.ArticleImageModel
+export type Account = Prisma.AccountModel
 /**
- * Model ArticleTag
+ * Model Verification
  * 
  */
-export type ArticleTag = Prisma.ArticleTagModel
+export type Verification = Prisma.VerificationModel
 /**
- * Model ArticleVideo
+ * Model CategoryPermission
  * 
  */
-export type ArticleVideo = Prisma.ArticleVideoModel
-/**
- * Model ArticleView
- * 
- */
-export type ArticleView = Prisma.ArticleViewModel
+export type CategoryPermission = Prisma.CategoryPermissionModel
 /**
  * Model Author
  * 
@@ -82,65 +77,35 @@ export type Author = Prisma.AuthorModel
  */
 export type Category = Prisma.CategoryModel
 /**
- * Model CategoryPermission
+ * Model Tag
  * 
  */
-export type CategoryPermission = Prisma.CategoryPermissionModel
+export type Tag = Prisma.TagModel
 /**
- * Model CategoryRelation
+ * Model Article
  * 
  */
-export type CategoryRelation = Prisma.CategoryRelationModel
+export type Article = Prisma.ArticleModel
 /**
- * Model Collection
+ * Model ArticleContent
  * 
  */
-export type Collection = Prisma.CollectionModel
-/**
- * Model CollectionContributor
- * 
- */
-export type CollectionContributor = Prisma.CollectionContributorModel
-/**
- * Model CollectionItem
- * 
- */
-export type CollectionItem = Prisma.CollectionItemModel
-/**
- * Model CollectionSource
- * 
- */
-export type CollectionSource = Prisma.CollectionSourceModel
-/**
- * Model Content
- * 
- */
-export type Content = Prisma.ContentModel
-/**
- * Model Document
- * 
- */
-export type Document = Prisma.DocumentModel
+export type ArticleContent = Prisma.ArticleContentModel
 /**
  * Model Image
  * 
  */
 export type Image = Prisma.ImageModel
 /**
- * Model Media
+ * Model Video
  * 
  */
-export type Media = Prisma.MediaModel
+export type Video = Prisma.VideoModel
 /**
- * Model Source
+ * Model Document
  * 
  */
-export type Source = Prisma.SourceModel
-/**
- * Model Tag
- * 
- */
-export type Tag = Prisma.TagModel
+export type Document = Prisma.DocumentModel
 /**
  * Model Timeline
  * 
@@ -152,27 +117,62 @@ export type Timeline = Prisma.TimelineModel
  */
 export type TimelineEvent = Prisma.TimelineEventModel
 /**
- * Model Video
+ * Model Source
  * 
  */
-export type Video = Prisma.VideoModel
+export type Source = Prisma.SourceModel
 /**
- * Model account
+ * Model Media
  * 
  */
-export type account = Prisma.accountModel
+export type Media = Prisma.MediaModel
 /**
- * Model session
+ * Model Collection
  * 
  */
-export type session = Prisma.sessionModel
+export type Collection = Prisma.CollectionModel
 /**
- * Model user
+ * Model CollectionItem
  * 
  */
-export type user = Prisma.userModel
+export type CollectionItem = Prisma.CollectionItemModel
 /**
- * Model verification
+ * Model CollectionSource
  * 
  */
-export type verification = Prisma.verificationModel
+export type CollectionSource = Prisma.CollectionSourceModel
+/**
+ * Model CollectionContributor
+ * 
+ */
+export type CollectionContributor = Prisma.CollectionContributorModel
+/**
+ * Model Content
+ * 
+ */
+export type Content = Prisma.ContentModel
+/**
+ * Model CategoryRelation
+ * 
+ */
+export type CategoryRelation = Prisma.CategoryRelationModel
+/**
+ * Model ArticleTag
+ * 
+ */
+export type ArticleTag = Prisma.ArticleTagModel
+/**
+ * Model ArticleImage
+ * 
+ */
+export type ArticleImage = Prisma.ArticleImageModel
+/**
+ * Model ArticleView
+ * 
+ */
+export type ArticleView = Prisma.ArticleViewModel
+/**
+ * Model ArticleVideo
+ * 
+ */
+export type ArticleVideo = Prisma.ArticleVideoModel

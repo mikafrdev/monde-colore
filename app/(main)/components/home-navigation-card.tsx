@@ -1,5 +1,3 @@
-import { Trophy } from "lucide-react";
-import Image from "next/image";
 import {
    Card,
    CardAction,
@@ -7,22 +5,29 @@ import {
    CardHeader,
    CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 export default async function HomeNavigationCard({
    icon,
    title,
    description,
+   href,
    isLast,
 }: {
    icon: React.ReactNode;
    title: string;
    description: string;
+   href: string;
    isLast?: boolean;
 }) {
    return (
-      <>
+      <Link
+         href={href}
+         className="group/card block size-full"
+         aria-label={title}
+      >
          {!isLast ? (
-            <Card className="size-full hover:bg-secondary hover:border-primary transition-colors duration-700 border-foreground">
+            <Card className="relative size-full hover:bg-secondary hover:border-primary transition-colors duration-700 border-foreground">
                <CardHeader className="h-full">
                   <CardAction>
                      <div className="p-4 group-hover/card:bg-white rounded-2xl transition-colors">
@@ -43,6 +48,6 @@ export default async function HomeNavigationCard({
                </CardHeader>
             </Card>
          )}
-      </>
+      </Link>
    );
 }

@@ -224,7 +224,7 @@ export type DocumentWhereInput = {
   mimeType?: Prisma.StringFilter<"Document"> | string
   size?: Prisma.IntNullableFilter<"Document"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -234,7 +234,7 @@ export type DocumentOrderByWithRelationInput = {
   mimeType?: Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  Content?: Prisma.ContentOrderByWithRelationInput
+  content?: Prisma.ContentOrderByWithRelationInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -247,7 +247,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   mimeType?: Prisma.StringFilter<"Document"> | string
   size?: Prisma.IntNullableFilter<"Document"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }, "id" | "fileUrl">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -277,23 +277,23 @@ export type DocumentScalarWhereWithAggregatesInput = {
 }
 
 export type DocumentCreateInput = {
-  id: string
+  id?: string
   title: string
   fileUrl: string
   mimeType: string
   size?: number | null
   createdAt?: Date | string
-  Content?: Prisma.ContentCreateNestedOneWithoutDocumentInput
+  content?: Prisma.ContentCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   fileUrl: string
   mimeType: string
   size?: number | null
   createdAt?: Date | string
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutDocumentInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
@@ -303,7 +303,7 @@ export type DocumentUpdateInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Content?: Prisma.ContentUpdateOneWithoutDocumentNestedInput
+  content?: Prisma.ContentUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -313,11 +313,11 @@ export type DocumentUncheckedUpdateInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutDocumentNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
-  id: string
+  id?: string
   title: string
   fileUrl: string
   mimeType: string
@@ -341,11 +341,6 @@ export type DocumentUncheckedUpdateManyInput = {
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type DocumentNullableScalarRelationFilter = {
-  is?: Prisma.DocumentWhereInput | null
-  isNot?: Prisma.DocumentWhereInput | null
 }
 
 export type DocumentCountOrderByAggregateInput = {
@@ -383,6 +378,11 @@ export type DocumentSumOrderByAggregateInput = {
   size?: Prisma.SortOrder
 }
 
+export type DocumentNullableScalarRelationFilter = {
+  is?: Prisma.DocumentWhereInput | null
+  isNot?: Prisma.DocumentWhereInput | null
+}
+
 export type DocumentCreateNestedOneWithoutContentInput = {
   create?: Prisma.XOR<Prisma.DocumentCreateWithoutContentInput, Prisma.DocumentUncheckedCreateWithoutContentInput>
   connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutContentInput
@@ -400,7 +400,7 @@ export type DocumentUpdateOneWithoutContentNestedInput = {
 }
 
 export type DocumentCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   fileUrl: string
   mimeType: string
@@ -409,7 +409,7 @@ export type DocumentCreateWithoutContentInput = {
 }
 
 export type DocumentUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   fileUrl: string
   mimeType: string
@@ -460,7 +460,7 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   mimeType?: boolean
   size?: boolean
   createdAt?: boolean
-  Content?: boolean | Prisma.Document$ContentArgs<ExtArgs>
+  content?: boolean | Prisma.Document$contentArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -492,7 +492,7 @@ export type DocumentSelectScalar = {
 
 export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "fileUrl" | "mimeType" | "size" | "createdAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Content?: boolean | Prisma.Document$ContentArgs<ExtArgs>
+  content?: boolean | Prisma.Document$contentArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -500,7 +500,7 @@ export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Document"
   objects: {
-    Content: Prisma.$ContentPayload<ExtArgs> | null
+    content: Prisma.$ContentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -903,7 +903,7 @@ readonly fields: DocumentFieldRefs;
  */
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Content<T extends Prisma.Document$ContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$ContentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  content<T extends Prisma.Document$contentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$contentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1332,9 +1332,9 @@ export type DocumentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Document.Content
+ * Document.content
  */
-export type Document$ContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Document$contentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Content
    */

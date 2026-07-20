@@ -182,9 +182,9 @@ export type AuthorWhereInput = {
   bio?: Prisma.StringNullableFilter<"Author"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"Author"> | string | null
   userId?: Prisma.StringNullableFilter<"Author"> | string | null
-  Article?: Prisma.ArticleListRelationFilter
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.userWhereInput> | null
-  CollectionContributor?: Prisma.CollectionContributorListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  articles?: Prisma.ArticleListRelationFilter
+  collections?: Prisma.CollectionContributorListRelationFilter
 }
 
 export type AuthorOrderByWithRelationInput = {
@@ -193,9 +193,9 @@ export type AuthorOrderByWithRelationInput = {
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByRelationAggregateInput
-  user?: Prisma.userOrderByWithRelationInput
-  CollectionContributor?: Prisma.CollectionContributorOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
+  articles?: Prisma.ArticleOrderByRelationAggregateInput
+  collections?: Prisma.CollectionContributorOrderByRelationAggregateInput
 }
 
 export type AuthorWhereUniqueInput = Prisma.AtLeast<{
@@ -207,9 +207,9 @@ export type AuthorWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Author"> | string
   bio?: Prisma.StringNullableFilter<"Author"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"Author"> | string | null
-  Article?: Prisma.ArticleListRelationFilter
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.userWhereInput> | null
-  CollectionContributor?: Prisma.CollectionContributorListRelationFilter
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  articles?: Prisma.ArticleListRelationFilter
+  collections?: Prisma.CollectionContributorListRelationFilter
 }, "id" | "userId">
 
 export type AuthorOrderByWithAggregationInput = {
@@ -235,23 +235,23 @@ export type AuthorScalarWhereWithAggregatesInput = {
 }
 
 export type AuthorCreateInput = {
-  id: string
+  id?: string
   name: string
   bio?: string | null
   avatarUrl?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
-  user?: Prisma.userCreateNestedOneWithoutAuthorInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
+  user?: Prisma.UserCreateNestedOneWithoutAuthorInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
+  collections?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorUncheckedCreateInput = {
-  id: string
+  id?: string
   name: string
   bio?: string | null
   avatarUrl?: string | null
   userId?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
+  collections?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorUpdateInput = {
@@ -259,9 +259,9 @@ export type AuthorUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
-  user?: Prisma.userUpdateOneWithoutAuthorNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
+  user?: Prisma.UserUpdateOneWithoutAuthorNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
+  collections?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
 }
 
 export type AuthorUncheckedUpdateInput = {
@@ -270,12 +270,12 @@ export type AuthorUncheckedUpdateInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  collections?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type AuthorCreateManyInput = {
-  id: string
+  id?: string
   name: string
   bio?: string | null
   avatarUrl?: string | null
@@ -297,9 +297,9 @@ export type AuthorUncheckedUpdateManyInput = {
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type AuthorScalarRelationFilter = {
-  is?: Prisma.AuthorWhereInput
-  isNot?: Prisma.AuthorWhereInput
+export type AuthorNullableScalarRelationFilter = {
+  is?: Prisma.AuthorWhereInput | null
+  isNot?: Prisma.AuthorWhereInput | null
 }
 
 export type AuthorCountOrderByAggregateInput = {
@@ -326,37 +326,9 @@ export type AuthorMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type AuthorNullableScalarRelationFilter = {
-  is?: Prisma.AuthorWhereInput | null
-  isNot?: Prisma.AuthorWhereInput | null
-}
-
-export type AuthorCreateNestedOneWithoutArticleInput = {
-  create?: Prisma.XOR<Prisma.AuthorCreateWithoutArticleInput, Prisma.AuthorUncheckedCreateWithoutArticleInput>
-  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutArticleInput
-  connect?: Prisma.AuthorWhereUniqueInput
-}
-
-export type AuthorUpdateOneRequiredWithoutArticleNestedInput = {
-  create?: Prisma.XOR<Prisma.AuthorCreateWithoutArticleInput, Prisma.AuthorUncheckedCreateWithoutArticleInput>
-  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutArticleInput
-  upsert?: Prisma.AuthorUpsertWithoutArticleInput
-  connect?: Prisma.AuthorWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AuthorUpdateToOneWithWhereWithoutArticleInput, Prisma.AuthorUpdateWithoutArticleInput>, Prisma.AuthorUncheckedUpdateWithoutArticleInput>
-}
-
-export type AuthorCreateNestedOneWithoutCollectionContributorInput = {
-  create?: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionContributorInput, Prisma.AuthorUncheckedCreateWithoutCollectionContributorInput>
-  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutCollectionContributorInput
-  connect?: Prisma.AuthorWhereUniqueInput
-}
-
-export type AuthorUpdateOneRequiredWithoutCollectionContributorNestedInput = {
-  create?: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionContributorInput, Prisma.AuthorUncheckedCreateWithoutCollectionContributorInput>
-  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutCollectionContributorInput
-  upsert?: Prisma.AuthorUpsertWithoutCollectionContributorInput
-  connect?: Prisma.AuthorWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AuthorUpdateToOneWithWhereWithoutCollectionContributorInput, Prisma.AuthorUpdateWithoutCollectionContributorInput>, Prisma.AuthorUncheckedUpdateWithoutCollectionContributorInput>
+export type AuthorScalarRelationFilter = {
+  is?: Prisma.AuthorWhereInput
+  isNot?: Prisma.AuthorWhereInput
 }
 
 export type AuthorCreateNestedOneWithoutUserInput = {
@@ -391,126 +363,50 @@ export type AuthorUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AuthorUpdateToOneWithWhereWithoutUserInput, Prisma.AuthorUpdateWithoutUserInput>, Prisma.AuthorUncheckedUpdateWithoutUserInput>
 }
 
-export type AuthorCreateWithoutArticleInput = {
-  id: string
-  name: string
-  bio?: string | null
-  avatarUrl?: string | null
-  user?: Prisma.userCreateNestedOneWithoutAuthorInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
+export type AuthorCreateNestedOneWithoutArticlesInput = {
+  create?: Prisma.XOR<Prisma.AuthorCreateWithoutArticlesInput, Prisma.AuthorUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutArticlesInput
+  connect?: Prisma.AuthorWhereUniqueInput
 }
 
-export type AuthorUncheckedCreateWithoutArticleInput = {
-  id: string
-  name: string
-  bio?: string | null
-  avatarUrl?: string | null
-  userId?: string | null
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
+export type AuthorUpdateOneRequiredWithoutArticlesNestedInput = {
+  create?: Prisma.XOR<Prisma.AuthorCreateWithoutArticlesInput, Prisma.AuthorUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutArticlesInput
+  upsert?: Prisma.AuthorUpsertWithoutArticlesInput
+  connect?: Prisma.AuthorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AuthorUpdateToOneWithWhereWithoutArticlesInput, Prisma.AuthorUpdateWithoutArticlesInput>, Prisma.AuthorUncheckedUpdateWithoutArticlesInput>
 }
 
-export type AuthorCreateOrConnectWithoutArticleInput = {
-  where: Prisma.AuthorWhereUniqueInput
-  create: Prisma.XOR<Prisma.AuthorCreateWithoutArticleInput, Prisma.AuthorUncheckedCreateWithoutArticleInput>
+export type AuthorCreateNestedOneWithoutCollectionsInput = {
+  create?: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionsInput, Prisma.AuthorUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutCollectionsInput
+  connect?: Prisma.AuthorWhereUniqueInput
 }
 
-export type AuthorUpsertWithoutArticleInput = {
-  update: Prisma.XOR<Prisma.AuthorUpdateWithoutArticleInput, Prisma.AuthorUncheckedUpdateWithoutArticleInput>
-  create: Prisma.XOR<Prisma.AuthorCreateWithoutArticleInput, Prisma.AuthorUncheckedCreateWithoutArticleInput>
-  where?: Prisma.AuthorWhereInput
-}
-
-export type AuthorUpdateToOneWithWhereWithoutArticleInput = {
-  where?: Prisma.AuthorWhereInput
-  data: Prisma.XOR<Prisma.AuthorUpdateWithoutArticleInput, Prisma.AuthorUncheckedUpdateWithoutArticleInput>
-}
-
-export type AuthorUpdateWithoutArticleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user?: Prisma.userUpdateOneWithoutAuthorNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
-}
-
-export type AuthorUncheckedUpdateWithoutArticleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
-}
-
-export type AuthorCreateWithoutCollectionContributorInput = {
-  id: string
-  name: string
-  bio?: string | null
-  avatarUrl?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
-  user?: Prisma.userCreateNestedOneWithoutAuthorInput
-}
-
-export type AuthorUncheckedCreateWithoutCollectionContributorInput = {
-  id: string
-  name: string
-  bio?: string | null
-  avatarUrl?: string | null
-  userId?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
-}
-
-export type AuthorCreateOrConnectWithoutCollectionContributorInput = {
-  where: Prisma.AuthorWhereUniqueInput
-  create: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionContributorInput, Prisma.AuthorUncheckedCreateWithoutCollectionContributorInput>
-}
-
-export type AuthorUpsertWithoutCollectionContributorInput = {
-  update: Prisma.XOR<Prisma.AuthorUpdateWithoutCollectionContributorInput, Prisma.AuthorUncheckedUpdateWithoutCollectionContributorInput>
-  create: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionContributorInput, Prisma.AuthorUncheckedCreateWithoutCollectionContributorInput>
-  where?: Prisma.AuthorWhereInput
-}
-
-export type AuthorUpdateToOneWithWhereWithoutCollectionContributorInput = {
-  where?: Prisma.AuthorWhereInput
-  data: Prisma.XOR<Prisma.AuthorUpdateWithoutCollectionContributorInput, Prisma.AuthorUncheckedUpdateWithoutCollectionContributorInput>
-}
-
-export type AuthorUpdateWithoutCollectionContributorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
-  user?: Prisma.userUpdateOneWithoutAuthorNestedInput
-}
-
-export type AuthorUncheckedUpdateWithoutCollectionContributorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
+export type AuthorUpdateOneRequiredWithoutCollectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionsInput, Prisma.AuthorUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.AuthorCreateOrConnectWithoutCollectionsInput
+  upsert?: Prisma.AuthorUpsertWithoutCollectionsInput
+  connect?: Prisma.AuthorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AuthorUpdateToOneWithWhereWithoutCollectionsInput, Prisma.AuthorUpdateWithoutCollectionsInput>, Prisma.AuthorUncheckedUpdateWithoutCollectionsInput>
 }
 
 export type AuthorCreateWithoutUserInput = {
-  id: string
+  id?: string
   name: string
   bio?: string | null
   avatarUrl?: string | null
-  Article?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
+  collections?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
   name: string
   bio?: string | null
   avatarUrl?: string | null
-  Article?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
+  collections?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorCreateOrConnectWithoutUserInput = {
@@ -534,8 +430,8 @@ export type AuthorUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
+  collections?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
 }
 
 export type AuthorUncheckedUpdateWithoutUserInput = {
@@ -543,8 +439,112 @@ export type AuthorUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Article?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
+  collections?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type AuthorCreateWithoutArticlesInput = {
+  id?: string
+  name: string
+  bio?: string | null
+  avatarUrl?: string | null
+  user?: Prisma.UserCreateNestedOneWithoutAuthorInput
+  collections?: Prisma.CollectionContributorCreateNestedManyWithoutAuthorInput
+}
+
+export type AuthorUncheckedCreateWithoutArticlesInput = {
+  id?: string
+  name: string
+  bio?: string | null
+  avatarUrl?: string | null
+  userId?: string | null
+  collections?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type AuthorCreateOrConnectWithoutArticlesInput = {
+  where: Prisma.AuthorWhereUniqueInput
+  create: Prisma.XOR<Prisma.AuthorCreateWithoutArticlesInput, Prisma.AuthorUncheckedCreateWithoutArticlesInput>
+}
+
+export type AuthorUpsertWithoutArticlesInput = {
+  update: Prisma.XOR<Prisma.AuthorUpdateWithoutArticlesInput, Prisma.AuthorUncheckedUpdateWithoutArticlesInput>
+  create: Prisma.XOR<Prisma.AuthorCreateWithoutArticlesInput, Prisma.AuthorUncheckedCreateWithoutArticlesInput>
+  where?: Prisma.AuthorWhereInput
+}
+
+export type AuthorUpdateToOneWithWhereWithoutArticlesInput = {
+  where?: Prisma.AuthorWhereInput
+  data: Prisma.XOR<Prisma.AuthorUpdateWithoutArticlesInput, Prisma.AuthorUncheckedUpdateWithoutArticlesInput>
+}
+
+export type AuthorUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneWithoutAuthorNestedInput
+  collections?: Prisma.CollectionContributorUpdateManyWithoutAuthorNestedInput
+}
+
+export type AuthorUncheckedUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collections?: Prisma.CollectionContributorUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type AuthorCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  bio?: string | null
+  avatarUrl?: string | null
+  user?: Prisma.UserCreateNestedOneWithoutAuthorInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
+}
+
+export type AuthorUncheckedCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  bio?: string | null
+  avatarUrl?: string | null
+  userId?: string | null
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type AuthorCreateOrConnectWithoutCollectionsInput = {
+  where: Prisma.AuthorWhereUniqueInput
+  create: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionsInput, Prisma.AuthorUncheckedCreateWithoutCollectionsInput>
+}
+
+export type AuthorUpsertWithoutCollectionsInput = {
+  update: Prisma.XOR<Prisma.AuthorUpdateWithoutCollectionsInput, Prisma.AuthorUncheckedUpdateWithoutCollectionsInput>
+  create: Prisma.XOR<Prisma.AuthorCreateWithoutCollectionsInput, Prisma.AuthorUncheckedCreateWithoutCollectionsInput>
+  where?: Prisma.AuthorWhereInput
+}
+
+export type AuthorUpdateToOneWithWhereWithoutCollectionsInput = {
+  where?: Prisma.AuthorWhereInput
+  data: Prisma.XOR<Prisma.AuthorUpdateWithoutCollectionsInput, Prisma.AuthorUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type AuthorUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneWithoutAuthorNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
+}
+
+export type AuthorUncheckedUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 
@@ -553,13 +553,13 @@ export type AuthorUncheckedUpdateWithoutUserInput = {
  */
 
 export type AuthorCountOutputType = {
-  Article: number
-  CollectionContributor: number
+  articles: number
+  collections: number
 }
 
 export type AuthorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | AuthorCountOutputTypeCountArticleArgs
-  CollectionContributor?: boolean | AuthorCountOutputTypeCountCollectionContributorArgs
+  articles?: boolean | AuthorCountOutputTypeCountArticlesArgs
+  collections?: boolean | AuthorCountOutputTypeCountCollectionsArgs
 }
 
 /**
@@ -575,14 +575,14 @@ export type AuthorCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * AuthorCountOutputType without action
  */
-export type AuthorCountOutputTypeCountArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AuthorCountOutputTypeCountArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ArticleWhereInput
 }
 
 /**
  * AuthorCountOutputType without action
  */
-export type AuthorCountOutputTypeCountCollectionContributorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AuthorCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionContributorWhereInput
 }
 
@@ -593,9 +593,9 @@ export type AuthorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   bio?: boolean
   avatarUrl?: boolean
   userId?: boolean
-  Article?: boolean | Prisma.Author$ArticleArgs<ExtArgs>
   user?: boolean | Prisma.Author$userArgs<ExtArgs>
-  CollectionContributor?: boolean | Prisma.Author$CollectionContributorArgs<ExtArgs>
+  articles?: boolean | Prisma.Author$articlesArgs<ExtArgs>
+  collections?: boolean | Prisma.Author$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.AuthorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["author"]>
 
@@ -627,9 +627,9 @@ export type AuthorSelectScalar = {
 
 export type AuthorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "bio" | "avatarUrl" | "userId", ExtArgs["result"]["author"]>
 export type AuthorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.Author$ArticleArgs<ExtArgs>
   user?: boolean | Prisma.Author$userArgs<ExtArgs>
-  CollectionContributor?: boolean | Prisma.Author$CollectionContributorArgs<ExtArgs>
+  articles?: boolean | Prisma.Author$articlesArgs<ExtArgs>
+  collections?: boolean | Prisma.Author$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.AuthorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AuthorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -642,9 +642,9 @@ export type AuthorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $AuthorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Author"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>[]
-    user: Prisma.$userPayload<ExtArgs> | null
-    CollectionContributor: Prisma.$CollectionContributorPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs> | null
+    articles: Prisma.$ArticlePayload<ExtArgs>[]
+    collections: Prisma.$CollectionContributorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1046,9 +1046,9 @@ readonly fields: AuthorFieldRefs;
  */
 export interface Prisma__AuthorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.Author$ArticleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$ArticleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  user<T extends Prisma.Author$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$userArgs<ExtArgs>>): Prisma.Prisma__userClient<runtime.Types.Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  CollectionContributor<T extends Prisma.Author$CollectionContributorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$CollectionContributorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionContributorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.Author$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  articles<T extends Prisma.Author$articlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collections<T extends Prisma.Author$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Author$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionContributorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1484,9 +1484,28 @@ export type AuthorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Author.Article
+ * Author.user
  */
-export type Author$ArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Author$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Author.articles
+ */
+export type Author$articlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Article
    */
@@ -1508,28 +1527,9 @@ export type Author$ArticleArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Author.user
+ * Author.collections
  */
-export type Author$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the user
-   */
-  select?: Prisma.userSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the user
-   */
-  omit?: Prisma.userOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.userInclude<ExtArgs> | null
-  where?: Prisma.userWhereInput
-}
-
-/**
- * Author.CollectionContributor
- */
-export type Author$CollectionContributorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Author$collectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CollectionContributor
    */

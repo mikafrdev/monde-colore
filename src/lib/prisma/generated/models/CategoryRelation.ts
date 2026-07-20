@@ -158,15 +158,15 @@ export type CategoryRelationWhereInput = {
   NOT?: Prisma.CategoryRelationWhereInput | Prisma.CategoryRelationWhereInput[]
   parentId?: Prisma.StringFilter<"CategoryRelation"> | string
   childId?: Prisma.StringFilter<"CategoryRelation"> | string
-  Category_CategoryRelation_childIdToCategory?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
-  Category_CategoryRelation_parentIdToCategory?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  parent?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  child?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }
 
 export type CategoryRelationOrderByWithRelationInput = {
   parentId?: Prisma.SortOrder
   childId?: Prisma.SortOrder
-  Category_CategoryRelation_childIdToCategory?: Prisma.CategoryOrderByWithRelationInput
-  Category_CategoryRelation_parentIdToCategory?: Prisma.CategoryOrderByWithRelationInput
+  parent?: Prisma.CategoryOrderByWithRelationInput
+  child?: Prisma.CategoryOrderByWithRelationInput
 }
 
 export type CategoryRelationWhereUniqueInput = Prisma.AtLeast<{
@@ -176,8 +176,8 @@ export type CategoryRelationWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CategoryRelationWhereInput | Prisma.CategoryRelationWhereInput[]
   parentId?: Prisma.StringFilter<"CategoryRelation"> | string
   childId?: Prisma.StringFilter<"CategoryRelation"> | string
-  Category_CategoryRelation_childIdToCategory?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
-  Category_CategoryRelation_parentIdToCategory?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  parent?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  child?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }, "parentId_childId" | "parentId_childId">
 
 export type CategoryRelationOrderByWithAggregationInput = {
@@ -197,8 +197,8 @@ export type CategoryRelationScalarWhereWithAggregatesInput = {
 }
 
 export type CategoryRelationCreateInput = {
-  Category_CategoryRelation_childIdToCategory: Prisma.CategoryCreateNestedOneWithoutCategoryRelation_CategoryRelation_childIdToCategoryInput
-  Category_CategoryRelation_parentIdToCategory: Prisma.CategoryCreateNestedOneWithoutCategoryRelation_CategoryRelation_parentIdToCategoryInput
+  parent: Prisma.CategoryCreateNestedOneWithoutParentRelationsInput
+  child: Prisma.CategoryCreateNestedOneWithoutChildRelationsInput
 }
 
 export type CategoryRelationUncheckedCreateInput = {
@@ -207,8 +207,8 @@ export type CategoryRelationUncheckedCreateInput = {
 }
 
 export type CategoryRelationUpdateInput = {
-  Category_CategoryRelation_childIdToCategory?: Prisma.CategoryUpdateOneRequiredWithoutCategoryRelation_CategoryRelation_childIdToCategoryNestedInput
-  Category_CategoryRelation_parentIdToCategory?: Prisma.CategoryUpdateOneRequiredWithoutCategoryRelation_CategoryRelation_parentIdToCategoryNestedInput
+  parent?: Prisma.CategoryUpdateOneRequiredWithoutParentRelationsNestedInput
+  child?: Prisma.CategoryUpdateOneRequiredWithoutChildRelationsNestedInput
 }
 
 export type CategoryRelationUncheckedUpdateInput = {
@@ -260,140 +260,140 @@ export type CategoryRelationMinOrderByAggregateInput = {
   childId?: Prisma.SortOrder
 }
 
-export type CategoryRelationCreateNestedManyWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInputEnvelope
+export type CategoryRelationCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput> | Prisma.CategoryRelationCreateWithoutParentInput[] | Prisma.CategoryRelationUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutParentInput | Prisma.CategoryRelationCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.CategoryRelationCreateManyParentInputEnvelope
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
 }
 
-export type CategoryRelationCreateNestedManyWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInputEnvelope
+export type CategoryRelationCreateNestedManyWithoutChildInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput> | Prisma.CategoryRelationCreateWithoutChildInput[] | Prisma.CategoryRelationUncheckedCreateWithoutChildInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutChildInput | Prisma.CategoryRelationCreateOrConnectWithoutChildInput[]
+  createMany?: Prisma.CategoryRelationCreateManyChildInputEnvelope
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
 }
 
-export type CategoryRelationUncheckedCreateNestedManyWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInputEnvelope
+export type CategoryRelationUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput> | Prisma.CategoryRelationCreateWithoutParentInput[] | Prisma.CategoryRelationUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutParentInput | Prisma.CategoryRelationCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.CategoryRelationCreateManyParentInputEnvelope
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
 }
 
-export type CategoryRelationUncheckedCreateNestedManyWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInputEnvelope
+export type CategoryRelationUncheckedCreateNestedManyWithoutChildInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput> | Prisma.CategoryRelationCreateWithoutChildInput[] | Prisma.CategoryRelationUncheckedCreateWithoutChildInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutChildInput | Prisma.CategoryRelationCreateOrConnectWithoutChildInput[]
+  createMany?: Prisma.CategoryRelationCreateManyChildInputEnvelope
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
 }
 
-export type CategoryRelationUpdateManyWithoutCategory_CategoryRelation_childIdToCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInputEnvelope
+export type CategoryRelationUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput> | Prisma.CategoryRelationCreateWithoutParentInput[] | Prisma.CategoryRelationUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutParentInput | Prisma.CategoryRelationCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutParentInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.CategoryRelationCreateManyParentInputEnvelope
   set?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   disconnect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   delete?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
-  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_childIdToCategoryInput[]
+  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutParentInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutParentInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutParentInput[]
   deleteMany?: Prisma.CategoryRelationScalarWhereInput | Prisma.CategoryRelationScalarWhereInput[]
 }
 
-export type CategoryRelationUpdateManyWithoutCategory_CategoryRelation_parentIdToCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInputEnvelope
+export type CategoryRelationUpdateManyWithoutChildNestedInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput> | Prisma.CategoryRelationCreateWithoutChildInput[] | Prisma.CategoryRelationUncheckedCreateWithoutChildInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutChildInput | Prisma.CategoryRelationCreateOrConnectWithoutChildInput[]
+  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutChildInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutChildInput[]
+  createMany?: Prisma.CategoryRelationCreateManyChildInputEnvelope
   set?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   disconnect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   delete?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
-  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
+  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutChildInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutChildInput[]
+  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutChildInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutChildInput[]
   deleteMany?: Prisma.CategoryRelationScalarWhereInput | Prisma.CategoryRelationScalarWhereInput[]
 }
 
-export type CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_childIdToCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInputEnvelope
+export type CategoryRelationUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput> | Prisma.CategoryRelationCreateWithoutParentInput[] | Prisma.CategoryRelationUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutParentInput | Prisma.CategoryRelationCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutParentInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.CategoryRelationCreateManyParentInputEnvelope
   set?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   disconnect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   delete?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
-  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput[]
-  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_childIdToCategoryInput[]
+  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutParentInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutParentInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutParentInput[]
   deleteMany?: Prisma.CategoryRelationScalarWhereInput | Prisma.CategoryRelationScalarWhereInput[]
 }
 
-export type CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_parentIdToCategoryNestedInput = {
-  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput> | Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[] | Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  createMany?: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInputEnvelope
+export type CategoryRelationUncheckedUpdateManyWithoutChildNestedInput = {
+  create?: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput> | Prisma.CategoryRelationCreateWithoutChildInput[] | Prisma.CategoryRelationUncheckedCreateWithoutChildInput[]
+  connectOrCreate?: Prisma.CategoryRelationCreateOrConnectWithoutChildInput | Prisma.CategoryRelationCreateOrConnectWithoutChildInput[]
+  upsert?: Prisma.CategoryRelationUpsertWithWhereUniqueWithoutChildInput | Prisma.CategoryRelationUpsertWithWhereUniqueWithoutChildInput[]
+  createMany?: Prisma.CategoryRelationCreateManyChildInputEnvelope
   set?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   disconnect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   delete?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
   connect?: Prisma.CategoryRelationWhereUniqueInput | Prisma.CategoryRelationWhereUniqueInput[]
-  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
-  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_parentIdToCategoryInput[]
+  update?: Prisma.CategoryRelationUpdateWithWhereUniqueWithoutChildInput | Prisma.CategoryRelationUpdateWithWhereUniqueWithoutChildInput[]
+  updateMany?: Prisma.CategoryRelationUpdateManyWithWhereWithoutChildInput | Prisma.CategoryRelationUpdateManyWithWhereWithoutChildInput[]
   deleteMany?: Prisma.CategoryRelationScalarWhereInput | Prisma.CategoryRelationScalarWhereInput[]
 }
 
-export type CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  Category_CategoryRelation_parentIdToCategory: Prisma.CategoryCreateNestedOneWithoutCategoryRelation_CategoryRelation_parentIdToCategoryInput
+export type CategoryRelationCreateWithoutParentInput = {
+  child: Prisma.CategoryCreateNestedOneWithoutChildRelationsInput
 }
 
-export type CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  parentId: string
-}
-
-export type CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  where: Prisma.CategoryRelationWhereUniqueInput
-  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput>
-}
-
-export type CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInputEnvelope = {
-  data: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInput | Prisma.CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInput[]
-  skipDuplicates?: boolean
-}
-
-export type CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
-  Category_CategoryRelation_childIdToCategory: Prisma.CategoryCreateNestedOneWithoutCategoryRelation_CategoryRelation_childIdToCategoryInput
-}
-
-export type CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUncheckedCreateWithoutParentInput = {
   childId: string
 }
 
-export type CategoryRelationCreateOrConnectWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationCreateOrConnectWithoutParentInput = {
   where: Prisma.CategoryRelationWhereUniqueInput
-  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput>
+  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput>
 }
 
-export type CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInputEnvelope = {
-  data: Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInput | Prisma.CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInput[]
+export type CategoryRelationCreateManyParentInputEnvelope = {
+  data: Prisma.CategoryRelationCreateManyParentInput | Prisma.CategoryRelationCreateManyParentInput[]
   skipDuplicates?: boolean
 }
 
-export type CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  where: Prisma.CategoryRelationWhereUniqueInput
-  update: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput>
-  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_childIdToCategoryInput>
+export type CategoryRelationCreateWithoutChildInput = {
+  parent: Prisma.CategoryCreateNestedOneWithoutParentRelationsInput
 }
 
-export type CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  where: Prisma.CategoryRelationWhereUniqueInput
-  data: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput, Prisma.CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput>
+export type CategoryRelationUncheckedCreateWithoutChildInput = {
+  parentId: string
 }
 
-export type CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_childIdToCategoryInput = {
+export type CategoryRelationCreateOrConnectWithoutChildInput = {
+  where: Prisma.CategoryRelationWhereUniqueInput
+  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput>
+}
+
+export type CategoryRelationCreateManyChildInputEnvelope = {
+  data: Prisma.CategoryRelationCreateManyChildInput | Prisma.CategoryRelationCreateManyChildInput[]
+  skipDuplicates?: boolean
+}
+
+export type CategoryRelationUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.CategoryRelationWhereUniqueInput
+  update: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutParentInput, Prisma.CategoryRelationUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutParentInput, Prisma.CategoryRelationUncheckedCreateWithoutParentInput>
+}
+
+export type CategoryRelationUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.CategoryRelationWhereUniqueInput
+  data: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutParentInput, Prisma.CategoryRelationUncheckedUpdateWithoutParentInput>
+}
+
+export type CategoryRelationUpdateManyWithWhereWithoutParentInput = {
   where: Prisma.CategoryRelationScalarWhereInput
-  data: Prisma.XOR<Prisma.CategoryRelationUpdateManyMutationInput, Prisma.CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_childIdToCategoryInput>
+  data: Prisma.XOR<Prisma.CategoryRelationUpdateManyMutationInput, Prisma.CategoryRelationUncheckedUpdateManyWithoutParentInput>
 }
 
 export type CategoryRelationScalarWhereInput = {
@@ -404,52 +404,52 @@ export type CategoryRelationScalarWhereInput = {
   childId?: Prisma.StringFilter<"CategoryRelation"> | string
 }
 
-export type CategoryRelationUpsertWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUpsertWithWhereUniqueWithoutChildInput = {
   where: Prisma.CategoryRelationWhereUniqueInput
-  update: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput>
-  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedCreateWithoutCategory_CategoryRelation_parentIdToCategoryInput>
+  update: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutChildInput, Prisma.CategoryRelationUncheckedUpdateWithoutChildInput>
+  create: Prisma.XOR<Prisma.CategoryRelationCreateWithoutChildInput, Prisma.CategoryRelationUncheckedCreateWithoutChildInput>
 }
 
-export type CategoryRelationUpdateWithWhereUniqueWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUpdateWithWhereUniqueWithoutChildInput = {
   where: Prisma.CategoryRelationWhereUniqueInput
-  data: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput, Prisma.CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput>
+  data: Prisma.XOR<Prisma.CategoryRelationUpdateWithoutChildInput, Prisma.CategoryRelationUncheckedUpdateWithoutChildInput>
 }
 
-export type CategoryRelationUpdateManyWithWhereWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUpdateManyWithWhereWithoutChildInput = {
   where: Prisma.CategoryRelationScalarWhereInput
-  data: Prisma.XOR<Prisma.CategoryRelationUpdateManyMutationInput, Prisma.CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_parentIdToCategoryInput>
+  data: Prisma.XOR<Prisma.CategoryRelationUpdateManyMutationInput, Prisma.CategoryRelationUncheckedUpdateManyWithoutChildInput>
 }
 
-export type CategoryRelationCreateManyCategory_CategoryRelation_childIdToCategoryInput = {
-  parentId: string
-}
-
-export type CategoryRelationCreateManyCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationCreateManyParentInput = {
   childId: string
 }
 
-export type CategoryRelationUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  Category_CategoryRelation_parentIdToCategory?: Prisma.CategoryUpdateOneRequiredWithoutCategoryRelation_CategoryRelation_parentIdToCategoryNestedInput
+export type CategoryRelationCreateManyChildInput = {
+  parentId: string
 }
 
-export type CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  parentId?: Prisma.StringFieldUpdateOperationsInput | string
+export type CategoryRelationUpdateWithoutParentInput = {
+  child?: Prisma.CategoryUpdateOneRequiredWithoutChildRelationsNestedInput
 }
 
-export type CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_childIdToCategoryInput = {
-  parentId?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type CategoryRelationUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
-  Category_CategoryRelation_childIdToCategory?: Prisma.CategoryUpdateOneRequiredWithoutCategoryRelation_CategoryRelation_childIdToCategoryNestedInput
-}
-
-export type CategoryRelationUncheckedUpdateWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUncheckedUpdateWithoutParentInput = {
   childId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_parentIdToCategoryInput = {
+export type CategoryRelationUncheckedUpdateManyWithoutParentInput = {
   childId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type CategoryRelationUpdateWithoutChildInput = {
+  parent?: Prisma.CategoryUpdateOneRequiredWithoutParentRelationsNestedInput
+}
+
+export type CategoryRelationUncheckedUpdateWithoutChildInput = {
+  parentId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type CategoryRelationUncheckedUpdateManyWithoutChildInput = {
+  parentId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -457,22 +457,22 @@ export type CategoryRelationUncheckedUpdateManyWithoutCategory_CategoryRelation_
 export type CategoryRelationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   parentId?: boolean
   childId?: boolean
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryRelation"]>
 
 export type CategoryRelationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   parentId?: boolean
   childId?: boolean
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryRelation"]>
 
 export type CategoryRelationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   parentId?: boolean
   childId?: boolean
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoryRelation"]>
 
 export type CategoryRelationSelectScalar = {
@@ -482,23 +482,23 @@ export type CategoryRelationSelectScalar = {
 
 export type CategoryRelationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"parentId" | "childId", ExtArgs["result"]["categoryRelation"]>
 export type CategoryRelationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type CategoryRelationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 export type CategoryRelationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Category_CategoryRelation_childIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  Category_CategoryRelation_parentIdToCategory?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  child?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 
 export type $CategoryRelationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CategoryRelation"
   objects: {
-    Category_CategoryRelation_childIdToCategory: Prisma.$CategoryPayload<ExtArgs>
-    Category_CategoryRelation_parentIdToCategory: Prisma.$CategoryPayload<ExtArgs>
+    parent: Prisma.$CategoryPayload<ExtArgs>
+    child: Prisma.$CategoryPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     parentId: string
@@ -897,8 +897,8 @@ readonly fields: CategoryRelationFieldRefs;
  */
 export interface Prisma__CategoryRelationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Category_CategoryRelation_childIdToCategory<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Category_CategoryRelation_parentIdToCategory<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  parent<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  child<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

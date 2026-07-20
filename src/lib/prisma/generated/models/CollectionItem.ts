@@ -224,8 +224,8 @@ export type CollectionItemWhereInput = {
   order?: Prisma.IntFilter<"CollectionItem"> | number
   isPrimary?: Prisma.BoolFilter<"CollectionItem"> | boolean
   label?: Prisma.StringNullableFilter<"CollectionItem"> | string | null
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
-  Content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
 }
 
 export type CollectionItemOrderByWithRelationInput = {
@@ -235,8 +235,8 @@ export type CollectionItemOrderByWithRelationInput = {
   order?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
-  Collection?: Prisma.CollectionOrderByWithRelationInput
-  Content?: Prisma.ContentOrderByWithRelationInput
+  collection?: Prisma.CollectionOrderByWithRelationInput
+  content?: Prisma.ContentOrderByWithRelationInput
 }
 
 export type CollectionItemWhereUniqueInput = Prisma.AtLeast<{
@@ -250,8 +250,8 @@ export type CollectionItemWhereUniqueInput = Prisma.AtLeast<{
   order?: Prisma.IntFilter<"CollectionItem"> | number
   isPrimary?: Prisma.BoolFilter<"CollectionItem"> | boolean
   label?: Prisma.StringNullableFilter<"CollectionItem"> | string | null
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
-  Content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  content?: Prisma.XOR<Prisma.ContentScalarRelationFilter, Prisma.ContentWhereInput>
 }, "id" | "collectionId_contentId">
 
 export type CollectionItemOrderByWithAggregationInput = {
@@ -281,16 +281,16 @@ export type CollectionItemScalarWhereWithAggregatesInput = {
 }
 
 export type CollectionItemCreateInput = {
-  id: string
+  id?: string
   order: number
   isPrimary?: boolean
   label?: string | null
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionItemInput
-  Content: Prisma.ContentCreateNestedOneWithoutCollectionItemInput
+  collection: Prisma.CollectionCreateNestedOneWithoutItemsInput
+  content: Prisma.ContentCreateNestedOneWithoutCollectionItemsInput
 }
 
 export type CollectionItemUncheckedCreateInput = {
-  id: string
+  id?: string
   collectionId: string
   contentId: string
   order: number
@@ -303,8 +303,8 @@ export type CollectionItemUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionItemNestedInput
-  Content?: Prisma.ContentUpdateOneRequiredWithoutCollectionItemNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutItemsNestedInput
+  content?: Prisma.ContentUpdateOneRequiredWithoutCollectionItemsNestedInput
 }
 
 export type CollectionItemUncheckedUpdateInput = {
@@ -317,7 +317,7 @@ export type CollectionItemUncheckedUpdateInput = {
 }
 
 export type CollectionItemCreateManyInput = {
-  id: string
+  id?: string
   collectionId: string
   contentId: string
   order: number
@@ -476,15 +476,15 @@ export type CollectionItemUncheckedUpdateManyWithoutContentNestedInput = {
 }
 
 export type CollectionItemCreateWithoutCollectionInput = {
-  id: string
+  id?: string
   order: number
   isPrimary?: boolean
   label?: string | null
-  Content: Prisma.ContentCreateNestedOneWithoutCollectionItemInput
+  content: Prisma.ContentCreateNestedOneWithoutCollectionItemsInput
 }
 
 export type CollectionItemUncheckedCreateWithoutCollectionInput = {
-  id: string
+  id?: string
   contentId: string
   order: number
   isPrimary?: boolean
@@ -530,15 +530,15 @@ export type CollectionItemScalarWhereInput = {
 }
 
 export type CollectionItemCreateWithoutContentInput = {
-  id: string
+  id?: string
   order: number
   isPrimary?: boolean
   label?: string | null
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionItemInput
+  collection: Prisma.CollectionCreateNestedOneWithoutItemsInput
 }
 
 export type CollectionItemUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   collectionId: string
   order: number
   isPrimary?: boolean
@@ -572,7 +572,7 @@ export type CollectionItemUpdateManyWithWhereWithoutContentInput = {
 }
 
 export type CollectionItemCreateManyCollectionInput = {
-  id: string
+  id?: string
   contentId: string
   order: number
   isPrimary?: boolean
@@ -584,7 +584,7 @@ export type CollectionItemUpdateWithoutCollectionInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.ContentUpdateOneRequiredWithoutCollectionItemNestedInput
+  content?: Prisma.ContentUpdateOneRequiredWithoutCollectionItemsNestedInput
 }
 
 export type CollectionItemUncheckedUpdateWithoutCollectionInput = {
@@ -604,7 +604,7 @@ export type CollectionItemUncheckedUpdateManyWithoutCollectionInput = {
 }
 
 export type CollectionItemCreateManyContentInput = {
-  id: string
+  id?: string
   collectionId: string
   order: number
   isPrimary?: boolean
@@ -616,7 +616,7 @@ export type CollectionItemUpdateWithoutContentInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionItemNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type CollectionItemUncheckedUpdateWithoutContentInput = {
@@ -644,8 +644,8 @@ export type CollectionItemSelect<ExtArgs extends runtime.Types.Extensions.Intern
   order?: boolean
   isPrimary?: boolean
   label?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionItem"]>
 
 export type CollectionItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -655,8 +655,8 @@ export type CollectionItemSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   order?: boolean
   isPrimary?: boolean
   label?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionItem"]>
 
 export type CollectionItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -666,8 +666,8 @@ export type CollectionItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   order?: boolean
   isPrimary?: boolean
   label?: boolean
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionItem"]>
 
 export type CollectionItemSelectScalar = {
@@ -681,23 +681,23 @@ export type CollectionItemSelectScalar = {
 
 export type CollectionItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collectionId" | "contentId" | "order" | "isPrimary" | "label", ExtArgs["result"]["collectionItem"]>
 export type CollectionItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 export type CollectionItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 export type CollectionItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
-  Content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  content?: boolean | Prisma.ContentDefaultArgs<ExtArgs>
 }
 
 export type $CollectionItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CollectionItem"
   objects: {
-    Collection: Prisma.$CollectionPayload<ExtArgs>
-    Content: Prisma.$ContentPayload<ExtArgs>
+    collection: Prisma.$CollectionPayload<ExtArgs>
+    content: Prisma.$ContentPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1100,8 +1100,8 @@ readonly fields: CollectionItemFieldRefs;
  */
 export interface Prisma__CollectionItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Content<T extends Prisma.ContentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContentDefaultArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  content<T extends Prisma.ContentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContentDefaultArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

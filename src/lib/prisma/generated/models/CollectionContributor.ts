@@ -174,8 +174,8 @@ export type CollectionContributorWhereInput = {
   collectionId?: Prisma.StringFilter<"CollectionContributor"> | string
   authorId?: Prisma.StringFilter<"CollectionContributor"> | string
   role?: Prisma.EnumCollectionContributorRoleFilter<"CollectionContributor"> | $Enums.CollectionContributorRole
-  Author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
 }
 
 export type CollectionContributorOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type CollectionContributorOrderByWithRelationInput = {
   collectionId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  Author?: Prisma.AuthorOrderByWithRelationInput
-  Collection?: Prisma.CollectionOrderByWithRelationInput
+  collection?: Prisma.CollectionOrderByWithRelationInput
+  author?: Prisma.AuthorOrderByWithRelationInput
 }
 
 export type CollectionContributorWhereUniqueInput = Prisma.AtLeast<{
@@ -196,8 +196,8 @@ export type CollectionContributorWhereUniqueInput = Prisma.AtLeast<{
   collectionId?: Prisma.StringFilter<"CollectionContributor"> | string
   authorId?: Prisma.StringFilter<"CollectionContributor"> | string
   role?: Prisma.EnumCollectionContributorRoleFilter<"CollectionContributor"> | $Enums.CollectionContributorRole
-  Author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  Collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  collection?: Prisma.XOR<Prisma.CollectionScalarRelationFilter, Prisma.CollectionWhereInput>
+  author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
 }, "id" | "collectionId_authorId">
 
 export type CollectionContributorOrderByWithAggregationInput = {
@@ -221,14 +221,14 @@ export type CollectionContributorScalarWhereWithAggregatesInput = {
 }
 
 export type CollectionContributorCreateInput = {
-  id: string
+  id?: string
   role?: $Enums.CollectionContributorRole
-  Author: Prisma.AuthorCreateNestedOneWithoutCollectionContributorInput
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionContributorInput
+  collection: Prisma.CollectionCreateNestedOneWithoutContributorsInput
+  author: Prisma.AuthorCreateNestedOneWithoutCollectionsInput
 }
 
 export type CollectionContributorUncheckedCreateInput = {
-  id: string
+  id?: string
   collectionId: string
   authorId: string
   role?: $Enums.CollectionContributorRole
@@ -237,8 +237,8 @@ export type CollectionContributorUncheckedCreateInput = {
 export type CollectionContributorUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCollectionContributorRoleFieldUpdateOperationsInput | $Enums.CollectionContributorRole
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutCollectionContributorNestedInput
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionContributorNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutContributorsNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutCollectionsNestedInput
 }
 
 export type CollectionContributorUncheckedUpdateInput = {
@@ -249,7 +249,7 @@ export type CollectionContributorUncheckedUpdateInput = {
 }
 
 export type CollectionContributorCreateManyInput = {
-  id: string
+  id?: string
   collectionId: string
   authorId: string
   role?: $Enums.CollectionContributorRole
@@ -392,13 +392,13 @@ export type EnumCollectionContributorRoleFieldUpdateOperationsInput = {
 }
 
 export type CollectionContributorCreateWithoutAuthorInput = {
-  id: string
+  id?: string
   role?: $Enums.CollectionContributorRole
-  Collection: Prisma.CollectionCreateNestedOneWithoutCollectionContributorInput
+  collection: Prisma.CollectionCreateNestedOneWithoutContributorsInput
 }
 
 export type CollectionContributorUncheckedCreateWithoutAuthorInput = {
-  id: string
+  id?: string
   collectionId: string
   role?: $Enums.CollectionContributorRole
 }
@@ -440,13 +440,13 @@ export type CollectionContributorScalarWhereInput = {
 }
 
 export type CollectionContributorCreateWithoutCollectionInput = {
-  id: string
+  id?: string
   role?: $Enums.CollectionContributorRole
-  Author: Prisma.AuthorCreateNestedOneWithoutCollectionContributorInput
+  author: Prisma.AuthorCreateNestedOneWithoutCollectionsInput
 }
 
 export type CollectionContributorUncheckedCreateWithoutCollectionInput = {
-  id: string
+  id?: string
   authorId: string
   role?: $Enums.CollectionContributorRole
 }
@@ -478,7 +478,7 @@ export type CollectionContributorUpdateManyWithWhereWithoutCollectionInput = {
 }
 
 export type CollectionContributorCreateManyAuthorInput = {
-  id: string
+  id?: string
   collectionId: string
   role?: $Enums.CollectionContributorRole
 }
@@ -486,7 +486,7 @@ export type CollectionContributorCreateManyAuthorInput = {
 export type CollectionContributorUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCollectionContributorRoleFieldUpdateOperationsInput | $Enums.CollectionContributorRole
-  Collection?: Prisma.CollectionUpdateOneRequiredWithoutCollectionContributorNestedInput
+  collection?: Prisma.CollectionUpdateOneRequiredWithoutContributorsNestedInput
 }
 
 export type CollectionContributorUncheckedUpdateWithoutAuthorInput = {
@@ -502,7 +502,7 @@ export type CollectionContributorUncheckedUpdateManyWithoutAuthorInput = {
 }
 
 export type CollectionContributorCreateManyCollectionInput = {
-  id: string
+  id?: string
   authorId: string
   role?: $Enums.CollectionContributorRole
 }
@@ -510,7 +510,7 @@ export type CollectionContributorCreateManyCollectionInput = {
 export type CollectionContributorUpdateWithoutCollectionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCollectionContributorRoleFieldUpdateOperationsInput | $Enums.CollectionContributorRole
-  Author?: Prisma.AuthorUpdateOneRequiredWithoutCollectionContributorNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutCollectionsNestedInput
 }
 
 export type CollectionContributorUncheckedUpdateWithoutCollectionInput = {
@@ -532,8 +532,8 @@ export type CollectionContributorSelect<ExtArgs extends runtime.Types.Extensions
   collectionId?: boolean
   authorId?: boolean
   role?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionContributor"]>
 
 export type CollectionContributorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -541,8 +541,8 @@ export type CollectionContributorSelectCreateManyAndReturn<ExtArgs extends runti
   collectionId?: boolean
   authorId?: boolean
   role?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionContributor"]>
 
 export type CollectionContributorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -550,8 +550,8 @@ export type CollectionContributorSelectUpdateManyAndReturn<ExtArgs extends runti
   collectionId?: boolean
   authorId?: boolean
   role?: boolean
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collectionContributor"]>
 
 export type CollectionContributorSelectScalar = {
@@ -563,23 +563,23 @@ export type CollectionContributorSelectScalar = {
 
 export type CollectionContributorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collectionId" | "authorId" | "role", ExtArgs["result"]["collectionContributor"]>
 export type CollectionContributorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }
 export type CollectionContributorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }
 export type CollectionContributorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
-  Collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  collection?: boolean | Prisma.CollectionDefaultArgs<ExtArgs>
+  author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
 }
 
 export type $CollectionContributorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CollectionContributor"
   objects: {
-    Author: Prisma.$AuthorPayload<ExtArgs>
-    Collection: Prisma.$CollectionPayload<ExtArgs>
+    collection: Prisma.$CollectionPayload<ExtArgs>
+    author: Prisma.$AuthorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -980,8 +980,8 @@ readonly fields: CollectionContributorFieldRefs;
  */
 export interface Prisma__CollectionContributorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Author<T extends Prisma.AuthorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthorDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  collection<T extends Prisma.CollectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CollectionDefaultArgs<ExtArgs>>): Prisma.Prisma__CollectionClient<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  author<T extends Prisma.AuthorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthorDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

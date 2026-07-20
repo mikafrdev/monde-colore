@@ -174,7 +174,7 @@ export type ArticleViewWhereInput = {
   articleId?: Prisma.StringFilter<"ArticleView"> | string
   ipHash?: Prisma.StringNullableFilter<"ArticleView"> | string | null
   viewedAt?: Prisma.DateTimeFilter<"ArticleView"> | Date | string
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }
 
 export type ArticleViewOrderByWithRelationInput = {
@@ -182,7 +182,7 @@ export type ArticleViewOrderByWithRelationInput = {
   articleId?: Prisma.SortOrder
   ipHash?: Prisma.SortOrderInput | Prisma.SortOrder
   viewedAt?: Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
 }
 
 export type ArticleViewWhereUniqueInput = Prisma.AtLeast<{
@@ -193,7 +193,7 @@ export type ArticleViewWhereUniqueInput = Prisma.AtLeast<{
   articleId?: Prisma.StringFilter<"ArticleView"> | string
   ipHash?: Prisma.StringNullableFilter<"ArticleView"> | string | null
   viewedAt?: Prisma.DateTimeFilter<"ArticleView"> | Date | string
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }, "id">
 
 export type ArticleViewOrderByWithAggregationInput = {
@@ -217,14 +217,14 @@ export type ArticleViewScalarWhereWithAggregatesInput = {
 }
 
 export type ArticleViewCreateInput = {
-  id: string
+  id?: string
   ipHash?: string | null
   viewedAt?: Date | string
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleViewInput
+  article: Prisma.ArticleCreateNestedOneWithoutViewsInput
 }
 
 export type ArticleViewUncheckedCreateInput = {
-  id: string
+  id?: string
   articleId: string
   ipHash?: string | null
   viewedAt?: Date | string
@@ -234,7 +234,7 @@ export type ArticleViewUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ipHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleViewNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutViewsNestedInput
 }
 
 export type ArticleViewUncheckedUpdateInput = {
@@ -245,7 +245,7 @@ export type ArticleViewUncheckedUpdateInput = {
 }
 
 export type ArticleViewCreateManyInput = {
-  id: string
+  id?: string
   articleId: string
   ipHash?: string | null
   viewedAt?: Date | string
@@ -338,13 +338,13 @@ export type ArticleViewUncheckedUpdateManyWithoutArticleNestedInput = {
 }
 
 export type ArticleViewCreateWithoutArticleInput = {
-  id: string
+  id?: string
   ipHash?: string | null
   viewedAt?: Date | string
 }
 
 export type ArticleViewUncheckedCreateWithoutArticleInput = {
-  id: string
+  id?: string
   ipHash?: string | null
   viewedAt?: Date | string
 }
@@ -386,7 +386,7 @@ export type ArticleViewScalarWhereInput = {
 }
 
 export type ArticleViewCreateManyArticleInput = {
-  id: string
+  id?: string
   ipHash?: string | null
   viewedAt?: Date | string
 }
@@ -416,7 +416,7 @@ export type ArticleViewSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   articleId?: boolean
   ipHash?: boolean
   viewedAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleView"]>
 
 export type ArticleViewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -424,7 +424,7 @@ export type ArticleViewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   articleId?: boolean
   ipHash?: boolean
   viewedAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleView"]>
 
 export type ArticleViewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -432,7 +432,7 @@ export type ArticleViewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   articleId?: boolean
   ipHash?: boolean
   viewedAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleView"]>
 
 export type ArticleViewSelectScalar = {
@@ -444,19 +444,19 @@ export type ArticleViewSelectScalar = {
 
 export type ArticleViewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "articleId" | "ipHash" | "viewedAt", ExtArgs["result"]["articleView"]>
 export type ArticleViewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type ArticleViewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type ArticleViewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 
 export type $ArticleViewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ArticleView"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>
+    article: Prisma.$ArticlePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -857,7 +857,7 @@ readonly fields: ArticleViewFieldRefs;
  */
 export interface Prisma__ArticleViewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

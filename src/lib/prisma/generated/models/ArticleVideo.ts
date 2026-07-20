@@ -232,8 +232,8 @@ export type ArticleVideoWhereInput = {
   articleId?: Prisma.StringFilter<"ArticleVideo"> | string
   videoId?: Prisma.StringFilter<"ArticleVideo"> | string
   createdAt?: Prisma.DateTimeFilter<"ArticleVideo"> | Date | string
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Video?: Prisma.XOR<Prisma.VideoScalarRelationFilter, Prisma.VideoWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  video?: Prisma.XOR<Prisma.VideoScalarRelationFilter, Prisma.VideoWhereInput>
 }
 
 export type ArticleVideoOrderByWithRelationInput = {
@@ -244,8 +244,8 @@ export type ArticleVideoOrderByWithRelationInput = {
   articleId?: Prisma.SortOrder
   videoId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByWithRelationInput
-  Video?: Prisma.VideoOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
+  video?: Prisma.VideoOrderByWithRelationInput
 }
 
 export type ArticleVideoWhereUniqueInput = Prisma.AtLeast<{
@@ -260,8 +260,8 @@ export type ArticleVideoWhereUniqueInput = Prisma.AtLeast<{
   articleId?: Prisma.StringFilter<"ArticleVideo"> | string
   videoId?: Prisma.StringFilter<"ArticleVideo"> | string
   createdAt?: Prisma.DateTimeFilter<"ArticleVideo"> | Date | string
-  Article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
-  Video?: Prisma.XOR<Prisma.VideoScalarRelationFilter, Prisma.VideoWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  video?: Prisma.XOR<Prisma.VideoScalarRelationFilter, Prisma.VideoWhereInput>
 }, "id" | "articleId_videoId">
 
 export type ArticleVideoOrderByWithAggregationInput = {
@@ -293,17 +293,17 @@ export type ArticleVideoScalarWhereWithAggregatesInput = {
 }
 
 export type ArticleVideoCreateInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleVideoInput
-  Video: Prisma.VideoCreateNestedOneWithoutArticleVideoInput
+  article: Prisma.ArticleCreateNestedOneWithoutVideosInput
+  video: Prisma.VideoCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleVideoUncheckedCreateInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -318,8 +318,8 @@ export type ArticleVideoUpdateInput = {
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleVideoNestedInput
-  Video?: Prisma.VideoUpdateOneRequiredWithoutArticleVideoNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutVideosNestedInput
+  video?: Prisma.VideoUpdateOneRequiredWithoutArticlesNestedInput
 }
 
 export type ArticleVideoUncheckedUpdateInput = {
@@ -333,7 +333,7 @@ export type ArticleVideoUncheckedUpdateInput = {
 }
 
 export type ArticleVideoCreateManyInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -455,14 +455,6 @@ export type ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput = {
   deleteMany?: Prisma.ArticleVideoScalarWhereInput | Prisma.ArticleVideoScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ArticleVideoCreateNestedManyWithoutVideoInput = {
   create?: Prisma.XOR<Prisma.ArticleVideoCreateWithoutVideoInput, Prisma.ArticleVideoUncheckedCreateWithoutVideoInput> | Prisma.ArticleVideoCreateWithoutVideoInput[] | Prisma.ArticleVideoUncheckedCreateWithoutVideoInput[]
   connectOrCreate?: Prisma.ArticleVideoCreateOrConnectWithoutVideoInput | Prisma.ArticleVideoCreateOrConnectWithoutVideoInput[]
@@ -506,16 +498,16 @@ export type ArticleVideoUncheckedUpdateManyWithoutVideoNestedInput = {
 }
 
 export type ArticleVideoCreateWithoutArticleInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  Video: Prisma.VideoCreateNestedOneWithoutArticleVideoInput
+  video: Prisma.VideoCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleVideoUncheckedCreateWithoutArticleInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -563,16 +555,16 @@ export type ArticleVideoScalarWhereInput = {
 }
 
 export type ArticleVideoCreateWithoutVideoInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
   createdAt?: Date | string
-  Article: Prisma.ArticleCreateNestedOneWithoutArticleVideoInput
+  article: Prisma.ArticleCreateNestedOneWithoutVideosInput
 }
 
 export type ArticleVideoUncheckedCreateWithoutVideoInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -607,7 +599,7 @@ export type ArticleVideoUpdateManyWithWhereWithoutVideoInput = {
 }
 
 export type ArticleVideoCreateManyArticleInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -621,7 +613,7 @@ export type ArticleVideoUpdateWithoutArticleInput = {
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Video?: Prisma.VideoUpdateOneRequiredWithoutArticleVideoNestedInput
+  video?: Prisma.VideoUpdateOneRequiredWithoutArticlesNestedInput
 }
 
 export type ArticleVideoUncheckedUpdateWithoutArticleInput = {
@@ -643,7 +635,7 @@ export type ArticleVideoUncheckedUpdateManyWithoutArticleInput = {
 }
 
 export type ArticleVideoCreateManyVideoInput = {
-  id: string
+  id?: string
   order?: number
   caption?: string | null
   isPrimary?: boolean
@@ -657,7 +649,7 @@ export type ArticleVideoUpdateWithoutVideoInput = {
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Article?: Prisma.ArticleUpdateOneRequiredWithoutArticleVideoNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutVideosNestedInput
 }
 
 export type ArticleVideoUncheckedUpdateWithoutVideoInput = {
@@ -688,8 +680,8 @@ export type ArticleVideoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   articleId?: boolean
   videoId?: boolean
   createdAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleVideo"]>
 
 export type ArticleVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -700,8 +692,8 @@ export type ArticleVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   articleId?: boolean
   videoId?: boolean
   createdAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleVideo"]>
 
 export type ArticleVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -712,8 +704,8 @@ export type ArticleVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   articleId?: boolean
   videoId?: boolean
   createdAt?: boolean
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleVideo"]>
 
 export type ArticleVideoSelectScalar = {
@@ -728,23 +720,23 @@ export type ArticleVideoSelectScalar = {
 
 export type ArticleVideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order" | "caption" | "isPrimary" | "articleId" | "videoId" | "createdAt", ExtArgs["result"]["articleVideo"]>
 export type ArticleVideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }
 export type ArticleVideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }
 export type ArticleVideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
-  Video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  video?: boolean | Prisma.VideoDefaultArgs<ExtArgs>
 }
 
 export type $ArticleVideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ArticleVideo"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs>
-    Video: Prisma.$VideoPayload<ExtArgs>
+    article: Prisma.$ArticlePayload<ExtArgs>
+    video: Prisma.$VideoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1148,8 +1140,8 @@ readonly fields: ArticleVideoFieldRefs;
  */
 export interface Prisma__ArticleVideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  Video<T extends Prisma.VideoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VideoDefaultArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  video<T extends Prisma.VideoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VideoDefaultArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -348,8 +348,8 @@ export type VideoWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
   section?: Prisma.StringNullableFilter<"Video"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Video"> | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  articles?: Prisma.ArticleVideoListRelationFilter
 }
 
 export type VideoOrderByWithRelationInput = {
@@ -373,8 +373,8 @@ export type VideoOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   section?: Prisma.SortOrderInput | Prisma.SortOrder
   visibility?: Prisma.SortOrder
-  ArticleVideo?: Prisma.ArticleVideoOrderByRelationAggregateInput
-  Content?: Prisma.ContentOrderByWithRelationInput
+  content?: Prisma.ContentOrderByWithRelationInput
+  articles?: Prisma.ArticleVideoOrderByRelationAggregateInput
 }
 
 export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -401,8 +401,8 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
   section?: Prisma.StringNullableFilter<"Video"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Video"> | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  articles?: Prisma.ArticleVideoListRelationFilter
 }, "id">
 
 export type VideoOrderByWithAggregationInput = {
@@ -460,7 +460,7 @@ export type VideoScalarWhereWithAggregatesInput = {
 }
 
 export type VideoCreateInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   embedUrl?: string | null
@@ -477,15 +477,15 @@ export type VideoCreateInput = {
   altText?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   section?: string | null
   visibility?: $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutVideoInput
-  Content?: Prisma.ContentCreateNestedOneWithoutVideoInput
+  content?: Prisma.ContentCreateNestedOneWithoutVideoInput
+  articles?: Prisma.ArticleVideoCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   embedUrl?: string | null
@@ -502,11 +502,11 @@ export type VideoUncheckedCreateInput = {
   altText?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   section?: string | null
   visibility?: $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutVideoInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutVideoInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutVideoInput
+  articles?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUpdateInput = {
@@ -530,8 +530,8 @@ export type VideoUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutVideoNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutVideoNestedInput
+  content?: Prisma.ContentUpdateOneWithoutVideoNestedInput
+  articles?: Prisma.ArticleVideoUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateInput = {
@@ -555,12 +555,12 @@ export type VideoUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutVideoNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutVideoNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutVideoNestedInput
+  articles?: Prisma.ArticleVideoUncheckedUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoCreateManyInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   embedUrl?: string | null
@@ -577,7 +577,7 @@ export type VideoCreateManyInput = {
   altText?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   section?: string | null
   visibility?: $Enums.Visibility
 }
@@ -626,16 +626,6 @@ export type VideoUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-}
-
-export type VideoScalarRelationFilter = {
-  is?: Prisma.VideoWhereInput
-  isNot?: Prisma.VideoWhereInput
-}
-
-export type VideoNullableScalarRelationFilter = {
-  is?: Prisma.VideoWhereInput | null
-  isNot?: Prisma.VideoWhereInput | null
 }
 
 export type VideoCountOrderByAggregateInput = {
@@ -721,18 +711,22 @@ export type VideoSumOrderByAggregateInput = {
   duration?: Prisma.SortOrder
 }
 
-export type VideoCreateNestedOneWithoutArticleVideoInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutArticleVideoInput, Prisma.VideoUncheckedCreateWithoutArticleVideoInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutArticleVideoInput
-  connect?: Prisma.VideoWhereUniqueInput
+export type VideoNullableScalarRelationFilter = {
+  is?: Prisma.VideoWhereInput | null
+  isNot?: Prisma.VideoWhereInput | null
 }
 
-export type VideoUpdateOneRequiredWithoutArticleVideoNestedInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutArticleVideoInput, Prisma.VideoUncheckedCreateWithoutArticleVideoInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutArticleVideoInput
-  upsert?: Prisma.VideoUpsertWithoutArticleVideoInput
-  connect?: Prisma.VideoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutArticleVideoInput, Prisma.VideoUpdateWithoutArticleVideoInput>, Prisma.VideoUncheckedUpdateWithoutArticleVideoInput>
+export type VideoScalarRelationFilter = {
+  is?: Prisma.VideoWhereInput
+  isNot?: Prisma.VideoWhereInput
+}
+
+export type EnumVideoProviderFieldUpdateOperationsInput = {
+  set?: $Enums.VideoProvider
+}
+
+export type EnumVideoStatusFieldUpdateOperationsInput = {
+  set?: $Enums.VideoStatus
 }
 
 export type VideoCreateNestedOneWithoutContentInput = {
@@ -751,128 +745,22 @@ export type VideoUpdateOneWithoutContentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutContentInput, Prisma.VideoUpdateWithoutContentInput>, Prisma.VideoUncheckedUpdateWithoutContentInput>
 }
 
-export type EnumVideoProviderFieldUpdateOperationsInput = {
-  set?: $Enums.VideoProvider
+export type VideoCreateNestedOneWithoutArticlesInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutArticlesInput, Prisma.VideoUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutArticlesInput
+  connect?: Prisma.VideoWhereUniqueInput
 }
 
-export type EnumVideoStatusFieldUpdateOperationsInput = {
-  set?: $Enums.VideoStatus
-}
-
-export type VideoCreateWithoutArticleVideoInput = {
-  id: string
-  title: string
-  description?: string | null
-  embedUrl?: string | null
-  fileUrl?: string | null
-  provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
-  filename?: string | null
-  size?: number | null
-  mimeType?: string | null
-  width?: number | null
-  height?: number | null
-  duration?: number | null
-  thumbnailUrl?: string | null
-  altText?: string | null
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  section?: string | null
-  visibility?: $Enums.Visibility
-  Content?: Prisma.ContentCreateNestedOneWithoutVideoInput
-}
-
-export type VideoUncheckedCreateWithoutArticleVideoInput = {
-  id: string
-  title: string
-  description?: string | null
-  embedUrl?: string | null
-  fileUrl?: string | null
-  provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
-  filename?: string | null
-  size?: number | null
-  mimeType?: string | null
-  width?: number | null
-  height?: number | null
-  duration?: number | null
-  thumbnailUrl?: string | null
-  altText?: string | null
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  section?: string | null
-  visibility?: $Enums.Visibility
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutVideoInput
-}
-
-export type VideoCreateOrConnectWithoutArticleVideoInput = {
-  where: Prisma.VideoWhereUniqueInput
-  create: Prisma.XOR<Prisma.VideoCreateWithoutArticleVideoInput, Prisma.VideoUncheckedCreateWithoutArticleVideoInput>
-}
-
-export type VideoUpsertWithoutArticleVideoInput = {
-  update: Prisma.XOR<Prisma.VideoUpdateWithoutArticleVideoInput, Prisma.VideoUncheckedUpdateWithoutArticleVideoInput>
-  create: Prisma.XOR<Prisma.VideoCreateWithoutArticleVideoInput, Prisma.VideoUncheckedCreateWithoutArticleVideoInput>
-  where?: Prisma.VideoWhereInput
-}
-
-export type VideoUpdateToOneWithWhereWithoutArticleVideoInput = {
-  where?: Prisma.VideoWhereInput
-  data: Prisma.XOR<Prisma.VideoUpdateWithoutArticleVideoInput, Prisma.VideoUncheckedUpdateWithoutArticleVideoInput>
-}
-
-export type VideoUpdateWithoutArticleVideoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
-  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUpdateOneWithoutVideoNestedInput
-}
-
-export type VideoUncheckedUpdateWithoutArticleVideoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
-  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutVideoNestedInput
+export type VideoUpdateOneRequiredWithoutArticlesNestedInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutArticlesInput, Prisma.VideoUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutArticlesInput
+  upsert?: Prisma.VideoUpsertWithoutArticlesInput
+  connect?: Prisma.VideoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutArticlesInput, Prisma.VideoUpdateWithoutArticlesInput>, Prisma.VideoUncheckedUpdateWithoutArticlesInput>
 }
 
 export type VideoCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   embedUrl?: string | null
@@ -889,14 +777,14 @@ export type VideoCreateWithoutContentInput = {
   altText?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   section?: string | null
   visibility?: $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoCreateNestedManyWithoutVideoInput
+  articles?: Prisma.ArticleVideoCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   embedUrl?: string | null
@@ -913,10 +801,10 @@ export type VideoUncheckedCreateWithoutContentInput = {
   altText?: string | null
   publishedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   section?: string | null
   visibility?: $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutVideoInput
+  articles?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoCreateOrConnectWithoutContentInput = {
@@ -956,7 +844,7 @@ export type VideoUpdateWithoutContentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUpdateManyWithoutVideoNestedInput
+  articles?: Prisma.ArticleVideoUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateWithoutContentInput = {
@@ -980,7 +868,119 @@ export type VideoUncheckedUpdateWithoutContentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  ArticleVideo?: Prisma.ArticleVideoUncheckedUpdateManyWithoutVideoNestedInput
+  articles?: Prisma.ArticleVideoUncheckedUpdateManyWithoutVideoNestedInput
+}
+
+export type VideoCreateWithoutArticlesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  embedUrl?: string | null
+  fileUrl?: string | null
+  provider: $Enums.VideoProvider
+  status?: $Enums.VideoStatus
+  filename?: string | null
+  size?: number | null
+  mimeType?: string | null
+  width?: number | null
+  height?: number | null
+  duration?: number | null
+  thumbnailUrl?: string | null
+  altText?: string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  section?: string | null
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutVideoInput
+}
+
+export type VideoUncheckedCreateWithoutArticlesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  embedUrl?: string | null
+  fileUrl?: string | null
+  provider: $Enums.VideoProvider
+  status?: $Enums.VideoStatus
+  filename?: string | null
+  size?: number | null
+  mimeType?: string | null
+  width?: number | null
+  height?: number | null
+  duration?: number | null
+  thumbnailUrl?: string | null
+  altText?: string | null
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  section?: string | null
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutVideoInput
+}
+
+export type VideoCreateOrConnectWithoutArticlesInput = {
+  where: Prisma.VideoWhereUniqueInput
+  create: Prisma.XOR<Prisma.VideoCreateWithoutArticlesInput, Prisma.VideoUncheckedCreateWithoutArticlesInput>
+}
+
+export type VideoUpsertWithoutArticlesInput = {
+  update: Prisma.XOR<Prisma.VideoUpdateWithoutArticlesInput, Prisma.VideoUncheckedUpdateWithoutArticlesInput>
+  create: Prisma.XOR<Prisma.VideoCreateWithoutArticlesInput, Prisma.VideoUncheckedCreateWithoutArticlesInput>
+  where?: Prisma.VideoWhereInput
+}
+
+export type VideoUpdateToOneWithWhereWithoutArticlesInput = {
+  where?: Prisma.VideoWhereInput
+  data: Prisma.XOR<Prisma.VideoUpdateWithoutArticlesInput, Prisma.VideoUncheckedUpdateWithoutArticlesInput>
+}
+
+export type VideoUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
+  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutVideoNestedInput
+}
+
+export type VideoUncheckedUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
+  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUncheckedUpdateOneWithoutVideoNestedInput
 }
 
 
@@ -989,11 +989,11 @@ export type VideoUncheckedUpdateWithoutContentInput = {
  */
 
 export type VideoCountOutputType = {
-  ArticleVideo: number
+  articles: number
 }
 
 export type VideoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ArticleVideo?: boolean | VideoCountOutputTypeCountArticleVideoArgs
+  articles?: boolean | VideoCountOutputTypeCountArticlesArgs
 }
 
 /**
@@ -1009,7 +1009,7 @@ export type VideoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * VideoCountOutputType without action
  */
-export type VideoCountOutputTypeCountArticleVideoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type VideoCountOutputTypeCountArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ArticleVideoWhereInput
 }
 
@@ -1035,8 +1035,8 @@ export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   section?: boolean
   visibility?: boolean
-  ArticleVideo?: boolean | Prisma.Video$ArticleVideoArgs<ExtArgs>
-  Content?: boolean | Prisma.Video$ContentArgs<ExtArgs>
+  content?: boolean | Prisma.Video$contentArgs<ExtArgs>
+  articles?: boolean | Prisma.Video$articlesArgs<ExtArgs>
   _count?: boolean | Prisma.VideoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
@@ -1111,8 +1111,8 @@ export type VideoSelectScalar = {
 
 export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "embedUrl" | "fileUrl" | "provider" | "status" | "filename" | "size" | "mimeType" | "width" | "height" | "duration" | "thumbnailUrl" | "altText" | "publishedAt" | "createdAt" | "updatedAt" | "section" | "visibility", ExtArgs["result"]["video"]>
 export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ArticleVideo?: boolean | Prisma.Video$ArticleVideoArgs<ExtArgs>
-  Content?: boolean | Prisma.Video$ContentArgs<ExtArgs>
+  content?: boolean | Prisma.Video$contentArgs<ExtArgs>
+  articles?: boolean | Prisma.Video$articlesArgs<ExtArgs>
   _count?: boolean | Prisma.VideoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1121,8 +1121,8 @@ export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Video"
   objects: {
-    ArticleVideo: Prisma.$ArticleVideoPayload<ExtArgs>[]
-    Content: Prisma.$ContentPayload<ExtArgs> | null
+    content: Prisma.$ContentPayload<ExtArgs> | null
+    articles: Prisma.$ArticleVideoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1539,8 +1539,8 @@ readonly fields: VideoFieldRefs;
  */
 export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  ArticleVideo<T extends Prisma.Video$ArticleVideoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$ArticleVideoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Content<T extends Prisma.Video$ContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$ContentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  content<T extends Prisma.Video$contentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$contentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  articles<T extends Prisma.Video$articlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1983,9 +1983,28 @@ export type VideoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Video.ArticleVideo
+ * Video.content
  */
-export type Video$ArticleVideoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Video$contentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Content
+   */
+  select?: Prisma.ContentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Content
+   */
+  omit?: Prisma.ContentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContentInclude<ExtArgs> | null
+  where?: Prisma.ContentWhereInput
+}
+
+/**
+ * Video.articles
+ */
+export type Video$articlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ArticleVideo
    */
@@ -2004,25 +2023,6 @@ export type Video$ArticleVideoArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ArticleVideoScalarFieldEnum | Prisma.ArticleVideoScalarFieldEnum[]
-}
-
-/**
- * Video.Content
- */
-export type Video$ContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Content
-   */
-  select?: Prisma.ContentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Content
-   */
-  omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  where?: Prisma.ContentWhereInput
 }
 
 /**

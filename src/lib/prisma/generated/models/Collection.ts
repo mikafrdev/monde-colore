@@ -238,11 +238,11 @@ export type CollectionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
-  Image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
-  CollectionContributor?: Prisma.CollectionContributorListRelationFilter
-  CollectionItem?: Prisma.CollectionItemListRelationFilter
-  CollectionSource?: Prisma.CollectionSourceListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  coverImage?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  items?: Prisma.CollectionItemListRelationFilter
+  sources?: Prisma.CollectionSourceListRelationFilter
+  contributors?: Prisma.CollectionContributorListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }
 
 export type CollectionOrderByWithRelationInput = {
@@ -258,11 +258,11 @@ export type CollectionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
-  Image?: Prisma.ImageOrderByWithRelationInput
-  CollectionContributor?: Prisma.CollectionContributorOrderByRelationAggregateInput
-  CollectionItem?: Prisma.CollectionItemOrderByRelationAggregateInput
-  CollectionSource?: Prisma.CollectionSourceOrderByRelationAggregateInput
-  Content?: Prisma.ContentOrderByWithRelationInput
+  coverImage?: Prisma.ImageOrderByWithRelationInput
+  items?: Prisma.CollectionItemOrderByRelationAggregateInput
+  sources?: Prisma.CollectionSourceOrderByRelationAggregateInput
+  contributors?: Prisma.CollectionContributorOrderByRelationAggregateInput
+  content?: Prisma.ContentOrderByWithRelationInput
 }
 
 export type CollectionWhereUniqueInput = Prisma.AtLeast<{
@@ -281,11 +281,11 @@ export type CollectionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
-  Image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
-  CollectionContributor?: Prisma.CollectionContributorListRelationFilter
-  CollectionItem?: Prisma.CollectionItemListRelationFilter
-  CollectionSource?: Prisma.CollectionSourceListRelationFilter
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
+  coverImage?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  items?: Prisma.CollectionItemListRelationFilter
+  sources?: Prisma.CollectionSourceListRelationFilter
+  contributors?: Prisma.CollectionContributorListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }, "id" | "slug">
 
 export type CollectionOrderByWithAggregationInput = {
@@ -325,7 +325,7 @@ export type CollectionScalarWhereWithAggregatesInput = {
 }
 
 export type CollectionCreateInput = {
-  id: string
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -334,17 +334,17 @@ export type CollectionCreateInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Image?: Prisma.ImageCreateNestedOneWithoutCollectionInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
+  coverImage?: Prisma.ImageCreateNestedOneWithoutCollectionsInput
+  items?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
 }
 
 export type CollectionUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -354,12 +354,12 @@ export type CollectionUncheckedCreateInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
+  items?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
 }
 
 export type CollectionUpdateInput = {
@@ -374,11 +374,11 @@ export type CollectionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Image?: Prisma.ImageUpdateOneWithoutCollectionNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
+  coverImage?: Prisma.ImageUpdateOneWithoutCollectionsNestedInput
+  items?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
 }
 
 export type CollectionUncheckedUpdateInput = {
@@ -394,14 +394,14 @@ export type CollectionUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
 }
 
 export type CollectionCreateManyInput = {
-  id: string
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -411,7 +411,7 @@ export type CollectionCreateManyInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
 }
 
@@ -442,6 +442,16 @@ export type CollectionUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+}
+
+export type CollectionListRelationFilter = {
+  every?: Prisma.CollectionWhereInput
+  some?: Prisma.CollectionWhereInput
+  none?: Prisma.CollectionWhereInput
+}
+
+export type CollectionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type CollectionCountOrderByAggregateInput = {
@@ -499,14 +509,46 @@ export type CollectionNullableScalarRelationFilter = {
   isNot?: Prisma.CollectionWhereInput | null
 }
 
-export type CollectionListRelationFilter = {
-  every?: Prisma.CollectionWhereInput
-  some?: Prisma.CollectionWhereInput
-  none?: Prisma.CollectionWhereInput
+export type CollectionCreateNestedManyWithoutCoverImageInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput> | Prisma.CollectionCreateWithoutCoverImageInput[] | Prisma.CollectionUncheckedCreateWithoutCoverImageInput[]
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCoverImageInput | Prisma.CollectionCreateOrConnectWithoutCoverImageInput[]
+  createMany?: Prisma.CollectionCreateManyCoverImageInputEnvelope
+  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
 }
 
-export type CollectionOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type CollectionUncheckedCreateNestedManyWithoutCoverImageInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput> | Prisma.CollectionCreateWithoutCoverImageInput[] | Prisma.CollectionUncheckedCreateWithoutCoverImageInput[]
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCoverImageInput | Prisma.CollectionCreateOrConnectWithoutCoverImageInput[]
+  createMany?: Prisma.CollectionCreateManyCoverImageInputEnvelope
+  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+}
+
+export type CollectionUpdateManyWithoutCoverImageNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput> | Prisma.CollectionCreateWithoutCoverImageInput[] | Prisma.CollectionUncheckedCreateWithoutCoverImageInput[]
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCoverImageInput | Prisma.CollectionCreateOrConnectWithoutCoverImageInput[]
+  upsert?: Prisma.CollectionUpsertWithWhereUniqueWithoutCoverImageInput | Prisma.CollectionUpsertWithWhereUniqueWithoutCoverImageInput[]
+  createMany?: Prisma.CollectionCreateManyCoverImageInputEnvelope
+  set?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  disconnect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  delete?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  update?: Prisma.CollectionUpdateWithWhereUniqueWithoutCoverImageInput | Prisma.CollectionUpdateWithWhereUniqueWithoutCoverImageInput[]
+  updateMany?: Prisma.CollectionUpdateManyWithWhereWithoutCoverImageInput | Prisma.CollectionUpdateManyWithWhereWithoutCoverImageInput[]
+  deleteMany?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
+}
+
+export type CollectionUncheckedUpdateManyWithoutCoverImageNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput> | Prisma.CollectionCreateWithoutCoverImageInput[] | Prisma.CollectionUncheckedCreateWithoutCoverImageInput[]
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCoverImageInput | Prisma.CollectionCreateOrConnectWithoutCoverImageInput[]
+  upsert?: Prisma.CollectionUpsertWithWhereUniqueWithoutCoverImageInput | Prisma.CollectionUpsertWithWhereUniqueWithoutCoverImageInput[]
+  createMany?: Prisma.CollectionCreateManyCoverImageInputEnvelope
+  set?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  disconnect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  delete?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
+  update?: Prisma.CollectionUpdateWithWhereUniqueWithoutCoverImageInput | Prisma.CollectionUpdateWithWhereUniqueWithoutCoverImageInput[]
+  updateMany?: Prisma.CollectionUpdateManyWithWhereWithoutCoverImageInput | Prisma.CollectionUpdateManyWithWhereWithoutCoverImageInput[]
+  deleteMany?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
 }
 
 export type EnumCollectionTypeFieldUpdateOperationsInput = {
@@ -517,46 +559,46 @@ export type EnumCollectionStatusFieldUpdateOperationsInput = {
   set?: $Enums.CollectionStatus
 }
 
-export type CollectionCreateNestedOneWithoutCollectionContributorInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionContributorInput, Prisma.CollectionUncheckedCreateWithoutCollectionContributorInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionContributorInput
+export type CollectionCreateNestedOneWithoutItemsInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutItemsInput, Prisma.CollectionUncheckedCreateWithoutItemsInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutItemsInput
   connect?: Prisma.CollectionWhereUniqueInput
 }
 
-export type CollectionUpdateOneRequiredWithoutCollectionContributorNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionContributorInput, Prisma.CollectionUncheckedCreateWithoutCollectionContributorInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionContributorInput
-  upsert?: Prisma.CollectionUpsertWithoutCollectionContributorInput
+export type CollectionUpdateOneRequiredWithoutItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutItemsInput, Prisma.CollectionUncheckedCreateWithoutItemsInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutItemsInput
+  upsert?: Prisma.CollectionUpsertWithoutItemsInput
   connect?: Prisma.CollectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutCollectionContributorInput, Prisma.CollectionUpdateWithoutCollectionContributorInput>, Prisma.CollectionUncheckedUpdateWithoutCollectionContributorInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutItemsInput, Prisma.CollectionUpdateWithoutItemsInput>, Prisma.CollectionUncheckedUpdateWithoutItemsInput>
 }
 
-export type CollectionCreateNestedOneWithoutCollectionItemInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionItemInput, Prisma.CollectionUncheckedCreateWithoutCollectionItemInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionItemInput
-  connect?: Prisma.CollectionWhereUniqueInput
-}
-
-export type CollectionUpdateOneRequiredWithoutCollectionItemNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionItemInput, Prisma.CollectionUncheckedCreateWithoutCollectionItemInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionItemInput
-  upsert?: Prisma.CollectionUpsertWithoutCollectionItemInput
-  connect?: Prisma.CollectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutCollectionItemInput, Prisma.CollectionUpdateWithoutCollectionItemInput>, Prisma.CollectionUncheckedUpdateWithoutCollectionItemInput>
-}
-
-export type CollectionCreateNestedOneWithoutCollectionSourceInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionSourceInput, Prisma.CollectionUncheckedCreateWithoutCollectionSourceInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionSourceInput
+export type CollectionCreateNestedOneWithoutSourcesInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutSourcesInput, Prisma.CollectionUncheckedCreateWithoutSourcesInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutSourcesInput
   connect?: Prisma.CollectionWhereUniqueInput
 }
 
-export type CollectionUpdateOneRequiredWithoutCollectionSourceNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionSourceInput, Prisma.CollectionUncheckedCreateWithoutCollectionSourceInput>
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutCollectionSourceInput
-  upsert?: Prisma.CollectionUpsertWithoutCollectionSourceInput
+export type CollectionUpdateOneRequiredWithoutSourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutSourcesInput, Prisma.CollectionUncheckedCreateWithoutSourcesInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutSourcesInput
+  upsert?: Prisma.CollectionUpsertWithoutSourcesInput
   connect?: Prisma.CollectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutCollectionSourceInput, Prisma.CollectionUpdateWithoutCollectionSourceInput>, Prisma.CollectionUncheckedUpdateWithoutCollectionSourceInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutSourcesInput, Prisma.CollectionUpdateWithoutSourcesInput>, Prisma.CollectionUncheckedUpdateWithoutSourcesInput>
+}
+
+export type CollectionCreateNestedOneWithoutContributorsInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutContributorsInput, Prisma.CollectionUncheckedCreateWithoutContributorsInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutContributorsInput
+  connect?: Prisma.CollectionWhereUniqueInput
+}
+
+export type CollectionUpdateOneRequiredWithoutContributorsNestedInput = {
+  create?: Prisma.XOR<Prisma.CollectionCreateWithoutContributorsInput, Prisma.CollectionUncheckedCreateWithoutContributorsInput>
+  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutContributorsInput
+  upsert?: Prisma.CollectionUpsertWithoutContributorsInput
+  connect?: Prisma.CollectionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutContributorsInput, Prisma.CollectionUpdateWithoutContributorsInput>, Prisma.CollectionUncheckedUpdateWithoutContributorsInput>
 }
 
 export type CollectionCreateNestedOneWithoutContentInput = {
@@ -575,50 +617,8 @@ export type CollectionUpdateOneWithoutContentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CollectionUpdateToOneWithWhereWithoutContentInput, Prisma.CollectionUpdateWithoutContentInput>, Prisma.CollectionUncheckedUpdateWithoutContentInput>
 }
 
-export type CollectionCreateNestedManyWithoutImageInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput> | Prisma.CollectionCreateWithoutImageInput[] | Prisma.CollectionUncheckedCreateWithoutImageInput[]
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutImageInput | Prisma.CollectionCreateOrConnectWithoutImageInput[]
-  createMany?: Prisma.CollectionCreateManyImageInputEnvelope
-  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-}
-
-export type CollectionUncheckedCreateNestedManyWithoutImageInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput> | Prisma.CollectionCreateWithoutImageInput[] | Prisma.CollectionUncheckedCreateWithoutImageInput[]
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutImageInput | Prisma.CollectionCreateOrConnectWithoutImageInput[]
-  createMany?: Prisma.CollectionCreateManyImageInputEnvelope
-  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-}
-
-export type CollectionUpdateManyWithoutImageNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput> | Prisma.CollectionCreateWithoutImageInput[] | Prisma.CollectionUncheckedCreateWithoutImageInput[]
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutImageInput | Prisma.CollectionCreateOrConnectWithoutImageInput[]
-  upsert?: Prisma.CollectionUpsertWithWhereUniqueWithoutImageInput | Prisma.CollectionUpsertWithWhereUniqueWithoutImageInput[]
-  createMany?: Prisma.CollectionCreateManyImageInputEnvelope
-  set?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  disconnect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  delete?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  update?: Prisma.CollectionUpdateWithWhereUniqueWithoutImageInput | Prisma.CollectionUpdateWithWhereUniqueWithoutImageInput[]
-  updateMany?: Prisma.CollectionUpdateManyWithWhereWithoutImageInput | Prisma.CollectionUpdateManyWithWhereWithoutImageInput[]
-  deleteMany?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
-}
-
-export type CollectionUncheckedUpdateManyWithoutImageNestedInput = {
-  create?: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput> | Prisma.CollectionCreateWithoutImageInput[] | Prisma.CollectionUncheckedCreateWithoutImageInput[]
-  connectOrCreate?: Prisma.CollectionCreateOrConnectWithoutImageInput | Prisma.CollectionCreateOrConnectWithoutImageInput[]
-  upsert?: Prisma.CollectionUpsertWithWhereUniqueWithoutImageInput | Prisma.CollectionUpsertWithWhereUniqueWithoutImageInput[]
-  createMany?: Prisma.CollectionCreateManyImageInputEnvelope
-  set?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  disconnect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  delete?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  connect?: Prisma.CollectionWhereUniqueInput | Prisma.CollectionWhereUniqueInput[]
-  update?: Prisma.CollectionUpdateWithWhereUniqueWithoutImageInput | Prisma.CollectionUpdateWithWhereUniqueWithoutImageInput[]
-  updateMany?: Prisma.CollectionUpdateManyWithWhereWithoutImageInput | Prisma.CollectionUpdateManyWithWhereWithoutImageInput[]
-  deleteMany?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
-}
-
-export type CollectionCreateWithoutCollectionContributorInput = {
-  id: string
+export type CollectionCreateWithoutCoverImageInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -627,16 +627,96 @@ export type CollectionCreateWithoutCollectionContributorInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Image?: Prisma.ImageCreateNestedOneWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
+  items?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionUncheckedCreateWithoutCollectionContributorInput = {
-  id: string
+export type CollectionUncheckedCreateWithoutCoverImageInput = {
+  id?: string
+  title: string
+  slug: string
+  description?: string | null
+  type: $Enums.CollectionType
+  status?: $Enums.CollectionStatus
+  startedAt?: Date | string | null
+  endedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  items?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
+}
+
+export type CollectionCreateOrConnectWithoutCoverImageInput = {
+  where: Prisma.CollectionWhereUniqueInput
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput>
+}
+
+export type CollectionCreateManyCoverImageInputEnvelope = {
+  data: Prisma.CollectionCreateManyCoverImageInput | Prisma.CollectionCreateManyCoverImageInput[]
+  skipDuplicates?: boolean
+}
+
+export type CollectionUpsertWithWhereUniqueWithoutCoverImageInput = {
+  where: Prisma.CollectionWhereUniqueInput
+  update: Prisma.XOR<Prisma.CollectionUpdateWithoutCoverImageInput, Prisma.CollectionUncheckedUpdateWithoutCoverImageInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutCoverImageInput, Prisma.CollectionUncheckedCreateWithoutCoverImageInput>
+}
+
+export type CollectionUpdateWithWhereUniqueWithoutCoverImageInput = {
+  where: Prisma.CollectionWhereUniqueInput
+  data: Prisma.XOR<Prisma.CollectionUpdateWithoutCoverImageInput, Prisma.CollectionUncheckedUpdateWithoutCoverImageInput>
+}
+
+export type CollectionUpdateManyWithWhereWithoutCoverImageInput = {
+  where: Prisma.CollectionScalarWhereInput
+  data: Prisma.XOR<Prisma.CollectionUpdateManyMutationInput, Prisma.CollectionUncheckedUpdateManyWithoutCoverImageInput>
+}
+
+export type CollectionScalarWhereInput = {
+  AND?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
+  OR?: Prisma.CollectionScalarWhereInput[]
+  NOT?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
+  id?: Prisma.StringFilter<"Collection"> | string
+  title?: Prisma.StringFilter<"Collection"> | string
+  slug?: Prisma.StringFilter<"Collection"> | string
+  description?: Prisma.StringNullableFilter<"Collection"> | string | null
+  type?: Prisma.EnumCollectionTypeFilter<"Collection"> | $Enums.CollectionType
+  status?: Prisma.EnumCollectionStatusFilter<"Collection"> | $Enums.CollectionStatus
+  coverImageId?: Prisma.StringNullableFilter<"Collection"> | string | null
+  startedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
+  endedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
+  visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
+}
+
+export type CollectionCreateWithoutItemsInput = {
+  id?: string
+  title: string
+  slug: string
+  description?: string | null
+  type: $Enums.CollectionType
+  status?: $Enums.CollectionStatus
+  startedAt?: Date | string | null
+  endedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  coverImage?: Prisma.ImageCreateNestedOneWithoutCollectionsInput
+  sources?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
+}
+
+export type CollectionUncheckedCreateWithoutItemsInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -646,30 +726,30 @@ export type CollectionUncheckedCreateWithoutCollectionContributorInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
+  sources?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionCreateOrConnectWithoutCollectionContributorInput = {
+export type CollectionCreateOrConnectWithoutItemsInput = {
   where: Prisma.CollectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionContributorInput, Prisma.CollectionUncheckedCreateWithoutCollectionContributorInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutItemsInput, Prisma.CollectionUncheckedCreateWithoutItemsInput>
 }
 
-export type CollectionUpsertWithoutCollectionContributorInput = {
-  update: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionContributorInput, Prisma.CollectionUncheckedUpdateWithoutCollectionContributorInput>
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionContributorInput, Prisma.CollectionUncheckedCreateWithoutCollectionContributorInput>
+export type CollectionUpsertWithoutItemsInput = {
+  update: Prisma.XOR<Prisma.CollectionUpdateWithoutItemsInput, Prisma.CollectionUncheckedUpdateWithoutItemsInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutItemsInput, Prisma.CollectionUncheckedCreateWithoutItemsInput>
   where?: Prisma.CollectionWhereInput
 }
 
-export type CollectionUpdateToOneWithWhereWithoutCollectionContributorInput = {
+export type CollectionUpdateToOneWithWhereWithoutItemsInput = {
   where?: Prisma.CollectionWhereInput
-  data: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionContributorInput, Prisma.CollectionUncheckedUpdateWithoutCollectionContributorInput>
+  data: Prisma.XOR<Prisma.CollectionUpdateWithoutItemsInput, Prisma.CollectionUncheckedUpdateWithoutItemsInput>
 }
 
-export type CollectionUpdateWithoutCollectionContributorInput = {
+export type CollectionUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -681,13 +761,13 @@ export type CollectionUpdateWithoutCollectionContributorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Image?: Prisma.ImageUpdateOneWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
+  coverImage?: Prisma.ImageUpdateOneWithoutCollectionsNestedInput
+  sources?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionUncheckedUpdateWithoutCollectionContributorInput = {
+export type CollectionUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -700,13 +780,13 @@ export type CollectionUncheckedUpdateWithoutCollectionContributorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionCreateWithoutCollectionItemInput = {
-  id: string
+export type CollectionCreateWithoutSourcesInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -715,16 +795,16 @@ export type CollectionCreateWithoutCollectionItemInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Image?: Prisma.ImageCreateNestedOneWithoutCollectionInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
+  coverImage?: Prisma.ImageCreateNestedOneWithoutCollectionsInput
+  items?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionUncheckedCreateWithoutCollectionItemInput = {
-  id: string
+export type CollectionUncheckedCreateWithoutSourcesInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -734,30 +814,30 @@ export type CollectionUncheckedCreateWithoutCollectionItemInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
+  items?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionCreateOrConnectWithoutCollectionItemInput = {
+export type CollectionCreateOrConnectWithoutSourcesInput = {
   where: Prisma.CollectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionItemInput, Prisma.CollectionUncheckedCreateWithoutCollectionItemInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutSourcesInput, Prisma.CollectionUncheckedCreateWithoutSourcesInput>
 }
 
-export type CollectionUpsertWithoutCollectionItemInput = {
-  update: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionItemInput, Prisma.CollectionUncheckedUpdateWithoutCollectionItemInput>
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionItemInput, Prisma.CollectionUncheckedCreateWithoutCollectionItemInput>
+export type CollectionUpsertWithoutSourcesInput = {
+  update: Prisma.XOR<Prisma.CollectionUpdateWithoutSourcesInput, Prisma.CollectionUncheckedUpdateWithoutSourcesInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutSourcesInput, Prisma.CollectionUncheckedCreateWithoutSourcesInput>
   where?: Prisma.CollectionWhereInput
 }
 
-export type CollectionUpdateToOneWithWhereWithoutCollectionItemInput = {
+export type CollectionUpdateToOneWithWhereWithoutSourcesInput = {
   where?: Prisma.CollectionWhereInput
-  data: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionItemInput, Prisma.CollectionUncheckedUpdateWithoutCollectionItemInput>
+  data: Prisma.XOR<Prisma.CollectionUpdateWithoutSourcesInput, Prisma.CollectionUncheckedUpdateWithoutSourcesInput>
 }
 
-export type CollectionUpdateWithoutCollectionItemInput = {
+export type CollectionUpdateWithoutSourcesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -769,13 +849,13 @@ export type CollectionUpdateWithoutCollectionItemInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Image?: Prisma.ImageUpdateOneWithoutCollectionNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
+  coverImage?: Prisma.ImageUpdateOneWithoutCollectionsNestedInput
+  items?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionUncheckedUpdateWithoutCollectionItemInput = {
+export type CollectionUncheckedUpdateWithoutSourcesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -788,13 +868,13 @@ export type CollectionUncheckedUpdateWithoutCollectionItemInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionCreateWithoutCollectionSourceInput = {
-  id: string
+export type CollectionCreateWithoutContributorsInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -803,16 +883,16 @@ export type CollectionCreateWithoutCollectionSourceInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Image?: Prisma.ImageCreateNestedOneWithoutCollectionInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
+  coverImage?: Prisma.ImageCreateNestedOneWithoutCollectionsInput
+  items?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionUncheckedCreateWithoutCollectionSourceInput = {
-  id: string
+export type CollectionUncheckedCreateWithoutContributorsInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -822,30 +902,30 @@ export type CollectionUncheckedCreateWithoutCollectionSourceInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
+  items?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
 }
 
-export type CollectionCreateOrConnectWithoutCollectionSourceInput = {
+export type CollectionCreateOrConnectWithoutContributorsInput = {
   where: Prisma.CollectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionSourceInput, Prisma.CollectionUncheckedCreateWithoutCollectionSourceInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutContributorsInput, Prisma.CollectionUncheckedCreateWithoutContributorsInput>
 }
 
-export type CollectionUpsertWithoutCollectionSourceInput = {
-  update: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionSourceInput, Prisma.CollectionUncheckedUpdateWithoutCollectionSourceInput>
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutCollectionSourceInput, Prisma.CollectionUncheckedCreateWithoutCollectionSourceInput>
+export type CollectionUpsertWithoutContributorsInput = {
+  update: Prisma.XOR<Prisma.CollectionUpdateWithoutContributorsInput, Prisma.CollectionUncheckedUpdateWithoutContributorsInput>
+  create: Prisma.XOR<Prisma.CollectionCreateWithoutContributorsInput, Prisma.CollectionUncheckedCreateWithoutContributorsInput>
   where?: Prisma.CollectionWhereInput
 }
 
-export type CollectionUpdateToOneWithWhereWithoutCollectionSourceInput = {
+export type CollectionUpdateToOneWithWhereWithoutContributorsInput = {
   where?: Prisma.CollectionWhereInput
-  data: Prisma.XOR<Prisma.CollectionUpdateWithoutCollectionSourceInput, Prisma.CollectionUncheckedUpdateWithoutCollectionSourceInput>
+  data: Prisma.XOR<Prisma.CollectionUpdateWithoutContributorsInput, Prisma.CollectionUncheckedUpdateWithoutContributorsInput>
 }
 
-export type CollectionUpdateWithoutCollectionSourceInput = {
+export type CollectionUpdateWithoutContributorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -857,13 +937,13 @@ export type CollectionUpdateWithoutCollectionSourceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Image?: Prisma.ImageUpdateOneWithoutCollectionNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
+  coverImage?: Prisma.ImageUpdateOneWithoutCollectionsNestedInput
+  items?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionUncheckedUpdateWithoutCollectionSourceInput = {
+export type CollectionUncheckedUpdateWithoutContributorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -876,13 +956,13 @@ export type CollectionUncheckedUpdateWithoutCollectionSourceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
 }
 
 export type CollectionCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -891,16 +971,16 @@ export type CollectionCreateWithoutContentInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Image?: Prisma.ImageCreateNestedOneWithoutCollectionInput
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  coverImage?: Prisma.ImageCreateNestedOneWithoutCollectionsInput
+  items?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
 }
 
 export type CollectionUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -910,11 +990,11 @@ export type CollectionUncheckedCreateWithoutContentInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  items?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
+  sources?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
+  contributors?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
 }
 
 export type CollectionCreateOrConnectWithoutContentInput = {
@@ -945,10 +1025,10 @@ export type CollectionUpdateWithoutContentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Image?: Prisma.ImageUpdateOneWithoutCollectionNestedInput
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  coverImage?: Prisma.ImageUpdateOneWithoutCollectionsNestedInput
+  items?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
 }
 
 export type CollectionUncheckedUpdateWithoutContentInput = {
@@ -964,13 +1044,13 @@ export type CollectionUncheckedUpdateWithoutContentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
 }
 
-export type CollectionCreateWithoutImageInput = {
-  id: string
+export type CollectionCreateManyCoverImageInput = {
+  id?: string
   title: string
   slug: string
   description?: string | null
@@ -979,91 +1059,11 @@ export type CollectionCreateWithoutImageInput = {
   startedAt?: Date | string | null
   endedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentCreateNestedOneWithoutCollectionInput
-}
-
-export type CollectionUncheckedCreateWithoutImageInput = {
-  id: string
-  title: string
-  slug: string
-  description?: string | null
-  type: $Enums.CollectionType
-  status?: $Enums.CollectionStatus
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionItem?: Prisma.CollectionItemUncheckedCreateNestedManyWithoutCollectionInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedCreateNestedManyWithoutCollectionInput
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutCollectionInput
-}
-
-export type CollectionCreateOrConnectWithoutImageInput = {
-  where: Prisma.CollectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput>
-}
-
-export type CollectionCreateManyImageInputEnvelope = {
-  data: Prisma.CollectionCreateManyImageInput | Prisma.CollectionCreateManyImageInput[]
-  skipDuplicates?: boolean
-}
-
-export type CollectionUpsertWithWhereUniqueWithoutImageInput = {
-  where: Prisma.CollectionWhereUniqueInput
-  update: Prisma.XOR<Prisma.CollectionUpdateWithoutImageInput, Prisma.CollectionUncheckedUpdateWithoutImageInput>
-  create: Prisma.XOR<Prisma.CollectionCreateWithoutImageInput, Prisma.CollectionUncheckedCreateWithoutImageInput>
-}
-
-export type CollectionUpdateWithWhereUniqueWithoutImageInput = {
-  where: Prisma.CollectionWhereUniqueInput
-  data: Prisma.XOR<Prisma.CollectionUpdateWithoutImageInput, Prisma.CollectionUncheckedUpdateWithoutImageInput>
-}
-
-export type CollectionUpdateManyWithWhereWithoutImageInput = {
-  where: Prisma.CollectionScalarWhereInput
-  data: Prisma.XOR<Prisma.CollectionUpdateManyMutationInput, Prisma.CollectionUncheckedUpdateManyWithoutImageInput>
-}
-
-export type CollectionScalarWhereInput = {
-  AND?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
-  OR?: Prisma.CollectionScalarWhereInput[]
-  NOT?: Prisma.CollectionScalarWhereInput | Prisma.CollectionScalarWhereInput[]
-  id?: Prisma.StringFilter<"Collection"> | string
-  title?: Prisma.StringFilter<"Collection"> | string
-  slug?: Prisma.StringFilter<"Collection"> | string
-  description?: Prisma.StringNullableFilter<"Collection"> | string | null
-  type?: Prisma.EnumCollectionTypeFilter<"Collection"> | $Enums.CollectionType
-  status?: Prisma.EnumCollectionStatusFilter<"Collection"> | $Enums.CollectionStatus
-  coverImageId?: Prisma.StringNullableFilter<"Collection"> | string | null
-  startedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
-  endedAt?: Prisma.DateTimeNullableFilter<"Collection"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
-  visibility?: Prisma.EnumVisibilityFilter<"Collection"> | $Enums.Visibility
-}
-
-export type CollectionCreateManyImageInput = {
-  id: string
-  title: string
-  slug: string
-  description?: string | null
-  type: $Enums.CollectionType
-  status?: $Enums.CollectionStatus
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
 }
 
-export type CollectionUpdateWithoutImageInput = {
+export type CollectionUpdateWithoutCoverImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1075,13 +1075,13 @@ export type CollectionUpdateWithoutImageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionUncheckedUpdateWithoutImageInput = {
+export type CollectionUncheckedUpdateWithoutCoverImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1093,13 +1093,13 @@ export type CollectionUncheckedUpdateWithoutImageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  CollectionContributor?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionItem?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
-  CollectionSource?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
+  items?: Prisma.CollectionItemUncheckedUpdateManyWithoutCollectionNestedInput
+  sources?: Prisma.CollectionSourceUncheckedUpdateManyWithoutCollectionNestedInput
+  contributors?: Prisma.CollectionContributorUncheckedUpdateManyWithoutCollectionNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutCollectionNestedInput
 }
 
-export type CollectionUncheckedUpdateManyWithoutImageInput = {
+export type CollectionUncheckedUpdateManyWithoutCoverImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1119,15 +1119,15 @@ export type CollectionUncheckedUpdateManyWithoutImageInput = {
  */
 
 export type CollectionCountOutputType = {
-  CollectionContributor: number
-  CollectionItem: number
-  CollectionSource: number
+  items: number
+  sources: number
+  contributors: number
 }
 
 export type CollectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  CollectionContributor?: boolean | CollectionCountOutputTypeCountCollectionContributorArgs
-  CollectionItem?: boolean | CollectionCountOutputTypeCountCollectionItemArgs
-  CollectionSource?: boolean | CollectionCountOutputTypeCountCollectionSourceArgs
+  items?: boolean | CollectionCountOutputTypeCountItemsArgs
+  sources?: boolean | CollectionCountOutputTypeCountSourcesArgs
+  contributors?: boolean | CollectionCountOutputTypeCountContributorsArgs
 }
 
 /**
@@ -1143,22 +1143,22 @@ export type CollectionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * CollectionCountOutputType without action
  */
-export type CollectionCountOutputTypeCountCollectionContributorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CollectionContributorWhereInput
-}
-
-/**
- * CollectionCountOutputType without action
- */
-export type CollectionCountOutputTypeCountCollectionItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CollectionCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionItemWhereInput
 }
 
 /**
  * CollectionCountOutputType without action
  */
-export type CollectionCountOutputTypeCountCollectionSourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CollectionCountOutputTypeCountSourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionSourceWhereInput
+}
+
+/**
+ * CollectionCountOutputType without action
+ */
+export type CollectionCountOutputTypeCountContributorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CollectionContributorWhereInput
 }
 
 
@@ -1175,11 +1175,11 @@ export type CollectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
-  CollectionContributor?: boolean | Prisma.Collection$CollectionContributorArgs<ExtArgs>
-  CollectionItem?: boolean | Prisma.Collection$CollectionItemArgs<ExtArgs>
-  CollectionSource?: boolean | Prisma.Collection$CollectionSourceArgs<ExtArgs>
-  Content?: boolean | Prisma.Collection$ContentArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
+  items?: boolean | Prisma.Collection$itemsArgs<ExtArgs>
+  sources?: boolean | Prisma.Collection$sourcesArgs<ExtArgs>
+  contributors?: boolean | Prisma.Collection$contributorsArgs<ExtArgs>
+  content?: boolean | Prisma.Collection$contentArgs<ExtArgs>
   _count?: boolean | Prisma.CollectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["collection"]>
 
@@ -1196,7 +1196,7 @@ export type CollectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
 }, ExtArgs["result"]["collection"]>
 
 export type CollectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1212,7 +1212,7 @@ export type CollectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
 }, ExtArgs["result"]["collection"]>
 
 export type CollectionSelectScalar = {
@@ -1232,28 +1232,28 @@ export type CollectionSelectScalar = {
 
 export type CollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "type" | "status" | "coverImageId" | "startedAt" | "endedAt" | "createdAt" | "updatedAt" | "visibility", ExtArgs["result"]["collection"]>
 export type CollectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
-  CollectionContributor?: boolean | Prisma.Collection$CollectionContributorArgs<ExtArgs>
-  CollectionItem?: boolean | Prisma.Collection$CollectionItemArgs<ExtArgs>
-  CollectionSource?: boolean | Prisma.Collection$CollectionSourceArgs<ExtArgs>
-  Content?: boolean | Prisma.Collection$ContentArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
+  items?: boolean | Prisma.Collection$itemsArgs<ExtArgs>
+  sources?: boolean | Prisma.Collection$sourcesArgs<ExtArgs>
+  contributors?: boolean | Prisma.Collection$contributorsArgs<ExtArgs>
+  content?: boolean | Prisma.Collection$contentArgs<ExtArgs>
   _count?: boolean | Prisma.CollectionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CollectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
 }
 export type CollectionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Image?: boolean | Prisma.Collection$ImageArgs<ExtArgs>
+  coverImage?: boolean | Prisma.Collection$coverImageArgs<ExtArgs>
 }
 
 export type $CollectionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Collection"
   objects: {
-    Image: Prisma.$ImagePayload<ExtArgs> | null
-    CollectionContributor: Prisma.$CollectionContributorPayload<ExtArgs>[]
-    CollectionItem: Prisma.$CollectionItemPayload<ExtArgs>[]
-    CollectionSource: Prisma.$CollectionSourcePayload<ExtArgs>[]
-    Content: Prisma.$ContentPayload<ExtArgs> | null
+    coverImage: Prisma.$ImagePayload<ExtArgs> | null
+    items: Prisma.$CollectionItemPayload<ExtArgs>[]
+    sources: Prisma.$CollectionSourcePayload<ExtArgs>[]
+    contributors: Prisma.$CollectionContributorPayload<ExtArgs>[]
+    content: Prisma.$ContentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1662,11 +1662,11 @@ readonly fields: CollectionFieldRefs;
  */
 export interface Prisma__CollectionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Image<T extends Prisma.Collection$ImageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$ImageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  CollectionContributor<T extends Prisma.Collection$CollectionContributorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$CollectionContributorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionContributorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  CollectionItem<T extends Prisma.Collection$CollectionItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$CollectionItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  CollectionSource<T extends Prisma.Collection$CollectionSourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$CollectionSourceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Content<T extends Prisma.Collection$ContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$ContentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  coverImage<T extends Prisma.Collection$coverImageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$coverImageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  items<T extends Prisma.Collection$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sources<T extends Prisma.Collection$sourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$sourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contributors<T extends Prisma.Collection$contributorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$contributorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionContributorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  content<T extends Prisma.Collection$contentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Collection$contentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2109,9 +2109,9 @@ export type CollectionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Collection.Image
+ * Collection.coverImage
  */
-export type Collection$ImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Collection$coverImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Image
    */
@@ -2128,33 +2128,9 @@ export type Collection$ImageArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Collection.CollectionContributor
+ * Collection.items
  */
-export type Collection$CollectionContributorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CollectionContributor
-   */
-  select?: Prisma.CollectionContributorSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CollectionContributor
-   */
-  omit?: Prisma.CollectionContributorOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CollectionContributorInclude<ExtArgs> | null
-  where?: Prisma.CollectionContributorWhereInput
-  orderBy?: Prisma.CollectionContributorOrderByWithRelationInput | Prisma.CollectionContributorOrderByWithRelationInput[]
-  cursor?: Prisma.CollectionContributorWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CollectionContributorScalarFieldEnum | Prisma.CollectionContributorScalarFieldEnum[]
-}
-
-/**
- * Collection.CollectionItem
- */
-export type Collection$CollectionItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Collection$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CollectionItem
    */
@@ -2176,9 +2152,9 @@ export type Collection$CollectionItemArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * Collection.CollectionSource
+ * Collection.sources
  */
-export type Collection$CollectionSourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Collection$sourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CollectionSource
    */
@@ -2200,9 +2176,33 @@ export type Collection$CollectionSourceArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * Collection.Content
+ * Collection.contributors
  */
-export type Collection$ContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Collection$contributorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CollectionContributor
+   */
+  select?: Prisma.CollectionContributorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CollectionContributor
+   */
+  omit?: Prisma.CollectionContributorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollectionContributorInclude<ExtArgs> | null
+  where?: Prisma.CollectionContributorWhereInput
+  orderBy?: Prisma.CollectionContributorOrderByWithRelationInput | Prisma.CollectionContributorOrderByWithRelationInput[]
+  cursor?: Prisma.CollectionContributorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CollectionContributorScalarFieldEnum | Prisma.CollectionContributorScalarFieldEnum[]
+}
+
+/**
+ * Collection.content
+ */
+export type Collection$contentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Content
    */

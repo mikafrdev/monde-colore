@@ -190,8 +190,8 @@ export type TimelineWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Timeline"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Timeline"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Timeline"> | $Enums.Visibility
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
-  TimelineEvent?: Prisma.TimelineEventListRelationFilter
+  events?: Prisma.TimelineEventListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }
 
 export type TimelineOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type TimelineOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
-  Content?: Prisma.ContentOrderByWithRelationInput
-  TimelineEvent?: Prisma.TimelineEventOrderByRelationAggregateInput
+  events?: Prisma.TimelineEventOrderByRelationAggregateInput
+  content?: Prisma.ContentOrderByWithRelationInput
 }
 
 export type TimelineWhereUniqueInput = Prisma.AtLeast<{
@@ -215,8 +215,8 @@ export type TimelineWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Timeline"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Timeline"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Timeline"> | $Enums.Visibility
-  Content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
-  TimelineEvent?: Prisma.TimelineEventListRelationFilter
+  events?: Prisma.TimelineEventListRelationFilter
+  content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
 }, "id">
 
 export type TimelineOrderByWithAggregationInput = {
@@ -244,25 +244,25 @@ export type TimelineScalarWhereWithAggregatesInput = {
 }
 
 export type TimelineCreateInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Content?: Prisma.ContentCreateNestedOneWithoutTimelineInput
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutTimelineInput
+  events?: Prisma.TimelineEventCreateNestedManyWithoutTimelineInput
+  content?: Prisma.ContentCreateNestedOneWithoutTimelineInput
 }
 
 export type TimelineUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutTimelineInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutTimelineInput
+  events?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutTimelineInput
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutTimelineInput
 }
 
 export type TimelineUpdateInput = {
@@ -272,8 +272,8 @@ export type TimelineUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUpdateOneWithoutTimelineNestedInput
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutTimelineNestedInput
+  events?: Prisma.TimelineEventUpdateManyWithoutTimelineNestedInput
+  content?: Prisma.ContentUpdateOneWithoutTimelineNestedInput
 }
 
 export type TimelineUncheckedUpdateInput = {
@@ -283,16 +283,16 @@ export type TimelineUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutTimelineNestedInput
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutTimelineNestedInput
+  events?: Prisma.TimelineEventUncheckedUpdateManyWithoutTimelineNestedInput
+  content?: Prisma.ContentUncheckedUpdateOneWithoutTimelineNestedInput
 }
 
 export type TimelineCreateManyInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
 }
 
@@ -312,11 +312,6 @@ export type TimelineUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-}
-
-export type TimelineNullableScalarRelationFilter = {
-  is?: Prisma.TimelineWhereInput | null
-  isNot?: Prisma.TimelineWhereInput | null
 }
 
 export type TimelineCountOrderByAggregateInput = {
@@ -351,6 +346,25 @@ export type TimelineScalarRelationFilter = {
   isNot?: Prisma.TimelineWhereInput
 }
 
+export type TimelineNullableScalarRelationFilter = {
+  is?: Prisma.TimelineWhereInput | null
+  isNot?: Prisma.TimelineWhereInput | null
+}
+
+export type TimelineCreateNestedOneWithoutEventsInput = {
+  create?: Prisma.XOR<Prisma.TimelineCreateWithoutEventsInput, Prisma.TimelineUncheckedCreateWithoutEventsInput>
+  connectOrCreate?: Prisma.TimelineCreateOrConnectWithoutEventsInput
+  connect?: Prisma.TimelineWhereUniqueInput
+}
+
+export type TimelineUpdateOneRequiredWithoutEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.TimelineCreateWithoutEventsInput, Prisma.TimelineUncheckedCreateWithoutEventsInput>
+  connectOrCreate?: Prisma.TimelineCreateOrConnectWithoutEventsInput
+  upsert?: Prisma.TimelineUpsertWithoutEventsInput
+  connect?: Prisma.TimelineWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TimelineUpdateToOneWithWhereWithoutEventsInput, Prisma.TimelineUpdateWithoutEventsInput>, Prisma.TimelineUncheckedUpdateWithoutEventsInput>
+}
+
 export type TimelineCreateNestedOneWithoutContentInput = {
   create?: Prisma.XOR<Prisma.TimelineCreateWithoutContentInput, Prisma.TimelineUncheckedCreateWithoutContentInput>
   connectOrCreate?: Prisma.TimelineCreateOrConnectWithoutContentInput
@@ -367,38 +381,80 @@ export type TimelineUpdateOneWithoutContentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TimelineUpdateToOneWithWhereWithoutContentInput, Prisma.TimelineUpdateWithoutContentInput>, Prisma.TimelineUncheckedUpdateWithoutContentInput>
 }
 
-export type TimelineCreateNestedOneWithoutTimelineEventInput = {
-  create?: Prisma.XOR<Prisma.TimelineCreateWithoutTimelineEventInput, Prisma.TimelineUncheckedCreateWithoutTimelineEventInput>
-  connectOrCreate?: Prisma.TimelineCreateOrConnectWithoutTimelineEventInput
-  connect?: Prisma.TimelineWhereUniqueInput
+export type TimelineCreateWithoutEventsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutTimelineInput
 }
 
-export type TimelineUpdateOneRequiredWithoutTimelineEventNestedInput = {
-  create?: Prisma.XOR<Prisma.TimelineCreateWithoutTimelineEventInput, Prisma.TimelineUncheckedCreateWithoutTimelineEventInput>
-  connectOrCreate?: Prisma.TimelineCreateOrConnectWithoutTimelineEventInput
-  upsert?: Prisma.TimelineUpsertWithoutTimelineEventInput
-  connect?: Prisma.TimelineWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TimelineUpdateToOneWithWhereWithoutTimelineEventInput, Prisma.TimelineUpdateWithoutTimelineEventInput>, Prisma.TimelineUncheckedUpdateWithoutTimelineEventInput>
+export type TimelineUncheckedCreateWithoutEventsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutTimelineInput
+}
+
+export type TimelineCreateOrConnectWithoutEventsInput = {
+  where: Prisma.TimelineWhereUniqueInput
+  create: Prisma.XOR<Prisma.TimelineCreateWithoutEventsInput, Prisma.TimelineUncheckedCreateWithoutEventsInput>
+}
+
+export type TimelineUpsertWithoutEventsInput = {
+  update: Prisma.XOR<Prisma.TimelineUpdateWithoutEventsInput, Prisma.TimelineUncheckedUpdateWithoutEventsInput>
+  create: Prisma.XOR<Prisma.TimelineCreateWithoutEventsInput, Prisma.TimelineUncheckedCreateWithoutEventsInput>
+  where?: Prisma.TimelineWhereInput
+}
+
+export type TimelineUpdateToOneWithWhereWithoutEventsInput = {
+  where?: Prisma.TimelineWhereInput
+  data: Prisma.XOR<Prisma.TimelineUpdateWithoutEventsInput, Prisma.TimelineUncheckedUpdateWithoutEventsInput>
+}
+
+export type TimelineUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutTimelineNestedInput
+}
+
+export type TimelineUncheckedUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUncheckedUpdateOneWithoutTimelineNestedInput
 }
 
 export type TimelineCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  TimelineEvent?: Prisma.TimelineEventCreateNestedManyWithoutTimelineInput
+  events?: Prisma.TimelineEventCreateNestedManyWithoutTimelineInput
 }
 
 export type TimelineUncheckedCreateWithoutContentInput = {
-  id: string
+  id?: string
   title: string
   description?: string | null
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   visibility?: $Enums.Visibility
-  TimelineEvent?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutTimelineInput
+  events?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutTimelineInput
 }
 
 export type TimelineCreateOrConnectWithoutContentInput = {
@@ -424,7 +480,7 @@ export type TimelineUpdateWithoutContentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  TimelineEvent?: Prisma.TimelineEventUpdateManyWithoutTimelineNestedInput
+  events?: Prisma.TimelineEventUpdateManyWithoutTimelineNestedInput
 }
 
 export type TimelineUncheckedUpdateWithoutContentInput = {
@@ -434,63 +490,7 @@ export type TimelineUncheckedUpdateWithoutContentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  TimelineEvent?: Prisma.TimelineEventUncheckedUpdateManyWithoutTimelineNestedInput
-}
-
-export type TimelineCreateWithoutTimelineEventInput = {
-  id: string
-  title: string
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Content?: Prisma.ContentCreateNestedOneWithoutTimelineInput
-}
-
-export type TimelineUncheckedCreateWithoutTimelineEventInput = {
-  id: string
-  title: string
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt: Date | string
-  visibility?: $Enums.Visibility
-  Content?: Prisma.ContentUncheckedCreateNestedOneWithoutTimelineInput
-}
-
-export type TimelineCreateOrConnectWithoutTimelineEventInput = {
-  where: Prisma.TimelineWhereUniqueInput
-  create: Prisma.XOR<Prisma.TimelineCreateWithoutTimelineEventInput, Prisma.TimelineUncheckedCreateWithoutTimelineEventInput>
-}
-
-export type TimelineUpsertWithoutTimelineEventInput = {
-  update: Prisma.XOR<Prisma.TimelineUpdateWithoutTimelineEventInput, Prisma.TimelineUncheckedUpdateWithoutTimelineEventInput>
-  create: Prisma.XOR<Prisma.TimelineCreateWithoutTimelineEventInput, Prisma.TimelineUncheckedCreateWithoutTimelineEventInput>
-  where?: Prisma.TimelineWhereInput
-}
-
-export type TimelineUpdateToOneWithWhereWithoutTimelineEventInput = {
-  where?: Prisma.TimelineWhereInput
-  data: Prisma.XOR<Prisma.TimelineUpdateWithoutTimelineEventInput, Prisma.TimelineUncheckedUpdateWithoutTimelineEventInput>
-}
-
-export type TimelineUpdateWithoutTimelineEventInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUpdateOneWithoutTimelineNestedInput
-}
-
-export type TimelineUncheckedUpdateWithoutTimelineEventInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
-  Content?: Prisma.ContentUncheckedUpdateOneWithoutTimelineNestedInput
+  events?: Prisma.TimelineEventUncheckedUpdateManyWithoutTimelineNestedInput
 }
 
 
@@ -499,11 +499,11 @@ export type TimelineUncheckedUpdateWithoutTimelineEventInput = {
  */
 
 export type TimelineCountOutputType = {
-  TimelineEvent: number
+  events: number
 }
 
 export type TimelineCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  TimelineEvent?: boolean | TimelineCountOutputTypeCountTimelineEventArgs
+  events?: boolean | TimelineCountOutputTypeCountEventsArgs
 }
 
 /**
@@ -519,7 +519,7 @@ export type TimelineCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * TimelineCountOutputType without action
  */
-export type TimelineCountOutputTypeCountTimelineEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TimelineCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TimelineEventWhereInput
 }
 
@@ -531,8 +531,8 @@ export type TimelineSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
-  Content?: boolean | Prisma.Timeline$ContentArgs<ExtArgs>
-  TimelineEvent?: boolean | Prisma.Timeline$TimelineEventArgs<ExtArgs>
+  events?: boolean | Prisma.Timeline$eventsArgs<ExtArgs>
+  content?: boolean | Prisma.Timeline$contentArgs<ExtArgs>
   _count?: boolean | Prisma.TimelineCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["timeline"]>
 
@@ -565,8 +565,8 @@ export type TimelineSelectScalar = {
 
 export type TimelineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt" | "visibility", ExtArgs["result"]["timeline"]>
 export type TimelineInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Content?: boolean | Prisma.Timeline$ContentArgs<ExtArgs>
-  TimelineEvent?: boolean | Prisma.Timeline$TimelineEventArgs<ExtArgs>
+  events?: boolean | Prisma.Timeline$eventsArgs<ExtArgs>
+  content?: boolean | Prisma.Timeline$contentArgs<ExtArgs>
   _count?: boolean | Prisma.TimelineCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TimelineIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -575,8 +575,8 @@ export type TimelineIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $TimelinePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Timeline"
   objects: {
-    Content: Prisma.$ContentPayload<ExtArgs> | null
-    TimelineEvent: Prisma.$TimelineEventPayload<ExtArgs>[]
+    events: Prisma.$TimelineEventPayload<ExtArgs>[]
+    content: Prisma.$ContentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -979,8 +979,8 @@ readonly fields: TimelineFieldRefs;
  */
 export interface Prisma__TimelineClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Content<T extends Prisma.Timeline$ContentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Timeline$ContentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  TimelineEvent<T extends Prisma.Timeline$TimelineEventArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Timeline$TimelineEventArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  events<T extends Prisma.Timeline$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Timeline$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  content<T extends Prisma.Timeline$contentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Timeline$contentArgs<ExtArgs>>): Prisma.Prisma__ContentClient<runtime.Types.Result.GetResult<Prisma.$ContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1409,28 +1409,9 @@ export type TimelineDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Timeline.Content
+ * Timeline.events
  */
-export type Timeline$ContentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Content
-   */
-  select?: Prisma.ContentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Content
-   */
-  omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  where?: Prisma.ContentWhereInput
-}
-
-/**
- * Timeline.TimelineEvent
- */
-export type Timeline$TimelineEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Timeline$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TimelineEvent
    */
@@ -1449,6 +1430,25 @@ export type Timeline$TimelineEventArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.TimelineEventScalarFieldEnum | Prisma.TimelineEventScalarFieldEnum[]
+}
+
+/**
+ * Timeline.content
+ */
+export type Timeline$contentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Content
+   */
+  select?: Prisma.ContentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Content
+   */
+  omit?: Prisma.ContentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContentInclude<ExtArgs> | null
+  where?: Prisma.ContentWhereInput
 }
 
 /**

@@ -240,9 +240,9 @@ export type TimelineEventWhereInput = {
   order?: Prisma.IntFilter<"TimelineEvent"> | number
   imageId?: Prisma.StringNullableFilter<"TimelineEvent"> | string | null
   articleId?: Prisma.StringNullableFilter<"TimelineEvent"> | string | null
-  Article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
-  Image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
-  Timeline?: Prisma.XOR<Prisma.TimelineScalarRelationFilter, Prisma.TimelineWhereInput>
+  timeline?: Prisma.XOR<Prisma.TimelineScalarRelationFilter, Prisma.TimelineWhereInput>
+  image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
 }
 
 export type TimelineEventOrderByWithRelationInput = {
@@ -254,9 +254,9 @@ export type TimelineEventOrderByWithRelationInput = {
   order?: Prisma.SortOrder
   imageId?: Prisma.SortOrderInput | Prisma.SortOrder
   articleId?: Prisma.SortOrderInput | Prisma.SortOrder
-  Article?: Prisma.ArticleOrderByWithRelationInput
-  Image?: Prisma.ImageOrderByWithRelationInput
-  Timeline?: Prisma.TimelineOrderByWithRelationInput
+  timeline?: Prisma.TimelineOrderByWithRelationInput
+  image?: Prisma.ImageOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
 }
 
 export type TimelineEventWhereUniqueInput = Prisma.AtLeast<{
@@ -271,9 +271,9 @@ export type TimelineEventWhereUniqueInput = Prisma.AtLeast<{
   order?: Prisma.IntFilter<"TimelineEvent"> | number
   imageId?: Prisma.StringNullableFilter<"TimelineEvent"> | string | null
   articleId?: Prisma.StringNullableFilter<"TimelineEvent"> | string | null
-  Article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
-  Image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
-  Timeline?: Prisma.XOR<Prisma.TimelineScalarRelationFilter, Prisma.TimelineWhereInput>
+  timeline?: Prisma.XOR<Prisma.TimelineScalarRelationFilter, Prisma.TimelineWhereInput>
+  image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  article?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
 }, "id">
 
 export type TimelineEventOrderByWithAggregationInput = {
@@ -307,18 +307,18 @@ export type TimelineEventScalarWhereWithAggregatesInput = {
 }
 
 export type TimelineEventCreateInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
   order: number
-  Article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventInput
-  Image?: Prisma.ImageCreateNestedOneWithoutTimelineEventInput
-  Timeline: Prisma.TimelineCreateNestedOneWithoutTimelineEventInput
+  timeline: Prisma.TimelineCreateNestedOneWithoutEventsInput
+  image?: Prisma.ImageCreateNestedOneWithoutTimelineEventsInput
+  article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventsInput
 }
 
 export type TimelineEventUncheckedCreateInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -334,9 +334,9 @@ export type TimelineEventUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
-  Article?: Prisma.ArticleUpdateOneWithoutTimelineEventNestedInput
-  Image?: Prisma.ImageUpdateOneWithoutTimelineEventNestedInput
-  Timeline?: Prisma.TimelineUpdateOneRequiredWithoutTimelineEventNestedInput
+  timeline?: Prisma.TimelineUpdateOneRequiredWithoutEventsNestedInput
+  image?: Prisma.ImageUpdateOneWithoutTimelineEventsNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutTimelineEventsNestedInput
 }
 
 export type TimelineEventUncheckedUpdateInput = {
@@ -351,7 +351,7 @@ export type TimelineEventUncheckedUpdateInput = {
 }
 
 export type TimelineEventCreateManyInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -557,18 +557,26 @@ export type TimelineEventUncheckedUpdateManyWithoutTimelineNestedInput = {
   deleteMany?: Prisma.TimelineEventScalarWhereInput | Prisma.TimelineEventScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type TimelineEventCreateWithoutArticleInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
   order: number
-  Image?: Prisma.ImageCreateNestedOneWithoutTimelineEventInput
-  Timeline: Prisma.TimelineCreateNestedOneWithoutTimelineEventInput
+  timeline: Prisma.TimelineCreateNestedOneWithoutEventsInput
+  image?: Prisma.ImageCreateNestedOneWithoutTimelineEventsInput
 }
 
 export type TimelineEventUncheckedCreateWithoutArticleInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -618,17 +626,17 @@ export type TimelineEventScalarWhereInput = {
 }
 
 export type TimelineEventCreateWithoutImageInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
   order: number
-  Article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventInput
-  Timeline: Prisma.TimelineCreateNestedOneWithoutTimelineEventInput
+  timeline: Prisma.TimelineCreateNestedOneWithoutEventsInput
+  article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventsInput
 }
 
 export type TimelineEventUncheckedCreateWithoutImageInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -664,17 +672,17 @@ export type TimelineEventUpdateManyWithWhereWithoutImageInput = {
 }
 
 export type TimelineEventCreateWithoutTimelineInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
   order: number
-  Article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventInput
-  Image?: Prisma.ImageCreateNestedOneWithoutTimelineEventInput
+  image?: Prisma.ImageCreateNestedOneWithoutTimelineEventsInput
+  article?: Prisma.ArticleCreateNestedOneWithoutTimelineEventsInput
 }
 
 export type TimelineEventUncheckedCreateWithoutTimelineInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
@@ -710,7 +718,7 @@ export type TimelineEventUpdateManyWithWhereWithoutTimelineInput = {
 }
 
 export type TimelineEventCreateManyArticleInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -725,8 +733,8 @@ export type TimelineEventUpdateWithoutArticleInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
-  Image?: Prisma.ImageUpdateOneWithoutTimelineEventNestedInput
-  Timeline?: Prisma.TimelineUpdateOneRequiredWithoutTimelineEventNestedInput
+  timeline?: Prisma.TimelineUpdateOneRequiredWithoutEventsNestedInput
+  image?: Prisma.ImageUpdateOneWithoutTimelineEventsNestedInput
 }
 
 export type TimelineEventUncheckedUpdateWithoutArticleInput = {
@@ -750,7 +758,7 @@ export type TimelineEventUncheckedUpdateManyWithoutArticleInput = {
 }
 
 export type TimelineEventCreateManyImageInput = {
-  id: string
+  id?: string
   timelineId: string
   date: Date | string
   title: string
@@ -765,8 +773,8 @@ export type TimelineEventUpdateWithoutImageInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
-  Article?: Prisma.ArticleUpdateOneWithoutTimelineEventNestedInput
-  Timeline?: Prisma.TimelineUpdateOneRequiredWithoutTimelineEventNestedInput
+  timeline?: Prisma.TimelineUpdateOneRequiredWithoutEventsNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutTimelineEventsNestedInput
 }
 
 export type TimelineEventUncheckedUpdateWithoutImageInput = {
@@ -790,7 +798,7 @@ export type TimelineEventUncheckedUpdateManyWithoutImageInput = {
 }
 
 export type TimelineEventCreateManyTimelineInput = {
-  id: string
+  id?: string
   date: Date | string
   title: string
   description?: string | null
@@ -805,8 +813,8 @@ export type TimelineEventUpdateWithoutTimelineInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
-  Article?: Prisma.ArticleUpdateOneWithoutTimelineEventNestedInput
-  Image?: Prisma.ImageUpdateOneWithoutTimelineEventNestedInput
+  image?: Prisma.ImageUpdateOneWithoutTimelineEventsNestedInput
+  article?: Prisma.ArticleUpdateOneWithoutTimelineEventsNestedInput
 }
 
 export type TimelineEventUncheckedUpdateWithoutTimelineInput = {
@@ -840,9 +848,9 @@ export type TimelineEventSelect<ExtArgs extends runtime.Types.Extensions.Interna
   order?: boolean
   imageId?: boolean
   articleId?: boolean
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }, ExtArgs["result"]["timelineEvent"]>
 
 export type TimelineEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -854,9 +862,9 @@ export type TimelineEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   order?: boolean
   imageId?: boolean
   articleId?: boolean
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }, ExtArgs["result"]["timelineEvent"]>
 
 export type TimelineEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -868,9 +876,9 @@ export type TimelineEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   order?: boolean
   imageId?: boolean
   articleId?: boolean
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }, ExtArgs["result"]["timelineEvent"]>
 
 export type TimelineEventSelectScalar = {
@@ -886,27 +894,27 @@ export type TimelineEventSelectScalar = {
 
 export type TimelineEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "timelineId" | "date" | "title" | "description" | "order" | "imageId" | "articleId", ExtArgs["result"]["timelineEvent"]>
 export type TimelineEventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }
 export type TimelineEventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }
 export type TimelineEventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Article?: boolean | Prisma.TimelineEvent$ArticleArgs<ExtArgs>
-  Image?: boolean | Prisma.TimelineEvent$ImageArgs<ExtArgs>
-  Timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  timeline?: boolean | Prisma.TimelineDefaultArgs<ExtArgs>
+  image?: boolean | Prisma.TimelineEvent$imageArgs<ExtArgs>
+  article?: boolean | Prisma.TimelineEvent$articleArgs<ExtArgs>
 }
 
 export type $TimelineEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TimelineEvent"
   objects: {
-    Article: Prisma.$ArticlePayload<ExtArgs> | null
-    Image: Prisma.$ImagePayload<ExtArgs> | null
-    Timeline: Prisma.$TimelinePayload<ExtArgs>
+    timeline: Prisma.$TimelinePayload<ExtArgs>
+    image: Prisma.$ImagePayload<ExtArgs> | null
+    article: Prisma.$ArticlePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1311,9 +1319,9 @@ readonly fields: TimelineEventFieldRefs;
  */
 export interface Prisma__TimelineEventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Article<T extends Prisma.TimelineEvent$ArticleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineEvent$ArticleArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Image<T extends Prisma.TimelineEvent$ImageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineEvent$ImageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Timeline<T extends Prisma.TimelineDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineDefaultArgs<ExtArgs>>): Prisma.Prisma__TimelineClient<runtime.Types.Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  timeline<T extends Prisma.TimelineDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineDefaultArgs<ExtArgs>>): Prisma.Prisma__TimelineClient<runtime.Types.Result.GetResult<Prisma.$TimelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  image<T extends Prisma.TimelineEvent$imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineEvent$imageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.TimelineEvent$articleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimelineEvent$articleArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1752,28 +1760,9 @@ export type TimelineEventDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * TimelineEvent.Article
+ * TimelineEvent.image
  */
-export type TimelineEvent$ArticleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Article
-   */
-  select?: Prisma.ArticleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Article
-   */
-  omit?: Prisma.ArticleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ArticleInclude<ExtArgs> | null
-  where?: Prisma.ArticleWhereInput
-}
-
-/**
- * TimelineEvent.Image
- */
-export type TimelineEvent$ImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TimelineEvent$imageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Image
    */
@@ -1787,6 +1776,25 @@ export type TimelineEvent$ImageArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.ImageInclude<ExtArgs> | null
   where?: Prisma.ImageWhereInput
+}
+
+/**
+ * TimelineEvent.article
+ */
+export type TimelineEvent$articleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
 }
 
 /**
