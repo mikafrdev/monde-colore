@@ -1,0 +1,504 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/prisma/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Article {
+  id             String           @id
+  slug           String           @unique
+  title          String           @unique
+  excerpt        String?
+  body           String           @default("[]")
+  status         ArticleStatus    @default(DRAFT)
+  type           ArticleType      @default(ARTICLE)
+  publishedAt    DateTime?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  authorId       String
+  sourceId       String?
+  visibility     Visibility       @default(PUBLIC)
+  Author         Author           @relation(fields: [authorId], references: [id])
+  Source         Source?          @relation(fields: [sourceId], references: [id])
+  ArticleContent ArticleContent[]
+  ArticleImage   ArticleImage[]
+  ArticleTag     ArticleTag[]
+  ArticleVideo   ArticleVideo[]
+  ArticleView    ArticleView[]
+  Content        Content?
+  TimelineEvent  TimelineEvent[]
+  Category       Category[]
+}
+
+model ArticleContent {
+  id        String  @id
+  articleId String
+  contentId String
+  order     Int?
+  label     String?
+  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  Content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, contentId])
+  @@index([articleId])
+}
+
+model ArticleImage {
+  articleId String
+  imageId   String
+  order     Int?
+  isPrimary Boolean @default(false)
+  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  Image     Image   @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, imageId])
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  Article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  Tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+}
+
+model ArticleVideo {
+  id        String   @id
+  order     Int      @default(0)
+  caption   String?
+  isPrimary Boolean  @default(false)
+  articleId String
+  videoId   String
+  createdAt DateTime @default(now())
+  Article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  Video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, videoId])
+  @@index([articleId, order])
+}
+
+model ArticleView {
+  id        String   @id
+  articleId String
+  ipHash    String?
+  viewedAt  DateTime @default(now())
+  Article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
+
+model Author {
+  id                    String                  @id
+  name                  String
+  bio                   String?
+  avatarUrl             String?
+  userId                String?                 @unique
+  Article               Article[]
+  user                  user?                   @relation(fields: [userId], references: [id])
+  CollectionContributor CollectionContributor[]
+}
+
+model Category {
+  id                                                   String               @id
+  name                                                 String               @unique
+  slug                                                 String               @unique
+  description                                          String?
+  createdAt                                            DateTime             @default(now())
+  updatedAt                                            DateTime             @default(now())
+  isPublic                                             Boolean              @default(true)
+  CategoryPermission                                   CategoryPermission[]
+  CategoryRelation_CategoryRelation_childIdToCategory  CategoryRelation[]   @relation("CategoryRelation_childIdToCategory")
+  CategoryRelation_CategoryRelation_parentIdToCategory CategoryRelation[]   @relation("CategoryRelation_parentIdToCategory")
+  Article                                              Article[]
+}
+
+model CategoryPermission {
+  id           String         @id
+  categoryId   String
+  roleOrUserId String
+  type         PermissionType @default(ROLE)
+  granted      Boolean        @default(true)
+  Category     Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, roleOrUserId])
+}
+
+model CategoryRelation {
+  parentId                                     String
+  childId                                      String
+  Category_CategoryRelation_childIdToCategory  Category @relation("CategoryRelation_childIdToCategory", fields: [childId], references: [id], onDelete: Cascade)
+  Category_CategoryRelation_parentIdToCategory Category @relation("CategoryRelation_parentIdToCategory", fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@id([parentId, childId])
+  @@unique([parentId, childId])
+}
+
+model Collection {
+  id                    String                  @id
+  title                 String
+  slug                  String                  @unique
+  description           String?
+  type                  CollectionType
+  status                CollectionStatus        @default(DRAFT)
+  coverImageId          String?
+  startedAt             DateTime?
+  endedAt               DateTime?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime
+  visibility            Visibility              @default(PUBLIC)
+  Image                 Image?                  @relation(fields: [coverImageId], references: [id])
+  CollectionContributor CollectionContributor[]
+  CollectionItem        CollectionItem[]
+  CollectionSource      CollectionSource[]
+  Content               Content?
+}
+
+model CollectionContributor {
+  id           String                    @id
+  collectionId String
+  authorId     String
+  role         CollectionContributorRole @default(WRITER)
+  Author       Author                    @relation(fields: [authorId], references: [id])
+  Collection   Collection                @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, authorId])
+}
+
+model CollectionItem {
+  id           String     @id
+  collectionId String
+  contentId    String
+  order        Int
+  isPrimary    Boolean    @default(false)
+  label        String?
+  Collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  Content      Content    @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, contentId])
+  @@index([collectionId, order])
+}
+
+model CollectionSource {
+  id           String               @id
+  collectionId String
+  sourceId     String
+  role         CollectionSourceRole @default(PRIMARY)
+  Collection   Collection           @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  Source       Source               @relation(fields: [sourceId], references: [id])
+
+  @@unique([collectionId, sourceId])
+}
+
+model Content {
+  id             String           @id
+  type           ContentType
+  createdAt      DateTime         @default(now())
+  articleId      String?          @unique
+  videoId        String?          @unique
+  documentId     String?          @unique
+  timelineId     String?          @unique
+  collectionId   String?          @unique
+  ArticleContent ArticleContent[]
+  CollectionItem CollectionItem[]
+  Article        Article?         @relation(fields: [articleId], references: [id])
+  Collection     Collection?      @relation(fields: [collectionId], references: [id])
+  Document       Document?        @relation(fields: [documentId], references: [id])
+  Timeline       Timeline?        @relation(fields: [timelineId], references: [id])
+  Video          Video?           @relation(fields: [videoId], references: [id])
+}
+
+model Document {
+  id        String   @id
+  title     String
+  fileUrl   String   @unique
+  mimeType  String
+  size      Int?
+  createdAt DateTime @default(now())
+  Content   Content?
+}
+
+model Image {
+  id            String          @id
+  url           String          @unique
+  alt           String?
+  type          ImageType       @default(ARTICLE)
+  filename      String?
+  width         Int?
+  height        Int?
+  size          Int?
+  mimeType      String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  section       String?
+  visibility    Visibility      @default(PUBLIC)
+  ArticleImage  ArticleImage[]
+  Collection    Collection[]
+  TimelineEvent TimelineEvent[]
+}
+
+model Media {
+  id     String    @id
+  url    String    @unique
+  type   MediaType
+  Source Source[]
+}
+
+model Source {
+  id               String             @id
+  name             String
+  logo             String?
+  type             SourceType
+  bio              String?
+  Article          Article[]
+  CollectionSource CollectionSource[]
+  Media            Media[]
+}
+
+model Tag {
+  id         String       @id
+  name       String
+  slug       String       @unique
+  ArticleTag ArticleTag[]
+}
+
+model Timeline {
+  id            String          @id
+  title         String
+  description   String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  visibility    Visibility      @default(PUBLIC)
+  Content       Content?
+  TimelineEvent TimelineEvent[]
+}
+
+model TimelineEvent {
+  id          String   @id
+  timelineId  String
+  date        DateTime
+  title       String
+  description String?
+  order       Int
+  imageId     String?
+  articleId   String?
+  Article     Article? @relation(fields: [articleId], references: [id])
+  Image       Image?   @relation(fields: [imageId], references: [id])
+  Timeline    Timeline @relation(fields: [timelineId], references: [id], onDelete: Cascade)
+
+  @@index([timelineId, order])
+}
+
+model Video {
+  id           String         @id
+  title        String
+  description  String?
+  embedUrl     String?
+  fileUrl      String?
+  provider     VideoProvider
+  status       VideoStatus    @default(DRAFT)
+  filename     String?
+  size         Int?
+  mimeType     String?
+  width        Int?
+  height       Int?
+  duration     Int?
+  thumbnailUrl String?
+  altText      String?
+  publishedAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  section      String?
+  visibility   Visibility     @default(PUBLIC)
+  ArticleVideo ArticleVideo[]
+  Content      Content?
+}
+
+model account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime
+  user                  user      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model user {
+  id            String    @id
+  role          Role      @default(GUEST)
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  section       String?
+  Author        Author?
+  account       account[]
+  session       session[]
+}
+
+model verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+
+  @@index([identifier])
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ArticleType {
+  ARTICLE
+  INFORMATION
+  CUISINE
+  JEUXVIDEO
+  LEO
+  CARO
+  MIKA
+  MAMAN
+  SITES
+}
+
+enum CollectionContributorRole {
+  EDITOR
+  WRITER
+  RESEARCHER
+  PHOTOGRAPHER
+}
+
+enum CollectionSourceRole {
+  PRIMARY
+  CONTRIBUTOR
+  CITED
+}
+
+enum CollectionStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  LIVE
+}
+
+enum CollectionType {
+  DOSSIER
+  SERIE
+  ENQUETE
+  LIVE
+  SPECIAL
+}
+
+enum ContentType {
+  ARTICLE
+  VIDEO
+  DOCUMENT
+  TIMELINE
+  COLLECTION
+}
+
+enum ImageType {
+  ARTICLE
+  GALLERY
+  AVATAR
+  COVER
+}
+
+enum MediaRole {
+  COVER
+  INLINE
+  GALLERY
+}
+
+enum MediaType {
+  YOUTUBE
+  TWITTER
+  ODYSSEE
+  WEBSITE
+  INSTAGRAM
+  FACEBOOK
+  LINKEDIN
+  TIKTOK
+  RSS
+  PODCAST
+  IMAGE
+  VIDEO
+  AUDIO
+  PDF
+  GITHUB
+  PORTFOLIO
+  OTHER
+}
+
+enum PermissionType {
+  ROLE
+  USER
+}
+
+enum Role {
+  ADMIN
+  STAFF
+  MEMBER
+  GUEST
+  PUBLIC
+}
+
+enum SourceType {
+  PERSON
+  COLLECTIVE
+  BRAND
+  MEDIA
+  POLITICAL
+  INSTITUTION
+  COMPANY
+}
+
+enum VideoProvider {
+  YOUTUBE
+  VIMEO
+  UPLOAD
+  OTHER
+}
+
+enum VideoStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum Visibility {
+  PUBLIC
+  FAMILY
+  PRIVATE
+}
