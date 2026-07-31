@@ -3,16 +3,16 @@ import { ScrollToTopButton } from "@/components/scroll-to-top-button";
 import { AppFeatured } from "@main/components/app-featured";
 import Image from "next/image";
 
-export default async function JeuxVideo() {
+export default async function Football() {
    /* await new Promise((r) => setTimeout(r, 4000)); */
    return (
       <div>
          <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Jeux Vidéos</h1>
+            <h1 className="">Les équipes</h1>
             <Image
                loading="eager"
-               src="/uploads/images/eabbf922-5f7e-400b-b597-48154addd48e.jpg"
-               alt="Jeux Vidéos"
+               src="/uploads/images/artboard_1_720.webp"
+               alt="Football"
                width={1050}
                height={605}
                className=""

@@ -8,11 +8,11 @@ export default async function JeuxVideo() {
    return (
       <div>
          <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Jeux Vidéos</h1>
+            <h1 className="">Les consoles</h1>
             <Image
                loading="eager"
-               src="/uploads/images/eabbf922-5f7e-400b-b597-48154addd48e.jpg"
-               alt="Jeux Vidéos"
+               src="/uploads/images/786e3629-778b-4272-a0af-2b1a87540e9c.jpg"
+               alt="Les consoles"
                width={1050}
                height={605}
                className=""
