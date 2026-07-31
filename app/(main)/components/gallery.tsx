@@ -11,21 +11,23 @@ export function Gallery({ images }: { images: { src: string }[] }) {
    return (
       <>
          <div className="absolute inset-0 flex">
-        {images.map((img, i) => (
-          <div key={i} className="relative w-full flex-shrink-0 overflow-hidden">
-            <Image
-              fill
-              src={img.src}
-              onClick={() => setIndex(i)}
-              className="object-cover cursor-zoom-in animate-pan-vertical"
-              alt=""
-              sizes="(max-width: 768px) 100vw, 800px"
-            />
-          </div>
-        ))}
-      </div>
-
-
+            {images.map((img, i) => (
+               <div
+                  key={i}
+                  className="relative w-full flex-shrink-0 overflow-hidden"
+               >
+                  <Image
+                     loading="eager"
+                     fill
+                     src={img.src}
+                     onClick={() => setIndex(i)}
+                     className="object-cover cursor-zoom-in animate-pan-vertical"
+                     alt=""
+                     sizes="(max-width: 768px) 100vw, 800px"
+                  />
+               </div>
+            ))}
+         </div>
 
          <Lightbox
             open={index >= 0}

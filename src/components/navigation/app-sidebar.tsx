@@ -88,7 +88,7 @@ export function AppSidebar({ session }: AppSidebarProps) {
 
                                  {hasChildren && (
                                     <CollapsibleTrigger>
-                                       <SidebarMenuAction className="transition-transform group-data-[state=open]/collapsible:rotate-180">
+                                       <SidebarMenuAction className="transition-transform group-data-[state=open]/collapsible:rotate-180" asChild>
                                           <ChevronDown />
                                        </SidebarMenuAction>
                                     </CollapsibleTrigger>
