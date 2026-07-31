@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Gamepad2, Video, Image as ImageIcon, Music, Home } from "lucide-react";
+import { Gamepad2, Video, Image as ImageIcon, Music, Home, Volleyball, PersonStanding } from "lucide-react";
 
 export type SidebarLink = {
    readonly id: string;
@@ -72,14 +72,14 @@ const jeuxvideoSidebar: readonly SidebarLink[] = [
    {
       id: "consoles",
       label: "Les consoles",
-      href: "/",
+      href: "/jeux-video/consoles",
       icon: Home,
       description: "Les consoles de jeux vidéo",
    },
    {
       id: "videos",
       label: "Les jeux",
-      href: "/videos",
+      href: "/jeux-video/jeux",
       icon: Video,
       description: "Toutes les vidéos",
    },
@@ -106,6 +106,23 @@ const jeuxvideoSidebar: readonly SidebarLink[] = [
    },
 ] as const;
 
+const footballSidebar: readonly SidebarLink[] = [
+   {
+      id: "equipes",
+      label: "Les équipes",
+      href: "/football/equipes",
+      icon: Home,
+      description: "Les équipes de football",
+   },
+   {
+      id: "joueurs",
+      label: "Les joueurs",
+      href: "/football/joueurs",
+      icon: PersonStanding,
+      description: "Tous les joueurs de football",
+   }
+] as const;
+
 export const navigationSections: readonly NavSection[] = [
    {
       id: "home",
@@ -116,6 +133,24 @@ export const navigationSections: readonly NavSection[] = [
       icon: Home,
       matcher: (p) => p === "/",
       sidebar: homeSidebar,
+   },
+   {
+      id: "games",
+      label: "Jeux vidéo",
+      href: "/jeux-video",
+      type: "link",
+      icon: Gamepad2,
+      matcher: (p) => p.startsWith("/jeux-video"),
+      sidebar: jeuxvideoSidebar,
+   },
+   {
+      id: "football",
+      label: "Football",
+      href: "/football",
+      type: "link",
+      icon: Volleyball,
+      matcher: (p) => p.startsWith("/football"),
+      sidebar: footballSidebar,
    },
    {
       id: "videos",
@@ -143,15 +178,6 @@ export const navigationSections: readonly NavSection[] = [
       icon: Music,
       matcher: (p) => p.startsWith("/musiques"),
       sidebar: [],
-   },
-   {
-      id: "games",
-      label: "Jeux vidéo",
-      href: "/jeux-video",
-      type: "link",
-      icon: Gamepad2,
-      matcher: (p) => p.startsWith("/jeux-video"),
-      sidebar: jeuxvideoSidebar,
    },
 ] as const;
 

@@ -5,6 +5,7 @@ import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { AppNavigationMenu } from "@/components/navigation/app-navigation-menu";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import type { LayoutProps } from "@/types/app";
+import { RightColumn } from "@/components/navigation/right-column";
 
 export default async function MainLayout({ children }: LayoutProps) {
    const session = await auth.api.getSession({ headers: await headers() });
@@ -24,6 +25,7 @@ export default async function MainLayout({ children }: LayoutProps) {
                   <AppBreadcrumb />
                   {children}
                </main>
+               <RightColumn session={session} />
             </div>
          </div>
       </SidebarProvider>
