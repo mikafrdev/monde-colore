@@ -5,16 +5,16 @@ import HomeNavigationCard from "./home-navigation-card";
 export default async function HomeFeatureNavigation() {
    const navigation = [
       {
-         icon: <Play className="size-10" />,
-         title: "Vidéos",
-         description: "Regarde les dessins animés et films préférés",
-         href: "/videos",
-      },
-      {
          icon: <Gamepad2 className="size-10" />,
          title: "Jeux",
          description: "Retrouve tes jeux préférés et découvre de nouveaux jeux",
          href: "/jeux-video",
+      },
+      {
+         icon: <Play className="size-10" />,
+         title: "Vidéos",
+         description: "Regarde les dessins animés et films préférés",
+         href: "/videos",
       },
       {
          icon: <ImageIcon className="size-10" />,

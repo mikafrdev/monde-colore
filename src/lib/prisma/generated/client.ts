@@ -176,3 +176,8 @@ export type ArticleView = Prisma.ArticleViewModel
  * 
  */
 export type ArticleVideo = Prisma.ArticleVideoModel
+/**
+ * Model ArticleSite
+ * 
+ */
+export type ArticleSite = Prisma.ArticleSiteModel

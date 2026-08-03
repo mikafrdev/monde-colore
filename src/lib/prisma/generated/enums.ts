@@ -20,6 +20,17 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const Site = {
+  CARO: 'CARO',
+  LEO: 'LEO',
+  MIKA: 'MIKA',
+  MAMAN: 'MAMAN',
+  GENERAL: 'GENERAL'
+} as const
+
+export type Site = (typeof Site)[keyof typeof Site]
+
+
 export const PermissionType = {
   ROLE: 'ROLE',
   USER: 'USER'
@@ -50,12 +61,7 @@ export const ArticleType = {
   ARTICLE: 'ARTICLE',
   INFORMATION: 'INFORMATION',
   CUISINE: 'CUISINE',
-  JEUXVIDEO: 'JEUXVIDEO',
-  LEO: 'LEO',
-  CARO: 'CARO',
-  MIKA: 'MIKA',
-  MAMAN: 'MAMAN',
-  SITES: 'SITES'
+  JEUXVIDEO: 'JEUXVIDEO'
 } as const
 
 export type ArticleType = (typeof ArticleType)[keyof typeof ArticleType]

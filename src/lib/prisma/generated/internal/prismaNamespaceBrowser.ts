@@ -77,7 +77,8 @@ export const ModelName = {
   ArticleTag: 'ArticleTag',
   ArticleImage: 'ArticleImage',
   ArticleView: 'ArticleView',
-  ArticleVideo: 'ArticleVideo'
+  ArticleVideo: 'ArticleVideo',
+  ArticleSite: 'ArticleSite'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -99,7 +100,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   role: 'role',
-  section: 'section',
+  site: 'site',
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
@@ -242,7 +243,6 @@ export const ImageScalarFieldEnum = {
   mimeType: 'mimeType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  section: 'section',
   visibility: 'visibility'
 } as const
 
@@ -268,7 +268,6 @@ export const VideoScalarFieldEnum = {
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  section: 'section',
   visibility: 'visibility'
 } as const
 
@@ -444,6 +443,18 @@ export const ArticleVideoScalarFieldEnum = {
 } as const
 
 export type ArticleVideoScalarFieldEnum = (typeof ArticleVideoScalarFieldEnum)[keyof typeof ArticleVideoScalarFieldEnum]
+
+
+export const ArticleSiteScalarFieldEnum = {
+  id: 'id',
+  articleId: 'articleId',
+  site: 'site',
+  createdAt: 'createdAt',
+  imageId: 'imageId',
+  videoId: 'videoId'
+} as const
+
+export type ArticleSiteScalarFieldEnum = (typeof ArticleSiteScalarFieldEnum)[keyof typeof ArticleSiteScalarFieldEnum]
 
 
 export const SortOrder = {
