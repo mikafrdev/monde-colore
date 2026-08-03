@@ -540,7 +540,8 @@
 }
 
 @theme {
-  --animate-pan-vertical: pan-vertical 20s ease-in-out infinite;
+   --animate-pan-vertical: pan-vertical 20s ease-in-out infinite;
+   --animate-border-spin: border-spin 3s linear infinite;
 }
 
 @keyframes pan-vertical {
@@ -550,4 +551,16 @@
   50% {
     object-position: 50% 0%;
   }
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }

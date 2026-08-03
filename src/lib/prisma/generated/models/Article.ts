@@ -256,6 +256,7 @@ export type ArticleWhereInput = {
   images?: Prisma.ArticleImageListRelationFilter
   videos?: Prisma.ArticleVideoListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
+  sites?: Prisma.ArticleSiteListRelationFilter
 }
 
 export type ArticleOrderByWithRelationInput = {
@@ -282,6 +283,7 @@ export type ArticleOrderByWithRelationInput = {
   images?: Prisma.ArticleImageOrderByRelationAggregateInput
   videos?: Prisma.ArticleVideoOrderByRelationAggregateInput
   timelineEvents?: Prisma.TimelineEventOrderByRelationAggregateInput
+  sites?: Prisma.ArticleSiteOrderByRelationAggregateInput
 }
 
 export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -311,6 +313,7 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.ArticleImageListRelationFilter
   videos?: Prisma.ArticleVideoListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
+  sites?: Prisma.ArticleSiteListRelationFilter
 }, "id" | "slug" | "title">
 
 export type ArticleOrderByWithAggregationInput = {
@@ -373,6 +376,7 @@ export type ArticleCreateInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateInput = {
@@ -397,6 +401,7 @@ export type ArticleUncheckedCreateInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUpdateInput = {
@@ -421,6 +426,7 @@ export type ArticleUpdateInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateInput = {
@@ -445,6 +451,7 @@ export type ArticleUncheckedUpdateInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateManyInput = {
@@ -797,6 +804,20 @@ export type ArticleUpdateOneRequiredWithoutVideosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutVideosInput, Prisma.ArticleUpdateWithoutVideosInput>, Prisma.ArticleUncheckedUpdateWithoutVideosInput>
 }
 
+export type ArticleCreateNestedOneWithoutSitesInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutSitesInput, Prisma.ArticleUncheckedCreateWithoutSitesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutSitesInput
+  connect?: Prisma.ArticleWhereUniqueInput
+}
+
+export type ArticleUpdateOneRequiredWithoutSitesNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutSitesInput, Prisma.ArticleUncheckedCreateWithoutSitesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutSitesInput
+  upsert?: Prisma.ArticleUpsertWithoutSitesInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutSitesInput, Prisma.ArticleUpdateWithoutSitesInput>, Prisma.ArticleUncheckedUpdateWithoutSitesInput>
+}
+
 export type ArticleCreateWithoutAuthorInput = {
   id?: string
   slug: string
@@ -818,6 +839,7 @@ export type ArticleCreateWithoutAuthorInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutAuthorInput = {
@@ -841,6 +863,7 @@ export type ArticleUncheckedCreateWithoutAuthorInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutAuthorInput = {
@@ -909,6 +932,7 @@ export type ArticleCreateWithoutCategoriesInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutCategoriesInput = {
@@ -932,6 +956,7 @@ export type ArticleUncheckedCreateWithoutCategoriesInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutCategoriesInput = {
@@ -976,6 +1001,7 @@ export type ArticleCreateWithoutContentsInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutContentsInput = {
@@ -999,6 +1025,7 @@ export type ArticleUncheckedCreateWithoutContentsInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutContentsInput = {
@@ -1038,6 +1065,7 @@ export type ArticleUpdateWithoutContentsInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutContentsInput = {
@@ -1061,6 +1089,7 @@ export type ArticleUncheckedUpdateWithoutContentsInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutTimelineEventsInput = {
@@ -1084,6 +1113,7 @@ export type ArticleCreateWithoutTimelineEventsInput = {
   views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutTimelineEventsInput = {
@@ -1107,6 +1137,7 @@ export type ArticleUncheckedCreateWithoutTimelineEventsInput = {
   views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutTimelineEventsInput = {
@@ -1146,6 +1177,7 @@ export type ArticleUpdateWithoutTimelineEventsInput = {
   views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutTimelineEventsInput = {
@@ -1169,6 +1201,7 @@ export type ArticleUncheckedUpdateWithoutTimelineEventsInput = {
   views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutSourceInput = {
@@ -1192,6 +1225,7 @@ export type ArticleCreateWithoutSourceInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutSourceInput = {
@@ -1215,6 +1249,7 @@ export type ArticleUncheckedCreateWithoutSourceInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutSourceInput = {
@@ -1264,6 +1299,7 @@ export type ArticleCreateWithoutContentInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutContentInput = {
@@ -1287,6 +1323,7 @@ export type ArticleUncheckedCreateWithoutContentInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutContentInput = {
@@ -1326,6 +1363,7 @@ export type ArticleUpdateWithoutContentInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutContentInput = {
@@ -1349,6 +1387,7 @@ export type ArticleUncheckedUpdateWithoutContentInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutTagsInput = {
@@ -1372,6 +1411,7 @@ export type ArticleCreateWithoutTagsInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutTagsInput = {
@@ -1395,6 +1435,7 @@ export type ArticleUncheckedCreateWithoutTagsInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutTagsInput = {
@@ -1434,6 +1475,7 @@ export type ArticleUpdateWithoutTagsInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutTagsInput = {
@@ -1457,6 +1499,7 @@ export type ArticleUncheckedUpdateWithoutTagsInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutImagesInput = {
@@ -1480,6 +1523,7 @@ export type ArticleCreateWithoutImagesInput = {
   views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutImagesInput = {
@@ -1503,6 +1547,7 @@ export type ArticleUncheckedCreateWithoutImagesInput = {
   views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutImagesInput = {
@@ -1542,6 +1587,7 @@ export type ArticleUpdateWithoutImagesInput = {
   views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutImagesInput = {
@@ -1565,6 +1611,7 @@ export type ArticleUncheckedUpdateWithoutImagesInput = {
   views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutViewsInput = {
@@ -1588,6 +1635,7 @@ export type ArticleCreateWithoutViewsInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutViewsInput = {
@@ -1611,6 +1659,7 @@ export type ArticleUncheckedCreateWithoutViewsInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutViewsInput = {
@@ -1650,6 +1699,7 @@ export type ArticleUpdateWithoutViewsInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutViewsInput = {
@@ -1673,6 +1723,7 @@ export type ArticleUncheckedUpdateWithoutViewsInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutVideosInput = {
@@ -1696,6 +1747,7 @@ export type ArticleCreateWithoutVideosInput = {
   views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutVideosInput = {
@@ -1719,6 +1771,7 @@ export type ArticleUncheckedCreateWithoutVideosInput = {
   views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutVideosInput = {
@@ -1758,6 +1811,7 @@ export type ArticleUpdateWithoutVideosInput = {
   views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutVideosInput = {
@@ -1780,6 +1834,119 @@ export type ArticleUncheckedUpdateWithoutVideosInput = {
   contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
   views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleCreateWithoutSitesInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutSitesInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: string
+  status?: $Enums.ArticleStatus
+  type?: $Enums.ArticleType
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutSitesInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutSitesInput, Prisma.ArticleUncheckedCreateWithoutSitesInput>
+}
+
+export type ArticleUpsertWithoutSitesInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutSitesInput, Prisma.ArticleUncheckedUpdateWithoutSitesInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutSitesInput, Prisma.ArticleUncheckedCreateWithoutSitesInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutSitesInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutSitesInput, Prisma.ArticleUncheckedUpdateWithoutSitesInput>
+}
+
+export type ArticleUpdateWithoutSitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutSitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
+  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
 }
 
@@ -1819,6 +1986,7 @@ export type ArticleUpdateWithoutAuthorInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutAuthorInput = {
@@ -1842,6 +2010,7 @@ export type ArticleUncheckedUpdateWithoutAuthorInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateManyWithoutAuthorInput = {
@@ -1880,6 +2049,7 @@ export type ArticleUpdateWithoutCategoriesInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutCategoriesInput = {
@@ -1903,6 +2073,7 @@ export type ArticleUncheckedUpdateWithoutCategoriesInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateManyWithoutCategoriesInput = {
@@ -1957,6 +2128,7 @@ export type ArticleUpdateWithoutSourceInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutSourceInput = {
@@ -1980,6 +2152,7 @@ export type ArticleUncheckedUpdateWithoutSourceInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateManyWithoutSourceInput = {
@@ -2010,6 +2183,7 @@ export type ArticleCountOutputType = {
   images: number
   videos: number
   timelineEvents: number
+  sites: number
 }
 
 export type ArticleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2020,6 +2194,7 @@ export type ArticleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   images?: boolean | ArticleCountOutputTypeCountImagesArgs
   videos?: boolean | ArticleCountOutputTypeCountVideosArgs
   timelineEvents?: boolean | ArticleCountOutputTypeCountTimelineEventsArgs
+  sites?: boolean | ArticleCountOutputTypeCountSitesArgs
 }
 
 /**
@@ -2081,6 +2256,13 @@ export type ArticleCountOutputTypeCountTimelineEventsArgs<ExtArgs extends runtim
   where?: Prisma.TimelineEventWhereInput
 }
 
+/**
+ * ArticleCountOutputType without action
+ */
+export type ArticleCountOutputTypeCountSitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleSiteWhereInput
+}
+
 
 export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2106,6 +2288,7 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
+  sites?: boolean | Prisma.Article$sitesArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
@@ -2173,6 +2356,7 @@ export type ArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
+  sites?: boolean | Prisma.Article$sitesArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArticleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2197,6 +2381,7 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     images: Prisma.$ArticleImagePayload<ExtArgs>[]
     videos: Prisma.$ArticleVideoPayload<ExtArgs>[]
     timelineEvents: Prisma.$TimelineEventPayload<ExtArgs>[]
+    sites: Prisma.$ArticleSitePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2616,6 +2801,7 @@ export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends runtime.
   images<T extends Prisma.Article$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   videos<T extends Prisma.Article$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timelineEvents<T extends Prisma.Article$timelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$timelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sites<T extends Prisma.Article$sitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleSitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3262,6 +3448,30 @@ export type Article$timelineEventsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.TimelineEventScalarFieldEnum | Prisma.TimelineEventScalarFieldEnum[]
+}
+
+/**
+ * Article.sites
+ */
+export type Article$sitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArticleSite
+   */
+  select?: Prisma.ArticleSiteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArticleSite
+   */
+  omit?: Prisma.ArticleSiteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleSiteInclude<ExtArgs> | null
+  where?: Prisma.ArticleSiteWhereInput
+  orderBy?: Prisma.ArticleSiteOrderByWithRelationInput | Prisma.ArticleSiteOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleSiteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleSiteScalarFieldEnum | Prisma.ArticleSiteScalarFieldEnum[]
 }
 
 /**

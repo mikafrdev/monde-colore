@@ -1,8 +1,21 @@
+/* 
+bug connu et documenté, pas une erreur de configuration de ta part.
+
+Quand @prisma/extension-accelerate est utilisé avec Prisma 7, tous les types sont perdus et tout devient any — c'est l'issue prisma/prisma#28580, toujours ouverte. Ça correspond exactement à ton symptôme : findMany avec include te retourne le type "plat" de l'Article sans les relations. 
+GitHub
+
+Donc : upgrader Accelerate ne réglera rien, le bug est dans l'interaction Prisma 7 ↔ $extends(), pas dans une version spécifique de l'extension.
+
+Solutions possibles, en gardant Accelerate :
+
+Option A — Contourner en typant manuellement le retour (le plus pragmatique en attendant le fix upstream) */
+
 "use server";
 
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/lib/prisma/generated/client";
-import { ArticleType } from "@/lib/prisma/generated/enums";
+import { ArticleType, Site } from "@/lib/prisma/generated/enums";
+import { typed } from "./typed-query";
 
 // ─── Include partagé ──────────────────────────────────────────────────────────
 
@@ -11,12 +24,20 @@ const articleInclude = {
    source: true,
    categories: true,
    content: true,
+   sites: {
+      select: { site: true, featured: true, pinned: true, order: true },
+   },
    images: {
       select: {
          imageId: true,
          isPrimary: true,
          order: true,
-         image: { select: { url: true, alt: true } },
+         image: {
+            select: {
+               url: true,
+               alt: true,
+            },
+         },
       },
    },
    videos: {
@@ -42,62 +63,90 @@ const articleInclude = {
    },
 } satisfies Prisma.ArticleInclude;
 
-// ─── Type inféré ─────────────────────────────────────────────────────────────
+// ─── Type partagé ─────────────────────────────────────────────────────────────
 
 export type ArticleWithRelations = Prisma.ArticleGetPayload<{
    include: typeof articleInclude;
 }>;
 
-// ─── Queries ──────────────────────────────────────────────────────────────────
+// ─── Params ───────────────────────────────────────────────────────────────────
 
 type GetArticlesParams = {
    type?: ArticleType;
+   site?: Site;
    where?: Prisma.ArticleWhereInput;
    orderBy?: Prisma.ArticleOrderByWithRelationInput;
    take?: number;
    skip?: number;
 };
 
+// ─── Actions ──────────────────────────────────────────────────────────────────
+
 export async function getArticlesAction(params?: GetArticlesParams) {
-   return prisma.article.findMany({
-      where: {
-         ...(params?.type && { type: params.type }),
-         ...params?.where,
-      },
-      orderBy: params?.orderBy ?? { updatedAt: "desc" },
-      take: params?.take,
-      skip: params?.skip,
-      include: articleInclude,
-   });
+   return typed<ArticleWithRelations[]>(
+      prisma.article.findMany({
+         where: {
+            ...(params?.type && { type: params.type }),
+            ...(params?.site && { sites: { some: { site: params.site } } }),
+            ...params?.where,
+         },
+         orderBy: params?.orderBy ?? { updatedAt: "desc" },
+         take: params?.take,
+         skip: params?.skip,
+         include: articleInclude,
+      }),
+   );
 }
 
 export async function getArticleBySlug(slug: string) {
-   return prisma.article.findUnique({
-      where: { slug },
-      include: articleInclude,
-   });
+   return typed<ArticleWithRelations | null>(
+      prisma.article.findUnique({
+         where: { slug },
+         include: articleInclude,
+      }),
+   );
+}
+
+export async function getGamesBySiteAction(site?: Site) {
+   return typed<ArticleWithRelations[]>(
+      prisma.article.findMany({
+         where: {
+            type: "JEUXVIDEO",
+            ...(site && { sites: { some: { site } } }),
+         },
+         orderBy: { updatedAt: "desc" },
+         include: articleInclude,
+      }),
+   );
 }
 
 export async function getHomepageArticlesAction() {
    const query = (type: ArticleType) =>
+      typed<ArticleWithRelations[]>(
+         prisma.article.findMany({
+            where: { type },
+            orderBy: { updatedAt: "desc" },
+            take: 4,
+            include: articleInclude,
+         }),
+      );
+
+   const [informations, cuisines, jeuxvideos] = await Promise.all([
+      query("INFORMATION"),
+      query("CUISINE"),
+      query("JEUXVIDEO"),
+   ]);
+
+   return { informations, cuisines, jeuxvideos };
+}
+
+export async function getHomepageArticlesBySiteAction(site: Site) {
+   return typed<ArticleWithRelations[]>(
       prisma.article.findMany({
-         where: { type },
+         where: { sites: { some: { site } } },
          orderBy: { updatedAt: "desc" },
          take: 4,
          include: articleInclude,
-      });
-
-   const [informations, cuisines, jeuxvideos, leo, caro, mika, maman, sites] =
-      await Promise.all([
-         query("INFORMATION"),
-         query("CUISINE"),
-         query("JEUXVIDEO"),
-         query("LEO"),
-         query("CARO"),
-         query("MIKA"),
-         query("MAMAN"),
-         query("SITES"),
-      ]);
-
-   return { informations, cuisines, jeuxvideos, leo, caro, mika, maman, sites };
+      }),
+   );
 }

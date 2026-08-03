@@ -19,10 +19,18 @@ enum Role {
   PUBLIC // nouveau — anonyme
 }
 
+enum Site {
+  CARO
+  LEO
+  MIKA
+  MAMAN
+  GENERAL
+}
+
 model User {
   id            String    @id
   role          Role      @default(GUEST)
-  section       String? // "caro", "leo", "mika", "denise"...
+  site          Site?
   name          String
   email         String
   emailVerified Boolean   @default(false)
@@ -162,11 +170,6 @@ enum ArticleType {
   INFORMATION
   CUISINE
   JEUXVIDEO
-  LEO
-  CARO
-  MIKA
-  MAMAN
-  SITES
 }
 
 model Article {
@@ -197,6 +200,7 @@ model Article {
   images         ArticleImage[]
   videos         ArticleVideo[]
   timelineEvents TimelineEvent[]
+  sites          ArticleSite[]
 }
 
 model ArticleContent {
@@ -232,11 +236,11 @@ model Image {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  section    String? // "caro", "leo", "mika", "general"
   visibility Visibility @default(PUBLIC)
 
   articles       ArticleImage[]
   timelineEvents TimelineEvent[]
+  sites          ArticleSite[]
   collections    Collection[]    @relation("CollectionCover") // ← nom explicite
 }
 
@@ -281,11 +285,11 @@ model Video {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  section    String? // "caro", "leo", "mika", "general"
   visibility Visibility @default(PUBLIC)
 
   content  Content?
   articles ArticleVideo[]
+  sites    ArticleSite[]
 }
 
 model Document {
@@ -559,6 +563,27 @@ model ArticleVideo {
 
   @@unique([articleId, videoId])
   @@index([articleId, order])
+}
+
+model ArticleSite {
+  id        String  @id @default(cuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  site      Site
+
+  // Champs "ouverture future" — décommente/ajoute au besoin, sans casser l'existant
+  // publishedAt DateTime?     // date de publication propre à ce site
+  // featured    Boolean  @default(false)  // mis en avant sur ce site
+  // order       Int?          // ordre d'affichage sur ce site
+
+  createdAt DateTime @default(now())
+  image     Image?   @relation(fields: [imageId], references: [id])
+  imageId   String?
+  video     Video?   @relation(fields: [videoId], references: [id])
+  videoId   String?
+
+  @@unique([articleId, site])
+  @@index([site])
 }
 
 // Si tu n'as pas encore ce enum (à vérifier avec ArticleImage)

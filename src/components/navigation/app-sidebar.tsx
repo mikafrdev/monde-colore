@@ -27,7 +27,6 @@ import {
 import { ChevronDown, User2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useIsMobile } from "@/hooks/use-mobile";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -43,8 +42,7 @@ interface AppSidebarProps {
 
 export function AppSidebar({ session }: AppSidebarProps) {
    const [isPending] = useTransition();
-   const isMobile = useIsMobile();
-   const { setOpenMobile } = useSidebar();
+   const { isMobile, setOpenMobile } = useSidebar();
    const pathname = usePathname();
    const activeSection = useActiveSection();
 

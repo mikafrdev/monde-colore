@@ -50,7 +50,6 @@ export type ImageMinAggregateOutputType = {
   mimeType: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  section: string | null
   visibility: $Enums.Visibility | null
 }
 
@@ -66,7 +65,6 @@ export type ImageMaxAggregateOutputType = {
   mimeType: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  section: string | null
   visibility: $Enums.Visibility | null
 }
 
@@ -82,7 +80,6 @@ export type ImageCountAggregateOutputType = {
   mimeType: number
   createdAt: number
   updatedAt: number
-  section: number
   visibility: number
   _all: number
 }
@@ -112,7 +109,6 @@ export type ImageMinAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updatedAt?: true
-  section?: true
   visibility?: true
 }
 
@@ -128,7 +124,6 @@ export type ImageMaxAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updatedAt?: true
-  section?: true
   visibility?: true
 }
 
@@ -144,7 +139,6 @@ export type ImageCountAggregateInputType = {
   mimeType?: true
   createdAt?: true
   updatedAt?: true
-  section?: true
   visibility?: true
   _all?: true
 }
@@ -247,7 +241,6 @@ export type ImageGroupByOutputType = {
   mimeType: string | null
   createdAt: Date
   updatedAt: Date
-  section: string | null
   visibility: $Enums.Visibility
   _count: ImageCountAggregateOutputType | null
   _avg: ImageAvgAggregateOutputType | null
@@ -286,10 +279,10 @@ export type ImageWhereInput = {
   mimeType?: Prisma.StringNullableFilter<"Image"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
-  section?: Prisma.StringNullableFilter<"Image"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Image"> | $Enums.Visibility
   articles?: Prisma.ArticleImageListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
+  sites?: Prisma.ArticleSiteListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
 }
 
@@ -305,10 +298,10 @@ export type ImageOrderByWithRelationInput = {
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  section?: Prisma.SortOrderInput | Prisma.SortOrder
   visibility?: Prisma.SortOrder
   articles?: Prisma.ArticleImageOrderByRelationAggregateInput
   timelineEvents?: Prisma.TimelineEventOrderByRelationAggregateInput
+  sites?: Prisma.ArticleSiteOrderByRelationAggregateInput
   collections?: Prisma.CollectionOrderByRelationAggregateInput
 }
 
@@ -327,10 +320,10 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   mimeType?: Prisma.StringNullableFilter<"Image"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
-  section?: Prisma.StringNullableFilter<"Image"> | string | null
   visibility?: Prisma.EnumVisibilityFilter<"Image"> | $Enums.Visibility
   articles?: Prisma.ArticleImageListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
+  sites?: Prisma.ArticleSiteListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
 }, "id" | "url">
 
@@ -346,7 +339,6 @@ export type ImageOrderByWithAggregationInput = {
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  section?: Prisma.SortOrderInput | Prisma.SortOrder
   visibility?: Prisma.SortOrder
   _count?: Prisma.ImageCountOrderByAggregateInput
   _avg?: Prisma.ImageAvgOrderByAggregateInput
@@ -370,7 +362,6 @@ export type ImageScalarWhereWithAggregatesInput = {
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"Image"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
-  section?: Prisma.StringNullableWithAggregatesFilter<"Image"> | string | null
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Image"> | $Enums.Visibility
 }
 
@@ -386,10 +377,10 @@ export type ImageCreateInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
 }
 
@@ -405,10 +396,10 @@ export type ImageUncheckedCreateInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
 }
 
@@ -424,10 +415,10 @@ export type ImageUpdateInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
 }
 
@@ -443,10 +434,10 @@ export type ImageUncheckedUpdateInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
 }
 
@@ -462,7 +453,6 @@ export type ImageCreateManyInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
 }
 
@@ -478,7 +468,6 @@ export type ImageUpdateManyMutationInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
 }
 
@@ -494,7 +483,6 @@ export type ImageUncheckedUpdateManyInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
 }
 
@@ -510,7 +498,6 @@ export type ImageCountOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  section?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
 }
 
@@ -532,7 +519,6 @@ export type ImageMaxOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  section?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
 }
 
@@ -548,7 +534,6 @@ export type ImageMinOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  section?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
 }
 
@@ -618,6 +603,22 @@ export type ImageUpdateOneRequiredWithoutArticlesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutArticlesInput, Prisma.ImageUpdateWithoutArticlesInput>, Prisma.ImageUncheckedUpdateWithoutArticlesInput>
 }
 
+export type ImageCreateNestedOneWithoutSitesInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutSitesInput, Prisma.ImageUncheckedCreateWithoutSitesInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutSitesInput
+  connect?: Prisma.ImageWhereUniqueInput
+}
+
+export type ImageUpdateOneWithoutSitesNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutSitesInput, Prisma.ImageUncheckedCreateWithoutSitesInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutSitesInput
+  upsert?: Prisma.ImageUpsertWithoutSitesInput
+  disconnect?: Prisma.ImageWhereInput | boolean
+  delete?: Prisma.ImageWhereInput | boolean
+  connect?: Prisma.ImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutSitesInput, Prisma.ImageUpdateWithoutSitesInput>, Prisma.ImageUncheckedUpdateWithoutSitesInput>
+}
+
 export type ImageCreateWithoutTimelineEventsInput = {
   id?: string
   url: string
@@ -630,9 +631,9 @@ export type ImageCreateWithoutTimelineEventsInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
 }
 
@@ -648,9 +649,9 @@ export type ImageUncheckedCreateWithoutTimelineEventsInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
 }
 
@@ -682,9 +683,9 @@ export type ImageUpdateWithoutTimelineEventsInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
 }
 
@@ -700,9 +701,9 @@ export type ImageUncheckedUpdateWithoutTimelineEventsInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
 }
 
@@ -718,10 +719,10 @@ export type ImageCreateWithoutCollectionsInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutCollectionsInput = {
@@ -736,10 +737,10 @@ export type ImageUncheckedCreateWithoutCollectionsInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutCollectionsInput = {
@@ -770,10 +771,10 @@ export type ImageUpdateWithoutCollectionsInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutCollectionsInput = {
@@ -788,10 +789,10 @@ export type ImageUncheckedUpdateWithoutCollectionsInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateWithoutArticlesInput = {
@@ -806,9 +807,9 @@ export type ImageCreateWithoutArticlesInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
 }
 
@@ -824,9 +825,9 @@ export type ImageUncheckedCreateWithoutArticlesInput = {
   mimeType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  section?: string | null
   visibility?: $Enums.Visibility
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
 }
 
@@ -858,9 +859,9 @@ export type ImageUpdateWithoutArticlesInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
 }
 
@@ -876,8 +877,96 @@ export type ImageUncheckedUpdateWithoutArticlesInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  section?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+}
+
+export type ImageCreateWithoutSitesInput = {
+  id?: string
+  url: string
+  alt?: string | null
+  type?: $Enums.ImageType
+  filename?: string | null
+  width?: number | null
+  height?: number | null
+  size?: number | null
+  mimeType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+}
+
+export type ImageUncheckedCreateWithoutSitesInput = {
+  id?: string
+  url: string
+  alt?: string | null
+  type?: $Enums.ImageType
+  filename?: string | null
+  width?: number | null
+  height?: number | null
+  size?: number | null
+  mimeType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+}
+
+export type ImageCreateOrConnectWithoutSitesInput = {
+  where: Prisma.ImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ImageCreateWithoutSitesInput, Prisma.ImageUncheckedCreateWithoutSitesInput>
+}
+
+export type ImageUpsertWithoutSitesInput = {
+  update: Prisma.XOR<Prisma.ImageUpdateWithoutSitesInput, Prisma.ImageUncheckedUpdateWithoutSitesInput>
+  create: Prisma.XOR<Prisma.ImageCreateWithoutSitesInput, Prisma.ImageUncheckedCreateWithoutSitesInput>
+  where?: Prisma.ImageWhereInput
+}
+
+export type ImageUpdateToOneWithWhereWithoutSitesInput = {
+  where?: Prisma.ImageWhereInput
+  data: Prisma.XOR<Prisma.ImageUpdateWithoutSitesInput, Prisma.ImageUncheckedUpdateWithoutSitesInput>
+}
+
+export type ImageUpdateWithoutSitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+}
+
+export type ImageUncheckedUpdateWithoutSitesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
 }
@@ -890,12 +979,14 @@ export type ImageUncheckedUpdateWithoutArticlesInput = {
 export type ImageCountOutputType = {
   articles: number
   timelineEvents: number
+  sites: number
   collections: number
 }
 
 export type ImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   articles?: boolean | ImageCountOutputTypeCountArticlesArgs
   timelineEvents?: boolean | ImageCountOutputTypeCountTimelineEventsArgs
+  sites?: boolean | ImageCountOutputTypeCountSitesArgs
   collections?: boolean | ImageCountOutputTypeCountCollectionsArgs
 }
 
@@ -926,6 +1017,13 @@ export type ImageCountOutputTypeCountTimelineEventsArgs<ExtArgs extends runtime.
 /**
  * ImageCountOutputType without action
  */
+export type ImageCountOutputTypeCountSitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleSiteWhereInput
+}
+
+/**
+ * ImageCountOutputType without action
+ */
 export type ImageCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionWhereInput
 }
@@ -943,10 +1041,10 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   mimeType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  section?: boolean
   visibility?: boolean
   articles?: boolean | Prisma.Image$articlesArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Image$timelineEventsArgs<ExtArgs>
+  sites?: boolean | Prisma.Image$sitesArgs<ExtArgs>
   collections?: boolean | Prisma.Image$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -963,7 +1061,6 @@ export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   mimeType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  section?: boolean
   visibility?: boolean
 }, ExtArgs["result"]["image"]>
 
@@ -979,7 +1076,6 @@ export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   mimeType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  section?: boolean
   visibility?: boolean
 }, ExtArgs["result"]["image"]>
 
@@ -995,14 +1091,14 @@ export type ImageSelectScalar = {
   mimeType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  section?: boolean
   visibility?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "alt" | "type" | "filename" | "width" | "height" | "size" | "mimeType" | "createdAt" | "updatedAt" | "section" | "visibility", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "alt" | "type" | "filename" | "width" | "height" | "size" | "mimeType" | "createdAt" | "updatedAt" | "visibility", ExtArgs["result"]["image"]>
 export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   articles?: boolean | Prisma.Image$articlesArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Image$timelineEventsArgs<ExtArgs>
+  sites?: boolean | Prisma.Image$sitesArgs<ExtArgs>
   collections?: boolean | Prisma.Image$collectionsArgs<ExtArgs>
   _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1014,6 +1110,7 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     articles: Prisma.$ArticleImagePayload<ExtArgs>[]
     timelineEvents: Prisma.$TimelineEventPayload<ExtArgs>[]
+    sites: Prisma.$ArticleSitePayload<ExtArgs>[]
     collections: Prisma.$CollectionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1028,7 +1125,6 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     mimeType: string | null
     createdAt: Date
     updatedAt: Date
-    section: string | null
     visibility: $Enums.Visibility
   }, ExtArgs["result"]["image"]>
   composites: {}
@@ -1426,6 +1522,7 @@ export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   articles<T extends Prisma.Image$articlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timelineEvents<T extends Prisma.Image$timelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$timelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sites<T extends Prisma.Image$sitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleSitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   collections<T extends Prisma.Image$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1467,7 +1564,6 @@ export interface ImageFieldRefs {
   readonly mimeType: Prisma.FieldRef<"Image", 'String'>
   readonly createdAt: Prisma.FieldRef<"Image", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Image", 'DateTime'>
-  readonly section: Prisma.FieldRef<"Image", 'String'>
   readonly visibility: Prisma.FieldRef<"Image", 'Visibility'>
 }
     
@@ -1907,6 +2003,30 @@ export type Image$timelineEventsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.TimelineEventScalarFieldEnum | Prisma.TimelineEventScalarFieldEnum[]
+}
+
+/**
+ * Image.sites
+ */
+export type Image$sitesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArticleSite
+   */
+  select?: Prisma.ArticleSiteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArticleSite
+   */
+  omit?: Prisma.ArticleSiteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleSiteInclude<ExtArgs> | null
+  where?: Prisma.ArticleSiteWhereInput
+  orderBy?: Prisma.ArticleSiteOrderByWithRelationInput | Prisma.ArticleSiteOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleSiteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleSiteScalarFieldEnum | Prisma.ArticleSiteScalarFieldEnum[]
 }
 
 /**
