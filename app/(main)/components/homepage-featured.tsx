@@ -1,6 +1,6 @@
 import { useDataQuery } from "@main/hooks/use-data-query";
-import { getHomepageArticlesAction } from "@main/actions/get-articles-action";
 import { ArticleSection } from "@main/components/article-section";
+import { getHomepageArticlesAction } from "@/lib/queries/article.queries";
 
 type HomepageData = Awaited<ReturnType<typeof getHomepageArticlesAction>>;
 

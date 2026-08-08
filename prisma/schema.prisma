@@ -571,19 +571,20 @@ model ArticleSite {
   article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
   site      Site
 
-  // Champs "ouverture future" — décommente/ajoute au besoin, sans casser l'existant
-  // publishedAt DateTime?     // date de publication propre à ce site
-  // featured    Boolean  @default(false)  // mis en avant sur ce site
-  // order       Int?          // ordre d'affichage sur ce site
+  featured Boolean @default(false) // mis en avant sur la home de CE site
+  pinned   Boolean @default(false) // épinglé en haut, indépendamment du tri par date
+  order    Int? // ordre manuel d'affichage sur ce site
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   image     Image?   @relation(fields: [imageId], references: [id])
   imageId   String?
   video     Video?   @relation(fields: [videoId], references: [id])
   videoId   String?
 
   @@unique([articleId, site])
-  @@index([site])
+  @@index([site, featured])
+  @@index([site, order])
 }
 
 // Si tu n'as pas encore ce enum (à vérifier avec ArticleImage)

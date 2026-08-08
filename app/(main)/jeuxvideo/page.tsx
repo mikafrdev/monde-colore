@@ -10,13 +10,13 @@ const gameTypeList: gameListType[] = [
          title: "Les jeux vidéo",
          url: "a77417c2-52ff-49bc-b749-8e4c18fc9d41.jpg",
          alt: "Jeux vidéo",
-         link: "/jeux-video/jeux",
+         link: "/jeuxvideo/jeux",
       },
       {
          title: "Les consoles",
          url: "786e3629-778b-4272-a0af-2b1a87540e9c.jpg",
          alt: "Les consoles",
-         link: "/jeux-video/consoles",
+         link: "/jeuxvideo/consoles",
       }
    ];
 
