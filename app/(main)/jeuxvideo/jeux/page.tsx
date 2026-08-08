@@ -1,7 +1,9 @@
 import { ScrollToTopButton } from "@/components/scroll-to-top-button";
+import { Site } from "@/lib/prisma/generated/browser";
+import { getArticlesAction } from "@/lib/queries/article.queries";
 import { gameListType } from "@/types/game";
+import { ArticleSection } from "@main/components/article-section";
 import { Gallery } from "@main/components/gallery";
-import SubCategoryList from "@main/components/sub-category-list";
 
 export default async function JeuxVideo() {
    /* await new Promise((r) => setTimeout(r, 4000)); */
@@ -49,10 +51,16 @@ export default async function JeuxVideo() {
          link: "",
       },
    ];
+
+   const jeuxLeo = await getArticlesAction({
+      type: "JEUXVIDEO",
+      site: Site.LEO,
+   });
+
    return (
       <div>
          <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Les jeux</h1>
+            <h1 className="flex justify-center">Les jeux</h1>
             <div className="relative w-full h-64 min-h-64 overflow-hidden shadow-md">
                <Gallery
                   images={[
@@ -61,10 +69,10 @@ export default async function JeuxVideo() {
                      },
                   ]}
                />
-               {/*  */}
             </div>
          </div>
-         <SubCategoryList dataList={gameList} />
+
+         <ArticleSection articles={jeuxLeo} />
 
          <ScrollToTopButton />
       </div>

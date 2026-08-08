@@ -90,7 +90,7 @@ export function ArticlePageContent({
                      {new Date(article.publishedAt).toLocaleDateString("fr-FR")}
                   </span>
                )}
-               {article.source && <span>Source : {article.source.name}</span>}
+               {/* {article.source && <span>Source : {article.source.name}</span>} */}
             </div>
          </header>
 

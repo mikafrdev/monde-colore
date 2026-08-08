@@ -62,7 +62,7 @@ const homeSidebar: readonly SidebarLink[] = [
    {
       id: "games",
       label: "Jeux vidéo",
-      href: "/jeux-video",
+      href: "/jeuxvideo",
       icon: Gamepad2,
       description: "jeux vidéo de Léo",
    },
@@ -72,14 +72,14 @@ const jeuxvideoSidebar: readonly SidebarLink[] = [
    {
       id: "consoles",
       label: "Les consoles",
-      href: "/jeux-video/consoles",
+      href: "/jeuxvideo/consoles",
       icon: Home,
       description: "Les consoles de jeux vidéo",
    },
    {
       id: "videos",
       label: "Les jeux",
-      href: "/jeux-video/jeux",
+      href: "/jeuxvideo/jeux",
       icon: Video,
       description: "Toutes les vidéos",
    },
@@ -100,7 +100,7 @@ const jeuxvideoSidebar: readonly SidebarLink[] = [
    {
       id: "games",
       label: "Jeux vidéo",
-      href: "/jeux-video",
+      href: "/jeuxvideo",
       icon: Gamepad2,
       description: "jeux vidéo de Léo",
    },
@@ -137,10 +137,10 @@ export const navigationSections: readonly NavSection[] = [
    {
       id: "games",
       label: "Jeux vidéo",
-      href: "/jeux-video",
+      href: "/jeuxvideo",
       type: "link",
       icon: Gamepad2,
-      matcher: (p) => p.startsWith("/jeux-video"),
+      matcher: (p) => p.startsWith("/jeuxvideo"),
       sidebar: jeuxvideoSidebar,
    },
    {

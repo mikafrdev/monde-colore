@@ -107,19 +107,6 @@ export async function getArticleBySlug(slug: string) {
    );
 }
 
-export async function getGamesBySiteAction(site?: Site) {
-   return typed<ArticleWithRelations[]>(
-      prisma.article.findMany({
-         where: {
-            type: "JEUXVIDEO",
-            ...(site && { sites: { some: { site } } }),
-         },
-         orderBy: { updatedAt: "desc" },
-         include: articleInclude,
-      }),
-   );
-}
-
 export async function getHomepageArticlesAction() {
    const query = (type: ArticleType) =>
       typed<ArticleWithRelations[]>(

@@ -20,15 +20,29 @@ export type ArticleSiteModel = runtime.Types.Result.DefaultSelection<Prisma.$Art
 
 export type AggregateArticleSite = {
   _count: ArticleSiteCountAggregateOutputType | null
+  _avg: ArticleSiteAvgAggregateOutputType | null
+  _sum: ArticleSiteSumAggregateOutputType | null
   _min: ArticleSiteMinAggregateOutputType | null
   _max: ArticleSiteMaxAggregateOutputType | null
+}
+
+export type ArticleSiteAvgAggregateOutputType = {
+  order: number | null
+}
+
+export type ArticleSiteSumAggregateOutputType = {
+  order: number | null
 }
 
 export type ArticleSiteMinAggregateOutputType = {
   id: string | null
   articleId: string | null
   site: $Enums.Site | null
+  featured: boolean | null
+  pinned: boolean | null
+  order: number | null
   createdAt: Date | null
+  updatedAt: Date | null
   imageId: string | null
   videoId: string | null
 }
@@ -37,7 +51,11 @@ export type ArticleSiteMaxAggregateOutputType = {
   id: string | null
   articleId: string | null
   site: $Enums.Site | null
+  featured: boolean | null
+  pinned: boolean | null
+  order: number | null
   createdAt: Date | null
+  updatedAt: Date | null
   imageId: string | null
   videoId: string | null
 }
@@ -46,18 +64,34 @@ export type ArticleSiteCountAggregateOutputType = {
   id: number
   articleId: number
   site: number
+  featured: number
+  pinned: number
+  order: number
   createdAt: number
+  updatedAt: number
   imageId: number
   videoId: number
   _all: number
 }
 
 
+export type ArticleSiteAvgAggregateInputType = {
+  order?: true
+}
+
+export type ArticleSiteSumAggregateInputType = {
+  order?: true
+}
+
 export type ArticleSiteMinAggregateInputType = {
   id?: true
   articleId?: true
   site?: true
+  featured?: true
+  pinned?: true
+  order?: true
   createdAt?: true
+  updatedAt?: true
   imageId?: true
   videoId?: true
 }
@@ -66,7 +100,11 @@ export type ArticleSiteMaxAggregateInputType = {
   id?: true
   articleId?: true
   site?: true
+  featured?: true
+  pinned?: true
+  order?: true
   createdAt?: true
+  updatedAt?: true
   imageId?: true
   videoId?: true
 }
@@ -75,7 +113,11 @@ export type ArticleSiteCountAggregateInputType = {
   id?: true
   articleId?: true
   site?: true
+  featured?: true
+  pinned?: true
+  order?: true
   createdAt?: true
+  updatedAt?: true
   imageId?: true
   videoId?: true
   _all?: true
@@ -119,6 +161,18 @@ export type ArticleSiteAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ArticleSiteAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ArticleSiteSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ArticleSiteMinAggregateInputType
@@ -149,6 +203,8 @@ export type ArticleSiteGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: ArticleSiteCountAggregateInputType | true
+  _avg?: ArticleSiteAvgAggregateInputType
+  _sum?: ArticleSiteSumAggregateInputType
   _min?: ArticleSiteMinAggregateInputType
   _max?: ArticleSiteMaxAggregateInputType
 }
@@ -157,10 +213,16 @@ export type ArticleSiteGroupByOutputType = {
   id: string
   articleId: string
   site: $Enums.Site
+  featured: boolean
+  pinned: boolean
+  order: number | null
   createdAt: Date
+  updatedAt: Date
   imageId: string | null
   videoId: string | null
   _count: ArticleSiteCountAggregateOutputType | null
+  _avg: ArticleSiteAvgAggregateOutputType | null
+  _sum: ArticleSiteSumAggregateOutputType | null
   _min: ArticleSiteMinAggregateOutputType | null
   _max: ArticleSiteMaxAggregateOutputType | null
 }
@@ -187,7 +249,11 @@ export type ArticleSiteWhereInput = {
   id?: Prisma.StringFilter<"ArticleSite"> | string
   articleId?: Prisma.StringFilter<"ArticleSite"> | string
   site?: Prisma.EnumSiteFilter<"ArticleSite"> | $Enums.Site
+  featured?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  pinned?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  order?: Prisma.IntNullableFilter<"ArticleSite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
   imageId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
   videoId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
@@ -199,7 +265,11 @@ export type ArticleSiteOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   site?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
+  order?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   imageId?: Prisma.SortOrderInput | Prisma.SortOrder
   videoId?: Prisma.SortOrderInput | Prisma.SortOrder
   article?: Prisma.ArticleOrderByWithRelationInput
@@ -215,7 +285,11 @@ export type ArticleSiteWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ArticleSiteWhereInput | Prisma.ArticleSiteWhereInput[]
   articleId?: Prisma.StringFilter<"ArticleSite"> | string
   site?: Prisma.EnumSiteFilter<"ArticleSite"> | $Enums.Site
+  featured?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  pinned?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  order?: Prisma.IntNullableFilter<"ArticleSite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
   imageId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
   videoId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
@@ -227,12 +301,18 @@ export type ArticleSiteOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   site?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
+  order?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   imageId?: Prisma.SortOrderInput | Prisma.SortOrder
   videoId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ArticleSiteCountOrderByAggregateInput
+  _avg?: Prisma.ArticleSiteAvgOrderByAggregateInput
   _max?: Prisma.ArticleSiteMaxOrderByAggregateInput
   _min?: Prisma.ArticleSiteMinOrderByAggregateInput
+  _sum?: Prisma.ArticleSiteSumOrderByAggregateInput
 }
 
 export type ArticleSiteScalarWhereWithAggregatesInput = {
@@ -242,7 +322,11 @@ export type ArticleSiteScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ArticleSite"> | string
   articleId?: Prisma.StringWithAggregatesFilter<"ArticleSite"> | string
   site?: Prisma.EnumSiteWithAggregatesFilter<"ArticleSite"> | $Enums.Site
+  featured?: Prisma.BoolWithAggregatesFilter<"ArticleSite"> | boolean
+  pinned?: Prisma.BoolWithAggregatesFilter<"ArticleSite"> | boolean
+  order?: Prisma.IntNullableWithAggregatesFilter<"ArticleSite"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ArticleSite"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ArticleSite"> | Date | string
   imageId?: Prisma.StringNullableWithAggregatesFilter<"ArticleSite"> | string | null
   videoId?: Prisma.StringNullableWithAggregatesFilter<"ArticleSite"> | string | null
 }
@@ -250,7 +334,11 @@ export type ArticleSiteScalarWhereWithAggregatesInput = {
 export type ArticleSiteCreateInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   article: Prisma.ArticleCreateNestedOneWithoutSitesInput
   image?: Prisma.ImageCreateNestedOneWithoutSitesInput
   video?: Prisma.VideoCreateNestedOneWithoutSitesInput
@@ -260,7 +348,11 @@ export type ArticleSiteUncheckedCreateInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
   videoId?: string | null
 }
@@ -268,7 +360,11 @@ export type ArticleSiteUncheckedCreateInput = {
 export type ArticleSiteUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   article?: Prisma.ArticleUpdateOneRequiredWithoutSitesNestedInput
   image?: Prisma.ImageUpdateOneWithoutSitesNestedInput
   video?: Prisma.VideoUpdateOneWithoutSitesNestedInput
@@ -278,7 +374,11 @@ export type ArticleSiteUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -287,7 +387,11 @@ export type ArticleSiteCreateManyInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
   videoId?: string | null
 }
@@ -295,14 +399,22 @@ export type ArticleSiteCreateManyInput = {
 export type ArticleSiteUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ArticleSiteUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -326,16 +438,28 @@ export type ArticleSiteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   site?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   imageId?: Prisma.SortOrder
   videoId?: Prisma.SortOrder
+}
+
+export type ArticleSiteAvgOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type ArticleSiteMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   site?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   imageId?: Prisma.SortOrder
   videoId?: Prisma.SortOrder
 }
@@ -344,9 +468,17 @@ export type ArticleSiteMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   site?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   imageId?: Prisma.SortOrder
   videoId?: Prisma.SortOrder
+}
+
+export type ArticleSiteSumOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type ArticleSiteCreateNestedManyWithoutArticleInput = {
@@ -482,7 +614,11 @@ export type EnumSiteFieldUpdateOperationsInput = {
 export type ArticleSiteCreateWithoutArticleInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   image?: Prisma.ImageCreateNestedOneWithoutSitesInput
   video?: Prisma.VideoCreateNestedOneWithoutSitesInput
 }
@@ -490,7 +626,11 @@ export type ArticleSiteCreateWithoutArticleInput = {
 export type ArticleSiteUncheckedCreateWithoutArticleInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
   videoId?: string | null
 }
@@ -528,7 +668,11 @@ export type ArticleSiteScalarWhereInput = {
   id?: Prisma.StringFilter<"ArticleSite"> | string
   articleId?: Prisma.StringFilter<"ArticleSite"> | string
   site?: Prisma.EnumSiteFilter<"ArticleSite"> | $Enums.Site
+  featured?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  pinned?: Prisma.BoolFilter<"ArticleSite"> | boolean
+  order?: Prisma.IntNullableFilter<"ArticleSite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ArticleSite"> | Date | string
   imageId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
   videoId?: Prisma.StringNullableFilter<"ArticleSite"> | string | null
 }
@@ -536,7 +680,11 @@ export type ArticleSiteScalarWhereInput = {
 export type ArticleSiteCreateWithoutImageInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   article: Prisma.ArticleCreateNestedOneWithoutSitesInput
   video?: Prisma.VideoCreateNestedOneWithoutSitesInput
 }
@@ -545,7 +693,11 @@ export type ArticleSiteUncheckedCreateWithoutImageInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   videoId?: string | null
 }
 
@@ -578,7 +730,11 @@ export type ArticleSiteUpdateManyWithWhereWithoutImageInput = {
 export type ArticleSiteCreateWithoutVideoInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   article: Prisma.ArticleCreateNestedOneWithoutSitesInput
   image?: Prisma.ImageCreateNestedOneWithoutSitesInput
 }
@@ -587,7 +743,11 @@ export type ArticleSiteUncheckedCreateWithoutVideoInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
 }
 
@@ -620,7 +780,11 @@ export type ArticleSiteUpdateManyWithWhereWithoutVideoInput = {
 export type ArticleSiteCreateManyArticleInput = {
   id?: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
   videoId?: string | null
 }
@@ -628,7 +792,11 @@ export type ArticleSiteCreateManyArticleInput = {
 export type ArticleSiteUpdateWithoutArticleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ImageUpdateOneWithoutSitesNestedInput
   video?: Prisma.VideoUpdateOneWithoutSitesNestedInput
 }
@@ -636,7 +804,11 @@ export type ArticleSiteUpdateWithoutArticleInput = {
 export type ArticleSiteUncheckedUpdateWithoutArticleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -644,7 +816,11 @@ export type ArticleSiteUncheckedUpdateWithoutArticleInput = {
 export type ArticleSiteUncheckedUpdateManyWithoutArticleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -653,14 +829,22 @@ export type ArticleSiteCreateManyImageInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   videoId?: string | null
 }
 
 export type ArticleSiteUpdateWithoutImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   article?: Prisma.ArticleUpdateOneRequiredWithoutSitesNestedInput
   video?: Prisma.VideoUpdateOneWithoutSitesNestedInput
 }
@@ -669,7 +853,11 @@ export type ArticleSiteUncheckedUpdateWithoutImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -677,7 +865,11 @@ export type ArticleSiteUncheckedUpdateManyWithoutImageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -685,14 +877,22 @@ export type ArticleSiteCreateManyVideoInput = {
   id?: string
   articleId: string
   site: $Enums.Site
+  featured?: boolean
+  pinned?: boolean
+  order?: number | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   imageId?: string | null
 }
 
 export type ArticleSiteUpdateWithoutVideoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   article?: Prisma.ArticleUpdateOneRequiredWithoutSitesNestedInput
   image?: Prisma.ImageUpdateOneWithoutSitesNestedInput
 }
@@ -701,7 +901,11 @@ export type ArticleSiteUncheckedUpdateWithoutVideoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -709,7 +913,11 @@ export type ArticleSiteUncheckedUpdateManyWithoutVideoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
   site?: Prisma.EnumSiteFieldUpdateOperationsInput | $Enums.Site
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -719,7 +927,11 @@ export type ArticleSiteSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   articleId?: boolean
   site?: boolean
+  featured?: boolean
+  pinned?: boolean
+  order?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   imageId?: boolean
   videoId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
@@ -731,7 +943,11 @@ export type ArticleSiteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   articleId?: boolean
   site?: boolean
+  featured?: boolean
+  pinned?: boolean
+  order?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   imageId?: boolean
   videoId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
@@ -743,7 +959,11 @@ export type ArticleSiteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   articleId?: boolean
   site?: boolean
+  featured?: boolean
+  pinned?: boolean
+  order?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   imageId?: boolean
   videoId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
@@ -755,12 +975,16 @@ export type ArticleSiteSelectScalar = {
   id?: boolean
   articleId?: boolean
   site?: boolean
+  featured?: boolean
+  pinned?: boolean
+  order?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   imageId?: boolean
   videoId?: boolean
 }
 
-export type ArticleSiteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "articleId" | "site" | "createdAt" | "imageId" | "videoId", ExtArgs["result"]["articleSite"]>
+export type ArticleSiteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "articleId" | "site" | "featured" | "pinned" | "order" | "createdAt" | "updatedAt" | "imageId" | "videoId", ExtArgs["result"]["articleSite"]>
 export type ArticleSiteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   image?: boolean | Prisma.ArticleSite$imageArgs<ExtArgs>
@@ -788,7 +1012,11 @@ export type $ArticleSitePayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     articleId: string
     site: $Enums.Site
+    featured: boolean
+    pinned: boolean
+    order: number | null
     createdAt: Date
+    updatedAt: Date
     imageId: string | null
     videoId: string | null
   }, ExtArgs["result"]["articleSite"]>
@@ -1220,7 +1448,11 @@ export interface ArticleSiteFieldRefs {
   readonly id: Prisma.FieldRef<"ArticleSite", 'String'>
   readonly articleId: Prisma.FieldRef<"ArticleSite", 'String'>
   readonly site: Prisma.FieldRef<"ArticleSite", 'Site'>
+  readonly featured: Prisma.FieldRef<"ArticleSite", 'Boolean'>
+  readonly pinned: Prisma.FieldRef<"ArticleSite", 'Boolean'>
+  readonly order: Prisma.FieldRef<"ArticleSite", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ArticleSite", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"ArticleSite", 'DateTime'>
   readonly imageId: Prisma.FieldRef<"ArticleSite", 'String'>
   readonly videoId: Prisma.FieldRef<"ArticleSite", 'String'>
 }

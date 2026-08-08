@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ImageIcon, Star } from "lucide-react";
-import { routes } from "@/lib/routes";
+import { routes } from "@main/lib/routes";
 import type { ArticleWithRelations } from "@/lib/queries/article.queries";
 
 type ArticleSectionProps = {
@@ -38,7 +38,9 @@ export function ArticleSection({ title, articles }: ArticleSectionProps) {
       <>
          <h2 className="text-2xl font-bold">{title}</h2>
          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-4">
-            {articles.map((article) => {
+            {articles.map((article, index) => {
+               const isAboveFold = index < 4;
+
                const primaryImage =
                   article.images.find((i) => i.isPrimary) ?? article.images[0];
                const primaryVideo =
@@ -60,9 +62,16 @@ export function ArticleSection({ title, articles }: ArticleSectionProps) {
                return (
                   <Link
                      key={article.id}
-                     href={routes.article(article.type, article.slug)}
+                     href={routes.article(
+                        article.categories[0]?.slug ?? "autres",
+                        article.slug,
+                     )}
+                     /* href="#" */
                      className="block"
                   >
+                     {article.categories.map((category) => (
+                        <div key={category.id}>{category.name}</div>
+                     ))}
                      <Card className="group relative overflow-hidden py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                         {/* Badge */}
                         <div className="absolute top-3 right-3 z-10">
@@ -77,7 +86,8 @@ export function ArticleSection({ title, articles }: ArticleSectionProps) {
                         <div className="relative aspect-video overflow-hidden border-b border-border">
                            {imageUrl ? (
                               <Image
-                                 loading="lazy"
+                                 loading={isAboveFold ? "eager" : "lazy"}
+                                 priority={isAboveFold}
                                  src={imageUrl}
                                  alt={imageAlt}
                                  fill

@@ -449,7 +449,11 @@ export const ArticleSiteScalarFieldEnum = {
   id: 'id',
   articleId: 'articleId',
   site: 'site',
+  featured: 'featured',
+  pinned: 'pinned',
+  order: 'order',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   imageId: 'imageId',
   videoId: 'videoId'
 } as const
