@@ -1,5 +1,5 @@
 import { Site } from "@/lib/prisma/generated/enums";
-import { ArticleSection } from "@main/components/article-section";
+import { ArticleList } from "@main/components/article-list";
 import { getArticlesBySiteAndCategoryAction } from "@/lib/queries/article.queries";
 import { useDataQuery } from "@/hooks/use-data-query";
 
@@ -15,9 +15,12 @@ export function TypedFeatured({ site, categorySlug }: TypedFeaturedProps) {
    );
 
    return (
-      <ArticleSection
+      <ArticleList
          title={categorySlug ?? "Tous les articles"}
          articles={articles}
+         heroImages={[
+            { src: "/uploads/images/a77417c2-52ff-49bc-b749-8e4c18fc9d41.jpg" },
+         ]}
       />
    );
 }

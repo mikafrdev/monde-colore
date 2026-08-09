@@ -1,27 +1,24 @@
-import { AppCarousel } from "@/components/app-carousel";
-import { ScrollToTopButton } from "@/components/scroll-to-top-button";
+import Footer from "@/components/footer";
+import { Site } from "@/lib/prisma/generated/enums";
+import { getCategoryBySlug } from "@/lib/queries/categorie.queries";
 import { AppFeatured } from "@main/components/app-featured";
-import Image from "next/image";
+import { notFound } from "next/dist/client/components/navigation";
 
-export default async function Football() {
-   /* await new Promise((r) => setTimeout(r, 4000)); */
+export default async function PageTeams() {
+   /* await new Promise((r) => setTimeout(r, 2000)); */
+
+   const category = await getCategoryBySlug("equipes");
+
+   if (!category) {
+      notFound();
+   }
+
    return (
-      <div>
-         <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Les équipes</h1>
-            <Image
-               loading="eager"
-               src="/uploads/images/artboard_1_720.webp"
-               alt="Football"
-               width={1050}
-               height={605}
-               className=""
-            />
-            {/* <AppCarousel />
-            <AppFeatured pageType="LEO" /> */}
-         </div>
-
-         <ScrollToTopButton />
+      <div className="flex flex-col gap-6 pl-4 flex-1 px-4">
+         <h1 className="hidden">Les équipes</h1>
+         {/* <AppSearch /> */}
+         <AppFeatured site={Site.LEO} categorySlug={category?.slug} />
+         <Footer />
       </div>
    );
 }
