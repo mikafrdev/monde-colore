@@ -16,9 +16,10 @@ import { VideoServer } from "@/lib/tiptap/video.extension.server";
 import { HorizontalRule } from "@tiptap/extension-horizontal-rule";
 import { HardBreak } from "@tiptap/extension-hard-break";
 import { Link } from "@tiptap/extension-link";
+import type { Prisma } from "@/lib/prisma/generated/client";
 
 interface TiptapRendererProps {
-   content: string;
+   content: Prisma.JsonValue;
 }
 
 export function TiptapRenderer({ content }: TiptapRendererProps) {
@@ -27,7 +28,7 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
    try {
       // Compteur pour tracker la première image
       let imageCount = 0;
-      const json = JSON.parse(content);
+      const json = typeof content === "string" ? JSON.parse(content) : content;
 
       return renderToReactElement({
          extensions: [
@@ -48,7 +49,7 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
             TiptapImage,
             VideoServer,
             HardBreak,
-            Link
+            Link,
          ],
          content: json,
          options: {
@@ -66,7 +67,7 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
                         alt={node.attrs.alt ?? ""}
                         width={w}
                         height={h}
-                        className="rounded-md"
+                        className="rounded-md w-full h-auto max-w-full"
                         sizes={`(max-width: 768px) 100vw, ${Math.min(w, 800)}px`}
                         loading={isFirst ? "eager" : "lazy"}
                         priority={isFirst}
@@ -98,6 +99,7 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
                         title={title ?? ""}
                         controls
                         className="w-full rounded-md my-4"
+                        poster={node.attrs.poster}
                      />
                   );
                },
@@ -106,6 +108,6 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
       });
    } catch (e) {
       console.error("TiptapRenderer parse error:", e);
-      return <p>{content}</p>;
+      return <p>{typeof content === "string" ? content : ""}</p>;
    }
 }

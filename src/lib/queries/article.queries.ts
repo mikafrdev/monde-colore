@@ -14,8 +14,9 @@ Option A — Contourner en typant manuellement le retour (le plus pragmatique en
 
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/lib/prisma/generated/client";
-import { ArticleType, Site } from "@/lib/prisma/generated/enums";
+import { PublicationStatus, Site } from "@/lib/prisma/generated/enums";
 import { typed } from "./typed-query";
+import { getCategoryBySlug } from "./categorie.queries";
 
 // ─── Include partagé ──────────────────────────────────────────────────────────
 
@@ -72,7 +73,7 @@ export type ArticleWithRelations = Prisma.ArticleGetPayload<{
 // ─── Params ───────────────────────────────────────────────────────────────────
 
 type GetArticlesParams = {
-   type?: ArticleType;
+   type?: PublicationStatus;
    site?: Site;
    where?: Prisma.ArticleWhereInput;
    orderBy?: Prisma.ArticleOrderByWithRelationInput;
@@ -82,17 +83,31 @@ type GetArticlesParams = {
 
 // ─── Actions ──────────────────────────────────────────────────────────────────
 
-export async function getArticlesAction(params?: GetArticlesParams) {
+export async function getArticlesBySiteAndCategoryAction(
+   site?: Site,
+   categorySlug?: string,
+) {
    return typed<ArticleWithRelations[]>(
       prisma.article.findMany({
          where: {
-            ...(params?.type && { type: params.type }),
-            ...(params?.site && { sites: { some: { site: params.site } } }),
-            ...params?.where,
+            ...(categorySlug && {
+               categories: {
+                  some: {
+                     slug: categorySlug,
+                  },
+               },
+            }),
+            ...(site && {
+               sites: {
+                  some: {
+                     site,
+                  },
+               },
+            }),
          },
-         orderBy: params?.orderBy ?? { updatedAt: "desc" },
-         take: params?.take,
-         skip: params?.skip,
+         orderBy: {
+            updatedAt: "desc",
+         },
          include: articleInclude,
       }),
    );
@@ -107,33 +122,66 @@ export async function getArticleBySlug(slug: string) {
    );
 }
 
-export async function getHomepageArticlesAction() {
-   const query = (type: ArticleType) =>
-      typed<ArticleWithRelations[]>(
-         prisma.article.findMany({
-            where: { type },
-            orderBy: { updatedAt: "desc" },
-            take: 4,
-            include: articleInclude,
-         }),
-      );
-
-   const [informations, cuisines, jeuxvideos] = await Promise.all([
-      query("INFORMATION"),
-      query("CUISINE"),
-      query("JEUXVIDEO"),
-   ]);
-
-   return { informations, cuisines, jeuxvideos };
-}
-
-export async function getHomepageArticlesBySiteAction(site: Site) {
-   return typed<ArticleWithRelations[]>(
+const query = (categorySlug: string) =>
+   typed<ArticleWithRelations[]>(
       prisma.article.findMany({
-         where: { sites: { some: { site } } },
-         orderBy: { updatedAt: "desc" },
+         where: {
+            categories: {
+               some: {
+                  slug: categorySlug,
+               },
+            },
+         },
+         orderBy: {
+            updatedAt: "desc",
+         },
          take: 4,
          include: articleInclude,
       }),
    );
+
+export async function getHomepageFeaturedAction(site: Site) {
+   const categorySlugs = ["informations", "cuisine", "jeux-video"];
+
+   const articles = await typed<ArticleWithRelations[]>(
+      prisma.article.findMany({
+         where: {
+            sites: {
+               some: {
+                  site,
+               },
+            },
+
+            categories: {
+               some: {
+                  slug: {
+                     in: categorySlugs,
+                  },
+               },
+            },
+         },
+
+         orderBy: {
+            updatedAt: "desc",
+         },
+
+         include: articleInclude,
+      }),
+   );
+
+   return {
+      informations: articles.filter((article) =>
+         article.categories.some(
+            (category) => category.slug === "informations",
+         ),
+      ),
+
+      cuisines: articles.filter((article) =>
+         article.categories.some((category) => category.slug === "cuisine"),
+      ),
+
+      jeuxvideos: articles.filter((article) =>
+         article.categories.some((category) => category.slug === "jeux-video"),
+      ),
+   };
 }

@@ -8,7 +8,7 @@ export default async function HomeFeatureNavigation() {
          icon: <Gamepad2 className="size-10" />,
          title: "Jeux",
          description: "Retrouve tes jeux préférés et découvre de nouveaux jeux",
-         href: "/jeuxvideo",
+         href: "/jeux-video",
       },
       {
          icon: <Play className="size-10" />,

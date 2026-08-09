@@ -14,3 +14,22 @@ export async function getCategoriesAction() {
       orderBy: { name: "asc" },
    });
 }
+
+export async function getCategorySlugs() {
+   return prisma.category.findMany({
+      orderBy: {
+         name: "asc",
+      },
+      select: {
+         slug: true,
+      },
+   });
+}
+
+export async function getCategoryBySlug(slug: string) {
+   return prisma.category.findUnique({
+      where: {
+         slug,
+      },
+   });
+}

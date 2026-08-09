@@ -5,21 +5,20 @@ import Image from "next/image";
 
 export default async function JeuxVideo() {
    /* await new Promise((r) => setTimeout(r, 4000)); */
-const gameTypeList: gameListType[] = [
+   const gameTypeList: gameListType[] = [
       {
          title: "Les jeux vidéo",
          url: "a77417c2-52ff-49bc-b749-8e4c18fc9d41.jpg",
          alt: "Jeux vidéo",
-         link: "/jeuxvideo/jeux",
+         link: "/jeux-video/jeux",
       },
       {
          title: "Les consoles",
          url: "786e3629-778b-4272-a0af-2b1a87540e9c.jpg",
          alt: "Les consoles",
-         link: "/jeuxvideo/consoles",
-      }
+         link: "/jeux-video/consoles",
+      },
    ];
-
 
    return (
       <div>

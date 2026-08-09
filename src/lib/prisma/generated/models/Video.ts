@@ -47,7 +47,7 @@ export type VideoMinAggregateOutputType = {
   embedUrl: string | null
   fileUrl: string | null
   provider: $Enums.VideoProvider | null
-  status: $Enums.VideoStatus | null
+  status: $Enums.PublicationStatus | null
   filename: string | null
   size: number | null
   mimeType: string | null
@@ -69,7 +69,7 @@ export type VideoMaxAggregateOutputType = {
   embedUrl: string | null
   fileUrl: string | null
   provider: $Enums.VideoProvider | null
-  status: $Enums.VideoStatus | null
+  status: $Enums.PublicationStatus | null
   filename: string | null
   size: number | null
   mimeType: string | null
@@ -282,7 +282,7 @@ export type VideoGroupByOutputType = {
   embedUrl: string | null
   fileUrl: string | null
   provider: $Enums.VideoProvider
-  status: $Enums.VideoStatus
+  status: $Enums.PublicationStatus
   filename: string | null
   size: number | null
   mimeType: string | null
@@ -327,7 +327,7 @@ export type VideoWhereInput = {
   embedUrl?: Prisma.StringNullableFilter<"Video"> | string | null
   fileUrl?: Prisma.StringNullableFilter<"Video"> | string | null
   provider?: Prisma.EnumVideoProviderFilter<"Video"> | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFilter<"Video"> | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFilter<"Video"> | $Enums.PublicationStatus
   filename?: Prisma.StringNullableFilter<"Video"> | string | null
   size?: Prisma.IntNullableFilter<"Video"> | number | null
   mimeType?: Prisma.StringNullableFilter<"Video"> | string | null
@@ -380,7 +380,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
   embedUrl?: Prisma.StringNullableFilter<"Video"> | string | null
   fileUrl?: Prisma.StringNullableFilter<"Video"> | string | null
   provider?: Prisma.EnumVideoProviderFilter<"Video"> | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFilter<"Video"> | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFilter<"Video"> | $Enums.PublicationStatus
   filename?: Prisma.StringNullableFilter<"Video"> | string | null
   size?: Prisma.IntNullableFilter<"Video"> | number | null
   mimeType?: Prisma.StringNullableFilter<"Video"> | string | null
@@ -435,7 +435,7 @@ export type VideoScalarWhereWithAggregatesInput = {
   embedUrl?: Prisma.StringNullableWithAggregatesFilter<"Video"> | string | null
   fileUrl?: Prisma.StringNullableWithAggregatesFilter<"Video"> | string | null
   provider?: Prisma.EnumVideoProviderWithAggregatesFilter<"Video"> | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusWithAggregatesFilter<"Video"> | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusWithAggregatesFilter<"Video"> | $Enums.PublicationStatus
   filename?: Prisma.StringNullableWithAggregatesFilter<"Video"> | string | null
   size?: Prisma.IntNullableWithAggregatesFilter<"Video"> | number | null
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"Video"> | string | null
@@ -457,7 +457,7 @@ export type VideoCreateInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -482,7 +482,7 @@ export type VideoUncheckedCreateInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -507,7 +507,7 @@ export type VideoUpdateInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -532,7 +532,7 @@ export type VideoUncheckedUpdateInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -557,7 +557,7 @@ export type VideoCreateManyInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -579,7 +579,7 @@ export type VideoUpdateManyMutationInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -601,7 +601,7 @@ export type VideoUncheckedUpdateManyInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -710,10 +710,6 @@ export type EnumVideoProviderFieldUpdateOperationsInput = {
   set?: $Enums.VideoProvider
 }
 
-export type EnumVideoStatusFieldUpdateOperationsInput = {
-  set?: $Enums.VideoStatus
-}
-
 export type VideoCreateNestedOneWithoutContentInput = {
   create?: Prisma.XOR<Prisma.VideoCreateWithoutContentInput, Prisma.VideoUncheckedCreateWithoutContentInput>
   connectOrCreate?: Prisma.VideoCreateOrConnectWithoutContentInput
@@ -767,7 +763,7 @@ export type VideoCreateWithoutContentInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -791,7 +787,7 @@ export type VideoUncheckedCreateWithoutContentInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -831,7 +827,7 @@ export type VideoUpdateWithoutContentInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -855,7 +851,7 @@ export type VideoUncheckedUpdateWithoutContentInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -879,7 +875,7 @@ export type VideoCreateWithoutArticlesInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -903,7 +899,7 @@ export type VideoUncheckedCreateWithoutArticlesInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -943,7 +939,7 @@ export type VideoUpdateWithoutArticlesInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -967,7 +963,7 @@ export type VideoUncheckedUpdateWithoutArticlesInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -991,7 +987,7 @@ export type VideoCreateWithoutSitesInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -1015,7 +1011,7 @@ export type VideoUncheckedCreateWithoutSitesInput = {
   embedUrl?: string | null
   fileUrl?: string | null
   provider: $Enums.VideoProvider
-  status?: $Enums.VideoStatus
+  status?: $Enums.PublicationStatus
   filename?: string | null
   size?: number | null
   mimeType?: string | null
@@ -1055,7 +1051,7 @@ export type VideoUpdateWithoutSitesInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1079,7 +1075,7 @@ export type VideoUncheckedUpdateWithoutSitesInput = {
   embedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.EnumVideoProviderFieldUpdateOperationsInput | $Enums.VideoProvider
-  status?: Prisma.EnumVideoStatusFieldUpdateOperationsInput | $Enums.VideoStatus
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1252,7 +1248,7 @@ export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     embedUrl: string | null
     fileUrl: string | null
     provider: $Enums.VideoProvider
-    status: $Enums.VideoStatus
+    status: $Enums.PublicationStatus
     filename: string | null
     size: number | null
     mimeType: string | null
@@ -1697,7 +1693,7 @@ export interface VideoFieldRefs {
   readonly embedUrl: Prisma.FieldRef<"Video", 'String'>
   readonly fileUrl: Prisma.FieldRef<"Video", 'String'>
   readonly provider: Prisma.FieldRef<"Video", 'VideoProvider'>
-  readonly status: Prisma.FieldRef<"Video", 'VideoStatus'>
+  readonly status: Prisma.FieldRef<"Video", 'PublicationStatus'>
   readonly filename: Prisma.FieldRef<"Video", 'String'>
   readonly size: Prisma.FieldRef<"Video", 'Int'>
   readonly mimeType: Prisma.FieldRef<"Video", 'String'>

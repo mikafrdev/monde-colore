@@ -127,6 +127,101 @@ export type Source = Prisma.SourceModel
  */
 export type Media = Prisma.MediaModel
 /**
+ * Model Platform
+ * 
+ */
+export type Platform = Prisma.PlatformModel
+/**
+ * Model PlatformMedia
+ * 
+ */
+export type PlatformMedia = Prisma.PlatformMediaModel
+/**
+ * Model GamePlatform
+ * 
+ */
+export type GamePlatform = Prisma.GamePlatformModel
+/**
+ * Model Game
+ * 
+ */
+export type Game = Prisma.GameModel
+/**
+ * Model GameEdition
+ * 
+ */
+export type GameEdition = Prisma.GameEditionModel
+/**
+ * Model GameCollection
+ * 
+ */
+export type GameCollection = Prisma.GameCollectionModel
+/**
+ * Model Franchise
+ * 
+ */
+export type Franchise = Prisma.FranchiseModel
+/**
+ * Model Genre
+ * 
+ */
+export type Genre = Prisma.GenreModel
+/**
+ * Model GameGenre
+ * 
+ */
+export type GameGenre = Prisma.GameGenreModel
+/**
+ * Model Console
+ * 
+ */
+export type Console = Prisma.ConsoleModel
+/**
+ * Model ConsoleCategory
+ * 
+ */
+export type ConsoleCategory = Prisma.ConsoleCategoryModel
+/**
+ * Model ConsoleMedia
+ * 
+ */
+export type ConsoleMedia = Prisma.ConsoleMediaModel
+/**
+ * Model ConsoleAccessory
+ * 
+ */
+export type ConsoleAccessory = Prisma.ConsoleAccessoryModel
+/**
+ * Model ConsoleConfiguration
+ * 
+ */
+export type ConsoleConfiguration = Prisma.ConsoleConfigurationModel
+/**
+ * Model ConsoleConfigurationAccessory
+ * 
+ */
+export type ConsoleConfigurationAccessory = Prisma.ConsoleConfigurationAccessoryModel
+/**
+ * Model ConsoleVariant
+ * 
+ */
+export type ConsoleVariant = Prisma.ConsoleVariantModel
+/**
+ * Model Region
+ * 
+ */
+export type Region = Prisma.RegionModel
+/**
+ * Model Company
+ * 
+ */
+export type Company = Prisma.CompanyModel
+/**
+ * Model Accessory
+ * 
+ */
+export type Accessory = Prisma.AccessoryModel
+/**
  * Model Collection
  * 
  */

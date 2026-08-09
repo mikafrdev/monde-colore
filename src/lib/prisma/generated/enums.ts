@@ -48,23 +48,13 @@ export const Visibility = {
 export type Visibility = (typeof Visibility)[keyof typeof Visibility]
 
 
-export const ArticleStatus = {
+export const PublicationStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
   ARCHIVED: 'ARCHIVED'
 } as const
 
-export type ArticleStatus = (typeof ArticleStatus)[keyof typeof ArticleStatus]
-
-
-export const ArticleType = {
-  ARTICLE: 'ARTICLE',
-  INFORMATION: 'INFORMATION',
-  CUISINE: 'CUISINE',
-  JEUXVIDEO: 'JEUXVIDEO'
-} as const
-
-export type ArticleType = (typeof ArticleType)[keyof typeof ArticleType]
+export type PublicationStatus = (typeof PublicationStatus)[keyof typeof PublicationStatus]
 
 
 export const ImageType = {
@@ -85,15 +75,6 @@ export const VideoProvider = {
 } as const
 
 export type VideoProvider = (typeof VideoProvider)[keyof typeof VideoProvider]
-
-
-export const VideoStatus = {
-  DRAFT: 'DRAFT',
-  PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED'
-} as const
-
-export type VideoStatus = (typeof VideoStatus)[keyof typeof VideoStatus]
 
 
 export const SourceType = {
@@ -132,12 +113,67 @@ export const MediaType = {
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
 
+export const PlatformType = {
+  CONSOLE: 'CONSOLE',
+  HANDHELD: 'HANDHELD',
+  MOBILE: 'MOBILE',
+  COMPUTER: 'COMPUTER',
+  ARCADE: 'ARCADE',
+  CLOUD: 'CLOUD',
+  WEB: 'WEB'
+} as const
+
+export type PlatformType = (typeof PlatformType)[keyof typeof PlatformType]
+
+
+export const GameKind = {
+  MAIN: 'MAIN',
+  SPIN_OFF: 'SPIN_OFF',
+  REMAKE: 'REMAKE',
+  REMASTER: 'REMASTER',
+  COLLECTION: 'COLLECTION',
+  EXPANSION: 'EXPANSION',
+  DLC: 'DLC'
+} as const
+
+export type GameKind = (typeof GameKind)[keyof typeof GameKind]
+
+
+export const GameMediaType = {
+  CARTRIDGE: 'CARTRIDGE',
+  DISC: 'DISC',
+  DIGITAL: 'DIGITAL',
+  FLOPPY: 'FLOPPY',
+  TAPE: 'TAPE'
+} as const
+
+export type GameMediaType = (typeof GameMediaType)[keyof typeof GameMediaType]
+
+
+export const AccessoryType = {
+  CONTROLLER: 'CONTROLLER',
+  CAMERA: 'CAMERA',
+  MEMORY_CARD: 'MEMORY_CARD',
+  CABLE: 'CABLE',
+  ADAPTER: 'ADAPTER',
+  KEYBOARD: 'KEYBOARD',
+  MOUSE: 'MOUSE',
+  HEADSET: 'HEADSET',
+  LIGHT_GUN: 'LIGHT_GUN',
+  STORAGE: 'STORAGE',
+  OTHER: 'OTHER'
+} as const
+
+export type AccessoryType = (typeof AccessoryType)[keyof typeof AccessoryType]
+
+
 export const CollectionType = {
   DOSSIER: 'DOSSIER',
   SERIE: 'SERIE',
   ENQUETE: 'ENQUETE',
   LIVE: 'LIVE',
-  SPECIAL: 'SPECIAL'
+  SPECIAL: 'SPECIAL',
+  GUIDE: 'GUIDE'
 } as const
 
 export type CollectionType = (typeof CollectionType)[keyof typeof CollectionType]
@@ -181,12 +217,3 @@ export const ContentType = {
 } as const
 
 export type ContentType = (typeof ContentType)[keyof typeof ContentType]
-
-
-export const MediaRole = {
-  COVER: 'COVER',
-  INLINE: 'INLINE',
-  GALLERY: 'GALLERY'
-} as const
-
-export type MediaRole = (typeof MediaRole)[keyof typeof MediaRole]

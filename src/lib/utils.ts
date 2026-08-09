@@ -5,6 +5,8 @@ export function cn(...inputs: ClassValue[]) {
    return twMerge(clsx(inputs));
 }
 
+import type { Prisma } from "@/lib/prisma/generated/client";
+
 // Tronque à n mots
 export const truncateWords = (text: string, max: number): string => {
    const words = text.split(" ").filter(Boolean);

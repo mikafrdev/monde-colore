@@ -68,6 +68,25 @@ export const ModelName = {
   TimelineEvent: 'TimelineEvent',
   Source: 'Source',
   Media: 'Media',
+  Platform: 'Platform',
+  PlatformMedia: 'PlatformMedia',
+  GamePlatform: 'GamePlatform',
+  Game: 'Game',
+  GameEdition: 'GameEdition',
+  GameCollection: 'GameCollection',
+  Franchise: 'Franchise',
+  Genre: 'Genre',
+  GameGenre: 'GameGenre',
+  Console: 'Console',
+  ConsoleCategory: 'ConsoleCategory',
+  ConsoleMedia: 'ConsoleMedia',
+  ConsoleAccessory: 'ConsoleAccessory',
+  ConsoleConfiguration: 'ConsoleConfiguration',
+  ConsoleConfigurationAccessory: 'ConsoleConfigurationAccessory',
+  ConsoleVariant: 'ConsoleVariant',
+  Region: 'Region',
+  Company: 'Company',
+  Accessory: 'Accessory',
   Collection: 'Collection',
   CollectionItem: 'CollectionItem',
   CollectionSource: 'CollectionSource',
@@ -160,8 +179,8 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 export const CategoryPermissionScalarFieldEnum = {
   id: 'id',
   categoryId: 'categoryId',
-  roleOrUserId: 'roleOrUserId',
-  type: 'type',
+  role: 'role',
+  userId: 'userId',
   granted: 'granted'
 } as const
 
@@ -208,13 +227,13 @@ export const ArticleScalarFieldEnum = {
   excerpt: 'excerpt',
   body: 'body',
   status: 'status',
-  type: 'type',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   visibility: 'visibility',
   authorId: 'authorId',
-  sourceId: 'sourceId'
+  sourceId: 'sourceId',
+  gameId: 'gameId'
 } as const
 
 export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
@@ -330,6 +349,210 @@ export const MediaScalarFieldEnum = {
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
+
+
+export const PlatformScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  type: 'type'
+} as const
+
+export type PlatformScalarFieldEnum = (typeof PlatformScalarFieldEnum)[keyof typeof PlatformScalarFieldEnum]
+
+
+export const PlatformMediaScalarFieldEnum = {
+  platformId: 'platformId',
+  mediaType: 'mediaType',
+  notes: 'notes'
+} as const
+
+export type PlatformMediaScalarFieldEnum = (typeof PlatformMediaScalarFieldEnum)[keyof typeof PlatformMediaScalarFieldEnum]
+
+
+export const GamePlatformScalarFieldEnum = {
+  isExclusive: 'isExclusive',
+  regionLocked: 'regionLocked',
+  notes: 'notes',
+  gameId: 'gameId',
+  platformId: 'platformId',
+  mediaType: 'mediaType',
+  releasedAt: 'releasedAt'
+} as const
+
+export type GamePlatformScalarFieldEnum = (typeof GamePlatformScalarFieldEnum)[keyof typeof GamePlatformScalarFieldEnum]
+
+
+export const GameScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  kind: 'kind',
+  releaseDate: 'releaseDate',
+  coverUrl: 'coverUrl',
+  publisherId: 'publisherId',
+  developerId: 'developerId',
+  franchiseId: 'franchiseId',
+  gameCollectionId: 'gameCollectionId'
+} as const
+
+export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const GameEditionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  platformId: 'platformId',
+  regionId: 'regionId',
+  title: 'title',
+  coverUrl: 'coverUrl',
+  barcode: 'barcode',
+  releasedAt: 'releasedAt'
+} as const
+
+export type GameEditionScalarFieldEnum = (typeof GameEditionScalarFieldEnum)[keyof typeof GameEditionScalarFieldEnum]
+
+
+export const GameCollectionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type GameCollectionScalarFieldEnum = (typeof GameCollectionScalarFieldEnum)[keyof typeof GameCollectionScalarFieldEnum]
+
+
+export const FranchiseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description'
+} as const
+
+export type FranchiseScalarFieldEnum = (typeof FranchiseScalarFieldEnum)[keyof typeof FranchiseScalarFieldEnum]
+
+
+export const GenreScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+} as const
+
+export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
+
+
+export const GameGenreScalarFieldEnum = {
+  gameId: 'gameId',
+  genreId: 'genreId'
+} as const
+
+export type GameGenreScalarFieldEnum = (typeof GameGenreScalarFieldEnum)[keyof typeof GameGenreScalarFieldEnum]
+
+
+export const ConsoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  shortName: 'shortName',
+  releaseYear: 'releaseYear',
+  platformId: 'platformId',
+  manufacturerId: 'manufacturerId'
+} as const
+
+export type ConsoleScalarFieldEnum = (typeof ConsoleScalarFieldEnum)[keyof typeof ConsoleScalarFieldEnum]
+
+
+export const ConsoleCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+} as const
+
+export type ConsoleCategoryScalarFieldEnum = (typeof ConsoleCategoryScalarFieldEnum)[keyof typeof ConsoleCategoryScalarFieldEnum]
+
+
+export const ConsoleMediaScalarFieldEnum = {
+  consoleId: 'consoleId',
+  mediaType: 'mediaType',
+  notes: 'notes'
+} as const
+
+export type ConsoleMediaScalarFieldEnum = (typeof ConsoleMediaScalarFieldEnum)[keyof typeof ConsoleMediaScalarFieldEnum]
+
+
+export const ConsoleAccessoryScalarFieldEnum = {
+  id: 'id',
+  releasedAt: 'releasedAt',
+  consoleId: 'consoleId',
+  accessoryId: 'accessoryId',
+  required: 'required'
+} as const
+
+export type ConsoleAccessoryScalarFieldEnum = (typeof ConsoleAccessoryScalarFieldEnum)[keyof typeof ConsoleAccessoryScalarFieldEnum]
+
+
+export const ConsoleConfigurationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  baseConsoleId: 'baseConsoleId',
+  mediaTypes: 'mediaTypes'
+} as const
+
+export type ConsoleConfigurationScalarFieldEnum = (typeof ConsoleConfigurationScalarFieldEnum)[keyof typeof ConsoleConfigurationScalarFieldEnum]
+
+
+export const ConsoleConfigurationAccessoryScalarFieldEnum = {
+  setupId: 'setupId',
+  accessoryId: 'accessoryId',
+  required: 'required'
+} as const
+
+export type ConsoleConfigurationAccessoryScalarFieldEnum = (typeof ConsoleConfigurationAccessoryScalarFieldEnum)[keyof typeof ConsoleConfigurationAccessoryScalarFieldEnum]
+
+
+export const ConsoleVariantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  consoleId: 'consoleId',
+  releaseYear: 'releaseYear',
+  notes: 'notes'
+} as const
+
+export type ConsoleVariantScalarFieldEnum = (typeof ConsoleVariantScalarFieldEnum)[keyof typeof ConsoleVariantScalarFieldEnum]
+
+
+export const RegionScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name'
+} as const
+
+export type RegionScalarFieldEnum = (typeof RegionScalarFieldEnum)[keyof typeof RegionScalarFieldEnum]
+
+
+export const CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  logoUrl: 'logoUrl',
+  country: 'country',
+  description: 'description'
+} as const
+
+export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const AccessoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  releaseYear: 'releaseYear',
+  type: 'type',
+  manufacturerId: 'manufacturerId'
+} as const
+
+export type AccessoryScalarFieldEnum = (typeof AccessoryScalarFieldEnum)[keyof typeof AccessoryScalarFieldEnum]
 
 
 export const CollectionScalarFieldEnum = {
@@ -469,6 +692,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -483,4 +714,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

@@ -40,7 +40,8 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  author Author?
+  author              Author?
+  categoryPermissions CategoryPermission[]
 
   @@unique([email])
   @@map("user")
@@ -99,14 +100,16 @@ model Verification {
 // ─────────────────────────────────────────
 
 model CategoryPermission {
-  id           String         @id @default(cuid())
-  categoryId   String
-  category     Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  roleOrUserId String // peut être un Role enum OU un User.id
-  type         PermissionType @default(ROLE)
-  granted      Boolean        @default(true) // true = accès, false = refus explicite
+  id         String   @id @default(cuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  role       Role?
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  granted    Boolean  @default(true)
 
-  @@unique([categoryId, roleOrUserId])
+  @@unique([categoryId, role])
+  @@unique([categoryId, userId])
 }
 
 enum PermissionType {
@@ -159,31 +162,23 @@ model Tag {
   articles ArticleTag[]
 }
 
-enum ArticleStatus {
+enum PublicationStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
 }
 
-enum ArticleType {
-  ARTICLE
-  INFORMATION
-  CUISINE
-  JEUXVIDEO
-}
-
 model Article {
-  id          String        @id @default(cuid())
-  slug        String        @unique
-  title       String        @unique
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  title       String
   excerpt     String?
-  body        String        @default("[]")
+  body        Json?
   content     Content?
-  status      ArticleStatus @default(DRAFT)
-  type        ArticleType   @default(ARTICLE)
+  status      PublicationStatus @default(DRAFT)
   publishedAt DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   visibility Visibility @default(PUBLIC)
 
@@ -201,6 +196,13 @@ model Article {
   videos         ArticleVideo[]
   timelineEvents TimelineEvent[]
   sites          ArticleSite[]
+  game           Game?            @relation(fields: [gameId], references: [id])
+  gameId         String?
+
+  @@index([authorId])
+  @@index([sourceId])
+  @@index([gameId])
+  @@index([status, publishedAt])
 }
 
 model ArticleContent {
@@ -251,12 +253,6 @@ enum VideoProvider {
   OTHER
 }
 
-enum VideoStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
-}
-
 model Video {
   id          String  @id @default(cuid())
   title       String
@@ -265,7 +261,7 @@ model Video {
   fileUrl     String? // fichier uploadé
 
   provider VideoProvider
-  status   VideoStatus   @default(DRAFT)
+  status   PublicationStatus @default(DRAFT)
 
   // Métadonnées fichier (upload uniquement)
   filename String?
@@ -380,6 +376,332 @@ model Media {
   sources Source[]
 }
 
+//-------------- FIN ARTICLES / CONTENU -----------------
+
+enum PlatformType {
+  CONSOLE
+  HANDHELD
+  MOBILE
+  COMPUTER
+  ARCADE
+  CLOUD
+  WEB
+}
+
+model Platform {
+  id String @id @default(cuid())
+
+  name String @unique
+  slug String @unique
+
+  type PlatformType
+
+  games          GamePlatform[]
+  console        Console[]
+  gameEditions   GameEdition[]
+  platformMedias PlatformMedia[]
+}
+
+model PlatformMedia {
+  platformId String
+  platform   Platform @relation(fields: [platformId], references: [id])
+
+  mediaType GameMediaType
+
+  notes String?
+
+  @@id([platformId, mediaType])
+}
+
+model GamePlatform {
+  isExclusive  Boolean @default(false)
+  regionLocked Boolean @default(false)
+  notes        String?
+
+  gameId String
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  platformId String
+  platform   Platform @relation(fields: [platformId], references: [id], onDelete: Cascade)
+
+  mediaType GameMediaType?
+
+  releasedAt DateTime?
+
+  @@id([gameId, platformId])
+}
+
+enum GameKind {
+  MAIN
+  SPIN_OFF
+  REMAKE
+  REMASTER
+  COLLECTION
+  EXPANSION
+  DLC
+}
+
+model Game {
+  id    String @id @default(cuid())
+  title String
+  slug  String @unique
+
+  kind GameKind @default(MAIN)
+
+  releaseDate DateTime?
+  coverUrl    String?
+
+  publisherId String?
+  publisher   Company? @relation("Publisher", fields: [publisherId], references: [id])
+
+  developerId String?
+  developer   Company? @relation("Developer", fields: [developerId], references: [id])
+
+  franchiseId String?
+  franchise   Franchise? @relation(fields: [franchiseId], references: [id])
+
+  gameCollection   GameCollection? @relation(fields: [gameCollectionId], references: [id])
+  gameCollectionId String?
+
+  gameEditions GameEdition[]
+  articles     Article[]
+  platforms    GamePlatform[]
+  gameGenres   GameGenre[]
+
+  @@index([publisherId])
+  @@index([developerId])
+  @@index([franchiseId])
+  @@index([gameCollectionId])
+}
+
+model GameEdition {
+  id String @id @default(cuid())
+
+  gameId String
+  game   Game   @relation(fields: [gameId], references: [id])
+
+  platformId String?
+  platform   Platform? @relation(fields: [platformId], references: [id])
+
+  regionId String
+  region   Region @relation(fields: [regionId], references: [id])
+
+  title    String?
+  coverUrl String?
+  barcode  String?
+
+  releasedAt DateTime?
+
+  @@unique([gameId, platformId, regionId])
+}
+
+model GameCollection {
+  id String @id @default(cuid())
+
+  name String //Pokemon Generation 1: - Rouge - Bleu - Jaune
+
+  games Game[]
+}
+
+model Franchise {
+  id String @id @default(cuid())
+
+  name String @unique //Final Fantasy Pokemon Resident Evil
+  slug String @unique
+
+  description String?
+
+  games Game[]
+}
+
+model Genre {
+  id String @id @default(cuid())
+
+  name String @unique
+  slug String @unique
+
+  games GameGenre[]
+}
+
+model GameGenre {
+  gameId String
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  genreId String
+  genre   Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, genreId])
+}
+
+model Console {
+  id   String @id @default(cuid())
+  name String @unique // "Nintendo Switch"
+  slug String @unique
+
+  shortName   String?
+  releaseYear Int?
+
+  platformId String
+  platform   Platform @relation(fields: [platformId], references: [id])
+
+  manufacturerId String
+  manufacturer   Company @relation(fields: [manufacturerId], references: [id])
+
+  types       ConsoleCategory[]
+  media       ConsoleMedia[]
+  accessories ConsoleAccessory[]
+  setups      ConsoleConfiguration[]
+
+  compatibleAccessories Accessory[]      @relation("AccessoryCompatibility")
+  consoleVariants       ConsoleVariant[]
+
+  @@index([manufacturerId])
+}
+
+model ConsoleCategory {
+  id String @id @default(cuid())
+
+  name String @unique //HOME HANDHELD HYBRID MICRO PLUG_AND_PLAY
+  slug String @unique
+
+  consoles Console[]
+}
+
+enum GameMediaType {
+  CARTRIDGE
+  DISC
+  DIGITAL
+  FLOPPY
+  TAPE
+}
+
+model ConsoleMedia {
+  consoleId String
+  console   Console @relation(fields: [consoleId], references: [id])
+
+  mediaType GameMediaType
+
+  notes String?
+
+  @@id([consoleId, mediaType])
+}
+
+model ConsoleAccessory {
+  id String @id @default(cuid())
+
+  releasedAt DateTime?
+
+  consoleId String
+  console   Console @relation(fields: [consoleId], references: [id])
+
+  accessoryId String
+  accessory   Accessory @relation(fields: [accessoryId], references: [id])
+
+  required Boolean @default(false)
+
+  @@unique([consoleId, accessoryId])
+}
+
+model ConsoleConfiguration {
+  id String @id @default(cuid())
+
+  name String
+
+  baseConsoleId String
+  baseConsole   Console @relation(fields: [baseConsoleId], references: [id])
+
+  accessories ConsoleConfigurationAccessory[]
+
+  mediaTypes GameMediaType[]
+}
+
+model ConsoleConfigurationAccessory {
+  setupId String
+  setup   ConsoleConfiguration @relation(fields: [setupId], references: [id])
+
+  accessoryId String
+  accessory   Accessory @relation(fields: [accessoryId], references: [id])
+
+  required Boolean @default(true)
+
+  @@id([setupId, accessoryId])
+}
+
+model ConsoleVariant {
+  id String @id @default(cuid())
+
+  name String
+
+  consoleId String
+  console   Console @relation(fields: [consoleId], references: [id])
+
+  releaseYear Int?
+
+  notes String?
+}
+
+model Region {
+  id String @id @default(cuid())
+
+  code String @unique
+  name String
+
+  releases GameEdition[]
+}
+
+model Company {
+  id   String @id @default(cuid())
+  name String @unique // "Nintendo", "Capcom", "Sony"
+  slug String @unique
+
+  logoUrl     String?
+  country     String?
+  description String?
+
+  manufacturedConsoles    Console[]
+  manufacturedAccessories Accessory[]
+
+  publishedGames Game[] @relation("Publisher")
+  developedGames Game[] @relation("Developer")
+
+  @@index([name])
+}
+
+enum AccessoryType {
+  CONTROLLER
+  CAMERA
+  MEMORY_CARD
+  CABLE
+  ADAPTER
+  KEYBOARD
+  MOUSE
+  HEADSET
+  LIGHT_GUN
+  STORAGE
+  OTHER
+}
+
+model Accessory {
+  id String @id @default(cuid())
+
+  name        String
+  slug        String
+  description String?
+  imageUrl    String?
+  releaseYear Int?
+
+  type AccessoryType @default(OTHER)
+
+  manufacturerId String
+  manufacturer   Company @relation(fields: [manufacturerId], references: [id])
+
+  consoleAccessories ConsoleAccessory[]
+
+  setupAccessories ConsoleConfigurationAccessory[]
+
+  compatibleConsoles Console[] @relation("AccessoryCompatibility")
+}
+
 // ─────────────────────────────────────────
 // COLLECTION
 // ─────────────────────────────────────────
@@ -390,6 +712,7 @@ enum CollectionType {
   ENQUETE
   LIVE
   SPECIAL
+  GUIDE
 }
 
 enum CollectionStatus {
@@ -585,11 +908,4 @@ model ArticleSite {
   @@unique([articleId, site])
   @@index([site, featured])
   @@index([site, order])
-}
-
-// Si tu n'as pas encore ce enum (à vérifier avec ArticleImage)
-enum MediaRole {
-  COVER // hero / couverture
-  INLINE // dans le corps de l'article
-  GALLERY // galerie en bas
 }

@@ -29,15 +29,14 @@ export type ArticleMinAggregateOutputType = {
   slug: string | null
   title: string | null
   excerpt: string | null
-  body: string | null
-  status: $Enums.ArticleStatus | null
-  type: $Enums.ArticleType | null
+  status: $Enums.PublicationStatus | null
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   visibility: $Enums.Visibility | null
   authorId: string | null
   sourceId: string | null
+  gameId: string | null
 }
 
 export type ArticleMaxAggregateOutputType = {
@@ -45,15 +44,14 @@ export type ArticleMaxAggregateOutputType = {
   slug: string | null
   title: string | null
   excerpt: string | null
-  body: string | null
-  status: $Enums.ArticleStatus | null
-  type: $Enums.ArticleType | null
+  status: $Enums.PublicationStatus | null
   publishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   visibility: $Enums.Visibility | null
   authorId: string | null
   sourceId: string | null
+  gameId: string | null
 }
 
 export type ArticleCountAggregateOutputType = {
@@ -63,13 +61,13 @@ export type ArticleCountAggregateOutputType = {
   excerpt: number
   body: number
   status: number
-  type: number
   publishedAt: number
   createdAt: number
   updatedAt: number
   visibility: number
   authorId: number
   sourceId: number
+  gameId: number
   _all: number
 }
 
@@ -79,15 +77,14 @@ export type ArticleMinAggregateInputType = {
   slug?: true
   title?: true
   excerpt?: true
-  body?: true
   status?: true
-  type?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
   visibility?: true
   authorId?: true
   sourceId?: true
+  gameId?: true
 }
 
 export type ArticleMaxAggregateInputType = {
@@ -95,15 +92,14 @@ export type ArticleMaxAggregateInputType = {
   slug?: true
   title?: true
   excerpt?: true
-  body?: true
   status?: true
-  type?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
   visibility?: true
   authorId?: true
   sourceId?: true
+  gameId?: true
 }
 
 export type ArticleCountAggregateInputType = {
@@ -113,13 +109,13 @@ export type ArticleCountAggregateInputType = {
   excerpt?: true
   body?: true
   status?: true
-  type?: true
   publishedAt?: true
   createdAt?: true
   updatedAt?: true
   visibility?: true
   authorId?: true
   sourceId?: true
+  gameId?: true
   _all?: true
 }
 
@@ -200,15 +196,15 @@ export type ArticleGroupByOutputType = {
   slug: string
   title: string
   excerpt: string | null
-  body: string
-  status: $Enums.ArticleStatus
-  type: $Enums.ArticleType
+  body: runtime.JsonValue | null
+  status: $Enums.PublicationStatus
   publishedAt: Date | null
   createdAt: Date
   updatedAt: Date
   visibility: $Enums.Visibility
   authorId: string
   sourceId: string | null
+  gameId: string | null
   _count: ArticleCountAggregateOutputType | null
   _min: ArticleMinAggregateOutputType | null
   _max: ArticleMaxAggregateOutputType | null
@@ -237,15 +233,15 @@ export type ArticleWhereInput = {
   slug?: Prisma.StringFilter<"Article"> | string
   title?: Prisma.StringFilter<"Article"> | string
   excerpt?: Prisma.StringNullableFilter<"Article"> | string | null
-  body?: Prisma.StringFilter<"Article"> | string
-  status?: Prisma.EnumArticleStatusFilter<"Article"> | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
+  body?: Prisma.JsonNullableFilter<"Article">
+  status?: Prisma.EnumPublicationStatusFilter<"Article"> | $Enums.PublicationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
+  gameId?: Prisma.StringNullableFilter<"Article"> | string | null
   content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
   author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
   source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
@@ -257,6 +253,7 @@ export type ArticleWhereInput = {
   videos?: Prisma.ArticleVideoListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
   sites?: Prisma.ArticleSiteListRelationFilter
+  game?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
 }
 
 export type ArticleOrderByWithRelationInput = {
@@ -264,15 +261,15 @@ export type ArticleOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   excerpt?: Prisma.SortOrderInput | Prisma.SortOrder
-  body?: Prisma.SortOrder
+  body?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  gameId?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.ContentOrderByWithRelationInput
   author?: Prisma.AuthorOrderByWithRelationInput
   source?: Prisma.SourceOrderByWithRelationInput
@@ -284,25 +281,26 @@ export type ArticleOrderByWithRelationInput = {
   videos?: Prisma.ArticleVideoOrderByRelationAggregateInput
   timelineEvents?: Prisma.TimelineEventOrderByRelationAggregateInput
   sites?: Prisma.ArticleSiteOrderByRelationAggregateInput
+  game?: Prisma.GameOrderByWithRelationInput
 }
 
 export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   slug?: string
-  title?: string
   AND?: Prisma.ArticleWhereInput | Prisma.ArticleWhereInput[]
   OR?: Prisma.ArticleWhereInput[]
   NOT?: Prisma.ArticleWhereInput | Prisma.ArticleWhereInput[]
+  title?: Prisma.StringFilter<"Article"> | string
   excerpt?: Prisma.StringNullableFilter<"Article"> | string | null
-  body?: Prisma.StringFilter<"Article"> | string
-  status?: Prisma.EnumArticleStatusFilter<"Article"> | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
+  body?: Prisma.JsonNullableFilter<"Article">
+  status?: Prisma.EnumPublicationStatusFilter<"Article"> | $Enums.PublicationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
+  gameId?: Prisma.StringNullableFilter<"Article"> | string | null
   content?: Prisma.XOR<Prisma.ContentNullableScalarRelationFilter, Prisma.ContentWhereInput> | null
   author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
   source?: Prisma.XOR<Prisma.SourceNullableScalarRelationFilter, Prisma.SourceWhereInput> | null
@@ -314,22 +312,23 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   videos?: Prisma.ArticleVideoListRelationFilter
   timelineEvents?: Prisma.TimelineEventListRelationFilter
   sites?: Prisma.ArticleSiteListRelationFilter
-}, "id" | "slug" | "title">
+  game?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
+}, "id" | "slug">
 
 export type ArticleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   excerpt?: Prisma.SortOrderInput | Prisma.SortOrder
-  body?: Prisma.SortOrder
+  body?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  gameId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ArticleCountOrderByAggregateInput
   _max?: Prisma.ArticleMaxOrderByAggregateInput
   _min?: Prisma.ArticleMinOrderByAggregateInput
@@ -343,15 +342,15 @@ export type ArticleScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Article"> | string
   title?: Prisma.StringWithAggregatesFilter<"Article"> | string
   excerpt?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
-  body?: Prisma.StringWithAggregatesFilter<"Article"> | string
-  status?: Prisma.EnumArticleStatusWithAggregatesFilter<"Article"> | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeWithAggregatesFilter<"Article"> | $Enums.ArticleType
+  body?: Prisma.JsonNullableWithAggregatesFilter<"Article">
+  status?: Prisma.EnumPublicationStatusWithAggregatesFilter<"Article"> | $Enums.PublicationStatus
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringWithAggregatesFilter<"Article"> | string
   sourceId?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
+  gameId?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
 }
 
 export type ArticleCreateInput = {
@@ -359,9 +358,8 @@ export type ArticleCreateInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -377,6 +375,7 @@ export type ArticleCreateInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateInput = {
@@ -384,15 +383,15 @@ export type ArticleUncheckedCreateInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -409,9 +408,8 @@ export type ArticleUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,6 +425,7 @@ export type ArticleUpdateInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateInput = {
@@ -434,15 +433,15 @@ export type ArticleUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -459,15 +458,15 @@ export type ArticleCreateManyInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
 }
 
 export type ArticleUpdateManyMutationInput = {
@@ -475,9 +474,8 @@ export type ArticleUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -489,15 +487,15 @@ export type ArticleUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleListRelationFilter = {
@@ -517,13 +515,13 @@ export type ArticleCountOrderByAggregateInput = {
   excerpt?: Prisma.SortOrder
   body?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
+  gameId?: Prisma.SortOrder
 }
 
 export type ArticleMaxOrderByAggregateInput = {
@@ -531,15 +529,14 @@ export type ArticleMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
-  body?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
+  gameId?: Prisma.SortOrder
 }
 
 export type ArticleMinOrderByAggregateInput = {
@@ -547,15 +544,14 @@ export type ArticleMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
-  body?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   sourceId?: Prisma.SortOrder
+  gameId?: Prisma.SortOrder
 }
 
 export type ArticleScalarRelationFilter = {
@@ -648,12 +644,8 @@ export type ArticleUncheckedUpdateManyWithoutCategoriesNestedInput = {
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
-export type EnumArticleStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ArticleStatus
-}
-
-export type EnumArticleTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ArticleType
+export type EnumPublicationStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PublicationStatus
 }
 
 export type EnumVisibilityFieldUpdateOperationsInput = {
@@ -729,6 +721,48 @@ export type ArticleUncheckedUpdateManyWithoutSourceNestedInput = {
   connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
   update?: Prisma.ArticleUpdateWithWhereUniqueWithoutSourceInput | Prisma.ArticleUpdateWithWhereUniqueWithoutSourceInput[]
   updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutSourceInput | Prisma.ArticleUpdateManyWithWhereWithoutSourceInput[]
+  deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
+}
+
+export type ArticleCreateNestedManyWithoutGameInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput> | Prisma.ArticleCreateWithoutGameInput[] | Prisma.ArticleUncheckedCreateWithoutGameInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutGameInput | Prisma.ArticleCreateOrConnectWithoutGameInput[]
+  createMany?: Prisma.ArticleCreateManyGameInputEnvelope
+  connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+}
+
+export type ArticleUncheckedCreateNestedManyWithoutGameInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput> | Prisma.ArticleCreateWithoutGameInput[] | Prisma.ArticleUncheckedCreateWithoutGameInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutGameInput | Prisma.ArticleCreateOrConnectWithoutGameInput[]
+  createMany?: Prisma.ArticleCreateManyGameInputEnvelope
+  connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+}
+
+export type ArticleUpdateManyWithoutGameNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput> | Prisma.ArticleCreateWithoutGameInput[] | Prisma.ArticleUncheckedCreateWithoutGameInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutGameInput | Prisma.ArticleCreateOrConnectWithoutGameInput[]
+  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutGameInput | Prisma.ArticleUpsertWithWhereUniqueWithoutGameInput[]
+  createMany?: Prisma.ArticleCreateManyGameInputEnvelope
+  set?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  disconnect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  delete?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutGameInput | Prisma.ArticleUpdateWithWhereUniqueWithoutGameInput[]
+  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutGameInput | Prisma.ArticleUpdateManyWithWhereWithoutGameInput[]
+  deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
+}
+
+export type ArticleUncheckedUpdateManyWithoutGameNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput> | Prisma.ArticleCreateWithoutGameInput[] | Prisma.ArticleUncheckedCreateWithoutGameInput[]
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutGameInput | Prisma.ArticleCreateOrConnectWithoutGameInput[]
+  upsert?: Prisma.ArticleUpsertWithWhereUniqueWithoutGameInput | Prisma.ArticleUpsertWithWhereUniqueWithoutGameInput[]
+  createMany?: Prisma.ArticleCreateManyGameInputEnvelope
+  set?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  disconnect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  delete?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  connect?: Prisma.ArticleWhereUniqueInput | Prisma.ArticleWhereUniqueInput[]
+  update?: Prisma.ArticleUpdateWithWhereUniqueWithoutGameInput | Prisma.ArticleUpdateWithWhereUniqueWithoutGameInput[]
+  updateMany?: Prisma.ArticleUpdateManyWithWhereWithoutGameInput | Prisma.ArticleUpdateManyWithWhereWithoutGameInput[]
   deleteMany?: Prisma.ArticleScalarWhereInput | Prisma.ArticleScalarWhereInput[]
 }
 
@@ -823,9 +857,8 @@ export type ArticleCreateWithoutAuthorInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -840,6 +873,7 @@ export type ArticleCreateWithoutAuthorInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutAuthorInput = {
@@ -847,14 +881,14 @@ export type ArticleUncheckedCreateWithoutAuthorInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -900,15 +934,15 @@ export type ArticleScalarWhereInput = {
   slug?: Prisma.StringFilter<"Article"> | string
   title?: Prisma.StringFilter<"Article"> | string
   excerpt?: Prisma.StringNullableFilter<"Article"> | string | null
-  body?: Prisma.StringFilter<"Article"> | string
-  status?: Prisma.EnumArticleStatusFilter<"Article"> | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFilter<"Article"> | $Enums.ArticleType
+  body?: Prisma.JsonNullableFilter<"Article">
+  status?: Prisma.EnumPublicationStatusFilter<"Article"> | $Enums.PublicationStatus
   publishedAt?: Prisma.DateTimeNullableFilter<"Article"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   visibility?: Prisma.EnumVisibilityFilter<"Article"> | $Enums.Visibility
   authorId?: Prisma.StringFilter<"Article"> | string
   sourceId?: Prisma.StringNullableFilter<"Article"> | string | null
+  gameId?: Prisma.StringNullableFilter<"Article"> | string | null
 }
 
 export type ArticleCreateWithoutCategoriesInput = {
@@ -916,9 +950,8 @@ export type ArticleCreateWithoutCategoriesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -933,6 +966,7 @@ export type ArticleCreateWithoutCategoriesInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutCategoriesInput = {
@@ -940,15 +974,15 @@ export type ArticleUncheckedCreateWithoutCategoriesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
   contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
@@ -985,9 +1019,8 @@ export type ArticleCreateWithoutContentsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1002,6 +1035,7 @@ export type ArticleCreateWithoutContentsInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutContentsInput = {
@@ -1009,15 +1043,15 @@ export type ArticleUncheckedCreateWithoutContentsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1049,9 +1083,8 @@ export type ArticleUpdateWithoutContentsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1066,6 +1099,7 @@ export type ArticleUpdateWithoutContentsInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutContentsInput = {
@@ -1073,15 +1107,15 @@ export type ArticleUncheckedUpdateWithoutContentsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1097,9 +1131,8 @@ export type ArticleCreateWithoutTimelineEventsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1114,6 +1147,7 @@ export type ArticleCreateWithoutTimelineEventsInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutTimelineEventsInput = {
@@ -1121,15 +1155,15 @@ export type ArticleUncheckedCreateWithoutTimelineEventsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1161,9 +1195,8 @@ export type ArticleUpdateWithoutTimelineEventsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1178,6 +1211,7 @@ export type ArticleUpdateWithoutTimelineEventsInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutTimelineEventsInput = {
@@ -1185,15 +1219,15 @@ export type ArticleUncheckedUpdateWithoutTimelineEventsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1209,9 +1243,8 @@ export type ArticleCreateWithoutSourceInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1226,6 +1259,7 @@ export type ArticleCreateWithoutSourceInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutSourceInput = {
@@ -1233,14 +1267,14 @@ export type ArticleUncheckedCreateWithoutSourceInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1278,14 +1312,87 @@ export type ArticleUpdateManyWithWhereWithoutSourceInput = {
   data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutSourceInput>
 }
 
+export type ArticleCreateWithoutGameInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  content?: Prisma.ContentCreateNestedOneWithoutArticleInput
+  author: Prisma.AuthorCreateNestedOneWithoutArticlesInput
+  source?: Prisma.SourceCreateNestedOneWithoutArticlesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutGameInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+  content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
+  tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
+  contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
+  views?: Prisma.ArticleViewUncheckedCreateNestedManyWithoutArticleInput
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  videos?: Prisma.ArticleVideoUncheckedCreateNestedManyWithoutArticleInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutArticleInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutGameInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput>
+}
+
+export type ArticleCreateManyGameInputEnvelope = {
+  data: Prisma.ArticleCreateManyGameInput | Prisma.ArticleCreateManyGameInput[]
+  skipDuplicates?: boolean
+}
+
+export type ArticleUpsertWithWhereUniqueWithoutGameInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutGameInput, Prisma.ArticleUncheckedUpdateWithoutGameInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutGameInput, Prisma.ArticleUncheckedCreateWithoutGameInput>
+}
+
+export type ArticleUpdateWithWhereUniqueWithoutGameInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutGameInput, Prisma.ArticleUncheckedUpdateWithoutGameInput>
+}
+
+export type ArticleUpdateManyWithWhereWithoutGameInput = {
+  where: Prisma.ArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateManyMutationInput, Prisma.ArticleUncheckedUpdateManyWithoutGameInput>
+}
+
 export type ArticleCreateWithoutContentInput = {
   id?: string
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1300,6 +1407,7 @@ export type ArticleCreateWithoutContentInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutContentInput = {
@@ -1307,15 +1415,15 @@ export type ArticleUncheckedCreateWithoutContentInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
   contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
@@ -1347,9 +1455,8 @@ export type ArticleUpdateWithoutContentInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1364,6 +1471,7 @@ export type ArticleUpdateWithoutContentInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutContentInput = {
@@ -1371,15 +1479,15 @@ export type ArticleUncheckedUpdateWithoutContentInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
   contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
@@ -1395,9 +1503,8 @@ export type ArticleCreateWithoutTagsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1412,6 +1519,7 @@ export type ArticleCreateWithoutTagsInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutTagsInput = {
@@ -1419,15 +1527,15 @@ export type ArticleUncheckedCreateWithoutTagsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   contents?: Prisma.ArticleContentUncheckedCreateNestedManyWithoutArticleInput
@@ -1459,9 +1567,8 @@ export type ArticleUpdateWithoutTagsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1476,6 +1583,7 @@ export type ArticleUpdateWithoutTagsInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutTagsInput = {
@@ -1483,15 +1591,15 @@ export type ArticleUncheckedUpdateWithoutTagsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
@@ -1507,9 +1615,8 @@ export type ArticleCreateWithoutImagesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1524,6 +1631,7 @@ export type ArticleCreateWithoutImagesInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutImagesInput = {
@@ -1531,15 +1639,15 @@ export type ArticleUncheckedCreateWithoutImagesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1571,9 +1679,8 @@ export type ArticleUpdateWithoutImagesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1588,6 +1695,7 @@ export type ArticleUpdateWithoutImagesInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutImagesInput = {
@@ -1595,15 +1703,15 @@ export type ArticleUncheckedUpdateWithoutImagesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1619,9 +1727,8 @@ export type ArticleCreateWithoutViewsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1636,6 +1743,7 @@ export type ArticleCreateWithoutViewsInput = {
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutViewsInput = {
@@ -1643,15 +1751,15 @@ export type ArticleUncheckedCreateWithoutViewsInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1683,9 +1791,8 @@ export type ArticleUpdateWithoutViewsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1700,6 +1807,7 @@ export type ArticleUpdateWithoutViewsInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutViewsInput = {
@@ -1707,15 +1815,15 @@ export type ArticleUncheckedUpdateWithoutViewsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1731,9 +1839,8 @@ export type ArticleCreateWithoutVideosInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1748,6 +1855,7 @@ export type ArticleCreateWithoutVideosInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutVideosInput = {
@@ -1755,15 +1863,15 @@ export type ArticleUncheckedCreateWithoutVideosInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1795,9 +1903,8 @@ export type ArticleUpdateWithoutVideosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1812,6 +1919,7 @@ export type ArticleUpdateWithoutVideosInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutVideosInput = {
@@ -1819,15 +1927,15 @@ export type ArticleUncheckedUpdateWithoutVideosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1843,9 +1951,8 @@ export type ArticleCreateWithoutSitesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1860,6 +1967,7 @@ export type ArticleCreateWithoutSitesInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   videos?: Prisma.ArticleVideoCreateNestedManyWithoutArticleInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutArticleInput
+  game?: Prisma.GameCreateNestedOneWithoutArticlesInput
 }
 
 export type ArticleUncheckedCreateWithoutSitesInput = {
@@ -1867,15 +1975,15 @@ export type ArticleUncheckedCreateWithoutSitesInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
   sourceId?: string | null
+  gameId?: string | null
   content?: Prisma.ContentUncheckedCreateNestedOneWithoutArticleInput
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutArticlesInput
   tags?: Prisma.ArticleTagUncheckedCreateNestedManyWithoutArticleInput
@@ -1907,9 +2015,8 @@ export type ArticleUpdateWithoutSitesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1924,6 +2031,7 @@ export type ArticleUpdateWithoutSitesInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutSitesInput = {
@@ -1931,15 +2039,15 @@ export type ArticleUncheckedUpdateWithoutSitesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -1955,14 +2063,14 @@ export type ArticleCreateManyAuthorInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   sourceId?: string | null
+  gameId?: string | null
 }
 
 export type ArticleUpdateWithoutAuthorInput = {
@@ -1970,9 +2078,8 @@ export type ArticleUpdateWithoutAuthorInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1987,6 +2094,7 @@ export type ArticleUpdateWithoutAuthorInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutAuthorInput = {
@@ -1994,14 +2102,14 @@ export type ArticleUncheckedUpdateWithoutAuthorInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -2018,14 +2126,14 @@ export type ArticleUncheckedUpdateManyWithoutAuthorInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleUpdateWithoutCategoriesInput = {
@@ -2033,9 +2141,8 @@ export type ArticleUpdateWithoutCategoriesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2050,6 +2157,7 @@ export type ArticleUpdateWithoutCategoriesInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutCategoriesInput = {
@@ -2057,15 +2165,15 @@ export type ArticleUncheckedUpdateWithoutCategoriesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
   contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
@@ -2081,15 +2189,15 @@ export type ArticleUncheckedUpdateManyWithoutCategoriesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleCreateManySourceInput = {
@@ -2097,14 +2205,14 @@ export type ArticleCreateManySourceInput = {
   slug: string
   title: string
   excerpt?: string | null
-  body?: string
-  status?: $Enums.ArticleStatus
-  type?: $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
   publishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   visibility?: $Enums.Visibility
   authorId: string
+  gameId?: string | null
 }
 
 export type ArticleUpdateWithoutSourceInput = {
@@ -2112,9 +2220,8 @@ export type ArticleUpdateWithoutSourceInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2129,6 +2236,7 @@ export type ArticleUpdateWithoutSourceInput = {
   videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+  game?: Prisma.GameUpdateOneWithoutArticlesNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutSourceInput = {
@@ -2136,14 +2244,14 @@ export type ArticleUncheckedUpdateWithoutSourceInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
   tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
@@ -2160,14 +2268,92 @@ export type ArticleUncheckedUpdateManyWithoutSourceInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumArticleStatusFieldUpdateOperationsInput | $Enums.ArticleStatus
-  type?: Prisma.EnumArticleTypeFieldUpdateOperationsInput | $Enums.ArticleType
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  gameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ArticleCreateManyGameInput = {
+  id?: string
+  slug: string
+  title: string
+  excerpt?: string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.PublicationStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  authorId: string
+  sourceId?: string | null
+}
+
+export type ArticleUpdateWithoutGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  content?: Prisma.ContentUpdateOneWithoutArticleNestedInput
+  author?: Prisma.AuthorUpdateOneRequiredWithoutArticlesNestedInput
+  source?: Prisma.SourceUpdateOneWithoutArticlesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.ContentUncheckedUpdateOneWithoutArticleNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutArticlesNestedInput
+  tags?: Prisma.ArticleTagUncheckedUpdateManyWithoutArticleNestedInput
+  contents?: Prisma.ArticleContentUncheckedUpdateManyWithoutArticleNestedInput
+  views?: Prisma.ArticleViewUncheckedUpdateManyWithoutArticleNestedInput
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  videos?: Prisma.ArticleVideoUncheckedUpdateManyWithoutArticleNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutArticleNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateManyWithoutGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2271,13 +2457,13 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   excerpt?: boolean
   body?: boolean
   status?: boolean
-  type?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
+  gameId?: boolean
   content?: boolean | Prisma.Article$contentArgs<ExtArgs>
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
@@ -2289,6 +2475,7 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
   sites?: boolean | Prisma.Article$sitesArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
@@ -2299,15 +2486,16 @@ export type ArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   excerpt?: boolean
   body?: boolean
   status?: boolean
-  type?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
+  gameId?: boolean
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
 export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2317,15 +2505,16 @@ export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   excerpt?: boolean
   body?: boolean
   status?: boolean
-  type?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
+  gameId?: boolean
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
 export type ArticleSelectScalar = {
@@ -2335,16 +2524,16 @@ export type ArticleSelectScalar = {
   excerpt?: boolean
   body?: boolean
   status?: boolean
-  type?: boolean
   publishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   visibility?: boolean
   authorId?: boolean
   sourceId?: boolean
+  gameId?: boolean
 }
 
-export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "excerpt" | "body" | "status" | "type" | "publishedAt" | "createdAt" | "updatedAt" | "visibility" | "authorId" | "sourceId", ExtArgs["result"]["article"]>
+export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "excerpt" | "body" | "status" | "publishedAt" | "createdAt" | "updatedAt" | "visibility" | "authorId" | "sourceId" | "gameId", ExtArgs["result"]["article"]>
 export type ArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   content?: boolean | Prisma.Article$contentArgs<ExtArgs>
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
@@ -2357,15 +2546,18 @@ export type ArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   videos?: boolean | Prisma.Article$videosArgs<ExtArgs>
   timelineEvents?: boolean | Prisma.Article$timelineEventsArgs<ExtArgs>
   sites?: boolean | Prisma.Article$sitesArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArticleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
 }
 export type ArticleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   source?: boolean | Prisma.Article$sourceArgs<ExtArgs>
+  game?: boolean | Prisma.Article$gameArgs<ExtArgs>
 }
 
 export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2382,21 +2574,22 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     videos: Prisma.$ArticleVideoPayload<ExtArgs>[]
     timelineEvents: Prisma.$TimelineEventPayload<ExtArgs>[]
     sites: Prisma.$ArticleSitePayload<ExtArgs>[]
+    game: Prisma.$GamePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     slug: string
     title: string
     excerpt: string | null
-    body: string
-    status: $Enums.ArticleStatus
-    type: $Enums.ArticleType
+    body: runtime.JsonValue | null
+    status: $Enums.PublicationStatus
     publishedAt: Date | null
     createdAt: Date
     updatedAt: Date
     visibility: $Enums.Visibility
     authorId: string
     sourceId: string | null
+    gameId: string | null
   }, ExtArgs["result"]["article"]>
   composites: {}
 }
@@ -2802,6 +2995,7 @@ export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends runtime.
   videos<T extends Prisma.Article$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timelineEvents<T extends Prisma.Article$timelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$timelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sites<T extends Prisma.Article$sitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleSitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  game<T extends Prisma.Article$gameArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$gameArgs<ExtArgs>>): Prisma.Prisma__GameClient<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2835,15 +3029,15 @@ export interface ArticleFieldRefs {
   readonly slug: Prisma.FieldRef<"Article", 'String'>
   readonly title: Prisma.FieldRef<"Article", 'String'>
   readonly excerpt: Prisma.FieldRef<"Article", 'String'>
-  readonly body: Prisma.FieldRef<"Article", 'String'>
-  readonly status: Prisma.FieldRef<"Article", 'ArticleStatus'>
-  readonly type: Prisma.FieldRef<"Article", 'ArticleType'>
+  readonly body: Prisma.FieldRef<"Article", 'Json'>
+  readonly status: Prisma.FieldRef<"Article", 'PublicationStatus'>
   readonly publishedAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly visibility: Prisma.FieldRef<"Article", 'Visibility'>
   readonly authorId: Prisma.FieldRef<"Article", 'String'>
   readonly sourceId: Prisma.FieldRef<"Article", 'String'>
+  readonly gameId: Prisma.FieldRef<"Article", 'String'>
 }
     
 
@@ -3472,6 +3666,25 @@ export type Article$sitesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ArticleSiteScalarFieldEnum | Prisma.ArticleSiteScalarFieldEnum[]
+}
+
+/**
+ * Article.game
+ */
+export type Article$gameArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
 }
 
 /**

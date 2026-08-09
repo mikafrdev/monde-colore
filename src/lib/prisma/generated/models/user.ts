@@ -217,6 +217,7 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   author?: Prisma.XOR<Prisma.AuthorNullableScalarRelationFilter, Prisma.AuthorWhereInput> | null
+  categoryPermissions?: Prisma.CategoryPermissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +233,7 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   author?: Prisma.AuthorOrderByWithRelationInput
+  categoryPermissions?: Prisma.CategoryPermissionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +252,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   author?: Prisma.XOR<Prisma.AuthorNullableScalarRelationFilter, Prisma.AuthorWhereInput> | null
+  categoryPermissions?: Prisma.CategoryPermissionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -295,6 +298,7 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -310,6 +314,7 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorUncheckedCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +330,7 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -340,6 +346,7 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUncheckedUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -476,6 +483,22 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
+export type UserCreateNestedOneWithoutCategoryPermissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCategoryPermissionsInput, Prisma.UserUncheckedCreateWithoutCategoryPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCategoryPermissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCategoryPermissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCategoryPermissionsInput, Prisma.UserUncheckedCreateWithoutCategoryPermissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCategoryPermissionsInput
+  upsert?: Prisma.UserUpsertWithoutCategoryPermissionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCategoryPermissionsInput, Prisma.UserUpdateWithoutCategoryPermissionsInput>, Prisma.UserUncheckedUpdateWithoutCategoryPermissionsInput>
+}
+
 export type UserCreateNestedOneWithoutAuthorInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuthorInput, Prisma.UserUncheckedCreateWithoutAuthorInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthorInput
@@ -504,6 +527,7 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -518,6 +542,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorUncheckedCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -548,6 +573,7 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -562,6 +588,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUncheckedUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -576,6 +603,7 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -590,6 +618,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   author?: Prisma.AuthorUncheckedCreateNestedOneWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -620,6 +649,7 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -633,6 +663,83 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  author?: Prisma.AuthorUncheckedUpdateOneWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCategoryPermissionsInput = {
+  id: string
+  role?: $Enums.Role
+  site?: $Enums.Site | null
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  author?: Prisma.AuthorCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCategoryPermissionsInput = {
+  id: string
+  role?: $Enums.Role
+  site?: $Enums.Site | null
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  author?: Prisma.AuthorUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCategoryPermissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCategoryPermissionsInput, Prisma.UserUncheckedCreateWithoutCategoryPermissionsInput>
+}
+
+export type UserUpsertWithoutCategoryPermissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCategoryPermissionsInput, Prisma.UserUncheckedUpdateWithoutCategoryPermissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCategoryPermissionsInput, Prisma.UserUncheckedCreateWithoutCategoryPermissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCategoryPermissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCategoryPermissionsInput, Prisma.UserUncheckedUpdateWithoutCategoryPermissionsInput>
+}
+
+export type UserUpdateWithoutCategoryPermissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  site?: Prisma.NullableEnumSiteFieldUpdateOperationsInput | $Enums.Site | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  author?: Prisma.AuthorUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCategoryPermissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  site?: Prisma.NullableEnumSiteFieldUpdateOperationsInput | $Enums.Site | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   author?: Prisma.AuthorUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -648,6 +755,7 @@ export type UserCreateWithoutAuthorInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthorInput = {
@@ -662,6 +770,7 @@ export type UserUncheckedCreateWithoutAuthorInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthorInput = {
@@ -692,6 +801,7 @@ export type UserUpdateWithoutAuthorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthorInput = {
@@ -706,6 +816,7 @@ export type UserUncheckedUpdateWithoutAuthorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  categoryPermissions?: Prisma.CategoryPermissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -716,11 +827,13 @@ export type UserUncheckedUpdateWithoutAuthorInput = {
 export type UserCountOutputType = {
   sessions: number
   accounts: number
+  categoryPermissions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  categoryPermissions?: boolean | UserCountOutputTypeCountCategoryPermissionsArgs
 }
 
 /**
@@ -747,6 +860,13 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AccountWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCategoryPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryPermissionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -761,6 +881,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   author?: boolean | Prisma.User$authorArgs<ExtArgs>
+  categoryPermissions?: boolean | Prisma.User$categoryPermissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -805,6 +926,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   author?: boolean | Prisma.User$authorArgs<ExtArgs>
+  categoryPermissions?: boolean | Prisma.User$categoryPermissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -816,6 +938,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     author: Prisma.$AuthorPayload<ExtArgs> | null
+    categoryPermissions: Prisma.$CategoryPermissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1224,6 +1347,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   author<T extends Prisma.User$authorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authorArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  categoryPermissions<T extends Prisma.User$categoryPermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$categoryPermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1719,6 +1843,30 @@ export type User$authorArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   include?: Prisma.AuthorInclude<ExtArgs> | null
   where?: Prisma.AuthorWhereInput
+}
+
+/**
+ * User.categoryPermissions
+ */
+export type User$categoryPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CategoryPermission
+   */
+  select?: Prisma.CategoryPermissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CategoryPermission
+   */
+  omit?: Prisma.CategoryPermissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryPermissionInclude<ExtArgs> | null
+  where?: Prisma.CategoryPermissionWhereInput
+  orderBy?: Prisma.CategoryPermissionOrderByWithRelationInput | Prisma.CategoryPermissionOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryPermissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CategoryPermissionScalarFieldEnum | Prisma.CategoryPermissionScalarFieldEnum[]
 }
 
 /**
