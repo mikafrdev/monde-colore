@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import type { ArticleWithRelations } from "@/lib/queries/article.queries";
 import { routes } from "@/lib/routes";
+import { Gallery } from "./gallery";
 type ArticleSectionProps = { title: string; articles: ArticleWithRelations[] };
 function getYoutubeThumbnail(embedUrl: string | null): string | null {
    if (!embedUrl) return null;
@@ -14,8 +15,19 @@ function getYoutubeThumbnail(embedUrl: string | null): string | null {
 }
 export function ArticleSection({ articles }: ArticleSectionProps) {
    return (
+      <>
+         <div className="relative w-full min-h-96 overflow-hidden shadow-md">
+            <Gallery
+               images={[
+                  {
+                     src: "/uploads/images/a77417c2-52ff-49bc-b749-8e4c18fc9d41.jpg",
+                  },
+               ]}
+            />
+         </div>
       <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
-         {" "}
+         
+
          {articles.map((article) => {
             const primaryImage =
                article.images.find((i) => i.isPrimary) ?? article.images[0];
@@ -26,9 +38,9 @@ export function ArticleSection({ articles }: ArticleSectionProps) {
                getYoutubeThumbnail(primaryVideo?.video?.embedUrl ?? null);
             const imageUrl = videoThumb ?? primaryImage?.image?.url ?? null;
             const imageAlt = primaryImage?.image?.alt ?? article.title;
+
             return (
                <div key={article.id} className="mb-6 break-inside-avoid">
-                  {" "}
                   <Link
                      href={routes.article(
                         article.categories[0]?.slug ?? "autres",
@@ -36,11 +48,9 @@ export function ArticleSection({ articles }: ArticleSectionProps) {
                      )}
                      className="group block"
                   >
-                     {" "}
                      <h3 className="mb-3 text-center font-medium">
-                        {" "}
-                        {article.title}{" "}
-                     </h3>{" "}
+                        {article.title}
+                     </h3>
                      <div
                         className="relative mx-auto w-[80%] rounded-lg p-[5px] transition-transform duration-300 hover:scale-105"
                         style={{
@@ -48,9 +58,9 @@ export function ArticleSection({ articles }: ArticleSectionProps) {
                            animation: "border-spin 4s linear infinite",
                         }}
                      >
-                        {" "}
+                        
                         <div className="rounded-lg bg-background p-[4px]">
-                           {" "}
+                           
                            {imageUrl ? (
                               <Image
                                  width={300}
@@ -62,16 +72,17 @@ export function ArticleSection({ articles }: ArticleSectionProps) {
                               />
                            ) : (
                               <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-muted">
-                                 {" "}
-                                 <ImageIcon className="size-8 text-muted-foreground" />{" "}
+                                 
+                                 <ImageIcon className="size-8 text-muted-foreground" />
                               </div>
-                           )}{" "}
-                        </div>{" "}
-                     </div>{" "}
-                  </Link>{" "}
+                           )}
+                        </div>
+                     </div>
+                  </Link>
                </div>
             );
-         })}{" "}
+         })}
       </div>
+      </>
    );
 }

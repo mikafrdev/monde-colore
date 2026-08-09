@@ -83,27 +83,13 @@ const jeuxvideoSidebar: readonly SidebarLink[] = [
       icon: Video,
       description: "Toutes les vidéos",
    },
-   {
-      id: "images",
-      label: "Images",
-      href: "/images",
+   /* {
+      id: "personnages",
+      label: "Personnages",
+      href: "/personnages",
       icon: ImageIcon,
-      description: "Toutes les images",
-   },
-   {
-      id: "music",
-      label: "Musique",
-      href: "/musiques",
-      icon: Music,
-      description: "Les chansons de Léo",
-   },
-   {
-      id: "games",
-      label: "Jeux vidéo",
-      href: "/jeux-video",
-      icon: Gamepad2,
-      description: "jeux vidéo de Léo",
-   },
+      description: "Les personnages de jeux vidéo",
+   } */
 ] as const;
 
 const footballSidebar: readonly SidebarLink[] = [

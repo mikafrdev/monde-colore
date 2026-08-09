@@ -14,7 +14,7 @@ export function Gallery({ images }: { images: { src: string }[] }) {
             {images.map((img, i) => (
                <div
                   key={i}
-                  className="relative w-full flex-shrink-0 overflow-hidden"
+                  className="relative w-full shrink-0 overflow-hidden"
                >
                   <Image
                      loading="eager"

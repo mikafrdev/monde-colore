@@ -46,6 +46,8 @@ export function AppSidebar({ session }: AppSidebarProps) {
    const pathname = usePathname();
    const activeSection = useActiveSection();
 
+   if (pathname === "/") return null;
+
    const closeOnMobile = () => isMobile && setOpenMobile(false);
 
    return (
