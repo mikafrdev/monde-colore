@@ -17,58 +17,11 @@ import type { Prisma } from "@/lib/prisma/generated/client";
 import { PublicationStatus, Site } from "@/lib/prisma/generated/enums";
 import { typed } from "./typed-query";
 import { getCategoryBySlug } from "./categorie.queries";
-
-// ─── Include partagé ──────────────────────────────────────────────────────────
-
-const articleInclude = {
-   author: true,
-   source: true,
-   categories: true,
-   content: true,
-   sites: {
-      select: { site: true, featured: true, pinned: true, order: true },
-   },
-   images: {
-      select: {
-         imageId: true,
-         isPrimary: true,
-         order: true,
-         image: {
-            select: {
-               url: true,
-               alt: true,
-            },
-         },
-      },
-   },
-   videos: {
-      select: {
-         videoId: true,
-         isPrimary: true,
-         order: true,
-         caption: true,
-         video: {
-            select: {
-               title: true,
-               embedUrl: true,
-               fileUrl: true,
-               thumbnailUrl: true,
-               altText: true,
-               provider: true,
-               width: true,
-               height: true,
-               duration: true,
-            },
-         },
-      },
-   },
-} satisfies Prisma.ArticleInclude;
-
-// ─── Type partagé ─────────────────────────────────────────────────────────────
-
-export type ArticleWithRelations = Prisma.ArticleGetPayload<{
-   include: typeof articleInclude;
-}>;
+import {
+   articleInclude,
+   ArticleRelatedCategoriesResult,
+   ArticleWithRelations,
+} from "./article.types";
 
 // ─── Params ───────────────────────────────────────────────────────────────────
 
@@ -184,4 +137,190 @@ export async function getHomepageFeaturedAction(site: Site) {
          article.categories.some((category) => category.slug === "jeux-video"),
       ),
    };
+}
+
+/* TEST */
+
+async function getAllParentIds(
+   categoryId: string,
+   visited = new Set<string>(),
+): Promise<Set<string>> {
+   if (visited.has(categoryId)) return visited;
+   visited.add(categoryId);
+
+   const relations = await prisma.categoryRelation.findMany({
+      where: { childId: categoryId },
+      select: { parentId: true },
+   });
+
+   for (const rel of relations) {
+      await getAllParentIds(rel.parentId, visited);
+   }
+
+   return visited;
+}
+
+async function getAllChildIds(
+   categoryId: string,
+   visited = new Set<string>(),
+): Promise<Set<string>> {
+   if (visited.has(categoryId)) return visited;
+   visited.add(categoryId);
+
+   const relations = await prisma.categoryRelation.findMany({
+      where: { parentId: categoryId },
+      select: { childId: true },
+   });
+
+   for (const rel of relations) {
+      await getAllChildIds(rel.childId, visited);
+   }
+
+   return visited;
+}
+
+/* 
+   
+
+export async function getArticlesByCategorySlug(slug: string): Promise<ArticleWithRelations[]> {
+  const category = await prisma.category.findUnique({ where: { slug } });
+  if (!category) return [];
+
+  const [parentIds, childIds] = await Promise.all([
+    getAllParentIds(category.id),
+    getAllChildIds(category.id),
+  ]);
+
+  const allIds = new Set([...parentIds, ...childIds]);
+
+  return prisma.article.findMany({
+    where: {
+      categories: {
+        some: { id: { in: Array.from(allIds) } },
+      },
+      status: "PUBLISHED",
+    },
+    include: articleInclude,
+    orderBy: { publishedAt: "desc" },
+  });
+} */
+
+export async function getArticlesByCategorySlug(
+   slug: string,
+): Promise<ArticleWithRelations[]> {
+   const category = await prisma.category.findUnique({ where: { slug } });
+   if (!category) return [];
+
+   const [parentIds, childIds] = await Promise.all([
+      getAllParentIds(category.id),
+      getAllChildIds(category.id),
+   ]);
+
+   const allIds = new Set([...parentIds, ...childIds]);
+
+   const args = {
+      where: {
+         categories: {
+            some: { id: { in: Array.from(allIds) } },
+         },
+         /* status: "PUBLISHED", */
+      },
+      include: articleInclude,
+      orderBy: { publishedAt: "desc" },
+   } satisfies Prisma.ArticleFindManyArgs;
+
+   return prisma.article.findMany(args);
+}
+
+export async function getArticleRelatedCategories(
+   slug: string,
+): Promise<ArticleRelatedCategoriesResult | null> {
+   const category = await prisma.category.findUnique({
+      where: { slug },
+      select: {
+         id: true,
+         name: true,
+         slug: true,
+         description: true,
+         parentRelations: {
+            select: { child: { select: { id: true, name: true, slug: true } } },
+         },
+         childRelations: {
+            select: {
+               parent: { select: { id: true, name: true, slug: true } },
+            },
+         },
+      },
+   });
+
+   if (!category) return null;
+
+   return {
+      id: category.id,
+      name: category.name,
+      slug: category.slug,
+      description: category.description,
+      parents: category.childRelations.map((r) => r.parent), // ✅ mes parents
+      children: category.parentRelations.map((r) => r.child), // ✅ mes enfants
+   };
+}
+
+export async function getArticleHomepageGroupedByCategoryAction(
+   site: Site,
+   categorySlugList: string[],
+) {
+   const categories = await prisma.category.findMany({
+      where: { slug: { in: categorySlugList } },
+   });
+
+   const groups = await Promise.all(
+      categorySlugList.map(async (slug) => {
+         const category = categories.find((c) => c.slug === slug);
+         if (!category) return null;
+
+         const articles = await typed<ArticleWithRelations[]>(
+            prisma.article.findMany({
+               where: {
+                  categories: { some: { slug } },
+                  sites: { some: { site } },
+                  status: PublicationStatus.PUBLISHED,
+               },
+               orderBy: { updatedAt: "desc" },
+               take: 6,
+               include: articleInclude,
+            }),
+         );
+
+         return { category, articles };
+      }),
+   );
+
+   return groups.filter(Boolean); // enlève les catégories introuvables
+}
+
+export async function getArticlesByCategorySlugAction(
+   site: Site,
+   categorySlug: string,
+   /* limit = 6, */
+) {
+   const category = await prisma.category.findUnique({
+      where: { slug: categorySlug },
+   });
+
+   if (!category) return null;
+
+   const articles = await typed<ArticleWithRelations[]>(
+      prisma.article.findMany({
+         where: {
+            categories: { some: { slug: categorySlug } },
+            sites: { some: { site } },
+            /* status: PublicationStatus.PUBLISHED, */
+         },
+         orderBy: { updatedAt: "desc" },
+         /* take: limit, */
+         include: articleInclude,
+      }),
+   );
+
+   return { category, articles };
 }

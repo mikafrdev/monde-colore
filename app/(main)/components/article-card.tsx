@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { getYoutubeThumbnail } from "@/lib/utils/video";
-import type { ArticleWithRelations } from "@/lib/queries/article.queries";
+import type { ArticleWithRelations } from "@/lib/queries/article.types";
 
 type ArticleCardProps = {
    article: ArticleWithRelations;

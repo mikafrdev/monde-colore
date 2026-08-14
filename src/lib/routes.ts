@@ -1,13 +1,12 @@
 export const routes = {
    home: "/",
-   informations: "/information",
+   informations: "/informations",
    cuisines: "/cuisine",
    jeuxvideo: "/jeux-video",
    football: "/football",
    sites: "/sites",
 
-   article: (type: string, slug: string) =>
-      `/${type.toLowerCase()}/jeux/${slug}`,
+   article: (category: string, slug: string) => `/article/${slug}`,
 
    adminArticleEdit: (id: string) => `/admin/articles/${id}/edit`,
 };

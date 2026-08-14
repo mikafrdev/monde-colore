@@ -1,6 +1,6 @@
 // components/article-list.tsx
 "use client";
-import type { ArticleWithRelations } from "@/lib/queries/article.queries";
+import type { ArticleWithRelations } from "@/lib/queries/article.types";
 import { routes } from "@/lib/routes";
 import { Gallery } from "./gallery";
 import { ArticleCard } from "./article-card";

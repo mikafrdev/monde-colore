@@ -13,7 +13,7 @@ export default async function SubCategoryList({ dataList }: dataListProps) {
          {dataList.map((data) => (
             <div key={data.url}>
                <Link href={data.link} className="block group">
-                  <h3 className="p-4 text-center font-medium">{data.title}</h3>
+                  <h3 className="py-8 text-center font-medium">{data.title}</h3>
                   <div
                      className="relative w-[80%] mx-auto rounded-lg p-[5px] transition-transform duration-300 hover:scale-105"
                      style={{
