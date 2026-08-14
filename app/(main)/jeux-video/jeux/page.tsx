@@ -16,6 +16,8 @@ export default async function PageJeuxVideo() {
       notFound();
    }
 
+   
+
    return (
       <div className="flex flex-col gap-6 pl-4 flex-1 px-4">
          <h1 className="hidden">Jeux Vidéo </h1>

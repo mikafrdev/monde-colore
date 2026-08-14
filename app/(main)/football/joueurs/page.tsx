@@ -1,27 +1,24 @@
-import { AppCarousel } from "@/components/app-carousel";
-import { ScrollToTopButton } from "@/components/scroll-to-top-button";
-import { AppFeatured } from "@main/components/app-featured";
-import Image from "next/image";
+import { Site } from "@/lib/prisma/generated/enums";
+import { getArticlesByCategorySlugAction } from "@/lib/queries/article.queries";
+import { ArticleHomePageByCategory } from "@main/components/articles-homepage-by-category";
+import { notFound } from "next/navigation";
 
-export default async function Football() {
-   /* await new Promise((r) => setTimeout(r, 4000)); */
+export default async function PageFootballJoueurs() {
+   const result = await getArticlesByCategorySlugAction(
+      Site.LEO,
+      "joueurs",
+   );
+
+   if (!result) {
+      notFound();
+   }
+
+   const { category, articles } = result;
+
    return (
-      <div>
-         <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Les joueurs</h1>
-            <Image
-               loading="eager"
-               src="/uploads/images/artboard_1_720.webp"
-               alt="Football"
-               width={1050}
-               height={605}
-               className=""
-            />
-            {/* <AppCarousel />
-            <AppFeatured pageType="LEO" /> */}
-         </div>
-
-         <ScrollToTopButton />
+      <div className="flex flex-col gap-6 pl-4 flex-1 px-4">
+         <h1 className="hidden">Football Joueurs </h1>
+         <ArticleHomePageByCategory title={category.name} articles={articles} />
       </div>
    );
 }

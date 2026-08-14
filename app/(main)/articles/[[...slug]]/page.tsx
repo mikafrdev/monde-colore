@@ -31,4 +31,13 @@ export default async function ArticlesListPage({
          </>
       );
    }
+
+   console.log("segments : ", segments)
+
+   return(
+      <>
+      {segments}
+      </>
+   )
+
 }
