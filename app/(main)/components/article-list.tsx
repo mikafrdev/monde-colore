@@ -26,7 +26,7 @@ export function ArticleList({
             </div>
          )}
 
-         {title && <h2 className="mb-6 text-2xl font-semibold">{title}</h2>}
+         {title && <h2 className="hidden mb-6 text-2xl font-semibold">{title}</h2>}
 
          <div className={columnsClassName}>
             {articles.map((article, index) => (

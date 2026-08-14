@@ -29,7 +29,7 @@ export default async function Football() {
    return (
       <div>
          <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Football</h1>
+            <h1 className="hidden">Football</h1>
             <Image
                loading="eager"
                src="/uploads/images/d46c9c70-6264-478a-9dba-9ad335fa1e28.png"

@@ -23,7 +23,7 @@ export default async function JeuxVideo() {
    return (
       <div>
          <div className="flex flex-col flex-1 gap-6">
-            <h1 className="">Jeux Vidéos</h1>
+            <h1 className="hidden">Jeux Vidéos</h1>
             <Image
                loading="eager"
                src="/uploads/images/eabbf922-5f7e-400b-b597-48154addd48e.jpg"

@@ -15,7 +15,7 @@ export default async function MainLayout({ children }: LayoutProps) {
          <div className="flex flex-col min-h-screen w-full">
             <header className="sticky w-full top-0 z-50 backdrop-blur-md bg-background">
                <AppNavigationMenu
-                  trigger={<SidebarTrigger className="px-0 md:hidden" />}
+                  trigger={<SidebarTrigger className="cursor-pointer px-0 md:hidden" />}
                   session={session}
                />
             </header>
@@ -25,7 +25,7 @@ export default async function MainLayout({ children }: LayoutProps) {
                   <AppBreadcrumb />
                   {children}
                </main>
-               <RightColumn session={session} />
+               <RightColumn />
             </div>
          </div>
       </SidebarProvider>
