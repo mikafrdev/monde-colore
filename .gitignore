@@ -49,7 +49,7 @@ prisma.config.ts
 
 # uploads (garder le dossier mais ignorer son contenu)
 /public/*
-!public/uploads/.gitkeep
+!public/.gitkeep
 
 # scripts & bases de données locales
 deploy.sh
