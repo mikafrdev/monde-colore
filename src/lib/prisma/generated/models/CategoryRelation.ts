@@ -178,7 +178,7 @@ export type CategoryRelationWhereUniqueInput = Prisma.AtLeast<{
   childId?: Prisma.StringFilter<"CategoryRelation"> | string
   parent?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   child?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
-}, "parentId_childId" | "parentId_childId">
+}, "parentId_childId">
 
 export type CategoryRelationOrderByWithAggregationInput = {
   parentId?: Prisma.SortOrder

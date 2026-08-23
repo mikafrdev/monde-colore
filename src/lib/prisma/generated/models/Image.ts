@@ -284,6 +284,7 @@ export type ImageWhereInput = {
   timelineEvents?: Prisma.TimelineEventListRelationFilter
   sites?: Prisma.ArticleSiteListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
 }
 
 export type ImageOrderByWithRelationInput = {
@@ -303,6 +304,7 @@ export type ImageOrderByWithRelationInput = {
   timelineEvents?: Prisma.TimelineEventOrderByRelationAggregateInput
   sites?: Prisma.ArticleSiteOrderByRelationAggregateInput
   collections?: Prisma.CollectionOrderByRelationAggregateInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
 }
 
 export type ImageWhereUniqueInput = Prisma.AtLeast<{
@@ -325,6 +327,7 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   timelineEvents?: Prisma.TimelineEventListRelationFilter
   sites?: Prisma.ArticleSiteListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
 }, "id" | "url">
 
 export type ImageOrderByWithAggregationInput = {
@@ -382,6 +385,7 @@ export type ImageCreateInput = {
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateInput = {
@@ -401,6 +405,7 @@ export type ImageUncheckedCreateInput = {
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageUpdateInput = {
@@ -420,6 +425,7 @@ export type ImageUpdateInput = {
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateInput = {
@@ -439,6 +445,7 @@ export type ImageUncheckedUpdateInput = {
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateManyInput = {
@@ -484,6 +491,11 @@ export type ImageUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+}
+
+export type ImageNullableScalarRelationFilter = {
+  is?: Prisma.ImageWhereInput | null
+  isNot?: Prisma.ImageWhereInput | null
 }
 
 export type ImageCountOrderByAggregateInput = {
@@ -543,14 +555,25 @@ export type ImageSumOrderByAggregateInput = {
   size?: Prisma.SortOrder
 }
 
-export type ImageNullableScalarRelationFilter = {
-  is?: Prisma.ImageWhereInput | null
-  isNot?: Prisma.ImageWhereInput | null
-}
-
 export type ImageScalarRelationFilter = {
   is?: Prisma.ImageWhereInput
   isNot?: Prisma.ImageWhereInput
+}
+
+export type ImageCreateNestedOneWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutCategoriesInput, Prisma.ImageUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutCategoriesInput
+  connect?: Prisma.ImageWhereUniqueInput
+}
+
+export type ImageUpdateOneWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutCategoriesInput, Prisma.ImageUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutCategoriesInput
+  upsert?: Prisma.ImageUpsertWithoutCategoriesInput
+  disconnect?: Prisma.ImageWhereInput | boolean
+  delete?: Prisma.ImageWhereInput | boolean
+  connect?: Prisma.ImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutCategoriesInput, Prisma.ImageUpdateWithoutCategoriesInput>, Prisma.ImageUncheckedUpdateWithoutCategoriesInput>
 }
 
 export type EnumImageTypeFieldUpdateOperationsInput = {
@@ -619,6 +642,98 @@ export type ImageUpdateOneWithoutSitesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutSitesInput, Prisma.ImageUpdateWithoutSitesInput>, Prisma.ImageUncheckedUpdateWithoutSitesInput>
 }
 
+export type ImageCreateWithoutCategoriesInput = {
+  id?: string
+  url: string
+  alt?: string | null
+  type?: $Enums.ImageType
+  filename?: string | null
+  width?: number | null
+  height?: number | null
+  size?: number | null
+  mimeType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
+  timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+}
+
+export type ImageUncheckedCreateWithoutCategoriesInput = {
+  id?: string
+  url: string
+  alt?: string | null
+  type?: $Enums.ImageType
+  filename?: string | null
+  width?: number | null
+  height?: number | null
+  size?: number | null
+  mimeType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  visibility?: $Enums.Visibility
+  articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
+  timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
+  sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+}
+
+export type ImageCreateOrConnectWithoutCategoriesInput = {
+  where: Prisma.ImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ImageCreateWithoutCategoriesInput, Prisma.ImageUncheckedCreateWithoutCategoriesInput>
+}
+
+export type ImageUpsertWithoutCategoriesInput = {
+  update: Prisma.XOR<Prisma.ImageUpdateWithoutCategoriesInput, Prisma.ImageUncheckedUpdateWithoutCategoriesInput>
+  create: Prisma.XOR<Prisma.ImageCreateWithoutCategoriesInput, Prisma.ImageUncheckedCreateWithoutCategoriesInput>
+  where?: Prisma.ImageWhereInput
+}
+
+export type ImageUpdateToOneWithWhereWithoutCategoriesInput = {
+  where?: Prisma.ImageWhereInput
+  data: Prisma.XOR<Prisma.ImageUpdateWithoutCategoriesInput, Prisma.ImageUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type ImageUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
+  timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+}
+
+export type ImageUncheckedUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  filename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+  articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
+  timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
+  sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+}
+
 export type ImageCreateWithoutTimelineEventsInput = {
   id?: string
   url: string
@@ -635,6 +750,7 @@ export type ImageCreateWithoutTimelineEventsInput = {
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutTimelineEventsInput = {
@@ -653,6 +769,7 @@ export type ImageUncheckedCreateWithoutTimelineEventsInput = {
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutTimelineEventsInput = {
@@ -687,6 +804,7 @@ export type ImageUpdateWithoutTimelineEventsInput = {
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutTimelineEventsInput = {
@@ -705,6 +823,7 @@ export type ImageUncheckedUpdateWithoutTimelineEventsInput = {
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateWithoutCollectionsInput = {
@@ -723,6 +842,7 @@ export type ImageCreateWithoutCollectionsInput = {
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutCollectionsInput = {
@@ -741,6 +861,7 @@ export type ImageUncheckedCreateWithoutCollectionsInput = {
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutCollectionsInput = {
@@ -775,6 +896,7 @@ export type ImageUpdateWithoutCollectionsInput = {
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutCollectionsInput = {
@@ -793,6 +915,7 @@ export type ImageUncheckedUpdateWithoutCollectionsInput = {
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateWithoutArticlesInput = {
@@ -811,6 +934,7 @@ export type ImageCreateWithoutArticlesInput = {
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutArticlesInput = {
@@ -829,6 +953,7 @@ export type ImageUncheckedCreateWithoutArticlesInput = {
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
   sites?: Prisma.ArticleSiteUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutArticlesInput = {
@@ -863,6 +988,7 @@ export type ImageUpdateWithoutArticlesInput = {
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutArticlesInput = {
@@ -881,6 +1007,7 @@ export type ImageUncheckedUpdateWithoutArticlesInput = {
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
   sites?: Prisma.ArticleSiteUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateWithoutSitesInput = {
@@ -899,6 +1026,7 @@ export type ImageCreateWithoutSitesInput = {
   articles?: Prisma.ArticleImageCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutSitesInput = {
@@ -917,6 +1045,7 @@ export type ImageUncheckedCreateWithoutSitesInput = {
   articles?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutImageInput
   timelineEvents?: Prisma.TimelineEventUncheckedCreateNestedManyWithoutImageInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutCoverImageInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutSitesInput = {
@@ -951,6 +1080,7 @@ export type ImageUpdateWithoutSitesInput = {
   articles?: Prisma.ArticleImageUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutSitesInput = {
@@ -969,6 +1099,7 @@ export type ImageUncheckedUpdateWithoutSitesInput = {
   articles?: Prisma.ArticleImageUncheckedUpdateManyWithoutImageNestedInput
   timelineEvents?: Prisma.TimelineEventUncheckedUpdateManyWithoutImageNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutCoverImageNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutImageNestedInput
 }
 
 
@@ -981,6 +1112,7 @@ export type ImageCountOutputType = {
   timelineEvents: number
   sites: number
   collections: number
+  categories: number
 }
 
 export type ImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -988,6 +1120,7 @@ export type ImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   timelineEvents?: boolean | ImageCountOutputTypeCountTimelineEventsArgs
   sites?: boolean | ImageCountOutputTypeCountSitesArgs
   collections?: boolean | ImageCountOutputTypeCountCollectionsArgs
+  categories?: boolean | ImageCountOutputTypeCountCategoriesArgs
 }
 
 /**
@@ -1028,6 +1161,13 @@ export type ImageCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.CollectionWhereInput
 }
 
+/**
+ * ImageCountOutputType without action
+ */
+export type ImageCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryWhereInput
+}
+
 
 export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1046,6 +1186,7 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   timelineEvents?: boolean | Prisma.Image$timelineEventsArgs<ExtArgs>
   sites?: boolean | Prisma.Image$sitesArgs<ExtArgs>
   collections?: boolean | Prisma.Image$collectionsArgs<ExtArgs>
+  categories?: boolean | Prisma.Image$categoriesArgs<ExtArgs>
   _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
 
@@ -1100,6 +1241,7 @@ export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   timelineEvents?: boolean | Prisma.Image$timelineEventsArgs<ExtArgs>
   sites?: boolean | Prisma.Image$sitesArgs<ExtArgs>
   collections?: boolean | Prisma.Image$collectionsArgs<ExtArgs>
+  categories?: boolean | Prisma.Image$categoriesArgs<ExtArgs>
   _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1112,6 +1254,7 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     timelineEvents: Prisma.$TimelineEventPayload<ExtArgs>[]
     sites: Prisma.$ArticleSitePayload<ExtArgs>[]
     collections: Prisma.$CollectionPayload<ExtArgs>[]
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1524,6 +1667,7 @@ export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Ty
   timelineEvents<T extends Prisma.Image$timelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$timelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sites<T extends Prisma.Image$sitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleSitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   collections<T extends Prisma.Image$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.Image$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2051,6 +2195,30 @@ export type Image$collectionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CollectionScalarFieldEnum | Prisma.CollectionScalarFieldEnum[]
+}
+
+/**
+ * Image.categories
+ */
+export type Image$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
 }
 
 /**

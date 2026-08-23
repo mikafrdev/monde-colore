@@ -97,7 +97,8 @@ export const ModelName = {
   ArticleImage: 'ArticleImage',
   ArticleView: 'ArticleView',
   ArticleVideo: 'ArticleVideo',
-  ArticleSite: 'ArticleSite'
+  ArticleSite: 'ArticleSite',
+  CategorySite: 'CategorySite'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -203,6 +204,7 @@ export const CategoryScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
+  imageId: 'imageId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isPublic: 'isPublic'
@@ -682,6 +684,20 @@ export const ArticleSiteScalarFieldEnum = {
 } as const
 
 export type ArticleSiteScalarFieldEnum = (typeof ArticleSiteScalarFieldEnum)[keyof typeof ArticleSiteScalarFieldEnum]
+
+
+export const CategorySiteScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  site: 'site',
+  featured: 'featured',
+  order: 'order',
+  visible: 'visible',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategorySiteScalarFieldEnum = (typeof CategorySiteScalarFieldEnum)[keyof typeof CategorySiteScalarFieldEnum]
 
 
 export const SortOrder = {

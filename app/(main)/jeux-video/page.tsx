@@ -1,10 +1,24 @@
 import { ScrollToTopButton } from "@/components/scroll-to-top-button";
+import { getChildCategoriesAction } from "@/lib/queries/categorie.queries";
+import { CURRENT_SITE } from "@/lib/site";
 import { gameListType } from "@/types/game";
 import SubCategoryList from "@main/components/sub-category-list";
 import Image from "next/image";
 
-export default async function JeuxVideo() {
+export default async function JeuxVideo({
+   params,
+}: {
+   params: Promise<{ slug?: string[] }>;
+}) {
+   const { slug: segments } = await params;
    /* await new Promise((r) => setTimeout(r, 4000)); */
+
+   const childCategories = await getChildCategoriesAction(
+      "gaming",
+      CURRENT_SITE,
+   );
+
+console.log("childCategories:", JSON.stringify(childCategories, null, 2));
    const gameTypeList: gameListType[] = [
       {
          title: "Les jeux vidéo",
@@ -24,6 +38,11 @@ export default async function JeuxVideo() {
       <div>
          <div className="flex flex-col flex-1 gap-6">
             <h1 className="hidden">Jeux Vidéos</h1>
+
+            {childCategories.map((category, index) => (
+               <div key={index}>{category.title} oui</div>
+            ))}
+
             <Image
                loading="eager"
                src="/uploads/images/eabbf922-5f7e-400b-b597-48154addd48e.jpg"

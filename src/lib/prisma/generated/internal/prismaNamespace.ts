@@ -443,7 +443,8 @@ export const ModelName = {
   ArticleImage: 'ArticleImage',
   ArticleView: 'ArticleView',
   ArticleVideo: 'ArticleVideo',
-  ArticleSite: 'ArticleSite'
+  ArticleSite: 'ArticleSite',
+  CategorySite: 'CategorySite'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -459,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "categoryPermission" | "author" | "category" | "tag" | "article" | "articleContent" | "image" | "video" | "document" | "timeline" | "timelineEvent" | "source" | "media" | "platform" | "platformMedia" | "gamePlatform" | "game" | "gameEdition" | "gameCollection" | "franchise" | "genre" | "gameGenre" | "console" | "consoleCategory" | "consoleMedia" | "consoleAccessory" | "consoleConfiguration" | "consoleConfigurationAccessory" | "consoleVariant" | "region" | "company" | "accessory" | "collection" | "collectionItem" | "collectionSource" | "collectionContributor" | "content" | "categoryRelation" | "articleTag" | "articleImage" | "articleView" | "articleVideo" | "articleSite"
+    modelProps: "user" | "session" | "account" | "verification" | "categoryPermission" | "author" | "category" | "tag" | "article" | "articleContent" | "image" | "video" | "document" | "timeline" | "timelineEvent" | "source" | "media" | "platform" | "platformMedia" | "gamePlatform" | "game" | "gameEdition" | "gameCollection" | "franchise" | "genre" | "gameGenre" | "console" | "consoleCategory" | "consoleMedia" | "consoleAccessory" | "consoleConfiguration" | "consoleConfigurationAccessory" | "consoleVariant" | "region" | "company" | "accessory" | "collection" | "collectionItem" | "collectionSource" | "collectionContributor" | "content" | "categoryRelation" | "articleTag" | "articleImage" | "articleView" | "articleVideo" | "articleSite" | "categorySite"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3941,6 +3942,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CategorySite: {
+      payload: Prisma.$CategorySitePayload<ExtArgs>
+      fields: Prisma.CategorySiteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CategorySiteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CategorySiteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        findFirst: {
+          args: Prisma.CategorySiteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CategorySiteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        findMany: {
+          args: Prisma.CategorySiteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>[]
+        }
+        create: {
+          args: Prisma.CategorySiteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        createMany: {
+          args: Prisma.CategorySiteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CategorySiteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>[]
+        }
+        delete: {
+          args: Prisma.CategorySiteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        update: {
+          args: Prisma.CategorySiteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        deleteMany: {
+          args: Prisma.CategorySiteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CategorySiteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CategorySiteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>[]
+        }
+        upsert: {
+          args: Prisma.CategorySiteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategorySitePayload>
+        }
+        aggregate: {
+          args: Prisma.CategorySiteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCategorySite>
+        }
+        groupBy: {
+          args: Prisma.CategorySiteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategorySiteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CategorySiteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategorySiteCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4067,6 +4142,7 @@ export const CategoryScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
+  imageId: 'imageId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isPublic: 'isPublic'
@@ -4546,6 +4622,20 @@ export const ArticleSiteScalarFieldEnum = {
 } as const
 
 export type ArticleSiteScalarFieldEnum = (typeof ArticleSiteScalarFieldEnum)[keyof typeof ArticleSiteScalarFieldEnum]
+
+
+export const CategorySiteScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  site: 'site',
+  featured: 'featured',
+  order: 'order',
+  visible: 'visible',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategorySiteScalarFieldEnum = (typeof CategorySiteScalarFieldEnum)[keyof typeof CategorySiteScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -5107,6 +5197,7 @@ export type GlobalOmitConfig = {
   articleView?: Prisma.ArticleViewOmit
   articleVideo?: Prisma.ArticleVideoOmit
   articleSite?: Prisma.ArticleSiteOmit
+  categorySite?: Prisma.CategorySiteOmit
 }
 
 /* Types for Logging */

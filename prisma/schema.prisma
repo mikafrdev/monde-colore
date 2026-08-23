@@ -144,13 +144,19 @@ model Category {
   slug        String  @unique
   description String?
 
+  imageId String? @unique
+
+  image Image? @relation("CategoryImage", fields: [imageId], references: [id])
+
   parentRelations CategoryRelation[] @relation("ParentCategory")
   childRelations  CategoryRelation[] @relation("ChildCategory")
 
-  articles  Article[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 
+  articles  Article[]
+  sites CategorySite[]
+  
   isPublic    Boolean              @default(true)
   permissions CategoryPermission[]
 }
@@ -244,6 +250,7 @@ model Image {
   timelineEvents TimelineEvent[]
   sites          ArticleSite[]
   collections    Collection[]    @relation("CollectionCover") // ← nom explicite
+  categories     Category[]      @relation("CategoryImage")
 }
 
 enum VideoProvider {
@@ -838,7 +845,6 @@ model CategoryRelation {
   child    Category @relation("ChildCategory", fields: [childId], references: [id], onDelete: Cascade)
 
   @@id([parentId, childId])
-  @@unique([parentId, childId])
 }
 
 model ArticleTag {
@@ -909,3 +915,22 @@ model ArticleSite {
   @@index([site, featured])
   @@index([site, order])
 }
+
+model CategorySite {
+  id         String   @id @default(cuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  site       Site
+
+  featured Boolean @default(false) // mise en avant sur ce site
+  order    Int?    // ordre d'affichage (ex: dans un menu de navigation)
+  visible  Boolean @default(true)  // afficher/masquer indépendamment des articles
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([categoryId, site])
+  @@index([site, featured])
+  @@index([site, order])
+}
+

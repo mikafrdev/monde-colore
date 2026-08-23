@@ -276,3 +276,8 @@ export type ArticleVideo = Prisma.ArticleVideoModel
  * 
  */
 export type ArticleSite = Prisma.ArticleSiteModel
+/**
+ * Model CategorySite
+ * 
+ */
+export type CategorySite = Prisma.CategorySiteModel
