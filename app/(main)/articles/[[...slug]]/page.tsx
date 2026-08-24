@@ -16,21 +16,6 @@ export default async function ArticlesListPage({
 }) {
    const { slug: segments } = await params;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    if (!segments || segments.length === 0) {
       const groups =
          await getArticleHomepageGroupedByCategoryAction(CURRENT_SITE);

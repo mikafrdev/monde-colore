@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -13,6 +13,9 @@ import {
    SidebarMenu,
    SidebarMenuButton,
    SidebarMenuItem,
+   SidebarMenuSub,
+   SidebarMenuSubButton,
+   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import type { CategoryWithRelations } from "@/lib/queries/category.types";
 import { cn } from "@/lib/utils";
@@ -26,13 +29,14 @@ type CategorieProps = {
 export function CategoryTreeMenu({ categories }: CategorieProps) {
    const pathname = usePathname();
 
-   /* const { data: categories = [], isLoading } = useTableQuery(
-      ["categories-with-relations"],
-      () => getCategoriesBySiteAction(),
-   ); */
-
    const categoriesMap = useMemo(
       () => new Map(categories.map((c) => [c.id, c])),
+      [categories],
+   );
+
+   // Cache des descendants complets (pour la réduction transitive).
+   const descendantsCache = useMemo(
+      () => new Map<string, Set<string>>(),
       [categories],
    );
 
@@ -79,6 +83,7 @@ export function CategoryTreeMenu({ categories }: CategorieProps) {
                parentPath={ARTICLES_ROOT}
                depth={0}
                categoriesMap={categoriesMap}
+               descendantsCache={descendantsCache}
                expandedIds={expandedIds}
                pathname={pathname}
             />
@@ -87,11 +92,47 @@ export function CategoryTreeMenu({ categories }: CategorieProps) {
    );
 }
 
+/**
+ * Renvoie tous les descendants (pas seulement enfants directs) d'une catégorie,
+ * avec cache et protection anti-cycle.
+ */
+function getDescendants(
+   id: string,
+   categoriesMap: Map<string, CategoryWithRelations>,
+   cache: Map<string, Set<string>>,
+   visiting: Set<string> = new Set(),
+): Set<string> {
+   if (cache.has(id)) return cache.get(id)!;
+   if (visiting.has(id)) return new Set(); // garde-fou anti-cycle
+
+   visiting.add(id);
+   const category = categoriesMap.get(id);
+   const result = new Set<string>();
+
+   if (category) {
+      for (const rel of category.parentRelations) {
+         result.add(rel.childId);
+         const childDescendants = getDescendants(
+            rel.childId,
+            categoriesMap,
+            cache,
+            visiting,
+         );
+         childDescendants.forEach((d) => result.add(d));
+      }
+   }
+
+   visiting.delete(id);
+   cache.set(id, result);
+   return result;
+}
+
 type CategoryTreeItemProps = {
    category: CategoryWithRelations;
    parentPath: string;
    depth: number;
    categoriesMap: Map<string, CategoryWithRelations>;
+   descendantsCache: Map<string, Set<string>>;
    expandedIds: Set<string>;
    pathname: string;
 };
@@ -101,66 +142,109 @@ function CategoryTreeItem({
    parentPath,
    depth,
    categoriesMap,
+   descendantsCache,
    expandedIds,
    pathname,
 }: CategoryTreeItemProps) {
    const href = `${parentPath}/${category.slug}`;
    const isActive = pathname === href;
 
-   // Enfants de cette catégorie : relations où elle EST le parent -> r.childId
-   const children = category.parentRelations
+   if (category.slug === "jeux-video") {
+   console.log({ href, pathname, isActive, parentPath });
+}
+
+   const rawChildren = category.parentRelations
       .map((r) => categoriesMap.get(r.childId))
       .filter((c): c is CategoryWithRelations => !!c);
+
+   // Réduction transitive : masque un enfant s'il est déjà atteignable
+   // via un autre enfant direct de cette catégorie (ex: Football → Sélections
+   // nationales est masqué car déjà atteignable via Football → Équipes).
+   const children = rawChildren.filter(
+      (child) =>
+         !rawChildren.some(
+            (other) =>
+               other.id !== child.id &&
+               getDescendants(other.id, categoriesMap, descendantsCache).has(
+                  child.id,
+               ),
+         ),
+   );
 
    const hasChildren = children.length > 0;
    const isOpen = expandedIds.has(category.id);
 
+   const [open, setOpen] = useState(isOpen);
+   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+
+   // Ajustement du state pendant le render (pattern React recommandé,
+   // évite le cascading render d'un useEffect).
+   if (isOpen !== prevIsOpen) {
+      setPrevIsOpen(isOpen);
+      setOpen(isOpen);
+   }
+
+   const isRoot = depth === 0;
+   const ButtonComponent = isRoot ? SidebarMenuButton : SidebarMenuSubButton;
+   const ItemComponent = isRoot ? SidebarMenuItem : SidebarMenuSubItem;
+
    const button = (
-      <SidebarMenuButton
-         asChild
-         isActive={isActive}
-         style={{ paddingLeft: `${12 + depth * 16}px` }}
-      >
+      <ButtonComponent asChild isActive={isActive}>
          <Link href={href}>
-            <span className={cn(depth === 0 && "font-bold")}>
+            <span className={cn("truncate", isRoot && "font-semibold")}>
                {category.name}
             </span>
          </Link>
-      </SidebarMenuButton>
+      </ButtonComponent>
    );
 
    if (!hasChildren) {
-      return <SidebarMenuItem>{button}</SidebarMenuItem>;
+      return <ItemComponent>{button}</ItemComponent>;
    }
 
    return (
-      <Collapsible defaultOpen={isOpen} className="group/collapsible w-full">
-         <SidebarMenuItem className="flex flex-col items-stretch">
-            <div className="flex items-center">
-               {button}
+      <Collapsible
+         open={open}
+         onOpenChange={setOpen}
+         className="group/collapsible w-full"
+      >
+         <ItemComponent
+            className={isRoot ? "flex flex-col items-stretch" : undefined}
+         >
+            <div className="flex items-center gap-0.5">
+               <div className="min-w-0 flex-1">{button}</div>
                <CollapsibleTrigger
                   type="button"
-                  className="p-2 shrink-0 text-muted-foreground hover:text-foreground"
-                  aria-label={`Déplier ${category.name}`}
+                  className={cn(
+                     "flex shrink-0 items-center justify-center rounded-md p-1.5 text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground",
+                  )}
+                  aria-label={
+                     open
+                        ? `Replier ${category.name}`
+                        : `Déplier ${category.name}`
+                  }
                >
-                  <ChevronRight className="size-4 transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  <ChevronRight className="size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                </CollapsibleTrigger>
             </div>
 
             <CollapsibleContent>
-               {children.map((child) => (
-                  <CategoryTreeItem
-                     key={child.id}
-                     category={child}
-                     parentPath={href}
-                     depth={depth + 1}
-                     categoriesMap={categoriesMap}
-                     expandedIds={expandedIds}
-                     pathname={pathname}
-                  />
-               ))}
+               <SidebarMenuSub className={cn(!isRoot && "mr-0")}>
+                  {children.map((child) => (
+                     <CategoryTreeItem
+                        key={child.id}
+                        category={child}
+                        parentPath={href}
+                        depth={depth + 1}
+                        categoriesMap={categoriesMap}
+                        descendantsCache={descendantsCache}
+                        expandedIds={expandedIds}
+                        pathname={pathname}
+                     />
+                  ))}
+               </SidebarMenuSub>
             </CollapsibleContent>
-         </SidebarMenuItem>
+         </ItemComponent>
       </Collapsible>
    );
 }

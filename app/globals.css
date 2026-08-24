@@ -268,9 +268,7 @@
    --sidebar-foreground: oklch(0.2077 0.0398 265.75);
    --sidebar-primary: oklch(0.9798 0.0117 231.65);
    --sidebar-primary-foreground: oklch(1 0 0);
-   --sidebar-accent: oklch(
-      0.9798 0.0117 231.65
-   ); /* oklch(0.9376 0.0345 236.5) */
+   --sidebar-accent: oklch(0.9376 0.0345 236.5);
    --sidebar-accent-foreground: oklch(36.4% 0.01 241.9);
    --sidebar-border: oklch(0.15 0 0);
    --sidebar-ring: oklch(0.6852 0.1543 232.66);
@@ -545,22 +543,23 @@
 }
 
 @keyframes pan-vertical {
-  0%, 100% {
-    object-position: 50% 100%;
-  }
-  50% {
-    object-position: 50% 0%;
-  }
+   0%,
+   100% {
+      object-position: 50% 100%;
+   }
+   50% {
+      object-position: 50% 0%;
+   }
 }
 
 @keyframes border-spin {
-  to {
-    --border-angle: 360deg;
-  }
+   to {
+      --border-angle: 360deg;
+   }
 }
 
 @property --border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+   syntax: "<angle>";
+   initial-value: 0deg;
+   inherits: false;
 }
