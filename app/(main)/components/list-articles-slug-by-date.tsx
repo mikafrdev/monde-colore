@@ -2,27 +2,27 @@
 "use client";
 import type { ArticleCardType } from "@/lib/queries/article.types";
 import { routes } from "@/lib/routes";
-import { Gallery } from "./gallery";
 import { ArticleCard } from "./article-card";
+import { HeroImage } from "./hero-image";
 
 type ArticleListProps = {
-   title?: string;
+   title: string;
+   image?: { url: string; alt: string | null } | null;
    articles: ArticleCardType[];
-   heroImages?: { src: string }[];
-   columnsClassName?: string;
 };
 
 export function ListArticleSlugByDate({
    title,
    articles,
-   heroImages,
-   columnsClassName = "columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4",
+   image,
 }: ArticleListProps) {
+   /* console.log("articles", articles); */
+
    return (
       <>
-         {heroImages && heroImages.length > 0 && (
+         {image && (
             <div className="relative w-full min-h-96 overflow-hidden shadow-md">
-               <Gallery images={heroImages} />
+               <HeroImage heroImageSrc={image.url} />
             </div>
          )}
 
@@ -30,7 +30,7 @@ export function ListArticleSlugByDate({
             <h2 className="hidden mb-6 text-2xl font-semibold">{title}</h2>
          )}
 
-         <div className={columnsClassName}>
+         <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
             {articles.map((article, index) => (
                <ArticleCard
                   key={article.id}

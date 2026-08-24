@@ -128,8 +128,16 @@ export type CategoryWithArticleCards = Prisma.CategoryGetPayload<{
    include: typeof homepageCategoryInclude;
 }>;
 
-export type CategoryPathSegment = {
-   id: string;
-   name: string;
-   slug: string;
-};
+// category.types.ts
+export const categoryPathSegmentSelect = {
+   id: true,
+   name: true,
+   slug: true,
+   image: {
+      select: { url: true, alt: true },
+   },
+} satisfies Prisma.CategorySelect;
+
+export type CategoryPathSegment = Prisma.CategoryGetPayload<{
+   select: typeof categoryPathSegmentSelect;
+}>;

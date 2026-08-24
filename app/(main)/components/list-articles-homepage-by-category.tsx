@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArticleCardType } from "@/lib/queries/article.types";
 import { routes } from "@/lib/routes";
 import { Article } from "@/lib/prisma/generated/client";
+import { ArticleCard } from "./article-card";
 
 type ArticleSectionProps = {
    title: string;
@@ -30,73 +31,20 @@ export function ListArticleHomePageByCategory({
 
    return (
       <section aria-labelledby={headingId}>
-         <h2 id={headingId} className="text-2xl font-bold my-4">
-            {title}
-         </h2>
+         <h2 id={headingId}>{title}</h2>
 
          <div className="flex flex-wrap justify-center gap-6">
             {articles.map((article, index) => {
-               const primaryImage =
-                  article.images.find((i) => i.isPrimary) ?? article.images[0];
-               const primaryVideo =
-                  article.videos?.find((v) => v.isPrimary) ??
-                  article.videos?.[0];
-
-               const videoThumb =
-                  primaryVideo?.video?.thumbnailUrl ??
-                  getYoutubeThumbnail(primaryVideo?.video?.embedUrl ?? null);
-
-               const imageUrl =
-                  videoThumb ||
-                  primaryImage?.image?.url ||
-                  "/images/placeholder.wepb";
-               const imageAlt = primaryImage?.image?.alt ?? article.title;
-
-               const articleDate = article.publishedAt ?? article.createdAt;
-               const isNew = new Date(articleDate) > sevenDaysAgo;
-
-               const imgWidth = primaryImage?.image?.width ?? 0;
-               const imgHeight = primaryImage?.image?.height ?? 0;
-               const isLandscape = imgWidth > imgHeight;
-               
-               /* console.log("imageUrl:", imageUrl);
-               console.log("imageAlt:", imageAlt); */
-
                return (
-                  <Link
+                  <ArticleCard
                      key={article.id}
+                     article={article}
+                     priority={index < 4}
                      href={routes.article(
                         article.categories[0]?.slug ?? "autres",
                         article.slug,
                      )}
-                     className={`${isLandscape ? "max-w-[400px]" : "max-w-[30%]"}
-                     flex flex-col justify-center align-middle min-w-[250px] `}
-                  >
-                     <div className="">
-                        <div className="relative flex justify-center">
-                           <Image
-                              loading={index === 0 ? "eager" : "lazy"}
-                              priority={index === 0}
-                              src={imageUrl}
-                              alt={imageAlt}
-                              width={imgWidth || 800}
-                              height={imgHeight || 600}
-                              className={` object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] transition-[filter] duration-300 group-hover:drop-shadow-[0_6px_16px_rgba(0,0,0,0.5)]`}
-                           />
-                        </div>
-
-                        <div className="flex flex-col items-center text-center border-0 pt-3 pb-5">
-                           <span className="font-semibold">
-                              {article.title}
-                           </span>
-                           {article.excerpt && (
-                              <span className="text-sm text-gray-600">
-                                 {article.excerpt}
-                              </span>
-                           )}
-                        </div>
-                     </div>
-                  </Link>
+                  />
                );
             })}
          </div>

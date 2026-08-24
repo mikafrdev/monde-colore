@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 import {
    CategoryPathSegment,
+   categoryPathSegmentSelect,
    categorySelect,
    CategoryWithRelations,
    categoryWithRelationsInclude,
@@ -142,20 +143,19 @@ export async function getCategoryPathChain(
    let previousId: string | null = null;
 
    for (const slug of segments) {
-      const category = await prisma.category.findFirst({
-         where: {
-            slug,
-            ...siteVisibleWhere(site),
-            ...(previousId && {
-               childRelations: {
-                  some: { parentId: previousId },
-               },
-            }),
-         },
-         select: { id: true, name: true, slug: true },
-      });
+      const category: CategoryPathSegment | null =
+         await prisma.category.findFirst({
+            where: {
+               slug,
+               ...siteVisibleWhere(site),
+               ...(previousId
+                  ? { childRelations: { some: { parentId: previousId } } }
+                  : {}),
+            },
+            select: categoryPathSegmentSelect,
+         });
 
-      if (!category) return null; // lien invalide dans le chemin
+      if (!category) return null;
 
       chain.push(category);
       previousId = category.id;

@@ -150,7 +150,7 @@ function CategoryTreeItem({
    const isActive = pathname === href;
 
    if (category.slug === "jeux-video") {
-   console.log({ href, pathname, isActive, parentPath });
+   /* console.log({ href, pathname, isActive, parentPath }); */
 }
 
    const rawChildren = category.parentRelations

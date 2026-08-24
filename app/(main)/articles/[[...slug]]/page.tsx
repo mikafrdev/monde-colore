@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { ListArticleSlugByDate } from "@main/components/list-articles-slug-by-date";
 import { CategoryBreadcrumb } from "@/components/navigation/category-breadcrumbs";
 import { ListArticleHomePageByCategory } from "@main/components/list-articles-homepage-by-category";
-import { prisma } from "@/lib/prisma";
 
 export default async function ArticlesListPage({
    params,
@@ -36,12 +35,15 @@ export default async function ArticlesListPage({
 
    if (!result) notFound();
 
+   console.log("result.category.image : ", result.category.image)
+
    return (
       <>
          <CategoryBreadcrumb chain={result.breadcrumb} />
 
          <ListArticleSlugByDate
             title={result.category.name}
+            image={result.category.image}
             articles={result.articles}
          />
       </>
