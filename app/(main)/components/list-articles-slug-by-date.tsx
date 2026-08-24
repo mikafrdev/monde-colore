@@ -1,18 +1,18 @@
 // components/article-list.tsx
 "use client";
-import type { ArticleWithRelations } from "@/lib/queries/article.types";
+import type { ArticleCardType } from "@/lib/queries/article.types";
 import { routes } from "@/lib/routes";
 import { Gallery } from "./gallery";
 import { ArticleCard } from "./article-card";
 
 type ArticleListProps = {
    title?: string;
-   articles: ArticleWithRelations[];
+   articles: ArticleCardType[];
    heroImages?: { src: string }[];
    columnsClassName?: string;
 };
 
-export function ArticleList({
+export function ListArticleSlugByDate({
    title,
    articles,
    heroImages,
@@ -26,7 +26,9 @@ export function ArticleList({
             </div>
          )}
 
-         {title && <h2 className="hidden mb-6 text-2xl font-semibold">{title}</h2>}
+         {title && (
+            <h2 className="hidden mb-6 text-2xl font-semibold">{title}</h2>
+         )}
 
          <div className={columnsClassName}>
             {articles.map((article, index) => (

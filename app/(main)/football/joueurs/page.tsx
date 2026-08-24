@@ -1,6 +1,6 @@
 import { Site } from "@/lib/prisma/generated/enums";
 import { getArticlesByCategorySlugAction } from "@/lib/queries/article.queries";
-import { ArticleHomePageByCategory } from "@main/components/articles-homepage-by-category";
+import { ArticleHomePageByCategory } from "@main/components/list-articles-homepage-by-category";
 import { notFound } from "next/navigation";
 
 export default async function PageFootballJoueurs() {

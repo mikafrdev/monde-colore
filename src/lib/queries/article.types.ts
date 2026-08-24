@@ -1,6 +1,36 @@
 import { Prisma } from "@/lib/prisma/generated/client";
 import { CategoryRef } from "@/lib/queries/category.types";
 
+export const articleCardInclude = {
+   images: {
+      where: { isPrimary: true },
+      take: 1,
+      select: {
+         isPrimary: true, // ← ajouté
+         image: {
+            select: { url: true, alt: true, width: true, height: true },
+         },
+      },
+   },
+   videos: {
+      where: { isPrimary: true },
+      take: 1,
+      select: {
+         isPrimary: true, // ← ajouté
+         video: {
+            select: { thumbnailUrl: true, embedUrl: true },
+         },
+      },
+   },
+   categories: {
+      select: { id: true, name: true, slug: true },
+   },
+} satisfies Prisma.ArticleInclude;
+
+export type ArticleCardType = Prisma.ArticleGetPayload<{
+   include: typeof articleCardInclude;
+}>;
+
 export const articleInclude = {
    author: true,
    source: true,
@@ -90,3 +120,13 @@ export type ArticleRelatedCategoriesResult = {
    parents: CategoryRef[];
    children: CategoryRef[];
 };
+
+const DEFAULT_ARTICLES_PER_CATEGORY = 6;
+
+export const homepageCategoryInclude = {
+   articles: {
+      take: DEFAULT_ARTICLES_PER_CATEGORY,
+      orderBy: { publishedAt: "desc" },
+      include: articleCardInclude,
+   },
+} satisfies Prisma.CategoryInclude;

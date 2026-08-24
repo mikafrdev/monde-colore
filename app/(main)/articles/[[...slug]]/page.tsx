@@ -1,6 +1,13 @@
-import { Site } from "@/lib/prisma/generated/enums";
-import { getArticleHomepageGroupedByCategoryAction } from "@/lib/queries/article.queries";
-import { ArticleHomePageByCategory } from "@main/components/articles-homepage-by-category";
+import {
+   getArticleHomepageGroupedByCategoryAction,
+   getArticlesByCategoryPathAction,
+} from "@/lib/queries/article.queries";
+import { CURRENT_SITE } from "@/lib/site";
+import { notFound } from "next/navigation";
+import { ListArticleSlugByDate } from "@main/components/list-articles-slug-by-date";
+import { CategoryBreadcrumb } from "@/components/navigation/category-breadcrumbs";
+import { ListArticleHomePageByCategory } from "@main/components/list-articles-homepage-by-category";
+import { prisma } from "@/lib/prisma";
 
 export default async function ArticlesListPage({
    params,
@@ -9,20 +16,28 @@ export default async function ArticlesListPage({
 }) {
    const { slug: segments } = await params;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    if (!segments || segments.length === 0) {
-      const categorySlugList = ["informations", "cuisine", "jeux-video"];
-      const articlesByCategory =
-         await getArticleHomepageGroupedByCategoryAction(
-            Site.MIKA,
-            categorySlugList,
-         );
-
-      const groups = articlesByCategory.filter((group) => group !== null);
-
+      const groups =
+         await getArticleHomepageGroupedByCategoryAction(CURRENT_SITE);
       return (
          <>
             {groups.map((group) => (
-               <ArticleHomePageByCategory
+               <ListArticleHomePageByCategory
                   key={group.category.id}
                   title={group.category.name}
                   articles={group.articles}
@@ -32,12 +47,18 @@ export default async function ArticlesListPage({
       );
    }
 
-   console.log("segments : ", segments)
+   const result = await getArticlesByCategoryPathAction(CURRENT_SITE, segments);
 
-   return(
+   if (!result) notFound();
+
+   return (
       <>
-      {segments}
-      </>
-   )
+         <CategoryBreadcrumb chain={result.breadcrumb} />
 
+         <ListArticleSlugByDate
+            title={result.category.name}
+            articles={result.articles}
+         />
+      </>
+   );
 }

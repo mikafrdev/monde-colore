@@ -1,7 +1,7 @@
 import { Site } from "@/lib/prisma/generated/browser";
 import { getHomepageFeaturedAction } from "@/lib/queries/article.queries";
 import { useDataQuery } from "@/hooks/use-data-query";
-import { ArticleList } from "@main/components/article-list";
+import { ArticleList } from "@main/components/list-articles-slug-by-date";
 
 export function HomepageFeatured({ site }: { site: Site }) {
    const { data, isLoading } = useDataQuery(["homepage-featured", site], () =>

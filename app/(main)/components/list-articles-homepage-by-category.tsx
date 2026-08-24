@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArticleWithRelations } from "@/lib/queries/article.types";
+import { ArticleCardType } from "@/lib/queries/article.types";
 import { routes } from "@/lib/routes";
+import { Article } from "@/lib/prisma/generated/client";
 
 type ArticleSectionProps = {
    title: string;
-   articles: ArticleWithRelations[];
+   articles: ArticleCardType[];
 };
 
 function getYoutubeThumbnail(embedUrl: string | null): string | null {
@@ -18,7 +19,7 @@ function getYoutubeThumbnail(embedUrl: string | null): string | null {
    return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : null;
 }
 
-export function ArticleHomePageByCategory({
+export function ListArticleHomePageByCategory({
    title,
    articles,
 }: ArticleSectionProps) {
@@ -57,8 +58,9 @@ export function ArticleHomePageByCategory({
                const imgWidth = primaryImage?.image?.width ?? 0;
                const imgHeight = primaryImage?.image?.height ?? 0;
                const isLandscape = imgWidth > imgHeight;
-               console.log("imageUrl:", imageUrl);
-               console.log("imageAlt:", imageAlt);
+               
+               /* console.log("imageUrl:", imageUrl);
+               console.log("imageAlt:", imageAlt); */
 
                return (
                   <Link

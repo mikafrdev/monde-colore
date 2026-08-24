@@ -3,28 +3,31 @@ import { headers } from "next/headers";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { AppNavigationMenu } from "@/components/navigation/app-navigation-menu";
-import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import type { LayoutProps } from "@/types/app";
 import { RightColumn } from "@/components/navigation/right-column";
+import { getCategoriesBySiteAction } from "@/lib/queries/categorie.queries";
+import { CURRENT_SITE } from "@/lib/site";
 
 export default async function MainLayout({ children }: LayoutProps) {
-   const session = await auth.api.getSession({ headers: await headers() });
+   const [session, categories] = await Promise.all([
+      auth.api.getSession({ headers: await headers() }),
+      getCategoriesBySiteAction(CURRENT_SITE),
+   ]);
 
    return (
       <SidebarProvider defaultOpen>
          <div className="flex flex-col min-h-screen w-full">
             <header className="sticky w-full top-0 z-50 backdrop-blur-md bg-background">
                <AppNavigationMenu
-                  trigger={<SidebarTrigger className="cursor-pointer px-0 md:hidden" />}
+                  trigger={
+                     <SidebarTrigger className="cursor-pointer px-0 md:hidden" />
+                  }
                   session={session}
                />
             </header>
             <div className="flex">
-               <AppSidebar session={session} />
-               <main className="flex-1">
-                  <AppBreadcrumb />
-                  {children}
-               </main>
+               <AppSidebar session={session} categories={categories} />
+               <main className="flex-1">{children}</main>
                <RightColumn />
             </div>
          </div>

@@ -35,12 +35,15 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useActiveSection } from "./hooks/use-active-section";
 import { navigationSections } from "./navigation-config";
+import { CategoryTreeMenu } from "./category-tree-menu";
+import { CategoryWithRelations } from "@/lib/queries/category.types";
 
 interface AppSidebarProps {
    session: Session | null;
+   categories: CategoryWithRelations[];
 }
 
-export function AppSidebar({ session }: AppSidebarProps) {
+export function AppSidebar({ session, categories }: AppSidebarProps) {
    const [isPending] = useTransition();
    const { isMobile, setOpenMobile } = useSidebar();
    const pathname = usePathname();
@@ -51,79 +54,57 @@ export function AppSidebar({ session }: AppSidebarProps) {
    const closeOnMobile = () => isMobile && setOpenMobile(false);
 
    return (
-      <Sidebar collapsible={isMobile ? "offcanvas" : "none"} className="h-svh bg-sidebar border-r-2 border-r-secondary">
+      <Sidebar
+         collapsible={isMobile ? "offcanvas" : "none"}
+         className="h-svh bg-sidebar border-r-2 border-r-secondary"
+      >
          <SidebarContent>
             {isMobile ? (
                // ---------- MOBILE : nav complète + sous-liens en accordéon ----------
                <SidebarGroup>
                   <SidebarMenu>
                      {navigationSections.map((section) => {
-                        const isActiveSection = activeSection.id === section.id;
-                        const children =
-                           section.type === "dropdown"
-                              ? section.dropdownItems
-                              : section.sidebar;
-                        const hasChildren = !!children?.length;
-
-                        return (
-                           <Collapsible
-                              key={section.id}
-                              defaultOpen={isActiveSection}
-                              className="group/collapsible"
-                           >
-                              <SidebarMenuItem>
-                                 <SidebarMenuButton
-                                    asChild
-                                    isActive={isActiveSection}
-                                    className="py-5"
-                                 >
-                                    <Link
-                                       href={section.href}
-                                       onClick={closeOnMobile}
+                        if (section.id === "articles") {
+                           return (
+                              <Collapsible
+                                 key={section.id}
+                                 defaultOpen={activeSection.id === "articles"}
+                              >
+                                 <SidebarMenuItem>
+                                    <SidebarMenuButton
+                                       asChild
+                                       isActive={
+                                          activeSection.id === "articles"
+                                       }
+                                       className="py-5"
                                     >
-                                       {section.icon && <section.icon className="primary" />}
-                                       <span>{section.label}</span>
-                                    </Link>
-                                 </SidebarMenuButton>
-
-                                 {hasChildren && (
+                                       <Link
+                                          href={section.href}
+                                          onClick={closeOnMobile}
+                                       >
+                                          {section.icon && (
+                                             <section.icon className="primary" />
+                                          )}
+                                          <span>{section.label}</span>
+                                       </Link>
+                                    </SidebarMenuButton>
                                     <CollapsibleTrigger>
-                                       <SidebarMenuAction className="transition-transform group-data-[state=open]/collapsible:rotate-180" asChild>
+                                       <SidebarMenuAction
+                                          className="transition-transform group-data-[state=open]/collapsible:rotate-180"
+                                          asChild
+                                       >
                                           <ChevronDown />
                                        </SidebarMenuAction>
                                     </CollapsibleTrigger>
-                                 )}
-
-                                 {hasChildren && (
                                     <CollapsibleContent>
-                                       <SidebarMenuSub>
-                                          {children!.map((item) => (
-                                             <SidebarMenuSubItem key={item.id}>
-                                                <SidebarMenuSubButton
-                                                   asChild
-                                                   isActive={
-                                                      pathname === item.href
-                                                   }
-                                                >
-                                                   <Link
-                                                      href={item.href}
-                                                      onClick={closeOnMobile}
-                                                   >
-                                                      {"icon" in item &&
-                                                         item.icon && (
-                                                            <item.icon className="text-primary" />
-                                                         )}
-                                                      <span>{item.label}</span>
-                                                   </Link>
-                                                </SidebarMenuSubButton>
-                                             </SidebarMenuSubItem>
-                                          ))}
-                                       </SidebarMenuSub>
+                                       <CategoryTreeMenu
+                                          categories={categories}
+                                       />
                                     </CollapsibleContent>
-                                 )}
-                              </SidebarMenuItem>
-                           </Collapsible>
-                        );
+                                 </SidebarMenuItem>
+                              </Collapsible>
+                           );
+                        }
                      })}
                   </SidebarMenu>
                </SidebarGroup>
@@ -134,25 +115,30 @@ export function AppSidebar({ session }: AppSidebarProps) {
                      {activeSection.label}
                   </SidebarGroupLabel>
 
-                  <SidebarMenu
-                     key={activeSection.id}
-                     className="mt-2 animate-in fade-in slide-in-from-left-2 duration-200"
-                  >
-                     {activeSection.sidebar.map((item) => (
-                        <SidebarMenuItem key={item.id}>
-                           <SidebarMenuButton
-                              asChild
-                              className="px-6 py-5"
-                              isActive={pathname === item.href}
-                           >
-                              <Link href={item.href}>
-                                 <item.icon className="size-5 text-primary" />
-                                 <span className="pl-3 font-bold">{item.label}</span>
-                              </Link>
-                           </SidebarMenuButton>
-                        </SidebarMenuItem>
-                     ))}
-                  </SidebarMenu>
+                  <div className="mt-2 animate-in fade-in slide-in-from-left-2 duration-200">
+                     {activeSection.id === "articles" ? (
+                        <CategoryTreeMenu categories={categories} />
+                     ) : (
+                        <SidebarMenu key={activeSection.id}>
+                           {activeSection.sidebar.map((item) => (
+                              <SidebarMenuItem key={item.id}>
+                                 <SidebarMenuButton
+                                    asChild
+                                    className="px-6 py-5"
+                                    isActive={pathname === item.href}
+                                 >
+                                    <Link href={item.href}>
+                                       <item.icon className="size-5 text-primary" />
+                                       <span className="pl-3 font-bold">
+                                          {item.label}
+                                       </span>
+                                    </Link>
+                                 </SidebarMenuButton>
+                              </SidebarMenuItem>
+                           ))}
+                        </SidebarMenu>
+                     )}
+                  </div>
                </SidebarGroup>
             )}
 

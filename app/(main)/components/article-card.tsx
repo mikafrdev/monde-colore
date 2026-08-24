@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { getYoutubeThumbnail } from "@/lib/utils/video";
-import type { ArticleWithRelations } from "@/lib/queries/article.types";
+import type { ArticleCardType } from "@/lib/queries/article.types";
 
 type ArticleCardProps = {
-   article: ArticleWithRelations;
+   article: ArticleCardType;
    href: string;
    priority?: boolean;
 };

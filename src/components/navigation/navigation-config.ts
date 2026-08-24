@@ -1,5 +1,14 @@
 import type { LucideIcon } from "lucide-react";
-import { Gamepad2, Video, Image as ImageIcon, Music, Home, Volleyball, PersonStanding } from "lucide-react";
+import {
+   Gamepad2,
+   Video,
+   Image as ImageIcon,
+   Music,
+   Home,
+   Volleyball,
+   PersonStanding,
+   Newspaper,
+} from "lucide-react";
 
 export type SidebarLink = {
    readonly id: string;
@@ -106,7 +115,7 @@ const footballSidebar: readonly SidebarLink[] = [
       href: "/football/joueurs",
       icon: PersonStanding,
       description: "Tous les joueurs de football",
-   }
+   },
 ] as const;
 
 export const navigationSections: readonly NavSection[] = [
@@ -119,6 +128,15 @@ export const navigationSections: readonly NavSection[] = [
       icon: Home,
       matcher: (p) => p === "/",
       sidebar: homeSidebar,
+   },
+   {
+      id: "articles",
+      label: "Articles",
+      href: "/articles",
+      type: "link",
+      icon: Newspaper,
+      matcher: (p) => p.startsWith("/articles"),
+      sidebar: [],
    },
    {
       id: "games",

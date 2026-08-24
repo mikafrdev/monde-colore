@@ -1,4 +1,5 @@
 import { Prisma, Site } from "@/lib/prisma/generated/client";
+import { articleCardInclude } from "./article.types";
 
 export type CategoryRef = {
    id: string;
@@ -82,8 +83,6 @@ export type ChildCategoryItem = {
 };
 
 export function childCategorySelect(site?: Site) {
-
-   
    return {
       slug: true,
       parentRelations: {
@@ -116,3 +115,21 @@ export function childCategorySelect(site?: Site) {
 export type CategoryWithChildRelations = Prisma.CategoryGetPayload<{
    select: ReturnType<typeof childCategorySelect>;
 }>;
+
+const homepageCategoryInclude = {
+   articles: {
+      take: 6,
+      orderBy: { publishedAt: "desc" },
+      include: articleCardInclude,
+   },
+} satisfies Prisma.CategoryInclude;
+
+export type CategoryWithArticleCards = Prisma.CategoryGetPayload<{
+   include: typeof homepageCategoryInclude;
+}>;
+
+export type CategoryPathSegment = {
+   id: string;
+   name: string;
+   slug: string;
+};

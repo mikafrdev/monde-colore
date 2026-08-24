@@ -1,5 +1,5 @@
 import { Site } from "@/lib/prisma/generated/enums";
-import { ArticleList } from "@main/components/article-list";
+import { ArticleList } from "@main/components/list-articles-slug-by-date";
 import { getArticlesBySiteAndCategoryAction } from "@/lib/queries/article.queries";
 import { useDataQuery } from "@/hooks/use-data-query";
 
