@@ -68,12 +68,12 @@ export default function AppUserMenu({ session }: { session: Session | null }) {
             <DropdownMenuContent className="w-40" align="start">
                <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
                <DropdownMenuSeparator />
-               <DropdownMenuItem asChild>
+               {/* <DropdownMenuItem asChild>
                   <Link href="/auth">Mon compte</Link>
-               </DropdownMenuItem>
-               <DropdownMenuItem asChild>
+               </DropdownMenuItem> */}
+               {/* <DropdownMenuItem asChild>
                   <Link href="/administration">Administration</Link>
-               </DropdownMenuItem>
+               </DropdownMenuItem> */}
                <DropdownMenuSeparator />
                <DropdownMenuItem
                   className="text-red-500"

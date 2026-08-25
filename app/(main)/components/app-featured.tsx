@@ -17,5 +17,5 @@ export function AppFeatured({ site, categorySlug, isHomepage }: AppFeaturedProps
       return <HomepageFeatured site={site} />;
    }
 
-   return <TypedFeatured categorySlug={categorySlug} site={site} />;
+   /* return <TypedFeatured categorySlug={categorySlug} site={site} />; */
 }

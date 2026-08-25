@@ -1,4 +1,5 @@
-import { getUser } from "@/lib/auth-server";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -17,7 +18,6 @@ import {
    Dumbbell,
    UserPlus,
 } from "lucide-react";
-import { headers } from "next/dist/server/request/headers";
 import Link from "next/link";
 
 const futureSections = [
@@ -71,11 +71,13 @@ const futureSections = [
    },
 ];
 
-export default async function DashboardClient() {
-   const user = await getUser();
-
-   const headersList = await headers();
-   console.log(Object.fromEntries(headersList.entries()));
+// Server Component : récupère la session côté serveur avant le rendu,
+// selon le pattern officiel de la doc Better Auth (auth.api.getSession).
+// Pas de "use client" ici, donc pas de useState/useEffect/onClick possibles
+// directement dans ce fichier — si besoin d'interactivité, extraire un sous-composant client.
+export default async function DashboardPage() {
+   const session = await auth.api.getSession({ headers: await headers() });
+   const user = session?.user ?? null;
 
    return (
       <div className="flex flex-col gap-8 p-6 max-w-3xl mx-auto border">
@@ -157,8 +159,8 @@ export default async function DashboardClient() {
 
                      <Separator />
 
-                     <div className="flex flex-nowrap align-middle gap-3 text-emerald-500">
-                        <UserPlus />
+                     <div className="flex flex-nowrap items-center gap-3 text-emerald-500">
+                        <UserPlus className="h-4 w-4" />
                         <Link className="font-medium" href="/auth/signup">
                            Ajouter un compte
                         </Link>

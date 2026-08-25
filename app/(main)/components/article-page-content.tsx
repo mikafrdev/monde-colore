@@ -2,7 +2,7 @@
 import { Carousel } from "@main/components/carousel";
 import { TiptapRenderer } from "@/lib/tiptap/tiptap-renderer";
 import { VideoPlayer } from "@main/components/video-player";
-import type { ArticleWithRelations } from "@/lib/queries/article.queries";
+import { ArticleWithRelations } from "@/lib/queries/article.types";
 
 type ArticlePageContentProps = {
    article: ArticleWithRelations;
