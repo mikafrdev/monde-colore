@@ -21,7 +21,7 @@ export function ListArticleSlugByDate({
    return (
       <>
          {image && (
-            <div className="relative w-full min-h-96 overflow-hidden shadow-md">
+            <div className="relative w-full min-h-96 mb-6 overflow-hidden shadow-md">
                <HeroImage heroImageSrc={image.url} />
             </div>
          )}

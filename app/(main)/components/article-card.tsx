@@ -42,8 +42,8 @@ export function ArticleCard({
                <div className="rounded-lg bg-background p-[4px]">
                   {imageUrl ? (
                      <Image
-                        width={300}
-                        height={100}
+                        width={800}
+                        height={400}
                         className="w-full h-auto rounded-lg block"
                         priority={priority}
                         src={imageUrl}
