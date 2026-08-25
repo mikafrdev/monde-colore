@@ -31,7 +31,17 @@ export function ListArticleHomePageByCategory({
 
    return (
       <section aria-labelledby={headingId}>
-         <h2 id={headingId}>{title}</h2>
+         <h2 id={headingId} className="text-[clamp(1.5rem,1.2rem+1.2vw,2.25rem)]
+         font-bold
+         leading-[1.2]
+         tracking-[-0.02em]
+         pl-3.5
+         border-l-[3px]
+         border-l-primary
+         ml-3
+         mt-8
+         mb-4
+         text-foreground">{title}</h2>
 
          <div className="flex flex-wrap justify-center gap-6">
             {articles.map((article, index) => {
