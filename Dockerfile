@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
 
 FROM node:22-alpine AS base
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # ---- Dépendances ----
 FROM base AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # ---- Build ----
 FROM base AS builder
@@ -20,7 +21,7 @@ ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_SITE=$NEXT_PUBLIC_SITE
 
 RUN npx prisma generate
-RUN npm run build
+RUN pnpm build
 
 # ---- Production ----
 FROM base AS runner
