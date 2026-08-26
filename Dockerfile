@@ -30,7 +30,7 @@ ENV BETTER_AUTH_SECRET=$BETTER_AUTH_SECRET
 ENV BETTER_AUTH_URL=$BETTER_AUTH_URL
 
 RUN npx prisma generate
-RUN pnpm build
+RUN npm run build
 
 # ---- Production ----
 FROM base AS runner

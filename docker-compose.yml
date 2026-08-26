@@ -13,8 +13,14 @@ services:
     container_name: monde-colore-app
     restart: unless-stopped
     ports:
-      - "3016:3016"
+      - "3016:3000"
     env_file:
       - .env
     volumes:
-      - /volume1/docker/monde-colore-uploads:/app/public/uploads
+      - /volume1/docker/shared-uploads:/app/public/uploads
+      - /volume1/docker/shared-static/home:/app/public/home
+      - /volume1/docker/shared-static/images:/app/public/images
+      - /volume1/docker/shared-static/logo:/app/public/logo
+      - /volume1/docker/shared-static/videos:/app/public/videos
+      - /volume1/docker/shared-static/audio:/app/public/audio
+      - /volume1/docker/shared-static/documents:/app/public/documents
