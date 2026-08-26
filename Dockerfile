@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 FROM node:22-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g npm@latest && npm install -g pnpm@10.15.0
 
 # ---- Dépendances ----
 FROM base AS deps
