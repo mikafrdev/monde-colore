@@ -39,8 +39,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/src/lib/prisma/generated ./src/lib/prisma/generated
 
 USER nextjs
-EXPOSE 3000
-ENV PORT=3000
+EXPOSE 3016
+ENV PORT=3016
 ENV HOSTNAME="0.0.0.0"
 
 CMD ["node", "server.js"]
