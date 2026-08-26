@@ -4,7 +4,7 @@ import { nextCookies } from "better-auth/next-js"; // ← import
 import { prisma } from "@/lib/prisma";
 
 export const auth = betterAuth({
-   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3016",
    trustedOrigins: [
       "https://mikapp.debe2387.odns.fr",
       "http://mikapp.debe2387.odns.fr",
