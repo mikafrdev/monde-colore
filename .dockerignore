@@ -1,8 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -11,14 +9,14 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage
 
 # next.js
-/.next/
-/out/
+.next
+out
 
 # production
-/build
+build
 
 # misc
 .DS_Store
@@ -31,22 +29,26 @@ yarn-error.log*
 .pnpm-debug.log*
 *.log
 
-# env files (can opt-in for committing if needed)
+# env files (jamais dans l'image, injectés via docker-compose env_file)
 .env*
-
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma
+# prisma (généré pendant le build Docker lui-même, pas besoin de copier celui du host)
 /src/lib/prisma/generated
 
-# uploads (garder le dossier mais ignorer son contenu)
-/public/*
+# uploads (jamais dans l'image, montés via volume Docker)
+public/*
 !public/.gitkeep
+
+# git et docker lui-même
+.git
+.gitignore
+Dockerfile
+.dockerignore
+docker-compose.yml
 
 # scripts & bases de données locales
 deploy.sh

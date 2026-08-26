@@ -1,0 +1,16 @@
+services:
+  monde-colore-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+        NEXT_PUBLIC_SITE: ${NEXT_PUBLIC_SITE}
+    container_name: monde-colore-app
+    restart: unless-stopped
+    ports:
+      - "3016:3000"
+    env_file:
+      - .env
+    volumes:
+      - /volume1/docker/monde-colore-uploads:/app/public/uploads
