@@ -16,6 +16,9 @@ services:
       - "3016:3000"
     env_file:
       - .env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     volumes:
       - /volume1/docker/shared-uploads:/app/public/uploads
       - /volume1/docker/shared-static/home:/app/public/home
