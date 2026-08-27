@@ -8,7 +8,78 @@ import {
    Volleyball,
    PersonStanding,
    Newspaper,
+   Utensils,
 } from "lucide-react";
+
+import type { CategoryWithRelations } from "@/lib/queries/category.types";
+
+// Sections 100% statiques, hors catégories (Home, et plus tard /jeux-videos si base dédiée)
+export const staticSections: readonly NavSection[] = [
+   {
+      id: "home",
+      label: "Accueil",
+      navLabel: "Home",
+      href: "/",
+      type: "link",
+      icon: Home,
+      matcher: (p) => p === "/",
+      sidebar: [],
+   },
+] as const;
+
+// Mapping slug -> icône, en attendant un champ `icon` en base
+const categoryIconMap: Record<string, LucideIcon> = {
+   "jeux-video": Gamepad2,
+   football: Volleyball,
+   cuisine: Utensils,
+   videos: Video,
+   images: ImageIcon,
+   musique: Music,
+};
+
+export function buildCategorySections(
+   rootCategories: CategoryWithRelations[],
+): NavSection[] {
+   return rootCategories.map((cat) => ({
+      id: cat.slug,
+      label: cat.name,
+      href: `/articles/${cat.slug}`,
+      type: "link" as const,
+      icon: categoryIconMap[cat.slug] ?? Newspaper,
+      matcher: (p: string) =>
+         p.startsWith(`/articles/${cat.slug}`) ||
+         p.startsWith(`/article/${cat.slug}/`),
+      sidebar: [], // plus utilisé, CategoryTreeMenu prend le relais
+   }));
+}
+
+export function getActiveSection(
+   pathname: string,
+   sections: readonly NavSection[],
+): NavSection | undefined {
+   return (
+      sections.find((s) => s.matcher?.(pathname)) ??
+      [...sections]
+         .filter((s) => s.href !== "/" && pathname.startsWith(s.href))
+         .sort((a, b) => b.href.length - a.href.length)[0]
+   );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export type SidebarLink = {
    readonly id: string;
@@ -119,6 +190,15 @@ export const navigationSections: readonly NavSection[] = [
       sidebar: footballSidebar,
    },
    {
+      id: "cuisine",
+      label: "cuisine",
+      href: "/articles/cuisine",
+      type: "link",
+      icon: Utensils,
+      matcher: (p) => p.startsWith("/articles/cuisine"),
+      sidebar: [],
+   },
+   {
       id: "videos",
       label: "Vidéos",
       href: "/articles/videos",
@@ -146,12 +226,3 @@ export const navigationSections: readonly NavSection[] = [
       sidebar: [],
    },
 ] as const;
-
-export function getActiveSection(pathname: string): NavSection | undefined {
-   return (
-      navigationSections.find((s) => s.matcher?.(pathname)) ??
-      [...navigationSections]
-         .filter((s) => s.href !== "/" && pathname.startsWith(s.href))
-         .sort((a, b) => b.href.length - a.href.length)[0]
-   );
-}

@@ -1,7 +1,6 @@
 "use client";
 
 import type { Session } from "@/lib/auth";
-import Image from "next/image";
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,27 +16,25 @@ import {
 import { ModeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 import AppUserMenu from "@auth/components/app-user-menu";
-import { navigationSections } from "@/components/navigation/navigation-config";
+import type { NavSection } from "@/components/navigation/navigation-config";
 import { useActiveSection } from "./hooks/use-active-section";
 
 type AppNavigationMenuProps = {
    session: Session | null;
    trigger?: React.ReactNode;
+   sections: readonly NavSection[];
 };
 
 export function AppNavigationMenu({
    session,
    trigger,
+   sections,
 }: AppNavigationMenuProps) {
    const pathname = usePathname();
-   const activeSection = useActiveSection();
+   const activeSection = useActiveSection(sections);
 
    return (
-      <div
-         className={cn(
-            "flex items-center justify-between w-full p-4 border-b-4 border-b-secondary",
-         )}
-      >
+      <div className="flex items-center justify-between w-full p-4 border-b-4 border-b-secondary">
          {trigger}
 
          <div className="flex flex-col justify-center items-center align-middle">
@@ -46,20 +43,12 @@ export function AppNavigationMenu({
                className="text-center text-primary text-xl font-semibold"
             >
                Le monde de Léo
-               {/* <Image
-                  width={100}
-                  height={40}
-                  src="/logo/logo.jpg"
-                  alt="Logo"
-                  className="w-[150px] h-auto"
-                  loading="eager"
-               /> */}
             </Link>
          </div>
 
          <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="gap-2">
-               {navigationSections.map((section) => {
+               {sections.map((section) => {
                   const isActive = activeSection.id === section.id;
 
                   if (section.type === "dropdown") {
@@ -100,11 +89,16 @@ export function AppNavigationMenu({
                                  "bg-sidebar-primary p-7",
                            )}
                         >
-                           <Link href={section.href} className="flex flex-col items-center">
+                           <Link
+                              href={section.href}
+                              className="flex flex-col items-center"
+                           >
                               {section.icon && (
                                  <section.icon className="h-4 w-4 shrink-0 text-primary" />
                               )}
-                              <span className="font-bold">{section.navLabel ?? section.label}</span>
+                              <span className="font-bold">
+                                 {section.navLabel ?? section.label}
+                              </span>
                            </Link>
                         </NavigationMenuLink>
                      </NavigationMenuItem>

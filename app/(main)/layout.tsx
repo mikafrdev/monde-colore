@@ -8,12 +8,26 @@ import { RightColumn } from "@/components/navigation/right-column";
 import { getCategoriesBySiteAction } from "@/lib/queries/categorie.queries";
 import { CURRENT_SITE } from "@/lib/site";
 import Footer from "@/components/footer";
+import {
+   staticSections,
+   buildCategorySections,
+} from "@/components/navigation/navigation-config";
 
 export default async function MainLayout({ children }: LayoutProps) {
    const [session, categories] = await Promise.all([
       auth.api.getSession({ headers: await headers() }),
       getCategoriesBySiteAction(CURRENT_SITE),
    ]);
+
+   // Catégories racines = sections principales (Gaming, Football, Cuisine...)
+   const rootCategories = categories.filter(
+      (c) => c.childRelations.length === 0,
+   );
+
+   const allSections = [
+      ...staticSections,
+      ...buildCategorySections(rootCategories),
+   ];
 
    return (
       <SidebarProvider defaultOpen>
@@ -24,10 +38,15 @@ export default async function MainLayout({ children }: LayoutProps) {
                      <SidebarTrigger className="cursor-pointer px-0 md:hidden" />
                   }
                   session={session}
+                  sections={allSections}
                />
             </header>
             <div className="flex flex-1 min-h-0">
-               <AppSidebar session={session} categories={categories} />
+               <AppSidebar
+                  session={session}
+                  categories={categories}
+                  sections={allSections}
+               />
                <main
                   id="main-scroll"
                   className="flex-1 overflow-y-auto scroll-smooth"

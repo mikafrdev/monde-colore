@@ -1,9 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { getActiveSection, navigationSections } from "../navigation-config";
+import { getActiveSection } from "../navigation-config";
+import type { NavSection } from "../navigation-config";
 
-export function useActiveSection() {
+export function useActiveSection(sections: readonly NavSection[]) {
    const pathname = usePathname();
-   return getActiveSection(pathname) ?? navigationSections[0];
+   return getActiveSection(pathname, sections) ?? sections[0];
 }

@@ -24,9 +24,14 @@ const ARTICLES_ROOT = "/articles";
 
 type CategorieProps = {
    categories: CategoryWithRelations[];
+   /**
+    * Si fourni, n'affiche que les enfants de cette catégorie racine
+    * (ex: "football", "jeux-video"), au lieu de toutes les racines.
+    */
+   rootSlug?: string;
 };
 
-export function CategoryTreeMenu({ categories }: CategorieProps) {
+export function CategoryTreeMenu({ categories, rootSlug }: CategorieProps) {
    const pathname = usePathname();
 
    const categoriesMap = useMemo(
@@ -34,28 +39,44 @@ export function CategoryTreeMenu({ categories }: CategorieProps) {
       [categories],
    );
 
-   // Cache des descendants complets (pour la réduction transitive).
    const descendantsCache = useMemo(
       () => new Map<string, Set<string>>(),
       [categories],
    );
 
-   // Catégories racines : pas enfant d'une autre catégorie.
-   const rootCategories = useMemo(
+   const allRootCategories = useMemo(
       () => categories.filter((c) => c.childRelations.length === 0),
       [categories],
    );
 
-   // Segments d'URL après /articles : /articles/politique/partis-politiques -> ["politique", "partis-politiques"]
-   const segments = useMemo(() => {
-      if (!pathname.startsWith(ARTICLES_ROOT)) return [];
-      return pathname.slice(ARTICLES_ROOT.length).split("/").filter(Boolean);
-   }, [pathname]);
+   // Si rootSlug est fourni, on affiche les enfants de cette racine précise.
+   // Sinon (menu global), on affiche toutes les racines.
+   const { itemsToRender, basePath } = useMemo(() => {
+      if (!rootSlug) {
+         return { itemsToRender: allRootCategories, basePath: ARTICLES_ROOT };
+      }
 
-   // Ids des catégories à garder ouvertes car sur le chemin de l'URL courante.
+      const root = allRootCategories.find((c) => c.slug === rootSlug);
+      if (!root) return { itemsToRender: [], basePath: ARTICLES_ROOT };
+
+      const children = root.parentRelations
+         .map((r) => categoriesMap.get(r.childId))
+         .filter((c): c is CategoryWithRelations => !!c);
+
+      return {
+         itemsToRender: children,
+         basePath: `${ARTICLES_ROOT}/${root.slug}`,
+      };
+   }, [rootSlug, allRootCategories, categoriesMap]);
+
+   const segments = useMemo(() => {
+      if (!pathname.startsWith(basePath)) return [];
+      return pathname.slice(basePath.length).split("/").filter(Boolean);
+   }, [pathname, basePath]);
+
    const expandedIds = useMemo(() => {
       const ids = new Set<string>();
-      let candidates = rootCategories;
+      let candidates = itemsToRender;
 
       for (const segment of segments) {
          const match = candidates.find((c) => c.slug === segment);
@@ -70,17 +91,17 @@ export function CategoryTreeMenu({ categories }: CategorieProps) {
       }
 
       return ids;
-   }, [segments, rootCategories, categoriesMap]);
+   }, [segments, itemsToRender, categoriesMap]);
 
-   if (rootCategories.length === 0) return null;
+   if (itemsToRender.length === 0) return null;
 
    return (
       <SidebarMenu>
-         {rootCategories.map((category) => (
+         {itemsToRender.map((category) => (
             <CategoryTreeItem
                key={category.id}
                category={category}
-               parentPath={ARTICLES_ROOT}
+               parentPath={basePath}
                depth={0}
                categoriesMap={categoriesMap}
                descendantsCache={descendantsCache}
@@ -103,7 +124,7 @@ function getDescendants(
    visiting: Set<string> = new Set(),
 ): Set<string> {
    if (cache.has(id)) return cache.get(id)!;
-   if (visiting.has(id)) return new Set(); // garde-fou anti-cycle
+   if (visiting.has(id)) return new Set();
 
    visiting.add(id);
    const category = categoriesMap.get(id);
@@ -149,17 +170,10 @@ function CategoryTreeItem({
    const href = `${parentPath}/${category.slug}`;
    const isActive = pathname === href;
 
-   if (category.slug === "jeux-video") {
-   /* console.log({ href, pathname, isActive, parentPath }); */
-}
-
    const rawChildren = category.parentRelations
       .map((r) => categoriesMap.get(r.childId))
       .filter((c): c is CategoryWithRelations => !!c);
 
-   // Réduction transitive : masque un enfant s'il est déjà atteignable
-   // via un autre enfant direct de cette catégorie (ex: Football → Sélections
-   // nationales est masqué car déjà atteignable via Football → Équipes).
    const children = rawChildren.filter(
       (child) =>
          !rawChildren.some(
@@ -177,8 +191,6 @@ function CategoryTreeItem({
    const [open, setOpen] = useState(isOpen);
    const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
 
-   // Ajustement du state pendant le render (pattern React recommandé,
-   // évite le cascading render d'un useEffect).
    if (isOpen !== prevIsOpen) {
       setPrevIsOpen(isOpen);
       setOpen(isOpen);
