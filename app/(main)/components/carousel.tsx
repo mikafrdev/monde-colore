@@ -39,9 +39,10 @@ export function Carousel({
 
    if (images.length === 1) {
       return (
-
-         <div className="flex justify-center">
-            {/* <div
+<div
+   className={`relative w-full rounded-xl overflow-hidden ${className ?? ""}`}
+   style={{ height }}
+>            {/* <div
             className={`relative w-full rounded-xl overflow-hidden ${className ?? ""}`}
             style={{ height }}
          > */}
@@ -52,6 +53,7 @@ export function Carousel({
                src={images[0].url}
                alt={images[0].alt ?? ""}
                fill
+                sizes="(max-width: 250px) 100vw, 350px"
                style={{ objectFit: "contain" }}
             />
          </div>

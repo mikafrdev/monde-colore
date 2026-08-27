@@ -23,9 +23,9 @@ export function ArticleDetail({ article, carouselHeight }: ArticleDetailProps) {
       ...(article.videos?.filter((v) => !v.isPrimary) ?? []),
    ];
 
-   console.log("Page détail - primaryImage : ", primaryImage);
+   /* console.log("Page détail - primaryImage : ", primaryImage);
    console.log("Page détail - sortedImages : ", sortedImages);
-   console.log("Page détail - sortedVideos : ", sortedVideos);
+   console.log("Page détail - sortedVideos : ", sortedVideos); */
 
    return (
       <article className="max-w-3xl mx-auto px-4 py-0">

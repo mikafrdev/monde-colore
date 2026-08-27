@@ -13,16 +13,16 @@ export default function Footer() {
          </div>
          <span className="text-xs text-gray-500">@2026 Le site de Léo</span>
 
-            <a
-               href="#top"
-               aria-label="Remonter en haut"
-               className={cn(
-                  buttonVariants({ size: "icon" }),
-                  "fixed bottom-6 right-6 z-50 rounded-full shadow-lg",
-               )}
-            >
-               <ArrowUp className="h-4 w-4" />
-            </a>
+         <a
+            href="#top"
+            aria-label="Remonter en haut"
+            className={cn(
+               buttonVariants({ size: "icon" }),
+               "fixed bottom-6 right-6 z-50 rounded-full shadow-lg",
+            )}
+         >
+            <ArrowUp className="h-4 w-4" />
+         </a>
       </footer>
    );
 }

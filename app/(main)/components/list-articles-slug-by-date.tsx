@@ -18,7 +18,8 @@ export function ListArticleSlugByDate({
    image,
    path,
 }: ArticleListProps) {
-   console.log("articles", articles);
+   
+   /* console.log("articles", articles); */
 
    return (
       <>

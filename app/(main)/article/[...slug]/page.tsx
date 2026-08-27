@@ -11,7 +11,7 @@ export default async function ArticlePage({
    params: Promise<{ slug: string[] }>;
 }) {
    const { slug } = await params;
-   console.log("slug reçu :", slug);
+   /* console.log("slug reçu :", slug); */
 
    if (!slug || slug.length === 0) {
       notFound();

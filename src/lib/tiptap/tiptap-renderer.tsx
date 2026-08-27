@@ -12,6 +12,7 @@ import { Subscript } from "@tiptap/extension-subscript";
 import { Superscript } from "@tiptap/extension-superscript";
 import { Image as TiptapImage } from "@tiptap/extension-image";
 import NextImage from "next/image";
+import Image from "next/image";
 import { VideoServer } from "@/lib/tiptap/video.extension.server";
 import { HorizontalRule } from "@tiptap/extension-horizontal-rule";
 import { HardBreak } from "@tiptap/extension-hard-break";
@@ -61,7 +62,8 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
                   const w = node.attrs.width ?? 800;
                   const h = node.attrs.height ?? 600;
                   return (
-                     <NextImage
+                     <div key={node.attrs.src}>
+                     {/* <NextImage
                         key={node.attrs.src}
                         src={node.attrs.src}
                         alt={node.attrs.alt ?? ""}
@@ -71,7 +73,18 @@ export function TiptapRenderer({ content }: TiptapRendererProps) {
                         sizes={`(max-width: 768px) 100vw, ${Math.min(w, 800)}px`}
                         loading={isFirst ? "eager" : "lazy"}
                         priority={isFirst}
+                     /> */}
+                     <Image
+                        src={node.attrs.src}
+                        alt={node.attrs.alt ?? ""}
+                        width={w}
+                        height={h}
+                        className="rounded-md w-full h-auto max-w-full"
+                        sizes={`(max-width: 768px) 100vw, ${Math.min(w, 800)}px`}
+                        loading={isFirst ? "eager" : "lazy"}
+                        priority={isFirst}
                      />
+                     </div>
                   );
                },
                video: ({ node }) => {

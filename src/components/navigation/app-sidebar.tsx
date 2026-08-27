@@ -56,7 +56,7 @@ export function AppSidebar({ session, categories }: AppSidebarProps) {
    return (
       <Sidebar
          collapsible={isMobile ? "offcanvas" : "none"}
-         className="h-svh bg-sidebar border-r-2 border-r-secondary"
+         className="bg-sidebar border-r-2 border-r-secondary"
       >
          <SidebarContent>
             {isMobile ? (
