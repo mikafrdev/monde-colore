@@ -6,7 +6,7 @@ export const routes = {
    football: "/football",
    sites: "/sites",
 
-   article: (category: string, slug: string) => `/article/${slug}`,
+   article: (...segments: string[]) => `/article/${segments.join("/")}`,
 
    adminArticleEdit: (id: string) => `/admin/articles/${id}/edit`,
 };

@@ -9,14 +9,16 @@ type ArticleListProps = {
    title: string;
    image?: { url: string; alt: string | null } | null;
    articles: ArticleCardType[];
+   path: string[];
 };
 
 export function ListArticleSlugByDate({
    title,
    articles,
    image,
+   path,
 }: ArticleListProps) {
-   /* console.log("articles", articles); */
+   console.log("articles", articles);
 
    return (
       <>
@@ -36,10 +38,7 @@ export function ListArticleSlugByDate({
                   key={article.id}
                   article={article}
                   priority={index < 4}
-                  href={routes.article(
-                     article.categories[0]?.slug ?? "autres",
-                     article.slug,
-                  )}
+                  href={routes.article(...path, article.slug)}
                />
             ))}
          </div>

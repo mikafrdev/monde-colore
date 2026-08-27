@@ -39,44 +39,6 @@ export type NavSection =
         dropdownItems: readonly SidebarLink[];
      });
 
-const homeSidebar: readonly SidebarLink[] = [
-   {
-      id: "home",
-      label: "Accueil",
-      href: "/",
-      icon: Home,
-      description: "Page d'accueil",
-   },
-   {
-      id: "videos",
-      label: "Vidéos",
-      href: "/videos",
-      icon: Video,
-      description: "Toutes les vidéos",
-   },
-   {
-      id: "images",
-      label: "Images",
-      href: "/images",
-      icon: ImageIcon,
-      description: "Toutes les images",
-   },
-   {
-      id: "music",
-      label: "Musique",
-      href: "/musiques",
-      icon: Music,
-      description: "Les chansons de Léo",
-   },
-   {
-      id: "games",
-      label: "Jeux vidéo",
-      href: "/jeux-video",
-      icon: Gamepad2,
-      description: "jeux vidéo de Léo",
-   },
-] as const;
-
 const jeuxvideoSidebar: readonly SidebarLink[] = [
    {
       id: "consoles",
@@ -127,7 +89,7 @@ export const navigationSections: readonly NavSection[] = [
       type: "link",
       icon: Home,
       matcher: (p) => p === "/",
-      sidebar: homeSidebar,
+      sidebar: [],
    },
    {
       id: "articles",

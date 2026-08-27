@@ -35,7 +35,7 @@ export default async function ArticlesListPage({
 
    if (!result) notFound();
 
-   console.log("result.category.image : ", result.category.image)
+   /* console.log("result.category.image : ", result.category.image) */
 
    return (
       <>
@@ -45,6 +45,7 @@ export default async function ArticlesListPage({
             title={result.category.name}
             image={result.category.image}
             articles={result.articles}
+            path={segments}
          />
       </>
    );
