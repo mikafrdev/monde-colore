@@ -2,8 +2,8 @@
 
 import type { Session } from "@/lib/auth";
 import * as React from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
    NavigationMenu,
    NavigationMenuContent,
@@ -16,22 +16,21 @@ import {
 import { ModeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 import AppUserMenu from "@auth/components/app-user-menu";
-import type { NavSection } from "@/components/navigation/navigation-config";
 import { useActiveSection } from "./hooks/use-active-section";
+import { useNavSections } from "./nav-sections-provider";
 
 type AppNavigationMenuProps = {
    session: Session | null;
    trigger?: React.ReactNode;
-   sections: readonly NavSection[];
 };
 
 export function AppNavigationMenu({
    session,
    trigger,
-   sections,
 }: AppNavigationMenuProps) {
-   const pathname = usePathname();
+   const sections = useNavSections();
    const activeSection = useActiveSection(sections);
+   const pathname = usePathname();
 
    return (
       <div className="flex items-center justify-between w-full p-4 border-b-4 border-b-secondary">

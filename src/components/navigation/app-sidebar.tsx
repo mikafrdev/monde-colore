@@ -33,22 +33,22 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { navigationSections, NavSection } from "./navigation-config";
 import { CategoryTreeMenu } from "./category-tree-menu";
 import { CategoryWithRelations } from "@/lib/queries/category.types";
 import { useActiveSection } from "./hooks/use-active-section";
+import { useNavSections } from "./nav-sections-provider";
 
 interface AppSidebarProps {
    session: Session | null;
    categories: CategoryWithRelations[];
-   sections: readonly NavSection[];
 }
 
-export function AppSidebar({ session, categories, sections }: AppSidebarProps) {
+export function AppSidebar({ session, categories }: AppSidebarProps) {
+   const sections = useNavSections();
+   const activeSection = useActiveSection(sections);
    const [isPending] = useTransition();
    const { isMobile, setOpenMobile } = useSidebar();
    const pathname = usePathname();
-   const activeSection = useActiveSection(sections);
 
    if (pathname === "/") return null;
 

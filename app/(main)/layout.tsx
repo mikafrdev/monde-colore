@@ -12,6 +12,7 @@ import {
    staticSections,
    buildCategorySections,
 } from "@/components/navigation/navigation-config";
+import { NavSectionsProvider } from "@/components/navigation/nav-sections-provider";
 
 export default async function MainLayout({ children }: LayoutProps) {
    const [session, categories] = await Promise.all([
@@ -19,45 +20,32 @@ export default async function MainLayout({ children }: LayoutProps) {
       getCategoriesBySiteAction(CURRENT_SITE),
    ]);
 
-   // Catégories racines = sections principales (Gaming, Football, Cuisine...)
-   const rootCategories = categories.filter(
-      (c) => c.childRelations.length === 0,
-   );
-
-   const allSections = [
-      ...staticSections,
-      ...buildCategorySections(rootCategories),
-   ];
-
    return (
-      <SidebarProvider defaultOpen>
-         <div className="flex flex-col h-svh w-full overflow-hidden">
-            <header className="w-full z-50 backdrop-blur-md bg-background shrink-0">
-               <AppNavigationMenu
-                  trigger={
-                     <SidebarTrigger className="cursor-pointer px-0 md:hidden" />
-                  }
-                  session={session}
-                  sections={allSections}
-               />
-            </header>
-            <div className="flex flex-1 min-h-0">
-               <AppSidebar
-                  session={session}
-                  categories={categories}
-                  sections={allSections}
-               />
-               <main
-                  id="main-scroll"
-                  className="flex-1 overflow-y-auto scroll-smooth"
-               >
-                  <div id="top" />
-                  {children}
-                  <Footer />
-               </main>
-               <RightColumn />
+      <NavSectionsProvider categories={categories}>
+         <SidebarProvider defaultOpen>
+            <div className="flex flex-col h-svh w-full overflow-hidden">
+               <header className="w-full z-50 backdrop-blur-md bg-background shrink-0">
+                  <AppNavigationMenu
+                     session={session}
+                     trigger={
+                        <SidebarTrigger className="cursor-pointer px-0 md:hidden" />
+                     }
+                  />
+               </header>
+               <div className="flex flex-1 min-h-0">
+                  <AppSidebar session={session} categories={categories} />
+                  <main
+                     id="main-scroll"
+                     className="flex-1 overflow-y-auto scroll-smooth"
+                  >
+                     <div id="top" />
+                     {children}
+                     <Footer />
+                  </main>
+                  <RightColumn />
+               </div>
             </div>
-         </div>
-      </SidebarProvider>
+         </SidebarProvider>
+      </NavSectionsProvider>
    );
 }
