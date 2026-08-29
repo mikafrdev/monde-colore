@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: LayoutProps) {
          >
             <ThemeProvider
                attribute="class"
-               defaultTheme="cosmic-night-dark"
+               defaultTheme="perso"
                themes={[
                   "perso",
                   "cosmic-night-dark",
