@@ -157,6 +157,30 @@ function MobileSectionItem({
 }) {
    const [open, setOpen] = useState(isActive);
 
+   const rootCategory = categories.find(
+      (c) => c.slug === section.id && c.childRelations.length === 0,
+   );
+   const hasChildren = rootCategory
+      ? rootCategory.parentRelations.length > 0
+      : false;
+
+   console.log(`DEBUG ${section.id} parentRelations:`, rootCategory?.parentRelations);
+
+   // Cas simple : pas d'enfants -> juste le titre, sans chevron ni Collapsible
+   if (!hasChildren) {
+      return (
+         <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={isActive} className="py-5">
+               <Link href={section.href} onClick={closeOnMobile}>
+                  {section.icon && <section.icon className="primary" />}
+                  <span>{section.label}</span>
+               </Link>
+            </SidebarMenuButton>
+         </SidebarMenuItem>
+      );
+   }
+
+   // Cas avec enfants : version complète avec chevron + Collapsible (ton code original)
    return (
       <Collapsible open={open} onOpenChange={setOpen}>
          <SidebarMenuItem className="flex flex-col items-stretch">
