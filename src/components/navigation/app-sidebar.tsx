@@ -52,6 +52,8 @@ export function AppSidebar({ session, categories }: AppSidebarProps) {
    const closeOnMobile = () => isMobile && setOpenMobile(false);
    const isHome = activeSection.id === "home";
 
+   if (pathname === "/") return null;
+
    return (
       <Sidebar
          collapsible={isMobile ? "offcanvas" : "none"}
