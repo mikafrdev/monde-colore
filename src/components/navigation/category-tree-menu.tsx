@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Minus, Plus } from "lucide-react";
 import {
    Collapsible,
    CollapsibleContent,
@@ -29,9 +29,14 @@ type CategorieProps = {
     * (ex: "football", "jeux-video"), au lieu de toutes les racines.
     */
    rootSlug?: string;
+   onNavigate?: () => void;
 };
 
-export function CategoryTreeMenu({ categories, rootSlug }: CategorieProps) {
+export function CategoryTreeMenu({
+   categories,
+   rootSlug,
+   onNavigate,
+}: CategorieProps) {
    const pathname = usePathname();
 
    const categoriesMap = useMemo(
@@ -107,6 +112,7 @@ export function CategoryTreeMenu({ categories, rootSlug }: CategorieProps) {
                descendantsCache={descendantsCache}
                expandedIds={expandedIds}
                pathname={pathname}
+               onNavigate={onNavigate}
             />
          ))}
       </SidebarMenu>
@@ -156,6 +162,7 @@ type CategoryTreeItemProps = {
    descendantsCache: Map<string, Set<string>>;
    expandedIds: Set<string>;
    pathname: string;
+   onNavigate?: () => void;
 };
 
 function CategoryTreeItem({
@@ -166,6 +173,7 @@ function CategoryTreeItem({
    descendantsCache,
    expandedIds,
    pathname,
+   onNavigate,
 }: CategoryTreeItemProps) {
    const href = `${parentPath}/${category.slug}`;
    const isActive = pathname === href;
@@ -202,7 +210,7 @@ function CategoryTreeItem({
 
    const button = (
       <ButtonComponent asChild isActive={isActive}>
-         <Link href={href}>
+         <Link href={href} onClick={onNavigate}>
             <span className={cn("truncate", isRoot && "font-semibold")}>
                {category.name}
             </span>
@@ -236,11 +244,16 @@ function CategoryTreeItem({
                         : `Déplier ${category.name}`
                   }
                >
-                  <ChevronRight className="size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  {open ? (
+                     <Minus className="cursor-pointer size-4" />
+                  ) : (
+                     <Plus className="cursor-pointer size-4" />
+                  )}
                </CollapsibleTrigger>
             </div>
 
-            <CollapsibleContent>
+            <CollapsibleContent className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+               {" "}
                <SidebarMenuSub className={cn(!isRoot && "mr-0")}>
                   {children.map((child) => (
                      <CategoryTreeItem
@@ -252,6 +265,7 @@ function CategoryTreeItem({
                         descendantsCache={descendantsCache}
                         expandedIds={expandedIds}
                         pathname={pathname}
+                        onNavigate={onNavigate}
                      />
                   ))}
                </SidebarMenuSub>
