@@ -10,6 +10,8 @@ services:
         DIRECT_URL: ${DIRECT_URL}
         BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
         BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+        MEDIA_UPLOADS_PATH: /app/media/uploads
+        MEDIA_STATIC_PATH: /app/media/static
     container_name: monde-colore-app
     restart: unless-stopped
     ports:
