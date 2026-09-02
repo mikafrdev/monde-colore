@@ -10,7 +10,7 @@ import {
    GetCategoriesParams,
 } from "./category.types";
 import { typed } from "./typed-query";
-import { Site } from "../prisma/generated/enums";
+import { Site } from "@/lib/prisma/generated/enums";
 
 export async function getCategorySlugs() {
    return prisma.category.findMany({
