@@ -112,6 +112,34 @@ export function childCategorySelect(site?: Site) {
    } satisfies Prisma.CategorySelect;
 }
 
+/* export function childCategorySelect(site?: Site) {
+   return {
+      slug: true,
+      childRelations: {
+         select: {
+            child: {
+               select: {
+                  name: true,
+                  slug: true,
+                  image: {
+                     select: {
+                        url: true,
+                        alt: true,
+                     },
+                  },
+                  sites: site
+                     ? {
+                          where: { site },
+                          select: { order: true },
+                       }
+                     : undefined,
+               },
+            },
+         },
+      },
+   } satisfies Prisma.CategorySelect;
+} */
+
 export type CategoryWithChildRelations = Prisma.CategoryGetPayload<{
    select: ReturnType<typeof childCategorySelect>;
 }>;

@@ -44,6 +44,9 @@ interface AppSidebarProps {
 
 export function AppSidebar({ session, categories }: AppSidebarProps) {
    const sections = useNavSections();
+
+   console.log("sections :", sections);
+
    const activeSection = useActiveSection(sections);
    const [isPending] = useTransition();
    const { isMobile, setOpenMobile } = useSidebar();
@@ -52,7 +55,7 @@ export function AppSidebar({ session, categories }: AppSidebarProps) {
    const closeOnMobile = () => isMobile && setOpenMobile(false);
    const isHome = activeSection.id === "home";
 
-   if (pathname === "/") return null;
+   /* if (pathname === "/") return null; */ 
 
    return (
       <Sidebar

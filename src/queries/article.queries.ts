@@ -16,7 +16,6 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/lib/prisma/generated/client";
 import { PublicationStatus, Site } from "@/lib/prisma/generated/enums";
 import { typed } from "./typed-query";
-import { getCategoryBySlug } from "./categorie.queries";
 import {
    articleInclude,
    ArticleRelatedCategoriesResult,
